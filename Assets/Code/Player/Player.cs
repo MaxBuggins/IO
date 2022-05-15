@@ -36,7 +36,7 @@ public class Player : Hurtable
     public float maxSpeed = 10;
     public float maxCrouchSpeed = 6;
 
-    public float airFriction = 0.1f;
+    public float airFriction = 0.01f;
 
     public float standHeight = 2f;
     public float crouchHeight = 0.8f;
@@ -53,14 +53,14 @@ public class Player : Hurtable
     private NetworkTransform netTrans;
     private CharacterController character;
     private PlayerMovement playerMovement;
-    private SpriteRenderer spriteRenderer;
+    private DirectionalSprite directionalSprite;
 
     private void Awake()
     {
         netTrans = GetComponent<NetworkTransform>();
         character = GetComponent<CharacterController>();
         playerMovement = GetComponent<PlayerMovement>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        directionalSprite = GetComponentInChildren<DirectionalSprite>();
 
         levelManager = FindObjectOfType<LevelManager>();
         networkManager = FindObjectOfType<NetworkManager>();
@@ -77,7 +77,7 @@ public class Player : Hurtable
     public override void OnStartLocalPlayer()
     {
         localInstance = this;
-        spriteRenderer.enabled = false;
+        directionalSprite.render.enabled = false;
 
         playerMovement.enabled = true;
         Instantiate(playerCamera.gameObject, transform);
@@ -119,6 +119,7 @@ public class Player : Hurtable
 
     public override void OnDeath()
     {
+        directionalSprite.render.enabled = false;
         character.enabled = false;
 
         Instantiate(corpse, transform.position, transform.rotation, null);
@@ -127,14 +128,16 @@ public class Player : Hurtable
 
     public override void OnAlive()
     {
-
-
         character.enabled = true;
 
 
         if (isLocalPlayer)
         {
             playerMovement.velocity = Vector3.zero;
+        }
+        else
+        {
+            directionalSprite.render.enabled = true;
         }
     }
 

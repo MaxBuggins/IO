@@ -21,9 +21,9 @@ public class DirectionalSprite : MonoBehaviour
 
     public float test;
 
-    private SpriteRenderer render;
+    [HideInInspector] public SpriteRenderer render;
 
-    void Start()
+    void Awake()
     {
         render = GetComponent<SpriteRenderer>();
 
@@ -40,6 +40,9 @@ public class DirectionalSprite : MonoBehaviour
         {
             faceCamera(yAxisOnly);
         }
+
+        if (directionalSprites.Length < 2) //optermisation 
+            return;
         
 
         Vector3 toOther = (transform.position - Camera.main.transform.position).normalized;

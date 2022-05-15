@@ -62,6 +62,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Primary"",
+                    ""type"": ""Button"",
+                    ""id"": ""59127a4d-a8e4-461b-bf2a-7aaad3483151"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +216,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""KeyLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07636b9a-dfed-4bd0-85a4-3e7a64a5da3a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Primary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6ad2764-5545-43fc-8b1d-1d5b592dfb4a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Primary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -219,6 +250,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Play_Move = m_Play.FindAction("Move", throwIfNotFound: true);
         m_Play_MouseLook = m_Play.FindAction("MouseLook", throwIfNotFound: true);
         m_Play_KeyLook = m_Play.FindAction("KeyLook", throwIfNotFound: true);
+        m_Play_Primary = m_Play.FindAction("Primary", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -282,6 +314,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Play_Move;
     private readonly InputAction m_Play_MouseLook;
     private readonly InputAction m_Play_KeyLook;
+    private readonly InputAction m_Play_Primary;
     public struct PlayActions
     {
         private @Controls m_Wrapper;
@@ -290,6 +323,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Play_Move;
         public InputAction @MouseLook => m_Wrapper.m_Play_MouseLook;
         public InputAction @KeyLook => m_Wrapper.m_Play_KeyLook;
+        public InputAction @Primary => m_Wrapper.m_Play_Primary;
         public InputActionMap Get() { return m_Wrapper.m_Play; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -311,6 +345,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @KeyLook.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnKeyLook;
                 @KeyLook.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnKeyLook;
                 @KeyLook.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnKeyLook;
+                @Primary.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnPrimary;
+                @Primary.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnPrimary;
+                @Primary.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnPrimary;
             }
             m_Wrapper.m_PlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -327,6 +364,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @KeyLook.started += instance.OnKeyLook;
                 @KeyLook.performed += instance.OnKeyLook;
                 @KeyLook.canceled += instance.OnKeyLook;
+                @Primary.started += instance.OnPrimary;
+                @Primary.performed += instance.OnPrimary;
+                @Primary.canceled += instance.OnPrimary;
             }
         }
     }
@@ -337,5 +377,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnMouseLook(InputAction.CallbackContext context);
         void OnKeyLook(InputAction.CallbackContext context);
+        void OnPrimary(InputAction.CallbackContext context);
     }
 }
