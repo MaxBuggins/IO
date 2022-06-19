@@ -64,9 +64,14 @@ public class DirectionalSprite : MonoBehaviour
 
         if (currentSpriteIndex != spriteNum)
         {
-            currentSpriteIndex = spriteNum;
-            render.sprite = directionalSprites[currentSpriteIndex];
+            SetSprite(spriteNum);
         }
+    }
+
+    public void SetSprite(int spriteIndex)
+    {
+        currentSpriteIndex = spriteIndex;
+        render.sprite = directionalSprites[currentSpriteIndex];
     }
 
     void faceCamera(bool yOnly) //rotates the mesh to face the main.camera

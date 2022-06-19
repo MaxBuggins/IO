@@ -36,6 +36,8 @@ public class Player : Hurtable
     public float maxSpeed = 10;
     public float maxCrouchSpeed = 6;
 
+    public float jumpHeight = 4;
+
     public float airFriction = 0.01f;
 
     public float standHeight = 2f;
@@ -51,15 +53,15 @@ public class Player : Hurtable
     private NetworkManager networkManager;
 
     private NetworkTransform netTrans;
-    private CharacterController character;
-    private PlayerMovement playerMovement;
+    private CapsuleCollider character;
+    public PlayerController playerMovement;
     private DirectionalSprite directionalSprite;
 
     private void Awake()
     {
         netTrans = GetComponent<NetworkTransform>();
-        character = GetComponent<CharacterController>();
-        playerMovement = GetComponent<PlayerMovement>();
+        character = GetComponentInChildren<CapsuleCollider>();
+        playerMovement = GetComponent<PlayerController>();
         directionalSprite = GetComponentInChildren<DirectionalSprite>();
 
         levelManager = FindObjectOfType<LevelManager>();
@@ -79,8 +81,8 @@ public class Player : Hurtable
         localInstance = this;
         directionalSprite.render.enabled = false;
 
-        playerMovement.enabled = true;
-        Instantiate(playerCamera.gameObject, transform);
+        //playerMovement.enabled = true;
+        playerCamera = Instantiate(playerCamera.gameObject, transform).GetComponent<PlayerCamera>();
 
         //UI_Main.instance.UIUpdate();
 
@@ -103,6 +105,8 @@ public class Player : Hurtable
         {
             character.height = standHeight;
         }
+
+        character.center = Vector3.up * character.height / 2;
     }
     
 
@@ -133,11 +137,13 @@ public class Player : Hurtable
 
         if (isLocalPlayer)
         {
+            //GetComponent<Rigidbody>().velocity = Vector3.zero;
             playerMovement.velocity = Vector3.zero;
         }
         else
         {
-            directionalSprite.render.enabled = true;
+            if(directionalSprite.render != null)
+                directionalSprite.render.enabled = true;
         }
     }
 
@@ -146,6 +152,7 @@ public class Player : Hurtable
     {
 
         deaths += 1;
+        bonusScore = 0;
         Invoke(nameof(SpawnPlayer), levelManager.respawnDelay);
     }
 
@@ -162,13 +169,38 @@ public class Player : Hurtable
 
     public int GetScore() //common conversion for main score
     {
-        return (kills * 3 + assists + deaths * -1 + bonusScore);
+        //return (kills * 3 + assists + deaths * -1 + bonusScore); THIS IS FOR SHOOTERS
+        return (bonusScore);
     }
 
     [TargetRpc]
     public override void TargetAddVelocity(NetworkConnection target, Vector3 vel) //TEMP apply to local player only
     {
-        playerMovement.velocity += vel;
+        playerMovement.rb.velocity += vel;
         //playerMovement.velocity = Vector3.ClampMagnitude(playerMovement.velocity, maxVelocity); //no more infinit death demension
+    }
+
+    [TargetRpc]
+    public override void TargetSetVelocity(NetworkConnection target, Vector3 vel, bool ignorZero) //TEMP apply to local player only
+    {
+        //Code some bitches
+        if (vel.x == 0)
+            vel.x = playerMovement.rb.velocity.x;
+        if (vel.y == 0)
+            vel.y = playerMovement.rb.velocity.y;
+        if (vel.z == 0)
+            vel.z = playerMovement.rb.velocity.z;
+
+        playerMovement.rb.velocity = vel;
+        //playerMovement.velocity = Vector3.ClampMagnitude(playerMovement.velocity, maxVelocity); //no more infinit death demension
+    }
+
+    [Command]
+    public void CmdSelfHarm(int damage)
+    {
+        if (damage < 0) //Stop Heal Hacks
+            return;
+
+        Hurt(damage, HurtType.Suicide);
     }
 }

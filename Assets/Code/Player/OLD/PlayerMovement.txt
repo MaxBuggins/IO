@@ -1,0 +1,268 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Mirror;
+
+
+[RequireComponent(typeof(CharacterController))]
+public class PlayerMovement : NetworkBehaviour
+{
+    [Header("Movement Variables")]
+    public LayerMask groundMask;
+    public float gravitY = -9.8f;
+    public float groundDistance;
+
+    public float maxTermnalVelocity = 100;
+    public float maxCrouchTermnalVelocity = 150;
+
+    public float slideSpeed = 100;
+
+    public float coyotTime = 0.1f;
+
+
+    [Header("Movement Internals")]
+    public Vector3 velocity = Vector3.zero;
+
+    [HideInInspector] public Vector2 move;
+    private float timeSinceGrounded;
+    public bool onSlope;
+
+    private PhysicMaterial floorPhysicMat;
+    [HideInInspector] public Vector3 floorNormal = Vector3.up;
+
+
+    [Header("Refrences")]
+    public Transform groundCheck;
+
+    private Player player;
+    private PlayerCamera playerCamera;
+    private CharacterController character;
+    private Camera cam;
+
+    [HideInInspector] public Controls controls;
+
+    public override void OnStartLocalPlayer() //just for the local client
+    {
+        controls = new Controls();
+
+        controls.Play.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
+        controls.Play.Move.canceled += ctx => move = Vector2.zero;
+
+        controls.Play.Jump.performed += funny => Jump();
+        controls.Play.Crouch.performed += funnyer => Crouch();
+
+
+        controls.Enable();
+
+        enabled = true;
+    }
+
+    void Start()
+    {
+        player = GetComponent<Player>();
+        character = GetComponent<CharacterController>();
+        playerCamera = GetComponentInChildren<PlayerCamera>();
+    }
+
+    void Update()
+    {
+        SetGravity();
+        ApplyMovement();
+    }
+
+
+    void ApplyMovement()
+    {
+        //velocity.y = 0; //dont use fall in calculations (GUYYYYYSSSS)
+
+        move = move.normalized;
+        float x = move.x;
+        float z = move.y;
+
+
+        Vector3 movement = transform.right * x + transform.forward * z;
+
+        if (player.crouching)
+            movement *= player.crouchSpeed;
+        else
+            movement *= player.speed;
+
+
+        //Do Fricktion/airristance
+        float fricktion = player.airFriction;
+
+        if (character.isGrounded)
+        {
+            if (floorPhysicMat == null)
+                fricktion = 0.3f;
+            else
+                fricktion = floorPhysicMat.dynamicFriction / 10;
+        }
+
+
+        velocity.x = Mathf.Lerp(velocity.x, 0, fricktion);
+        velocity.z = Mathf.Lerp(velocity.z, 0, fricktion);
+
+        //print(timeSinceGrounded);
+
+        //Character sliding of surfaces
+        if (timeSinceGrounded > 0 && onSlope)
+        {
+
+            //float slopeMultiplyer = -velocity.y;
+            //if (slopeMultiplyer < 0)
+            //slopeMultiplyer = 0;
+
+            float velocitY = velocity.y;
+
+            velocity = GetForwardTangent(velocity, floorNormal);
+
+            Vector3 slopeForce = Vector3.zero;
+
+            slopeForce.x = (1f - floorNormal.y) * floorNormal.x * slideSpeed * (1 - fricktion);
+            slopeForce.z = (1f - floorNormal.y) * floorNormal.z * slideSpeed * (1 - fricktion);
+
+            velocity += GetForwardTangent(slopeForce, floorNormal);
+
+            //if (velocitY > 0)
+                //velocity.y = velocitY;
+
+
+            //movement.y = velocitY;
+            //velocity = AdjustVelocityToSlope(velocity);
+        }
+
+        
+
+        character.Move((movement + velocity) * Time.deltaTime); //apply movement to charhcter contoler
+
+        movement = movement.normalized;
+
+        //apply maxium speed before being apart of velocity
+        float maX = player.maxSpeed - Mathf.Abs(velocity.x);
+        if (maX < 0)
+            maX = 0;
+        movement.x = Mathf.Clamp(movement.x, -maX, maX);
+
+        float maZ = player.maxSpeed - Mathf.Abs(velocity.z);
+        if (maZ < 0)
+            maZ = 0;
+        movement.z = Mathf.Clamp(movement.z, -maZ, maZ);
+
+        velocity += movement;
+        
+        //float velocitY = velocity.y; //save the fall (GUYS!!!!!!!) 
+        if (player.crouching)
+        {
+            velocity = Vector3.ClampMagnitude(velocity, maxCrouchTermnalVelocity);
+        }
+        else
+        {
+            velocity = Vector3.ClampMagnitude(velocity, maxTermnalVelocity);
+        }
+        //velocity.y = velocitY;
+
+    }
+
+    public Vector3 GetForwardTangent(Vector3 moveDir, Vector3 up) //thanks stranger after hours and days i finnally got it
+    {
+        //return Vector3.Cross(Vector3.Cross(up,moveDir),up);
+        Vector3 right = Vector3.Cross(up, moveDir);
+        Vector3 forward = Vector3.Cross(right, up);
+        return forward;
+    }
+
+    void SetGravity()
+    {
+        //!!!!!!!!!!!!!!!!!!!!WATCH OUT FOR THE (((!)))!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask, QueryTriggerInteraction.Ignore))
+        {
+            if (timeSinceGrounded < 0)
+                timeSinceGrounded = 0;
+
+            timeSinceGrounded += Time.deltaTime;
+
+            //if (velocity.y < 0) //if falling
+            //velocity.y = -2; //if grounded then no need to fall
+
+            velocity.y += gravitY * Time.deltaTime; //two deltra time cause PHJYSCIS
+
+        }
+        else
+        {
+            if (timeSinceGrounded > 0)
+                timeSinceGrounded = 0;
+
+            timeSinceGrounded -= Time.deltaTime; //-= Time.deltaTime * 3; cant spam jump
+
+            velocity.y += gravitY * Time.deltaTime; //two deltra time cause PHJYSCIS
+
+        }
+    }
+
+    void Jump()
+    {
+        if (timeSinceGrounded > -coyotTime)
+        {
+            //jumpDelay = coyotTime;
+            float jumpForce = Mathf.Sqrt(player.jumpHeight * -2.0f * gravitY);
+            Vector3 jumpVelocity = floorNormal * jumpForce;
+            velocity.x += jumpVelocity.x; //x and z are added to
+            velocity.y = jumpVelocity.y; //y gets set
+            velocity.z += jumpVelocity.z;
+            timeSinceGrounded = coyotTime; //stop double jumpers
+        }
+    }
+
+    public void Crouch()
+    {
+        playerCamera.Crouch(!player.crouching);
+        player.CmdCrouch();
+    }
+
+
+    [ClientCallback]
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        floorPhysicMat = hit.collider.material;
+
+        floorNormal = hit.normal;
+
+        float maxSlope = 95f;
+
+        if (floorNormal.x > maxSlope || floorNormal.x < -maxSlope)
+            floorNormal.x = 0;
+        if (floorNormal.z > maxSlope || floorNormal.z < -maxSlope)
+            floorNormal.z = 0;
+
+        //if (Physics.CheckSphere(groundCheck.position, groundDistance))
+            onSlope = (Vector3.Angle(Vector3.up, floorNormal) > character.slopeLimit);
+        //else
+            //onSlope = true;
+
+
+        Rigidbody body = hit.collider.attachedRigidbody;
+        Vector3 pushDir;
+
+        if (body == null)
+            return;
+
+        //dont push objects below (Cool platforming can happen)
+        if (hit.moveDirection.y < -0.3)
+            return;
+        else
+        {
+            pushDir = (hit.moveDirection);
+        }
+
+        body.velocity = pushDir * 5;
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1, 0, 0, 0.4f);
+
+        Gizmos.DrawSphere(groundCheck.position, groundDistance);
+    }
+}

@@ -4,7 +4,7 @@ using UnityEngine;
 using Mirror;
 
 
-public enum HurtType { Death }
+public enum HurtType { Death, Suicide, Fall }
 
 public class Hurtful : NetworkBehaviour
 {

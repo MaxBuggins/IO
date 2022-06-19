@@ -11,7 +11,12 @@ public class PlayerWeapon : NetworkBehaviour
 	[Range(0, 90)] public float accuracy = 0;
 
 	[Tooltip("Spawn Position relative to the players position")]
-	public Vector3 spawnOffset;
+	private Vector3 spawnOffset;
+	[Tooltip("Spawn Position relative to the players position when standing")]
+	public Vector3 standSpawnOffset;
+	[Tooltip("Spawn Position relative to the players position when crouching")]
+	public Vector3 crouchSpawnOffset;
+
 
 	public GameObject projectile;
 
@@ -21,7 +26,7 @@ public class PlayerWeapon : NetworkBehaviour
 
 
 	protected Player player;
-	private Controls controls;
+	public Controls controls;
 
     private void Start()
     {
@@ -42,15 +47,20 @@ public class PlayerWeapon : NetworkBehaviour
 	[Command]
 	public void CmdShootGun(Vector3 rotationAim)
 	{
-
 		//dead players cant shoot
 		if (player.health <= 0)
 			return;
+
+		
 
 		//randomise bullet spread
 		Vector3 offset = new Vector3(0, Random.Range(-accuracy, accuracy), 0);
 		Quaternion shootRot = Quaternion.Euler(rotationAim + offset);
 
+		if (player.crouching)
+			spawnOffset = crouchSpawnOffset;
+		else
+			spawnOffset = standSpawnOffset;
 
 		GameObject spawned = Instantiate(projectile, transform.position + spawnOffset, shootRot, null);
 
@@ -58,6 +68,7 @@ public class PlayerWeapon : NetworkBehaviour
 		Hurtful hurtful = spawned.GetComponent<Hurtful>();
 		if (hurtful != null)
 		{
+			hurtful.ignor = player;
 			//hurtful.damage = (int)((float)hurtful.damage * currentGun.dmgMultiplyer);
 		}
 
@@ -66,6 +77,6 @@ public class PlayerWeapon : NetworkBehaviour
 
     void UsePrimary()
     {
-		CmdShootGun(transform.eulerAngles);
+		CmdShootGun(PlayerCamera.localInstance.transform.eulerAngles);
     }
 }

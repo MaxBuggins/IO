@@ -71,6 +71,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b654fb1-c481-4fcc-8ef3-38b028009845"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Die"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2acd6d3-ef93-4d31-ae14-1649e95ded96"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -238,6 +256,67 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Primary"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da06daf4-0a83-4b16-89fb-531346cb2ccb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfe7ab50-f9c0-4fdc-9938-4a8e9e763eb5"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Die"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""6bad6703-4c60-4ff5-9e86-847bf61d8078"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d6197ef-228f-4030-ad6d-f3318c9e2327"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d8c2d88f-eacf-4b46-89a9-8b71656714c8"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""036a9e76-d3cd-4a6b-a192-a4a40a8244b9"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -251,6 +330,11 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Play_MouseLook = m_Play.FindAction("MouseLook", throwIfNotFound: true);
         m_Play_KeyLook = m_Play.FindAction("KeyLook", throwIfNotFound: true);
         m_Play_Primary = m_Play.FindAction("Primary", throwIfNotFound: true);
+        m_Play_Jump = m_Play.FindAction("Jump", throwIfNotFound: true);
+        m_Play_Die = m_Play.FindAction("Die", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +399,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Play_MouseLook;
     private readonly InputAction m_Play_KeyLook;
     private readonly InputAction m_Play_Primary;
+    private readonly InputAction m_Play_Jump;
+    private readonly InputAction m_Play_Die;
     public struct PlayActions
     {
         private @Controls m_Wrapper;
@@ -324,6 +410,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @MouseLook => m_Wrapper.m_Play_MouseLook;
         public InputAction @KeyLook => m_Wrapper.m_Play_KeyLook;
         public InputAction @Primary => m_Wrapper.m_Play_Primary;
+        public InputAction @Jump => m_Wrapper.m_Play_Jump;
+        public InputAction @Die => m_Wrapper.m_Play_Die;
         public InputActionMap Get() { return m_Wrapper.m_Play; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -348,6 +436,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Primary.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnPrimary;
                 @Primary.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnPrimary;
                 @Primary.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnPrimary;
+                @Jump.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnJump;
+                @Die.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
+                @Die.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
+                @Die.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
             }
             m_Wrapper.m_PlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -367,10 +461,49 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Primary.started += instance.OnPrimary;
                 @Primary.performed += instance.OnPrimary;
                 @Primary.canceled += instance.OnPrimary;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Die.started += instance.OnDie;
+                @Die.performed += instance.OnDie;
+                @Die.canceled += instance.OnDie;
             }
         }
     }
     public PlayActions @Play => new PlayActions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_Pause;
+    public struct MenuActions
+    {
+        private @Controls m_Wrapper;
+        public MenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_Menu_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+            {
+                @Pause.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
+            }
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+            }
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
     public interface IPlayActions
     {
         void OnCrouch(InputAction.CallbackContext context);
@@ -378,5 +511,11 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMouseLook(InputAction.CallbackContext context);
         void OnKeyLook(InputAction.CallbackContext context);
         void OnPrimary(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnDie(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }

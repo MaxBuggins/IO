@@ -83,6 +83,9 @@ public class Projectile : Hurtful
             Hurtable hurtable = hit.collider.gameObject.GetComponentInParent<Hurtable>();
             if (hurtable != null)
             {
+                if (hurtable == ignor)
+                    return;
+
                 //if (hurtful.ignorOwner && hurtable == hurtful.owner)
                 //return; //dont interact with the shooter
 

@@ -6,14 +6,21 @@ using UnityEngine.Rendering;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public Vector2 cameraOffset;
+    [HideInInspector] static public PlayerCamera localInstance;
 
     [Header("Variables")]
+    public bool lockYRot = false;
+    private float xRotation = 0f;
+
     public float mouseLookSensitivty = 18;
     public float keyLookSensitivty = 50;
     public float maXLook = 10;
+    public float rotToFloor = 8;
 
-    private float xRotation = 0f;
+    [Header("Offsets")]
+    [HideInInspector] public Vector2 cameraOffset;
+    public Vector2 standCameraOffset;
+    public Vector2 crouchCameraOffset;
 
     [Header("HeadBob")]
     public float bobSpeed = 1;
@@ -33,14 +40,16 @@ public class PlayerCamera : MonoBehaviour
     [HideInInspector] public Transform focus;
 
     [Header("Unity Things")]
-    public PlayerMovement movement;
+    public PlayerController movement;
     private Controls controls;
 
 
 
     void Start()
     {
-        movement = GetComponentInParent<PlayerMovement>();
+        localInstance = this;
+
+        movement = GetComponentInParent<PlayerController>();
 
         controls = new Controls();
 
@@ -54,24 +63,36 @@ public class PlayerCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         //audioSource.Play();
+
+        cameraOffset = standCameraOffset;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         float mouseX = look.x * Time.fixedDeltaTime;
         float mouseY = look.y * Time.fixedDeltaTime;
 
-        //xRotation -= mouseY;
-        //xRotation = Mathf.Clamp(xRotation, -85f, 85f);
+        if (lockYRot)
+        {
+            //Quaternion slopeRot = Quaternion.FromToRotation(transform.up, movement.floorNormal);
 
-        //transform.localRotation = Quaternion.Euler(xRotation + currentOffset.x, currentOffset.y, currentOffset.z);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, slopeRot * transform.rotation, rotToFloor * Time.fixedDeltaTime);
+            //transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 0, transform.localEulerAngles.z);
+        }
 
-        movement.transform.Rotate(Vector3.up * mouseX);
+        else
+        { 
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -85f, 85f);
+
+            transform.localRotation = Quaternion.Euler(xRotation + currentOffset.x, currentOffset.y, currentOffset.z);
+        }
+
+        movement.transform.Rotate(Vector3.up * mouseX);  
 
         lastPos = transform.position;
 
-
-        if (Mathf.Abs(movement.move.x) > 0.1f || Mathf.Abs(movement.move.y) > 0.1f)
+        if (Mathf.Abs(movement.moveInput.x) > 0.1f || Mathf.Abs(movement.moveInput.y) > 0.1f)
         {
             //Player is moving
             bobTime += Time.deltaTime * bobSpeed;
@@ -83,20 +104,17 @@ public class PlayerCamera : MonoBehaviour
             bobTime = 0;
             transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, cameraOffset.y, Time.deltaTime * bobSpeed), transform.localPosition.z);
         }
-    }
 
-    private void Update()
-    {
-        if(Vector3.Distance(Vector3.zero, currentOffset) > 0.15f)
+        if (Vector3.Distance(Vector3.zero, currentOffset) > 0.15f)
             currentOffset += (Vector3.zero - currentOffset).normalized * rotResetSpeed * Time.deltaTime;
     }
 
-    public void Crouch()
+    public void Crouch(bool crouch)
     {
-        if (cameraOffset.y == 0.35f)
-            cameraOffset.y = 0.65f;
+        if (crouch)
+            cameraOffset = crouchCameraOffset;
         else
-            cameraOffset.y = 0.35f;
+            cameraOffset = standCameraOffset;
 
     }
 

@@ -50,7 +50,7 @@ public class Hurtable : NetworkBehaviour
         }
     }
 
-    public virtual void OnHurt(int damage) //do somethin or other
+    public virtual void OnHurt(int damage) //do somethin or other to a toaster
     {
 
     }
@@ -86,6 +86,12 @@ public class Hurtable : NetworkBehaviour
 
     [TargetRpc]
     public virtual void TargetAddVelocity(NetworkConnection target, Vector3 vel)
+    {
+
+    }
+
+    [TargetRpc]
+    public virtual void TargetSetVelocity(NetworkConnection target, Vector3 vel, bool ignorZero)
     {
 
     }

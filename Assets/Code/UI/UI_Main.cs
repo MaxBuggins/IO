@@ -8,6 +8,10 @@ public class UI_Main : MonoBehaviour
 
     public UI_Base[] bases;
 
+    public GameObject playerUI;
+    public GameObject gameOverUI;
+    public GameObject pauseUI;
+
     public Canvas canvas;
 
     void Awake()
@@ -27,9 +31,45 @@ public class UI_Main : MonoBehaviour
 
     public void UIUpdate()
     {
-        foreach(UI_Base uI_Base in bases)
+        if (Player.localInstance == null)
+            return;
+
+        foreach (UI_Base uI_Base in bases)
         {
             uI_Base.Update();
         }
+
+        if (Player.localInstance.health <= 0)
+        {
+            gameOverUI.SetActive(true);
+            playerUI.SetActive(false);
+        }
+        else
+        {
+            playerUI.SetActive(true);
+            gameOverUI.SetActive(false);
+        }
     }
+
+    public void OnPause(bool pause)
+    {
+        playerUI.SetActive(!pause);
+        pauseUI.SetActive(pause);
+
+        if (pause)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+
+    public void ChangeSensativity(float sensativity)
+    {
+        Player.localInstance.playerCamera.mouseLookSensitivty = sensativity;
+    }
+
 }
