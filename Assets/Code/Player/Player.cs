@@ -11,9 +11,8 @@ public class Player : Hurtable
     [Header("Player Stats")] //spelling is for the weak, suck it up
 
     //[SyncVar(hook = nameof(OnNameChanged))]
-    public string username = "NoNameNed";
-    //[SyncVar(hook = nameof(OnColorChanged))]
-    public Color32 colour = Color.black;
+    [SyncVar] public string userName = "NoNameNed";
+    [SyncVar] public Color32 primaryColour = Color.black;
 
     [SyncVar] public int kills = 0; //umm no idear what this could mean
     [SyncVar] public int killStreak = 0; //how many kills before you respawn
@@ -21,7 +20,16 @@ public class Player : Hurtable
 
     [SyncVar] public int deaths = 0; //you die you death
 
-    [SyncVar] public int bonusScore = 0; //For gameMode unique scores like capturing a flag
+    [SyncVar(hook = nameof(OnScoreChange))]
+    public int bonusScore = 0; //For gameMode unique scores like capturing a flag
+
+    public float timeSinceGrounded = 0;
+
+    [HideInInspector] public MasterCheckPoint ownedRace;
+
+    [HideInInspector] public MasterCheckPoint currentRace;
+    //[SyncVar] public int currentCheckPoint = -1;
+    public readonly SyncList<double> checkPointTimes = new SyncList<double>();
 
     [SyncVar(hook = nameof(OnCrouch))]
     public bool crouching = false;
@@ -55,14 +63,17 @@ public class Player : Hurtable
     private NetworkTransform netTrans;
     private CapsuleCollider character;
     public PlayerController playerMovement;
-    private DirectionalSprite directionalSprite;
+    //private DirectionalSprite directionalSprite;
+    private SkinnedMeshRenderer playerMeshRenderer;
+
 
     private void Awake()
     {
         netTrans = GetComponent<NetworkTransform>();
         character = GetComponentInChildren<CapsuleCollider>();
         playerMovement = GetComponent<PlayerController>();
-        directionalSprite = GetComponentInChildren<DirectionalSprite>();
+        //directionalSprite = GetComponentInChildren<DirectionalSprite>();
+        playerMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
         levelManager = FindObjectOfType<LevelManager>();
         networkManager = FindObjectOfType<NetworkManager>();
@@ -73,20 +84,52 @@ public class Player : Hurtable
 
     public override void OnStartServer() 
     {
+        if (!netIdentity.isClient)
+        {
+            //set up SyncList
+            checkPointTimes.Callback += OnTimesUpdated;
+            // Process initial SyncList payload
+            for (int index = 0; index < checkPointTimes.Count; index++)
+                OnTimesUpdated(SyncList<double>.Operation.OP_ADD, index, new double(), checkPointTimes[index]);
+        }
+
         SpawnPlayer();
+    }
+
+    public override void OnStartClient()
+    {
+        OnCrouch(crouching, crouching);
+        base.OnStartClient();
     }
 
     public override void OnStartLocalPlayer()
     {
         localInstance = this;
-        directionalSprite.render.enabled = false;
+        playerMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+        //directionalSprite.render.enabled = false;
 
         //playerMovement.enabled = true;
         playerCamera = Instantiate(playerCamera.gameObject, transform).GetComponent<PlayerCamera>();
 
         //UI_Main.instance.UIUpdate();
 
+
+        CmdPlayerSetStats(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.userName, LocalPlayerSettingsStorage.localInstance.localPlayerSettings.primaryColour);
+
+        //set up SyncList
+        checkPointTimes.Callback += OnTimesUpdated;
+        // Process initial SyncList payload
+        for (int index = 0; index < checkPointTimes.Count; index++)
+            OnTimesUpdated(SyncList<double>.Operation.OP_ADD, index, new double(), checkPointTimes[index]);
+
+
         base.OnStartLocalPlayer();
+    }
+
+    public void CmdPlayerSetStats(string inUserName, Color32 inPrimaryColour)
+    {
+        userName = inUserName;
+        primaryColour = inPrimaryColour;
     }
 
     [Command]
@@ -97,7 +140,7 @@ public class Player : Hurtable
 
     public void OnCrouch(bool _Old, bool _New)
     {
-        if(crouching == true)
+        if(_New == true)
         {
             character.height = crouchHeight;
         }
@@ -107,26 +150,52 @@ public class Player : Hurtable
         }
 
         character.center = Vector3.up * character.height / 2;
+
+        if (isLocalPlayer)
+        {
+            playerCamera.Crouch(_New);
+        }
     }
     
+    public void OnScoreChange(int oldScore, int newScore)
+    {
+        if (newScore > oldScore)
+        {
+            if (isLocalPlayer)
+            {
+                UI_Main.instance.UIUpdate();
+                UI_Main.instance.TemparyChangeScreenColour(new Color(0.572f, 0.863f, 0.729f, 0.3f), 0.5f);
+            }
+        }
+    }
 
     [ClientCallback]
     public override void OnHurt(int damage)
     {
         if (isLocalPlayer)
         {
-            //UI_Main.instance.UIUpdate();
-            //gameCam.Shake(damage);
+            UI_Main.instance.UIUpdate();
+            playerCamera.Shake(damage);
+
+            if (health > 0)
+                UI_Main.instance.TemparyChangeScreenColour(new Color(0.706f, 0.125f, 0.165f, 0.3f), 0.5f);
         }
     }
 
 
     public override void OnDeath()
     {
-        directionalSprite.render.enabled = false;
+        playerMeshRenderer.gameObject.SetActive(false);
+        //directionalSprite.render.enabled = false;
         character.enabled = false;
 
         Instantiate(corpse, transform.position, transform.rotation, null);
+
+        if (isLocalPlayer)
+        {
+            playerCamera.Dead(true);
+            UI_Main.instance.UIUpdate();
+        }
     }
 
 
@@ -134,22 +203,30 @@ public class Player : Hurtable
     {
         character.enabled = true;
 
+        if(currentRace != null)
+            currentRace.EndRace(this);
+        //currentCheckPoint = -1;
+
+        playerMeshRenderer.gameObject.SetActive(true);
 
         if (isLocalPlayer)
         {
             //GetComponent<Rigidbody>().velocity = Vector3.zero;
             playerMovement.velocity = Vector3.zero;
+            playerCamera.Dead(false);
+            UI_Main.instance.UIUpdate();
         }
-        else
-        {
-            if(directionalSprite.render != null)
-                directionalSprite.render.enabled = true;
-        }
+
     }
 
     [ServerCallback]
     public override void ServerDeath()
     {
+        character.enabled = false;
+
+        if (ownedRace != null)
+            if (ownedRace.finished == false)
+                ownedRace.finished = true;
 
         deaths += 1;
         bonusScore = 0;
@@ -159,6 +236,11 @@ public class Player : Hurtable
     [ServerCallback]
     public void SpawnPlayer()
     {
+        character.enabled = true;
+
+        if (currentRace != null)
+            currentRace.EndRace(this);
+
         Transform sPoint = networkManager.GetStartPosition();
         transform.position = sPoint.position;
         netTrans.RpcTeleport(sPoint.position);
@@ -202,5 +284,47 @@ public class Player : Hurtable
             return;
 
         Hurt(damage, HurtType.Suicide);
+    }
+
+    void OnTimesUpdated(SyncList<double>.Operation operation, int index, double oldTime, double newTime)
+    {
+        switch (operation)
+        {
+            case SyncList<double>.Operation.OP_ADD:
+                {
+                    //currentCheckPoint++;
+                    Color textColor = currentRace.colour;
+                    textColor.a = 0.65f;
+
+                    string msg = "";
+
+                    if (index == 0)
+                    {
+                        UI_Main.instance.CreateAlert("|Start Race|", 60, textColor);
+                        return;
+                    }
+
+                    float time;
+                    float roundedTime;
+                    float duration = 2;
+
+                    if (currentRace.checkPoints[checkPointTimes.Count - 1].finish)
+                    {
+                        msg = "Finish | ";
+                        duration = 4;
+                        time = (float)(newTime - checkPointTimes[0]);
+                    }
+
+                    else
+                    {
+                        time = (float)(newTime - checkPointTimes[checkPointTimes.Count - 2]);
+                    }
+                    roundedTime = Mathf.Round(time * 1000.0f) / 1000.0f;
+                    UI_Main.instance.CreateAlert(msg + roundedTime, 60, textColor, duration);
+
+
+                    break;
+                }
+        }
     }
 }

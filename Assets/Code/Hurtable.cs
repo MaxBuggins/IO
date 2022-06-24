@@ -21,6 +21,9 @@ public class Hurtable : NetworkBehaviour
             health = maxHealth;
         else
             health -= damage;
+
+        if(health <= 0 )
+            ServerDeath();
     }
 
 
@@ -33,7 +36,6 @@ public class Hurtable : NetworkBehaviour
 
             if (_Old > 0 && _New <= 0) //on death
             {
-                ServerDeath();
                 OnDeath();
             }
         }

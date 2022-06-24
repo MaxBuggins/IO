@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using Pixelplacement;
+using UnityEngine.UI;
 
 public class UI_Main : MonoBehaviour
 {
@@ -8,9 +11,13 @@ public class UI_Main : MonoBehaviour
 
     public UI_Base[] bases;
 
+    [SerializeField] private Image screenImage;
+
     public GameObject playerUI;
     public GameObject gameOverUI;
     public GameObject pauseUI;
+
+    [SerializeField] private GameObject alertObject;
 
     public Canvas canvas;
 
@@ -26,7 +33,6 @@ public class UI_Main : MonoBehaviour
 
     private void Update()
     {
-        UIUpdate();
     }
 
     public void UIUpdate()
@@ -43,11 +49,21 @@ public class UI_Main : MonoBehaviour
         {
             gameOverUI.SetActive(true);
             playerUI.SetActive(false);
+            screenImage.color = new Color(0.706f, 0.125f, 0.165f, 0.2f);
         }
         else
         {
             playerUI.SetActive(true);
             gameOverUI.SetActive(false);
+            screenImage.color = Color.clear;
+        }
+    }
+
+    public void RefreshColour()
+    {
+        foreach (UI_Base uI_Base in bases)
+        {
+            uI_Base.RefreshColour(Player.localInstance.primaryColour);
         }
     }
 
@@ -59,17 +75,49 @@ public class UI_Main : MonoBehaviour
         if (pause)
         {
             Cursor.lockState = CursorLockMode.None;
+            screenImage.color = new Color(0.135f, 0.125f, 0.706f, 0.2f);
         }
         else
         {
+            screenImage.color = Color.clear;
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    public void CreateAlert(string text, float fontSize, Color fontColour, float duration = 2)
+    {
+        GameObject createdAlertObject = Instantiate(alertObject, transform);
+
+        createdAlertObject.GetComponent<SelfDestruct>().destoryDelay = duration;
+
+        TextMeshProUGUI createdAlertObjectTMPro = createdAlertObject.GetComponent<TextMeshProUGUI>();
+        createdAlertObjectTMPro.text = text;
+        createdAlertObjectTMPro.fontSize = fontSize;
+        createdAlertObjectTMPro.color = fontColour;
+
+        Tween.AnchoredPosition(createdAlertObject.GetComponent<RectTransform>(), Vector2.down * 600, duration, 0);
+
+
     }
 
 
     public void ChangeSensativity(float sensativity)
     {
-        Player.localInstance.playerCamera.mouseLookSensitivty = sensativity;
+        if (Player.localInstance != null)
+            Player.localInstance.playerCamera.mouseLookSensitivty = sensativity;
     }
 
+    public void ChangeScreenColour(Color colour)
+    {
+        screenImage.color = colour;
+    }
+
+    public void TemparyChangeScreenColour(Color colour, float duration = -1)
+    {
+        screenImage.color = colour;
+
+        if (duration > 0)
+            Tween.Color(screenImage, Color.clear, duration, 0);
+
+    }
 }

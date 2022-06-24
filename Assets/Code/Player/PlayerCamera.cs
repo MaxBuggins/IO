@@ -38,6 +38,8 @@ public class PlayerCamera : MonoBehaviour
     private Vector3 lastPos;
     [HideInInspector]public Vector3 currentOffset = Vector3.zero;
     [HideInInspector] public Transform focus;
+    private Collider deadCollider;
+
 
     [Header("Unity Things")]
     public PlayerController movement;
@@ -49,6 +51,7 @@ public class PlayerCamera : MonoBehaviour
     {
         localInstance = this;
 
+        deadCollider = GetComponent<Collider>();
         movement = GetComponentInParent<PlayerController>();
 
         controls = new Controls();
@@ -127,6 +130,11 @@ public class PlayerCamera : MonoBehaviour
         Vector3 orignalPosition = cameraOffset;
 
         Tween.Shake(transform, orignalPosition, Vector3.one * magnatude * amount, shakeDuration, 0);
+    }
+
+    public void Dead(bool isDead)
+    {
+        deadCollider.enabled = isDead;
     }
 
 }

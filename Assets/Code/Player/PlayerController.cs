@@ -45,6 +45,7 @@ public class PlayerController : NetworkBehaviour
     private PlayerWeapon playerWeapon;
     private Controls controls;
 
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -53,6 +54,8 @@ public class PlayerController : NetworkBehaviour
 
     public override void OnStartLocalPlayer() //just for the local client
     {
+        
+
         controls = new Controls();
 
         controls.Menu.Pause.performed += funnyer => Pause();
@@ -65,7 +68,7 @@ public class PlayerController : NetworkBehaviour
 
         controls.Play.Die.performed += FunnyDeath => Suicide();
 
-        //controls.Play.Crouch.performed += funnyer => Crouch();
+        controls.Play.Crouch.performed += funnyer => Crouch();
 
         controls.Enable();
 
@@ -77,10 +80,19 @@ public class PlayerController : NetworkBehaviour
     private void Update() 
     {
         GetMovementInput();
+
     }
 
 
-    private void FixedUpdate() {
+    private void FixedUpdate() 
+    {
+        if (!onGround)
+            Player.localInstance.timeSinceGrounded += Time.fixedDeltaTime;
+
+        if (transform.position.y < LevelManager.instance.minSightHeight)
+            UI_Main.instance.ChangeScreenColour(new Color(0.8f, 0.8f, 0.9f, 1));
+
+
         velocity = rb.velocity; 
 
         // Clamp speed for bunny hop more like funny hop
@@ -96,9 +108,11 @@ public class PlayerController : NetworkBehaviour
 
         // Air physics if moving upwards fast (Maybe Stupid)
         if (rampSlideLimit >= 0f && velocity.y > rampSlideLimit)
+        {
             onGround = false;
+        }
 
-        if (onGround) {
+            if (onGround) {
             // Rotate movement vector to match ground tangent
             moveRelative = Vector3.Cross(Vector3.Cross(groundNormal, moveRelative), groundNormal);
 
@@ -193,15 +207,18 @@ public class PlayerController : NetworkBehaviour
         velocity.y -= gravitY * Time.deltaTime;
     }
 
+    [ClientCallback]
     private void OnCollisionStay(Collision other) {
 
         groundMaterial = other.collider.material;
 
         // Check if any of the contacts has acceptable floor angle
         foreach (ContactPoint contact in other.contacts) {
-            if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI/2f)) {
+            if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI/2f)) 
+            {
                 groundNormal = contact.normal;
                 onGround = true;
+                Player.localInstance.timeSinceGrounded = 0;
                 return;
             }
         }
@@ -220,6 +237,7 @@ public class PlayerController : NetworkBehaviour
 
         UI_Main.instance.OnPause(pause);
 
+
         //I should really centerlise the controls instead of a seperate Controls for each script
         if (pause) 
         {
@@ -231,6 +249,11 @@ public class PlayerController : NetworkBehaviour
             controls.Play.Enable();
             playerWeapon.controls.Enable();
         }
+    }
+
+    public void Crouch()
+    {
+        Player.localInstance.CmdCrouch();
     }
 
     public void Suicide() //13 11 14

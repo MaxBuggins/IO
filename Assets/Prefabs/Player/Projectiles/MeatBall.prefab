@@ -69,7 +69,7 @@ MonoBehaviour:
   destoryOnHurt: 1
   ignor: {fileID: 0}
   moveForce: 1
-  collisionForce: 0
+  collisionForce: 0.5
   upwardsForce: 0
   maxVelocity: -1
   startDmgFallOff: 20
@@ -160,7 +160,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 356434909230592184, guid: b7310cb8b746ae84dbcc6198c0cd69ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1

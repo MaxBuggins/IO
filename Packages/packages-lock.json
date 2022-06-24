@@ -180,6 +180,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "judah4.hsvcolorpickerunity": {
+      "version": "https://github.com/judah4/HSV-Color-Picker-Unity.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1374fcb7f4db37df827f412d98184dd82df56f4c"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

@@ -89,6 +89,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Secondary"",
+                    ""type"": ""Button"",
+                    ""id"": ""163f8698-47a3-4052-9fb6-5b1c433f565b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""f04a6af5-61f9-478e-bf6b-be07eab89705"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -278,6 +296,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Die"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e5faef8-1e55-4389-9857-81c6a3463660"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Secondary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8ddbe0a-b0be-4c29-9743-3786c66f396f"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -332,6 +372,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Play_Primary = m_Play.FindAction("Primary", throwIfNotFound: true);
         m_Play_Jump = m_Play.FindAction("Jump", throwIfNotFound: true);
         m_Play_Die = m_Play.FindAction("Die", throwIfNotFound: true);
+        m_Play_Secondary = m_Play.FindAction("Secondary", throwIfNotFound: true);
+        m_Play_Reaction = m_Play.FindAction("Reaction", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -401,6 +443,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Play_Primary;
     private readonly InputAction m_Play_Jump;
     private readonly InputAction m_Play_Die;
+    private readonly InputAction m_Play_Secondary;
+    private readonly InputAction m_Play_Reaction;
     public struct PlayActions
     {
         private @Controls m_Wrapper;
@@ -412,6 +456,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Primary => m_Wrapper.m_Play_Primary;
         public InputAction @Jump => m_Wrapper.m_Play_Jump;
         public InputAction @Die => m_Wrapper.m_Play_Die;
+        public InputAction @Secondary => m_Wrapper.m_Play_Secondary;
+        public InputAction @Reaction => m_Wrapper.m_Play_Reaction;
         public InputActionMap Get() { return m_Wrapper.m_Play; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -442,6 +488,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Die.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
                 @Die.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
                 @Die.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
+                @Secondary.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
+                @Secondary.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
+                @Secondary.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
+                @Reaction.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnReaction;
+                @Reaction.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnReaction;
+                @Reaction.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnReaction;
             }
             m_Wrapper.m_PlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -467,6 +519,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Die.started += instance.OnDie;
                 @Die.performed += instance.OnDie;
                 @Die.canceled += instance.OnDie;
+                @Secondary.started += instance.OnSecondary;
+                @Secondary.performed += instance.OnSecondary;
+                @Secondary.canceled += instance.OnSecondary;
+                @Reaction.started += instance.OnReaction;
+                @Reaction.performed += instance.OnReaction;
+                @Reaction.canceled += instance.OnReaction;
             }
         }
     }
@@ -513,6 +571,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnPrimary(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDie(InputAction.CallbackContext context);
+        void OnSecondary(InputAction.CallbackContext context);
+        void OnReaction(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
