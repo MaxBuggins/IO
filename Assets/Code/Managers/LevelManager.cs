@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : NetworkBehaviour
 {
     [HideInInspector] public static LevelManager instance;
     public float respawnDelay = 1;
@@ -14,6 +14,13 @@ public class LevelManager : MonoBehaviour
     public float minSightHeight = -399;
 
     private List<Transform> spawnPoints = new List<Transform>();
+
+    [SerializeField] private float raceDuration = 60;
+    [HideInInspector] public float raceTimeRemaining;
+    [SyncVar(hook = nameof(OnRaceChange))]
+    public int currentLevelRace = -1;
+    public MasterCheckPoint[] levelRaces;
+
 
     private AudioSource audioSource;
     private AudioDistortionFilter audioDistortion;
@@ -35,6 +42,56 @@ public class LevelManager : MonoBehaviour
 
         audioSource.clip = backgroundMusic;
         audioSource.Play();
+
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        ServerChangeRace();
+    }
+
+    private void Update()
+    {
+        raceTimeRemaining -= Time.deltaTime;
+
+        if (isServer == false)
+            return;
+
+        if (raceTimeRemaining < 0)
+            ServerChangeRace();
+    }
+
+    [Server]
+    public void ServerChangeRace()
+    {
+        if (levelRaces.Length < 2)
+            return; //not enough races
+
+
+        int newRaceIndex = Random.Range(0, levelRaces.Length);
+        while (newRaceIndex == currentLevelRace)
+        {
+            newRaceIndex = Random.Range(0, levelRaces.Length);
+        }
+
+        if (currentLevelRace > -1)
+            levelRaces[currentLevelRace].ServerActivateCheckPoints(false);
+
+        currentLevelRace = newRaceIndex;
+        //levelRaces[currentLevelRace].active = true;
+        levelRaces[currentLevelRace].ServerActivateCheckPoints(true);
+
+        raceTimeRemaining = raceDuration;
+    }
+
+    public void OnRaceChange(int oldRaceIndex, int newRaceIndex)
+    {
+        //if (oldRaceIndex > -1)
+            //levelRaces[oldRaceIndex].active = false;
+
+        //levelRaces[newRaceIndex].gameObject.SetActive(true);
     }
 
     //public int GetSpawnWeaponID()

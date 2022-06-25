@@ -55,6 +55,7 @@ public class Player : Hurtable
 
     [Header("Unity Stuff")]
     public PlayerCamera playerCamera;
+    public GameObject playerUI;
     public GameObject corpse;
 
     private LevelManager levelManager;
@@ -82,16 +83,17 @@ public class Player : Hurtable
         OnAlive(); //player is alived
     }
 
+    private void Start()
+    {
+        //set up SyncList
+        checkPointTimes.Callback += OnTimesUpdated;
+        // Process initial SyncList payload
+        for (int index = 0; index < checkPointTimes.Count; index++)
+            OnTimesUpdated(SyncList<double>.Operation.OP_ADD, index, new double(), checkPointTimes[index]);
+    }
+
     public override void OnStartServer() 
     {
-        if (!netIdentity.isClient)
-        {
-            //set up SyncList
-            checkPointTimes.Callback += OnTimesUpdated;
-            // Process initial SyncList payload
-            for (int index = 0; index < checkPointTimes.Count; index++)
-                OnTimesUpdated(SyncList<double>.Operation.OP_ADD, index, new double(), checkPointTimes[index]);
-        }
 
         SpawnPlayer();
     }
@@ -104,6 +106,9 @@ public class Player : Hurtable
 
     public override void OnStartLocalPlayer()
     {
+        //Bring in the UI
+        Instantiate(playerUI, null);
+
         localInstance = this;
         playerMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         //directionalSprite.render.enabled = false;
@@ -115,13 +120,6 @@ public class Player : Hurtable
 
 
         CmdPlayerSetStats(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.userName, LocalPlayerSettingsStorage.localInstance.localPlayerSettings.primaryColour);
-
-        //set up SyncList
-        checkPointTimes.Callback += OnTimesUpdated;
-        // Process initial SyncList payload
-        for (int index = 0; index < checkPointTimes.Count; index++)
-            OnTimesUpdated(SyncList<double>.Operation.OP_ADD, index, new double(), checkPointTimes[index]);
-
 
         base.OnStartLocalPlayer();
     }

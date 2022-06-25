@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8350777027916955827}
   - component: {fileID: 5848720486412176636}
   - component: {fileID: 6912716922578377004}
+  - component: {fileID: 7000582011086203425}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -48,9 +49,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538843cf345ae074d9684ca847cd99e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   respawnDelay: 1
   backgroundMusic: {fileID: 8300000, guid: 8f56aa5f1bd6ba6449793f1d9c0776d7, type: 3}
   minSightHeight: -398
+  raceDuration: 300
+  raceTimeRemaining: 0
+  currentLevelRace: -1
+  levelRaces: []
 --- !u!82 &6912716922578377004
 AudioSource:
   m_ObjectHideFlags: 0
@@ -147,6 +154,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7000582011086203425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451684121783634245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: f86549032de67c145864b8262667d5fd
+  hasSpawned: 0
 --- !u!1001 &4508336227332898644
 PrefabInstance:
   m_ObjectHideFlags: 0

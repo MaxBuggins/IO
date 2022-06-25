@@ -14,6 +14,9 @@ public class MyNetworkManager : NetworkManager
     // have to cast to this type everywhere.
     public static new MyNetworkManager singleton { get; private set; }
 
+    //[Header("My Stuff")]
+    //public GameObject mainMenuObject;
+
     #region Unity Callbacks
 
     public override void OnValidate()
@@ -187,6 +190,8 @@ public class MyNetworkManager : NetworkManager
         //if (hud != null) //TEMPARAY
         //hud.showGUI = false;
 
+        //Destroy(mainMenuObject);
+
         base.OnClientConnect(conn);
     }
 
@@ -197,6 +202,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnClientDisconnect()
     {
         Cursor.lockState = CursorLockMode.None;
+
         base.OnClientDisconnect();
     }
 

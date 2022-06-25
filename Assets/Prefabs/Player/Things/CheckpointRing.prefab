@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 4580487920059259343}
   - component: {fileID: 5830119620076991899}
   - component: {fileID: 5409422950389270783}
-  - component: {fileID: 5079434260601506033}
   - component: {fileID: 4224797346711944587}
   m_Layer: 0
   m_Name: CheckpointRing
@@ -111,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 4822890314477641165}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 3, z: 8}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2499999, y: 1.25, z: 1.2499999}
   m_Children:
   - {fileID: 1605336309737869898}
   - {fileID: 6328241067183847744}
@@ -179,52 +178,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea76aa0b04ef2e4b9d015e694e8da9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkPointIndex: -1
-  finish: 0
-  masterCheckPoint: {fileID: 0}
-  textDisplay: {fileID: 6942595942831126859}
-  ringRender: {fileID: 5830119620076991899}
-  centerRender: {fileID: 737105800642869577}
---- !u!114 &5079434260601506033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4822890314477641165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 641d39d8903c9114e9e3a22e50572de5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  endScale: {x: 1.5, y: 1.5, z: 1.5}
-  duration: 0.5
-  animationCurve:
+  activeAnimationDuration: 0.6
+  activeAnimationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.8
-      value: 1.1
-      inSlope: 1.7512879
-      outSlope: 1.7512879
-      tangentMode: 1
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -232,6 +203,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  checkPointIndex: -1
+  finish: 0
+  masterCheckPoint: {fileID: 0}
+  textDisplay: {fileID: 6942595942831126859}
+  ringRender: {fileID: 5830119620076991899}
+  centerRender: {fileID: 737105800642869577}
 --- !u!64 &4224797346711944587
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -272,12 +249,12 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7455122982774864599}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7547155503490971459}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -344,7 +321,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'Exprie:
+
+    77:77'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

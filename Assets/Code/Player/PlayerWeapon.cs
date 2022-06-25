@@ -129,7 +129,7 @@ public class PlayerWeapon : NetworkBehaviour
 			spawnOffset = standSpawnOffset;
 
 
-		player.ownedRace.ServerCreateCheckPoint(transform.position, rotation);
+		player.ownedRace.ServerCreateCheckPoint(transform.position, rotation, Vector3.one * 1.3f);
 
 		//GameObject spawned = Instantiate(secondaryObject, transform.position + spawnOffset, rotation, player.ownedRace.transform);
 		//CheckPoint checkPoint = spawned.GetComponent<CheckPoint>();
@@ -154,6 +154,9 @@ public class PlayerWeapon : NetworkBehaviour
 	void UseSecondary()
 	{
 		if (timeSinceSecondary < secondaryCoolDown) //not enough time progressed
+			return;
+
+		if (isClientOnly) //TEMP SO MESH DOESNT EXPLOIT THIS IN DEVELPMENT FEATURE
 			return;
 
 		CmdCreateRing(PlayerCamera.localInstance.transform.rotation);

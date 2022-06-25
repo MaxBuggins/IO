@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using TMPro;
+using Pixelplacement;
 
 public class CheckPoint : MonoBehaviour
 {
+    public float activeAnimationDuration = 0.5f;
+    public AnimationCurve activeAnimationCurve;
+
     public int checkPointIndex = -1;
 
     public bool finish = false;
@@ -16,25 +20,48 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private Renderer ringRender;
     [SerializeField] private Renderer centerRender;
 
-
     private void Start()
     {
-        SetVisabilty(0.12f);
-        SetColour(masterCheckPoint.colour);
+        if (masterCheckPoint.active == false)
+            gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (checkPointIndex > 0)
+            return;
+
+        string minutes = Mathf.Floor(LevelManager.instance.raceTimeRemaining / 60).ToString("00");
+        string seconds = Mathf.Floor(LevelManager.instance.raceTimeRemaining % 60).ToString("00");
+
+        textDisplay.text = "Expire\n" + minutes + ":" + seconds;
+
     }
 
     public void SetCheckPoint()
     {
+        SetVisabilty(0.12f);
+        SetColour(masterCheckPoint.colour);
+
         if (checkPointIndex == 0)
         {
+            SetVisabilty(0.7f);
             textDisplay.text = "Start";
-
         }
         else
         {
             textDisplay.text = checkPointIndex.ToString();
         }
     }
+
+    public void TurnOnCheckPoint()
+    {
+        Vector3 currentScale = transform.localScale;
+        transform.localScale = Vector3.zero;
+
+        Tween.LocalScale(transform, currentScale, activeAnimationDuration, 0, activeAnimationCurve);
+    }
+
     
     public void SetAsFinish()
     {
@@ -87,18 +114,6 @@ public class CheckPoint : MonoBehaviour
         }
 
     }
-
-    
-/*    [TargetRpc]
-    public void TRpcStartCheckPoint(NetworkConnection target)
-    {
-        Player.localInstance.currentRace = masterCheckPoint;
-
-        Color textColor = masterCheckPoint.colour;
-        textColor.a = 0.65f;
-
-        UI_Main.instance.CreateAlert("|| Start Race ||", 80, textColor);
-    }*/
 
     public void SetVisabilty(float visability)
     {

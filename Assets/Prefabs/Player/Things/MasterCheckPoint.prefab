@@ -64,7 +64,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   finished: 0
+  active: 1
   checkPoints: []
+  raceName: The Nameless Race
   colour:
     serializedVersion: 2
     rgba: 4278190080

@@ -1,0 +1,5 @@
+newmtl Debug_32x32_-_White
+map_Kd Debug 32x32 - White.png
+Kd 1 1 1
+d 1
+
