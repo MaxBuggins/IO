@@ -635,6 +635,7 @@ RectTransform:
   - {fileID: 5639760854270212253}
   - {fileID: 7909264420659412178}
   - {fileID: 3897990707665231119}
+  - {fileID: 6941867328735569783}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -716,6 +717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9b1dee7b571734fb01f364e840bd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players: []
   bases:
   - {fileID: 6836023458409957068}
   - {fileID: 6368844255964849096}
@@ -724,8 +726,59 @@ MonoBehaviour:
   playerUI: {fileID: 4197636088601722070}
   gameOverUI: {fileID: 2631990722641047708}
   pauseUI: {fileID: 2626160022485743653}
+  scoreBoardUI: {fileID: 1806990851545315810}
   alertObject: {fileID: 5387573083884081287, guid: d50aa9a7ada4a57448508c69271e5821, type: 3}
   canvas: {fileID: 596965255092342151}
+--- !u!1 &1806990851545315810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6941867328735569783}
+  - component: {fileID: 7301088107937617883}
+  m_Layer: 5
+  m_Name: ScoreBoard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &6941867328735569783
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806990851545315810}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4824639848591001599}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7301088107937617883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806990851545315810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46d27ad575c0524da8bab2a37bc0a35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreRowPrefab: {fileID: 845869548414465211, guid: f20f0b9acb3e7844b9f94ca8126f5f60, type: 3}
+  scoreRows: []
 --- !u!1 &1900049215605157797
 GameObject:
   m_ObjectHideFlags: 0

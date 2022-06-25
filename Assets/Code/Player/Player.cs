@@ -10,15 +10,19 @@ public class Player : Hurtable
 
     [Header("Player Stats")] //spelling is for the weak, suck it up
 
-    //[SyncVar(hook = nameof(OnNameChanged))]
-    [SyncVar] public string userName = "NoNameNed";
-    [SyncVar] public Color32 primaryColour = Color.black;
+    [SyncVar(hook = nameof(OnNameChanged))]
+    public string userName = "NoNameNed";
+    [SyncVar(hook = nameof(OnColourChanged))]
+    public Color32 primaryColour = Color.black;
 
     [SyncVar] public int kills = 0; //umm no idear what this could mean
     [SyncVar] public int killStreak = 0; //how many kills before you respawn
     [SyncVar] public int assists = 0; //if you were helpful in someones death
 
     [SyncVar] public int deaths = 0; //you die you death
+
+    [SyncVar(hook = nameof(UpdateBestTime))] 
+    public float bestTime = -1;
 
     [SyncVar(hook = nameof(OnScoreChange))]
     public int bonusScore = 0; //For gameMode unique scores like capturing a flag
@@ -28,7 +32,6 @@ public class Player : Hurtable
     [HideInInspector] public MasterCheckPoint ownedRace;
 
     [HideInInspector] public MasterCheckPoint currentRace;
-    //[SyncVar] public int currentCheckPoint = -1;
     public readonly SyncList<double> checkPointTimes = new SyncList<double>();
 
     [SyncVar(hook = nameof(OnCrouch))]
@@ -90,6 +93,9 @@ public class Player : Hurtable
         // Process initial SyncList payload
         for (int index = 0; index < checkPointTimes.Count; index++)
             OnTimesUpdated(SyncList<double>.Operation.OP_ADD, index, new double(), checkPointTimes[index]);
+
+
+        UI_Main.instance.RefreshPlayerList();
     }
 
     public override void OnStartServer() 
@@ -124,6 +130,12 @@ public class Player : Hurtable
         base.OnStartLocalPlayer();
     }
 
+    void UpdateBestTime(float oldBestTime, float newBestTime)
+    {
+        UI_Main.instance.UIUpdate();
+    }
+
+    [Command]
     public void CmdPlayerSetStats(string inUserName, Color32 inPrimaryColour)
     {
         userName = inUserName;
@@ -166,6 +178,15 @@ public class Player : Hurtable
             }
         }
     }
+    public void OnNameChanged(string oldName, string newName)
+    {
+        UI_Main.instance.UIUpdate();
+    }
+
+    public void OnColourChanged(Color32 oldColor, Color32 newColor)
+    {
+        UI_Main.instance.UIUpdate();
+    }
 
     [ClientCallback]
     public override void OnHurt(int damage)
@@ -202,7 +223,7 @@ public class Player : Hurtable
         character.enabled = true;
 
         if(currentRace != null)
-            currentRace.EndRace(this);
+            currentRace.EndRace(this, false);
         //currentCheckPoint = -1;
 
         playerMeshRenderer.gameObject.SetActive(true);
@@ -237,7 +258,7 @@ public class Player : Hurtable
         character.enabled = true;
 
         if (currentRace != null)
-            currentRace.EndRace(this);
+            currentRace.EndRace(this, false);
 
         Transform sPoint = networkManager.GetStartPosition();
         transform.position = sPoint.position;
@@ -311,6 +332,8 @@ public class Player : Hurtable
                         msg = "Finish | ";
                         duration = 4;
                         time = (float)(newTime - checkPointTimes[0]);
+
+                        currentRace.EndRace(this, true);
                     }
 
                     else
@@ -320,9 +343,15 @@ public class Player : Hurtable
                     roundedTime = Mathf.Round(time * 1000.0f) / 1000.0f;
                     UI_Main.instance.CreateAlert(msg + roundedTime, 60, textColor, duration);
 
-
                     break;
                 }
         }
+    }
+
+    public void ClearRace()
+    {
+        currentRace = null;
+        checkPointTimes.Clear();
+        bestTime = -1;
     }
 }

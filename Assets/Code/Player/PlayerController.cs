@@ -58,17 +58,20 @@ public class PlayerController : NetworkBehaviour
 
         controls = new Controls();
 
-        controls.Menu.Pause.performed += funnyer => Pause();
+        controls.Menu.Pause.performed += funny => Pause();
 
         controls.Play.Move.performed += wasfunny => moveInput = wasfunny.ReadValue<Vector2>();
         controls.Play.Move.canceled += wasfunny => moveInput = Vector2.zero;
 
-        controls.Play.Jump.performed += funny => jumpPending = true;
-        controls.Play.Jump.canceled += funny => jumpPending = false;
+        controls.Play.Jump.performed += funnyer => jumpPending = true;
+        controls.Play.Jump.canceled += funnyer => jumpPending = false;
+
+        controls.Play.Crouch.performed += funnyerer => Crouch();
 
         controls.Play.Die.performed += FunnyDeath => Suicide();
 
-        controls.Play.Crouch.performed += funnyer => Crouch();
+        controls.Play.ShowScoreBoard.performed += Funnyiest => ShowScoreboard();
+
 
         controls.Enable();
 
@@ -259,5 +262,10 @@ public class PlayerController : NetworkBehaviour
     public void Suicide() //13 11 14
     {
         Player.localInstance.CmdSelfHarm(Player.localInstance.health);
+    }
+
+    public void ShowScoreboard()
+    {
+        UI_Main.instance.ShowScoreboard(!UI_Main.instance.scoreBoardUI.active);
     }
 }

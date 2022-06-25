@@ -16,6 +16,8 @@ public class CheckPoint : MonoBehaviour
 
     public MasterCheckPoint masterCheckPoint;
 
+    private Vector3 storedScale;
+
     [SerializeField] private TextMeshPro textDisplay;
     [SerializeField] private Renderer ringRender;
     [SerializeField] private Renderer centerRender;
@@ -29,6 +31,9 @@ public class CheckPoint : MonoBehaviour
     private void Update()
     {
         if (checkPointIndex > 0)
+            return;
+
+        if (LevelManager.instance == null)
             return;
 
         string minutes = Mathf.Floor(LevelManager.instance.raceTimeRemaining / 60).ToString("00");
@@ -62,7 +67,19 @@ public class CheckPoint : MonoBehaviour
         Tween.LocalScale(transform, currentScale, activeAnimationDuration, 0, activeAnimationCurve);
     }
 
-    
+    public void TurnOffCheckPoint()
+    {
+        storedScale = transform.localScale;
+
+        Tween.LocalScale(transform, Vector3.zero, activeAnimationDuration, 0, activeAnimationCurve, completeCallback: RevertScale);
+    }
+
+    public void RevertScale()
+    {
+        transform.localScale = storedScale;
+    }
+
+
     public void SetAsFinish()
     {
         finish = true;
@@ -91,7 +108,7 @@ public class CheckPoint : MonoBehaviour
                     player.checkPointTimes.Add(NetworkTime.time);
 
                     //player.checkPointTimes.Count = -1;
-                    masterCheckPoint.EndRace(player);
+                    masterCheckPoint.EndRace(player, true);
                     return;
                 }
 

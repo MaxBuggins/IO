@@ -81,8 +81,14 @@ public class MasterCheckPoint : NetworkBehaviour
         //UI_Main.instance.CreateAlert("|| Start Race ||", 80, textColor);
     }
 
-    public void EndRace(Player player)
+    public void EndRace(Player player, bool finish)
     {
+        if (isServer)
+        {
+            if (finish)
+                player.bestTime = (float)(player.checkPointTimes[player.checkPointTimes.Count - 1] - player.checkPointTimes[0]);
+        }
+
         player.currentRace = null;
 
         foreach (CheckPoint checkPoint in checkPoints)

@@ -78,9 +78,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reaction",
+                    "name": "ShowScoreBoard",
                     "type": "Button",
-                    "id": "f04a6af5-61f9-478e-bf6b-be07eab89705",
+                    "id": "2bb7392c-2d7d-4dc0-9f79-827609420c8d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -288,12 +288,12 @@
                 },
                 {
                     "name": "",
-                    "id": "e8ddbe0a-b0be-4c29-9743-3786c66f396f",
-                    "path": "",
+                    "id": "79fe7403-b564-4f05-8469-0aea1ab573f2",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reaction",
+                    "action": "ShowScoreBoard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

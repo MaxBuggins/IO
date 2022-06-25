@@ -100,9 +100,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Reaction"",
+                    ""name"": ""ShowScoreBoard"",
                     ""type"": ""Button"",
-                    ""id"": ""f04a6af5-61f9-478e-bf6b-be07eab89705"",
+                    ""id"": ""2bb7392c-2d7d-4dc0-9f79-827609420c8d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -310,12 +310,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e8ddbe0a-b0be-4c29-9743-3786c66f396f"",
-                    ""path"": """",
+                    ""id"": ""79fe7403-b564-4f05-8469-0aea1ab573f2"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Reaction"",
+                    ""action"": ""ShowScoreBoard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -373,7 +373,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Play_Jump = m_Play.FindAction("Jump", throwIfNotFound: true);
         m_Play_Die = m_Play.FindAction("Die", throwIfNotFound: true);
         m_Play_Secondary = m_Play.FindAction("Secondary", throwIfNotFound: true);
-        m_Play_Reaction = m_Play.FindAction("Reaction", throwIfNotFound: true);
+        m_Play_ShowScoreBoard = m_Play.FindAction("ShowScoreBoard", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -444,7 +444,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Play_Jump;
     private readonly InputAction m_Play_Die;
     private readonly InputAction m_Play_Secondary;
-    private readonly InputAction m_Play_Reaction;
+    private readonly InputAction m_Play_ShowScoreBoard;
     public struct PlayActions
     {
         private @Controls m_Wrapper;
@@ -457,7 +457,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Play_Jump;
         public InputAction @Die => m_Wrapper.m_Play_Die;
         public InputAction @Secondary => m_Wrapper.m_Play_Secondary;
-        public InputAction @Reaction => m_Wrapper.m_Play_Reaction;
+        public InputAction @ShowScoreBoard => m_Wrapper.m_Play_ShowScoreBoard;
         public InputActionMap Get() { return m_Wrapper.m_Play; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -491,9 +491,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Secondary.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
                 @Secondary.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
                 @Secondary.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
-                @Reaction.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnReaction;
-                @Reaction.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnReaction;
-                @Reaction.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnReaction;
+                @ShowScoreBoard.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
+                @ShowScoreBoard.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
+                @ShowScoreBoard.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
             }
             m_Wrapper.m_PlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -522,9 +522,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Secondary.started += instance.OnSecondary;
                 @Secondary.performed += instance.OnSecondary;
                 @Secondary.canceled += instance.OnSecondary;
-                @Reaction.started += instance.OnReaction;
-                @Reaction.performed += instance.OnReaction;
-                @Reaction.canceled += instance.OnReaction;
+                @ShowScoreBoard.started += instance.OnShowScoreBoard;
+                @ShowScoreBoard.performed += instance.OnShowScoreBoard;
+                @ShowScoreBoard.canceled += instance.OnShowScoreBoard;
             }
         }
     }
@@ -572,7 +572,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnDie(InputAction.CallbackContext context);
         void OnSecondary(InputAction.CallbackContext context);
-        void OnReaction(InputAction.CallbackContext context);
+        void OnShowScoreBoard(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

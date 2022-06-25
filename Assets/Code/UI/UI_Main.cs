@@ -9,13 +9,17 @@ public class UI_Main : MonoBehaviour
 {
     public static UI_Main instance;
 
+    [HideInInspector] public List<Player> players = new List<Player>();
+
     public UI_Base[] bases;
 
     [SerializeField] private Image screenImage;
 
-    public GameObject playerUI;
-    public GameObject gameOverUI;
-    public GameObject pauseUI;
+    [SerializeField] private GameObject playerUI;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject pauseUI;
+    //who even cares if this one is public
+    [SerializeField] public GameObject scoreBoardUI;
 
     [SerializeField] private GameObject alertObject;
 
@@ -33,12 +37,15 @@ public class UI_Main : MonoBehaviour
 
     private void Update()
     {
+
     }
 
     public void UIUpdate()
     {
         if (Player.localInstance == null)
             return;
+
+        players.Sort((p1, p2) => p1.bestTime.CompareTo(p2.bestTime));
 
         foreach (UI_Base uI_Base in bases)
         {
@@ -84,6 +91,23 @@ public class UI_Main : MonoBehaviour
         }
     }
 
+    public void ShowScoreboard(bool show)
+    {
+        UIUpdate();
+
+        playerUI.SetActive(!show);
+        scoreBoardUI.SetActive(show);
+
+        if (show)
+        {
+            screenImage.color = new Color(0.2f, 1f, 0.4f, 0.2f);
+        }
+        else
+        {
+            screenImage.color = Color.clear;
+        }
+    }
+
     public void CreateAlert(string text, float fontSize, Color fontColour, float duration = 2)
     {
         GameObject createdAlertObject = Instantiate(alertObject, transform);
@@ -99,7 +123,6 @@ public class UI_Main : MonoBehaviour
 
 
     }
-
 
     public void ChangeSensativity(float sensativity)
     {
@@ -119,5 +142,12 @@ public class UI_Main : MonoBehaviour
         if (duration > 0)
             Tween.Color(screenImage, Color.clear, duration, 0);
 
+    }
+
+
+    public void RefreshPlayerList()
+    {
+        players.Clear();
+        players.AddRange(FindObjectsOfType<Player>());
     }
 }

@@ -21,4 +21,9 @@ public class LocalPlayerSettingsStorage : MonoBehaviour
     {
         localPlayerSettings.primaryColour = new Color(color.r, color.g, color.b);
     }
+
+    public void SetUserName(string userName)
+    {
+        localPlayerSettings.userName = userName;
+    }
 }

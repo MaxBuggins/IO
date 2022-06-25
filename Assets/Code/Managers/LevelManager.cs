@@ -16,6 +16,8 @@ public class LevelManager : NetworkBehaviour
     private List<Transform> spawnPoints = new List<Transform>();
 
     [SerializeField] private float raceDuration = 60;
+    [SyncVar] private double raceStartTime = 0;
+
     [HideInInspector] public float raceTimeRemaining;
     [SyncVar(hook = nameof(OnRaceChange))]
     public int currentLevelRace = -1;
@@ -54,7 +56,11 @@ public class LevelManager : NetworkBehaviour
 
     private void Update()
     {
-        raceTimeRemaining -= Time.deltaTime;
+        //casting Network Time down to float will literrnly offset accuraccy by 8ms a day [Brugh]
+        //aka WHO CARES I DONT PLAN ON ADDING 20DAY RACES BRUVY
+
+        raceTimeRemaining = raceDuration - (float)(NetworkTime.time - raceStartTime);
+
 
         if (isServer == false)
             return;
@@ -83,7 +89,7 @@ public class LevelManager : NetworkBehaviour
         //levelRaces[currentLevelRace].active = true;
         levelRaces[currentLevelRace].ServerActivateCheckPoints(true);
 
-        raceTimeRemaining = raceDuration;
+        raceStartTime = NetworkTime.time;
     }
 
     public void OnRaceChange(int oldRaceIndex, int newRaceIndex)
