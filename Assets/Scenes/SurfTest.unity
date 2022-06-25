@@ -4104,6 +4104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7000582011086203425, guid: f86549032de67c145864b8262667d5fd, type: 3}
+      propertyPath: sceneId
+      value: 4136387602
+      objectReference: {fileID: 0}
     - target: {fileID: 8350777027916955827, guid: f86549032de67c145864b8262667d5fd, type: 3}
       propertyPath: m_RootOrder
       value: 5
