@@ -58,7 +58,6 @@ public class Player : Hurtable
 
     [Header("Unity Stuff")]
     public PlayerCamera playerCamera;
-    public GameObject playerUI;
     public GameObject corpse;
 
     private LevelManager levelManager;
@@ -88,14 +87,7 @@ public class Player : Hurtable
 
     private void Start()
     {
-        //set up SyncList
-        checkPointTimes.Callback += OnTimesUpdated;
-        // Process initial SyncList payload
-        for (int index = 0; index < checkPointTimes.Count; index++)
-            OnTimesUpdated(SyncList<double>.Operation.OP_ADD, index, new double(), checkPointTimes[index]);
-
-
-        UI_Main.instance.RefreshPlayerList();
+        LevelManager.instance.RefreshPlayerList();
     }
 
     public override void OnStartServer() 
@@ -112,9 +104,6 @@ public class Player : Hurtable
 
     public override void OnStartLocalPlayer()
     {
-        //Bring in the UI
-        Instantiate(playerUI, null);
-
         localInstance = this;
         playerMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         //directionalSprite.render.enabled = false;
@@ -126,6 +115,9 @@ public class Player : Hurtable
 
 
         CmdPlayerSetStats(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.userName, LocalPlayerSettingsStorage.localInstance.localPlayerSettings.primaryColour);
+
+        //set up SyncList
+        checkPointTimes.Callback += OnTimesUpdated;
 
         base.OnStartLocalPlayer();
     }
@@ -319,7 +311,7 @@ public class Player : Hurtable
 
                     if (index == 0)
                     {
-                        UI_Main.instance.CreateAlert("|Start Race|", 60, textColor);
+                        UI_Main.instance.CreateAlert("|Start Race|", 60, textColor, alertObjIndex: 0);
                         return;
                     }
 
@@ -330,7 +322,7 @@ public class Player : Hurtable
                     if (currentRace.checkPoints[checkPointTimes.Count - 1].finish)
                     {
                         msg = "Finish | ";
-                        duration = 4;
+                        duration = 3;
                         time = (float)(newTime - checkPointTimes[0]);
 
                         currentRace.EndRace(this, true);
@@ -341,7 +333,7 @@ public class Player : Hurtable
                         time = (float)(newTime - checkPointTimes[checkPointTimes.Count - 2]);
                     }
                     roundedTime = Mathf.Round(time * 1000.0f) / 1000.0f;
-                    UI_Main.instance.CreateAlert(msg + roundedTime, 60, textColor, duration);
+                    UI_Main.instance.CreateAlert(msg + roundedTime, 60, textColor, duration, alertObjIndex: 1);
 
                     break;
                 }

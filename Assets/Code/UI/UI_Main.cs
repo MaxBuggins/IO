@@ -9,8 +9,6 @@ public class UI_Main : MonoBehaviour
 {
     public static UI_Main instance;
 
-    [HideInInspector] public List<Player> players = new List<Player>();
-
     public UI_Base[] bases;
 
     [SerializeField] private Image screenImage;
@@ -21,7 +19,7 @@ public class UI_Main : MonoBehaviour
     //who even cares if this one is public
     [SerializeField] public GameObject scoreBoardUI;
 
-    [SerializeField] private GameObject alertObject;
+    [SerializeField] private GameObject[] alertObjects;
 
     public Canvas canvas;
 
@@ -45,7 +43,7 @@ public class UI_Main : MonoBehaviour
         if (Player.localInstance == null)
             return;
 
-        players.Sort((p1, p2) => p1.bestTime.CompareTo(p2.bestTime));
+        LevelManager.instance.RefreshPlayerList();
 
         foreach (UI_Base uI_Base in bases)
         {
@@ -108,9 +106,9 @@ public class UI_Main : MonoBehaviour
         }
     }
 
-    public void CreateAlert(string text, float fontSize, Color fontColour, float duration = 2)
+    public void CreateAlert(string text, float fontSize, Color fontColour, float duration = 2, float delay = 0, int alertObjIndex = 0)
     {
-        GameObject createdAlertObject = Instantiate(alertObject, transform);
+        GameObject createdAlertObject = Instantiate(alertObjects[alertObjIndex], transform);
 
         createdAlertObject.GetComponent<SelfDestruct>().destoryDelay = duration;
 
@@ -119,9 +117,7 @@ public class UI_Main : MonoBehaviour
         createdAlertObjectTMPro.fontSize = fontSize;
         createdAlertObjectTMPro.color = fontColour;
 
-        Tween.AnchoredPosition(createdAlertObject.GetComponent<RectTransform>(), Vector2.down * 600, duration, 0);
-
-
+        Tween.AnchoredPosition(createdAlertObject.GetComponent<RectTransform>(), Vector2.down * 600, duration, delay);
     }
 
     public void ChangeSensativity(float sensativity)
@@ -142,12 +138,5 @@ public class UI_Main : MonoBehaviour
         if (duration > 0)
             Tween.Color(screenImage, Color.clear, duration, 0);
 
-    }
-
-
-    public void RefreshPlayerList()
-    {
-        players.Clear();
-        players.AddRange(FindObjectsOfType<Player>());
     }
 }

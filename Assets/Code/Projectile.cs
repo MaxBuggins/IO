@@ -10,6 +10,8 @@ public class Projectile : Hurtful
     public float minDmgMultiplyer = 0.25f;
 
     [Header("Projectile Propertys")]
+    //[Tooltip("Will skip collision with hurtfuls ignored collider")]
+    //public bool skipIgnoreCollision;
     public float destroyDelay = 3;
     public float projectileWidth = 0.3f;
 

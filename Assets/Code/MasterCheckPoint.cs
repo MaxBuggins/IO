@@ -161,7 +161,7 @@ public class MasterCheckPoint : NetworkBehaviour
         foreach (CheckPoint checkPoint in checkPoints)
         {
             checkPoint.gameObject.SetActive(newBool);
-            checkPoint.TurnOnCheckPoint();
+            checkPoint.TurnOnCheckPoint(newBool);
         }
 
         RefreshCheckPoints();

@@ -18,16 +18,16 @@ public class UI_ScoreBoard : UI_Base
     public override void Update()
     {
         //Have the right number of player rows
-        while (scoreRows.Count != UI_Main.instance.players.Count)
+        while (scoreRows.Count != LevelManager.instance.players.Count)
         {
-            if (scoreRows.Count > UI_Main.instance.players.Count)
+            if (scoreRows.Count > LevelManager.instance.players.Count)
             {
                 UI_ScoreRow row = scoreRows[scoreRows.Count - 1];
                 scoreRows.Remove(row);
                 Destroy(row.gameObject);
             }
 
-            if (scoreRows.Count < UI_Main.instance.players.Count)
+            if (scoreRows.Count < LevelManager.instance.players.Count)
             {
                 UI_ScoreRow row = Instantiate(scoreRowPrefab, transform).GetComponent<UI_ScoreRow>();
                 scoreRows.Add(row);
@@ -38,16 +38,16 @@ public class UI_ScoreBoard : UI_Base
 
         foreach (UI_ScoreRow row in scoreRows)
         {
-            row.banner.color = UI_Main.instance.players[count].primaryColour;
+            row.banner.color = LevelManager.instance.players[count].primaryColour;
 
-            row.userName.text = UI_Main.instance.players[count].userName;
+            row.userName.text = LevelManager.instance.players[count].userName;
 
-            if (UI_Main.instance.players[count].bestTime > 0)
+            if (LevelManager.instance.players[count].bestTime > 0)
             {
-                string minutes = Mathf.Floor(UI_Main.instance.players[count].bestTime / 60).ToString("00");
-                string seconds = Mathf.Floor(UI_Main.instance.players[count].bestTime * 100).ToString("00:00");
+                //string minutes = Mathf.Floor(LevelManager.instance.players[count].bestTime / 60).ToString("00");
+                //string seconds = Mathf.Floor(LevelManager.instance.players[count].bestTime * 100).ToString("00:00");
                 //UI_Main.instance.players[count].bestTime.ToString("mm':'ss.ff'");
-                row.bestTime.text = (UI_Main.instance.players[count].bestTime * 100).ToString("00:00");
+                row.bestTime.text = (LevelManager.instance.players[count].bestTime * 100).ToString("00:00");
             }
             else 
                 row.bestTime.text = "No Attempt";

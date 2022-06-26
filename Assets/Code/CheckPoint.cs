@@ -59,19 +59,20 @@ public class CheckPoint : MonoBehaviour
         }
     }
 
-    public void TurnOnCheckPoint()
+    public void TurnOnCheckPoint(bool on)
     {
-        Vector3 currentScale = transform.localScale;
-        transform.localScale = Vector3.zero;
+        if (on)
+        {
+            Vector3 currentScale = transform.localScale;
+            transform.localScale = Vector3.zero;
 
-        Tween.LocalScale(transform, currentScale, activeAnimationDuration, 0, activeAnimationCurve);
-    }
-
-    public void TurnOffCheckPoint()
-    {
-        storedScale = transform.localScale;
-
-        Tween.LocalScale(transform, Vector3.zero, activeAnimationDuration, 0, activeAnimationCurve, completeCallback: RevertScale);
+            Tween.LocalScale(transform, currentScale, activeAnimationDuration, 0, activeAnimationCurve);
+        }
+        else //this will never happen and i cant be botherd fixing it
+        {
+            storedScale = transform.localScale;
+            Tween.LocalScale(transform, Vector3.zero, activeAnimationDuration, 0, activeAnimationCurve, completeCallback: RevertScale);
+        }
     }
 
     public void RevertScale()

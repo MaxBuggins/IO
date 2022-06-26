@@ -67,11 +67,11 @@ MonoBehaviour:
   damage: 25
   hurtType: 0
   destoryOnHurt: 1
-  ignor: {fileID: 0}
   moveForce: 1
-  collisionForce: 0.5
+  collisionForce: 0.1
   upwardsForce: 0
   maxVelocity: -1
+  ignor: {fileID: 0}
   startDmgFallOff: 20
   minDmgMultiplyer: 0.25
   destroyDelay: 10

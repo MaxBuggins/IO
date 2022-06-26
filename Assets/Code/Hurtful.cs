@@ -14,8 +14,6 @@ public class Hurtful : NetworkBehaviour
 
     public bool destoryOnHurt = false;
 
-    public Hurtable ignor;
-
     [Header("Force")]
     public bool moveForce = true; //if false then force is caculated via distance from collider center
     public float collisionForce = 0;
@@ -23,6 +21,8 @@ public class Hurtful : NetworkBehaviour
     public float maxVelocity = -1;
 
     protected Vector3 lastPos;
+
+    public Hurtable ignor;
 
 
 
