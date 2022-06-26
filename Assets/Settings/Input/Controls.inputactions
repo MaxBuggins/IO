@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Secondary",
+                    "type": "Button",
+                    "id": "163f8698-47a3-4052-9fb6-5b1c433f565b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "3b654fb1-c481-4fcc-8ef3-38b028009845",
@@ -63,15 +72,6 @@
                     "name": "Die",
                     "type": "Button",
                     "id": "a2acd6d3-ef93-4d31-ae14-1649e95ded96",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Secondary",
-                    "type": "Button",
-                    "id": "163f8698-47a3-4052-9fb6-5b1c433f565b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -272,17 +272,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Die",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1e5faef8-1e55-4389-9857-81c6a3463660",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Secondary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

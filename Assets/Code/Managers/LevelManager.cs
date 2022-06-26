@@ -103,6 +103,9 @@ public class LevelManager : NetworkBehaviour
             {
                 if (players[p].bestTime >= 0)
                 {
+                    if(p == 0)
+                        players[p].hatIndex = 1;
+
                     lastRoundResults.Add(players[p].userName + " | " + (players[p].bestTime * 100).ToString("00:00") + "*" + colorToHex(players[p].primaryColour));
                 }
 

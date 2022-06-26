@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 449960935531446770}
   - component: {fileID: 449960935531446669}
   - component: {fileID: 1509250230829665383}
+  - component: {fileID: 5656244061296683880}
   m_Layer: 0
   m_Name: RenderBody
   m_TagString: Untagged
@@ -296,8 +297,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71ec07a25c01f846b169ef7e38e4a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleStandSprite: {fileID: 2800000, guid: b99ac7b7da9b5c94c88589e711568f08, type: 3}
-  idleCrouchSprite: {fileID: 2800000, guid: acea9f914c18e214ab6ab1cc99b9ee5c, type: 3}
+  movementMultiplyer: 10
+--- !u!95 &5656244061296683880
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449960935531446768}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &449960936539232377
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,6 +430,7 @@ MonoBehaviour:
   primaryColour:
     serializedVersion: 2
     rgba: 4278190080
+  hatIndex: -1
   kills: 0
   killStreak: 0
   assists: 0
@@ -432,6 +452,7 @@ MonoBehaviour:
   playerCamera: {fileID: 1955725354896944600, guid: 30c829e905a8b504eaba2fe3d6825ed9, type: 3}
   corpse: {fileID: 2493553902459231394, guid: 4cfc498da6f543440a9adbb6c195a9f7, type: 3}
   playerMovement: {fileID: 0}
+  headTransform: {fileID: 7315356856291048817}
 --- !u!54 &1482048876518670402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -706,7 +727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2424952920725445680, guid: 92aefe3237c05e34e90862abf7c00b81, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.7763568e-15
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2841392621412811361, guid: 92aefe3237c05e34e90862abf7c00b81, type: 3}
       propertyPath: m_RootOrder
@@ -772,28 +793,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2841392621412811361, guid: 92aefe3237c05e34e90862abf7c00b81, type: 3}
   m_PrefabInstance: {fileID: 6251640796632463313}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2084714078978407898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!4 &7315356856291048817 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3694944438924872352, guid: 92aefe3237c05e34e90862abf7c00b81, type: 3}
+  m_PrefabInstance: {fileID: 6251640796632463313}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8856114309207715594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78131cc1fc7f4a24b87303a0638d899f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followCam: 1
-  yAxisOnly: 1
-  lookOffset: {x: 0, y: 0, z: 0}
-  orginalRot: {x: 0, y: 0, z: 0}
-  directionalSprites: []
-  currentSpriteIndex: 0
-  spriteCount: 8
-  sortAngle: 0
-  test: 0
-  render: {fileID: 0}
 --- !u!114 &5411668050551756456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -806,5 +810,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71ec07a25c01f846b169ef7e38e4a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleStandSprite: {fileID: 0}
-  idleCrouchSprite: {fileID: 0}
+  movementMultiplyer: 10

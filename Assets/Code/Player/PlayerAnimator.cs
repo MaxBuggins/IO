@@ -4,47 +4,35 @@ using UnityEngine;
 using System.Linq;
 
 
-[RequireComponent(typeof(DirectionalSprite))] //fancy
-//[RequireComponent(typeof(Player))] //fancy ERRRROR DONT DO THIS IF PARENT
+[RequireComponent(typeof(Animator))] //fancy
 public class PlayerAnimator : MonoBehaviour
 {
-    public Texture2D idleStandSprite;
-    public Texture2D idleCrouchSprite;
+    public float movementMultiplyer = 10;
 
-    private DirectionalSprite directionalSprite;
+    private Vector3 lastPos;
+
+    private Animator animator;
     private Player player;
 
 
     void Start()
     {
-        directionalSprite = GetComponent<DirectionalSprite>();
+        animator = GetComponent<Animator>();
         player = GetComponentInParent<Player>();
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
-        if (player.crouching == true)
-        {
-            SetSprites(idleCrouchSprite);
-        }
-        else
-        {
-            SetSprites(idleStandSprite);
-        }
-    }
+        float moveMagnatuide = Vector3.Distance(player.transform.position, lastPos);
 
-    public void SetSprites(Texture2D texture)
-    {
-        Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/"+texture.name);
+        moveMagnatuide *= movementMultiplyer;
+        moveMagnatuide = Mathf.Round(moveMagnatuide * 10f) / 10f;
 
-        int i = 0;
-        foreach (Sprite sprite in sprites)
-        {
-            directionalSprite.directionalSprites[i] = sprite;
-            i++;
-        }
+        animator.SetFloat("move", moveMagnatuide);
 
-        directionalSprite.SetSprite(directionalSprite.currentSpriteIndex);
+        print(moveMagnatuide);
+
+        lastPos = player.transform.position;
     }
 }

@@ -73,6 +73,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Secondary"",
+                    ""type"": ""Button"",
+                    ""id"": ""163f8698-47a3-4052-9fb6-5b1c433f565b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""3b654fb1-c481-4fcc-8ef3-38b028009845"",
@@ -85,15 +94,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""name"": ""Die"",
                     ""type"": ""Button"",
                     ""id"": ""a2acd6d3-ef93-4d31-ae14-1649e95ded96"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Secondary"",
-                    ""type"": ""Button"",
-                    ""id"": ""163f8698-47a3-4052-9fb6-5b1c433f565b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -299,17 +299,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1e5faef8-1e55-4389-9857-81c6a3463660"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Secondary"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""79fe7403-b564-4f05-8469-0aea1ab573f2"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
@@ -370,9 +359,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Play_MouseLook = m_Play.FindAction("MouseLook", throwIfNotFound: true);
         m_Play_KeyLook = m_Play.FindAction("KeyLook", throwIfNotFound: true);
         m_Play_Primary = m_Play.FindAction("Primary", throwIfNotFound: true);
+        m_Play_Secondary = m_Play.FindAction("Secondary", throwIfNotFound: true);
         m_Play_Jump = m_Play.FindAction("Jump", throwIfNotFound: true);
         m_Play_Die = m_Play.FindAction("Die", throwIfNotFound: true);
-        m_Play_Secondary = m_Play.FindAction("Secondary", throwIfNotFound: true);
         m_Play_ShowScoreBoard = m_Play.FindAction("ShowScoreBoard", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
@@ -441,9 +430,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Play_MouseLook;
     private readonly InputAction m_Play_KeyLook;
     private readonly InputAction m_Play_Primary;
+    private readonly InputAction m_Play_Secondary;
     private readonly InputAction m_Play_Jump;
     private readonly InputAction m_Play_Die;
-    private readonly InputAction m_Play_Secondary;
     private readonly InputAction m_Play_ShowScoreBoard;
     public struct PlayActions
     {
@@ -454,9 +443,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @MouseLook => m_Wrapper.m_Play_MouseLook;
         public InputAction @KeyLook => m_Wrapper.m_Play_KeyLook;
         public InputAction @Primary => m_Wrapper.m_Play_Primary;
+        public InputAction @Secondary => m_Wrapper.m_Play_Secondary;
         public InputAction @Jump => m_Wrapper.m_Play_Jump;
         public InputAction @Die => m_Wrapper.m_Play_Die;
-        public InputAction @Secondary => m_Wrapper.m_Play_Secondary;
         public InputAction @ShowScoreBoard => m_Wrapper.m_Play_ShowScoreBoard;
         public InputActionMap Get() { return m_Wrapper.m_Play; }
         public void Enable() { Get().Enable(); }
@@ -482,15 +471,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Primary.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnPrimary;
                 @Primary.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnPrimary;
                 @Primary.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnPrimary;
+                @Secondary.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
+                @Secondary.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
+                @Secondary.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
                 @Jump.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnJump;
                 @Die.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
                 @Die.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
                 @Die.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
-                @Secondary.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
-                @Secondary.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
-                @Secondary.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnSecondary;
                 @ShowScoreBoard.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
                 @ShowScoreBoard.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
                 @ShowScoreBoard.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
@@ -513,15 +502,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Primary.started += instance.OnPrimary;
                 @Primary.performed += instance.OnPrimary;
                 @Primary.canceled += instance.OnPrimary;
+                @Secondary.started += instance.OnSecondary;
+                @Secondary.performed += instance.OnSecondary;
+                @Secondary.canceled += instance.OnSecondary;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
                 @Die.started += instance.OnDie;
                 @Die.performed += instance.OnDie;
                 @Die.canceled += instance.OnDie;
-                @Secondary.started += instance.OnSecondary;
-                @Secondary.performed += instance.OnSecondary;
-                @Secondary.canceled += instance.OnSecondary;
                 @ShowScoreBoard.started += instance.OnShowScoreBoard;
                 @ShowScoreBoard.performed += instance.OnShowScoreBoard;
                 @ShowScoreBoard.canceled += instance.OnShowScoreBoard;
@@ -569,9 +558,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMouseLook(InputAction.CallbackContext context);
         void OnKeyLook(InputAction.CallbackContext context);
         void OnPrimary(InputAction.CallbackContext context);
+        void OnSecondary(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDie(InputAction.CallbackContext context);
-        void OnSecondary(InputAction.CallbackContext context);
         void OnShowScoreBoard(InputAction.CallbackContext context);
     }
     public interface IMenuActions

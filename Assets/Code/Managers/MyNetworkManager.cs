@@ -14,8 +14,8 @@ public class MyNetworkManager : NetworkManager
     // have to cast to this type everywhere.
     public static new MyNetworkManager singleton { get; private set; }
 
-    //[Header("My Stuff")]
-    //public GameObject mainMenuObject;
+    [Header("My Stuff")]
+    public GameObject[] playerHats;
 
     #region Unity Callbacks
 

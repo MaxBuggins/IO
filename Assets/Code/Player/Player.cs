@@ -12,8 +12,12 @@ public class Player : Hurtable
 
     [SyncVar(hook = nameof(OnNameChanged))]
     public string userName = "NoNameNed";
+
     [SyncVar(hook = nameof(OnColourChanged))]
     public Color32 primaryColour = Color.black;
+
+    [SyncVar(hook = nameof(OnHatChanged))]
+    public int hatIndex = -1; //-1 means no hat
 
     [SyncVar] public int kills = 0; //umm no idear what this could mean
     [SyncVar] public int killStreak = 0; //how many kills before you respawn
@@ -65,9 +69,12 @@ public class Player : Hurtable
 
     private NetworkTransform netTrans;
     private CapsuleCollider character;
-    public PlayerController playerMovement;
+    [HideInInspector] public PlayerController playerMovement;
     //private DirectionalSprite directionalSprite;
     private SkinnedMeshRenderer playerMeshRenderer;
+
+    [SerializeField] private Transform headTransform;
+    private GameObject hatObject;
 
 
     private void Awake()
@@ -130,7 +137,14 @@ public class Player : Hurtable
     [Command]
     public void CmdPlayerSetStats(string inUserName, Color32 inPrimaryColour)
     {
+        if (inUserName.Contains("_7_")) //SECRET SHhhhhhhh
+        {
+            inUserName = inUserName.Remove(inUserName.IndexOf("_7_"), "_7_".Length);   
+            hatIndex = 0;
+        }
+
         userName = inUserName;
+
         primaryColour = inPrimaryColour;
     }
 
@@ -178,6 +192,17 @@ public class Player : Hurtable
     public void OnColourChanged(Color32 oldColor, Color32 newColor)
     {
         UI_Main.instance.UIUpdate();
+    }
+
+    public void OnHatChanged(int oldHat, int newHat)
+    {
+        if (hatObject != null)
+            Destroy(hatObject);
+
+        hatObject = Instantiate(MyNetworkManager.singleton.playerHats[newHat], headTransform);
+
+        if (isLocalPlayer)
+            hatObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
     }
 
     [ClientCallback]
