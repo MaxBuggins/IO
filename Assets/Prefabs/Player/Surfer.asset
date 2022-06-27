@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e025bf64d160c2e43bf2f1d703757a2b, type: 3}
   m_Name: Surfer
   m_EditorClassIdentifier: 
-  className: 
-  hurtSounds: []
-  lauphSounds: []
+  className: SurferSeb?
+  lauphSounds:
+  - {fileID: 8300000, guid: 9b03ca86dacbb384d8c6f3dbc2290c45, type: 3}
+  hurtSounds:
+  - {fileID: 8300000, guid: fd6c0080d8c8c5d46aa878165aefedcb, type: 3}
+  - {fileID: 8300000, guid: 5fa582f89a73ccc48a8795dfbacb6f46, type: 3}
+  - {fileID: 8300000, guid: 3f6dd2c89ad9ae64393b6b1cb6a985cb, type: 3}
+  - {fileID: 8300000, guid: cf1bdda449398cd499469f613531be92, type: 3}
+  - {fileID: 8300000, guid: 7178fc6607820f9498e3d00ecade653b, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}

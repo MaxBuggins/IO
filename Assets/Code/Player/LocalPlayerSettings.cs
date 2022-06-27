@@ -11,4 +11,6 @@ public class LocalPlayerSettings : ScriptableObject
     public Color32 thirdryColour;
 
     public string killMessage;
+
+    public bool showOwnHat = false;
 }

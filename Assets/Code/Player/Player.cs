@@ -70,8 +70,9 @@ public class Player : Hurtable
 
     private NetworkTransform netTrans;
     private CapsuleCollider character;
+    private AudioSource audioSource;
     [HideInInspector] public PlayerController playerMovement;
-    //private DirectionalSprite directionalSprite;
+    
     private SkinnedMeshRenderer playerMeshRenderer;
 
     [SerializeField] private Transform headTransform;
@@ -83,6 +84,7 @@ public class Player : Hurtable
         netTrans = GetComponent<NetworkTransform>();
         character = GetComponentInChildren<CapsuleCollider>();
         playerMovement = GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
         //directionalSprite = GetComponentInChildren<DirectionalSprite>();
         playerMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
@@ -202,13 +204,17 @@ public class Player : Hurtable
 
         hatObject = Instantiate(MyNetworkManager.singleton.playerHats[newHat], headTransform);
 
-        if (isLocalPlayer)
+        audioSource.PlayOneShot(characteristicsObject.lauphSounds[Random.Range(0, characteristicsObject.lauphSounds.Length)]);
+
+        if (isLocalPlayer == true && LocalPlayerSettingsStorage.localInstance.localPlayerSettings.showOwnHat == false)
             hatObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
     }
 
     [ClientCallback]
     public override void OnHurt(int damage)
     {
+        audioSource.PlayOneShot(characteristicsObject.hurtSounds[Random.Range(0, characteristicsObject.hurtSounds.Length)]);
+
         if (isLocalPlayer)
         {
             UI_Main.instance.UIUpdate();
@@ -222,6 +228,8 @@ public class Player : Hurtable
 
     public override void OnDeath()
     {
+        audioSource.PlayOneShot(characteristicsObject.deathSounds[Random.Range(0, characteristicsObject.deathSounds.Length)]);
+
         playerMeshRenderer.gameObject.SetActive(false);
         //directionalSprite.render.enabled = false;
         character.enabled = false;

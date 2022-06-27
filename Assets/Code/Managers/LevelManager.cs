@@ -97,13 +97,13 @@ public class LevelManager : NetworkBehaviour
             levelRaces[currentLevelRace].ServerActivateCheckPoints(false);
 
             lastRoundResults.Clear();
-            RefreshPlayerList();       
+            RefreshPlayerList();
 
-            for(int p = 0; p < players.Count; p++) //we pusing P
+            for (int p = 0; p < players.Count; p++) //we pusing P
             {
                 if (players[p].bestTime >= 0)
                 {
-                    if(p == 0)
+                    if (p == 0)
                         players[p].hatIndex = 1;
 
                     lastRoundResults.Add(players[p].userName + " | " + (players[p].bestTime * 100).ToString("00:00") + "*" + colorToHex(players[p].primaryColour));
@@ -166,13 +166,16 @@ public class LevelManager : NetworkBehaviour
         players.Clear();
         players.AddRange(FindObjectsOfType<Player>());
         players.Sort((p1, p2) => p1.bestTime.CompareTo(p2.bestTime));
-        players.Reverse();
 
         for (int i = 0; i < players.Count; i++) //move no attempts to back
         {
             Player player = players[i];
-            players.RemoveAt(i);
-            players.Add(player);
+
+            if (player.bestTime < 0)
+            {
+                players.RemoveAt(i);
+                players.Add(player);
+            }
         }
     }
 
