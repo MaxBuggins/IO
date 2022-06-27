@@ -45,6 +45,7 @@ public class Player : Hurtable
     //so things like status effects can be applyed without editing the
     //default values.
     [Header("Local Stats")]
+    public CharacteristicsObject characteristicsObject;
 
     public float speed = 8;
     public float crouchSpeed = 4;

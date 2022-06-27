@@ -3325,6 +3325,7 @@ MonoBehaviour:
   playerHats:
   - {fileID: 7891328731170891781, guid: 4a4fa75c6c23cf047af0b13949bf25d2, type: 3}
   - {fileID: 5137231935399928584, guid: b25715fbbb354ed43bbf4dbaadfe60f8, type: 3}
+  - {fileID: 2616979179506411788, guid: 0415f3fd8679b2148a9c83e9eeba9aaa, type: 3}
 --- !u!1001 &5443291655494078784
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -68,7 +68,7 @@ MonoBehaviour:
   hurtType: 0
   destoryOnHurt: 1
   moveForce: 1
-  collisionForce: 0.1
+  collisionForce: 0.06
   upwardsForce: 0
   maxVelocity: -1
   ignor: {fileID: 0}

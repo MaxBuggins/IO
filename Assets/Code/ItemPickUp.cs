@@ -23,6 +23,7 @@ public class ItemPickUp : NetworkBehaviour
     [Header("Item Effects")]
     [Range(0,1)] public float healthPercentage; //relative to player max health
     public int score;
+    public int hatIndex = -1; //-1 means no hat
 
 
     [Header("Internals")]
@@ -84,6 +85,11 @@ public class ItemPickUp : NetworkBehaviour
             player.Hurt((int)(-player.maxHealth * healthPercentage)); //makes player gain health (WACKY)
 
             player.bonusScore += score;
+
+            if(hatIndex > 0) //debug hat not possible (He He Ha Ha)
+            {
+                player.hatIndex = hatIndex;
+            }
 
             if (respawn)
             {

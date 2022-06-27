@@ -1,0 +1,5 @@
+newmtl ConcreteBlocks
+map_Kd ConcreteBlocks.png
+Kd 1 1 1
+d 1
+

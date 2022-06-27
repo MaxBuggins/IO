@@ -125,7 +125,7 @@ public class Projectile : Hurtful
             if (hitRb != null)
             {
                 Vector3 vel = (transform.position - lastPos) / Time.deltaTime;
-                hitRb.AddForceAtPosition(vel / 3, hit.point, ForceMode.Impulse);
+                hitRb.AddForceAtPosition(vel * collisionForce, hit.point, ForceMode.Impulse);
             }
 
             else
