@@ -206,8 +206,16 @@ public class Player : Hurtable
 
         audioSource.PlayOneShot(characteristicsObject.lauphSounds[Random.Range(0, characteristicsObject.lauphSounds.Length)]);
 
-        if (isLocalPlayer == true && LocalPlayerSettingsStorage.localInstance.localPlayerSettings.showOwnHat == false)
+        if (isLocalPlayer == true)
+            SetLocalHatVisability();
+    }
+
+    public void SetLocalHatVisability()
+    {
+        if (LocalPlayerSettingsStorage.localInstance.localPlayerSettings.showOwnHat == false)
             hatObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+        else
+            hatObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
     }
 
     [ClientCallback]

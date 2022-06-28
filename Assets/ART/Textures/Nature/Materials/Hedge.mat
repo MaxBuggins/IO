@@ -7,25 +7,22 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Clouds
-  m_Shader: {fileID: -6465566751694194690, guid: 9e86a1273d3f48d4698c5c0a6df9972e, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON
+  m_Name: Hedge
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2998
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_ca72b47a09854399a40edb945e9b837d:
-        m_Texture: {fileID: 2800000, guid: 3440de1d960c2c345b8f411fe3176e12, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 3440de1d960c2c345b8f411fe3176e12, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: dd9cd0189e2cbd04dbf9c4814daaa3ea, type: 3}
+        m_Scale: {x: 0.25, y: 0.25}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
@@ -48,8 +45,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3440de1d960c2c345b8f411fe3176e12, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: dd9cd0189e2cbd04dbf9c4814daaa3ea, type: 3}
+        m_Scale: {x: 0.25, y: 0.25}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -80,24 +77,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_05c927c56b2a4a1cbdeaa014d32e9597: 1
-    - Vector1_0bb4961fc2af42519ddd5fb8a91a05fb: 10
-    - Vector1_1: 1
-    - Vector1_10dad10591504511a0aa6090a422ac46: 15
-    - Vector1_18a0c54ad8aa4e799a488aa50ca0b953: 3
-    - Vector1_4ae66af1f6a74a11b4048ef4eaeb234e: 256
-    - Vector1_56044e406eab4e53bb22d6040e551514: 5
-    - Vector1_656ef4b6576b4b3687d47072d1fb200f: 2
-    - Vector1_6fc2a2fab72a47a291eb204012b53633: 2
-    - Vector1_70a952083e5b431d900a97eac20b2eed: 0
-    - Vector1_75cd1eacccc446c9bba119925c6b7694: 2
-    - Vector1_848e7382ca6d4a69a28d8244ba531329: 100
-    - Vector1_8c795e53b94f42b69d00350f48bd5c46: -0.3
-    - Vector1_a4cf685b6f694615b4e468cd1d65fbe3: 20
-    - Vector1_b021945df4924f019011ba833b82d165: 1
-    - Vector1_f523ec5d07904757b653582b8faea8c1: 1
-    - Vector1_ff2237eb2c6e48ea887ff8f367ff3ed4: 1
-    - _AlphaClip: 1
+    - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -116,7 +96,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.05
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -124,23 +104,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_46d4db1016f5438a8049ce51e97363d2: {r: 1, g: 1, b: 1, a: 0}
-    - Color_5d1d975b092348c2b5d2a2d5b5b91f23: {r: 0, g: 0, b: 0, a: 1}
-    - Color_a7dfe24ea6ad4772bd2d6fa0b84ba926: {r: 1, g: 1, b: 1, a: 1}
-    - Color_f973b1553a914a2ca12ee4509fbccf04: {r: 0.53411764, g: 0.6355324, b: 0.8901961, a: 1}
-    - Vector2_1: {r: -1, g: 1, b: 0, a: 0}
-    - Vector2_33e7b7c563e447b7a09eb89de3073548: {r: 0, g: 1, b: 0, a: 0}
-    - Vector2_a11550edd0084f8295aca6840226359e: {r: 0.1, g: 0.2, b: 0, a: 0}
-    - Vector2_c44903edaf2743b3b8715e5ed4d1baa0: {r: -1, g: 1, b: 0, a: 0}
-    - Vector2_facbbb9dbb034aa18a32af546254cdce: {r: 0.006, g: 0.006, b: 0, a: 0}
-    - Vector2_fe1a3cd480b94b9ca4442b2ec249a0c8: {r: 0, g: 1, b: 0, a: 0}
-    - Vector4_4b3d46d0f46b4abd9a461febbccb8ef8: {r: 1, g: 0, b: 0, a: 90}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &7422715030869544143
+--- !u!114 &3536592036974684254
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

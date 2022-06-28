@@ -12,5 +12,7 @@ public class LocalPlayerSettings : ScriptableObject
 
     public string killMessage;
 
+    public float mouseSensativity = 15f;
+    public bool showCrosshair = true;
     public bool showOwnHat = false;
 }

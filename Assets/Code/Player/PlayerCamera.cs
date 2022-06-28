@@ -46,7 +46,6 @@ public class PlayerCamera : MonoBehaviour
     private Controls controls;
 
 
-
     void Start()
     {
         localInstance = this;
@@ -65,7 +64,7 @@ public class PlayerCamera : MonoBehaviour
         controls.Enable();
         Cursor.lockState = CursorLockMode.Locked;
 
-        //audioSource.Play();
+        mouseLookSensitivty = LocalPlayerSettingsStorage.localInstance.localPlayerSettings.mouseSensativity;
 
         cameraOffset = standCameraOffset;
     }

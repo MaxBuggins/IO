@@ -26,9 +26,4 @@ public class LocalPlayerSettingsStorage : MonoBehaviour
     {
         localPlayerSettings.userName = userName;
     }
-
-    public void SetShowOwnHat(bool show)
-    {
-        localPlayerSettings.showOwnHat = show;
-    }
 }

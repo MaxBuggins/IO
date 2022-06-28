@@ -120,12 +120,6 @@ public class UI_Main : MonoBehaviour
         Tween.AnchoredPosition(createdAlertObject.GetComponent<RectTransform>(), Vector2.down * 600, duration, delay);
     }
 
-    public void ChangeSensativity(float sensativity)
-    {
-        if (Player.localInstance != null)
-            Player.localInstance.playerCamera.mouseLookSensitivty = sensativity;
-    }
-
     public void ChangeScreenColour(Color colour)
     {
         screenImage.color = colour;

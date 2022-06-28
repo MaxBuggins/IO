@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: -5709555824425522411
     second: UISheetBIsexual_3
+  - first:
+      213: 8901455792056824119
+    second: UISheetBIsexual_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -230,6 +233,27 @@ TextureImporter:
       bones: []
       spriteID: 51baadb6a3593c0b0800000000000000
       internalID: -5709555824425522411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UISheetBIsexual_4
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 731f36581e2588b70800000000000000
+      internalID: 8901455792056824119
       vertices: []
       indices: 
       edges: []
