@@ -147,6 +147,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   currentOffset: {x: 0, y: 0, z: 0}
   focus: {fileID: 0}
+  deadCollider: {fileID: 1762061980112930572}
   movement: {fileID: 0}
 --- !u!135 &1762061980112930572
 SphereCollider:

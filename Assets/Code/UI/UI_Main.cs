@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Pixelplacement;
 using UnityEngine.UI;
+using Mirror;
 
 public class UI_Main : MonoBehaviour
 {
@@ -31,11 +32,6 @@ public class UI_Main : MonoBehaviour
             Destroy(this);
 
         canvas = GetComponent<Canvas>();
-    }
-
-    private void Update()
-    {
-
     }
 
     public void UIUpdate()

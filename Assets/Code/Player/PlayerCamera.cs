@@ -38,7 +38,7 @@ public class PlayerCamera : MonoBehaviour
     private Vector3 lastPos;
     [HideInInspector]public Vector3 currentOffset = Vector3.zero;
     [HideInInspector] public Transform focus;
-    private Collider deadCollider;
+    [SerializeField] private Collider deadCollider;
 
 
     [Header("Unity Things")]
@@ -50,7 +50,6 @@ public class PlayerCamera : MonoBehaviour
     {
         localInstance = this;
 
-        deadCollider = GetComponent<Collider>();
         movement = GetComponentInParent<PlayerController>();
 
         controls = new Controls();

@@ -453,6 +453,7 @@ MonoBehaviour:
   crouchHeight: 0.8
   playerCamera: {fileID: 1955725354896944600, guid: 30c829e905a8b504eaba2fe3d6825ed9, type: 3}
   corpse: {fileID: 2493553902459231394, guid: 4cfc498da6f543440a9adbb6c195a9f7, type: 3}
+  playerUIPrefab: {fileID: 1763443991739049652, guid: 9f7fbd4b37d0b6c47b6370e15f309739, type: 3}
   playerMovement: {fileID: 0}
   headTransform: {fileID: 7315356856291048817}
 --- !u!54 &1482048876518670402

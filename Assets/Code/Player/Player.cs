@@ -90,18 +90,18 @@ public class Player : Hurtable
 
         levelManager = FindObjectOfType<LevelManager>();
         networkManager = FindObjectOfType<NetworkManager>();
-
-
-        OnAlive(); //player is alived
     }
 
     private void Start()
     {
         LevelManager.instance.RefreshPlayerList();
+        OnAlive(); //player is alived
     }
 
     public override void OnStartServer() 
     {
+        if(isServerOnly) //no point haveing UI when your not playing
+            Destroy(UI_Main.instance);
 
         SpawnPlayer();
     }

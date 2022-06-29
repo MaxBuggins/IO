@@ -53,6 +53,9 @@ public class LevelManager : NetworkBehaviour
 
     private void Start()
     {
+        if (isServerOnly) //I dont want the server to obnoixuly blast subway song through the racks? 
+            return;
+
         audioSource.clip = backgroundMusic;
         audioSource.Play();
     }
