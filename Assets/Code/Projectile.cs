@@ -35,7 +35,11 @@ public class Projectile : Hurtful
     [Header("Projectile Refrences")]
     private NetworkTransform netTrans;
 
+    [Tooltip("Must be listed as spawnable in the NetManager")]
+    public GameObject hitNetworkObject;
+    [Tooltip("Decoration only for clients")]
     public GameObject hitObject;
+    [Tooltip("Decoration only for clients")]
     public GameObject hitDecal;
 
 
@@ -64,18 +68,15 @@ public class Projectile : Hurtful
         forwardSpeed -= airRistance * Time.deltaTime;
 
         if (isServer) //Adian Smells of car fuel
-            CheckHit();
-
+            ServerCheckHit();
         else
-            CheckPush();
-
-
+            ClientCheckHit();
 
         base.Update();
     }
 
     [Server]
-    void CheckHit()
+    void ServerCheckHit()
     {
         RaycastHit hit;
         if (Physics.SphereCast(transform.position, projectileWidth, transform.position - lastPos,
@@ -105,15 +106,15 @@ public class Projectile : Hurtful
                 HurtObject(hurtable, dmg, hurtType);
             }
 
-            ServerHit();
+            ServerHit(hit.point, hit.normal);
         }
 
         if (isServerOnly == false)
-            CheckPush();
+            ClientCheckHit();
     }
 
     [Client]
-    void CheckPush()
+    void ClientCheckHit() //does some extra client only stuff (rigidbodys)
     {
         RaycastHit hit;
         if (Physics.SphereCast(transform.position, projectileWidth, transform.position - lastPos,
@@ -128,23 +129,19 @@ public class Projectile : Hurtful
                 hitRb.AddForceAtPosition(vel * collisionForce, hit.point, ForceMode.Impulse);
             }
 
-            else
-            {
-                if (hitDecal != null)
-                    Instantiate(hitDecal, hit.point, Quaternion.LookRotation(hit.normal));
-
-                ClientHit();
-            }
+            ClientHit(hit.point, hit.normal);
         }
     }
 
     // everyoneDestroys
     [Server]
-    void ServerHit()
+    void ServerHit(Vector3 hitPos, Vector3 hitNormal)
     {
-        if (hitObject != null)
+        if (hitNetworkObject != null)
         {
-            GameObject obj = Instantiate(hitObject, lastPos, transform.rotation);
+            GameObject obj = Instantiate(hitNetworkObject, hitPos, transform.rotation);
+
+            NetworkServer.Spawn(hitNetworkObject);
 
             //Hurtful hurt = obj.GetComponentInChildren<Hurtful>();
             //if (hurt != null)
@@ -155,13 +152,13 @@ public class Projectile : Hurtful
     }
 
     [Client]
-    void ClientHit()
+    void ClientHit(Vector3 hitPos, Vector3 hitNormal)
     {
-        if (hitObject != null)
-            Instantiate(hitObject, lastPos, transform.rotation);
+        if (hitDecal != null)
+            Instantiate(hitDecal, hitPos, Quaternion.LookRotation(hitNormal));
 
-        //if (hitSplat != null)
-        //Instantiate(hitSplat, lastPos, transform.rotation);
+        if (hitObject != null)
+            Instantiate(hitObject, hitPos, transform.rotation);
 
         DestroySelf();
     }
@@ -174,11 +171,11 @@ public class Projectile : Hurtful
     [ClientRpc]
     void RpcSyncProjectile(Vector3 pos, Vector3 rot, bool hit)
     {
-        if (hit && hitObject != null)
-            Instantiate(hitObject, lastPos, transform.rotation);
-
         transform.position = pos;
         transform.eulerAngles = rot;
+
+        if (hit && hitDecal != null)
+            Instantiate(hitDecal, lastPos, transform.rotation);
     }
 
 
