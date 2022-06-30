@@ -74,6 +74,7 @@ public class Player : Hurtable
     [HideInInspector] public PlayerController playerMovement;
     
     private SkinnedMeshRenderer playerMeshRenderer;
+    [SerializeField] public PlayerAboveInfo playerAbove;
 
     [SerializeField] private Transform headTransform;
     private GameObject hatObject;
@@ -190,11 +191,13 @@ public class Player : Hurtable
     public void OnNameChanged(string oldName, string newName)
     {
         UI_Main.instance.UIUpdate();
+        playerAbove.ChangeText(newName);
     }
 
     public void OnColourChanged(Color32 oldColor, Color32 newColor)
     {
         UI_Main.instance.UIUpdate();
+        playerAbove.ChangeColour(newColor); //spell it right
     }
 
     public void OnHatChanged(int oldHat, int newHat)

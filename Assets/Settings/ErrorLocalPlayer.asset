@@ -24,4 +24,5 @@ MonoBehaviour:
     rgba: 0
   killMessage: // I am ERROR \\
   mouseSensativity: 19.043518
-  showOwnHat: 1
+  showCrosshair: 1
+  showOwnHat: 0

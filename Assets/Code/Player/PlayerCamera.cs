@@ -40,6 +40,8 @@ public class PlayerCamera : MonoBehaviour
     [HideInInspector] public Transform focus;
     [SerializeField] private Collider deadCollider;
 
+    private PlayerAboveInfo currentPlayerAboveInfo;
+
 
     [Header("Unity Things")]
     public PlayerController movement;
@@ -70,6 +72,39 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
+        var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Debug.DrawRay(ray.origin, ray.direction * 1000, Color.yellow);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, hitInfo: out hit, 200))
+        {
+            if (hit.collider.tag == "Player")
+            {
+                Player player = hit.collider.GetComponentInParent<Player>();
+
+                if (player != null)
+                {
+                    //lets not repeat whats been done
+                    if (currentPlayerAboveInfo != player.playerAbove)
+                    {
+                        if (currentPlayerAboveInfo != null)
+                            currentPlayerAboveInfo.gameObject.SetActive(false);
+
+                        currentPlayerAboveInfo = player.playerAbove;
+                        currentPlayerAboveInfo.gameObject.SetActive(true);
+                    }
+                }
+                else
+                    ClearAbovePlayerSelection(); //is
+            }
+            else
+                ClearAbovePlayerSelection(); //this
+        }
+        else
+            ClearAbovePlayerSelection(); //retarded
+
+
         float mouseX = look.x * Time.fixedDeltaTime;
         float mouseY = look.y * Time.fixedDeltaTime;
 
@@ -117,6 +152,14 @@ public class PlayerCamera : MonoBehaviour
         else
             cameraOffset = standCameraOffset;
 
+    }
+
+    void ClearAbovePlayerSelection()
+    {
+        if (currentPlayerAboveInfo != null)
+            currentPlayerAboveInfo.gameObject.SetActive(false);
+
+        currentPlayerAboveInfo = null;
     }
 
 
