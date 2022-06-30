@@ -57,6 +57,33 @@ public class PlayerWeapon : NetworkBehaviour
 	}
 
 	[Command]
+	public void CmdSpawnChildObject(Vector3 localPosition, Vector3 localRotation)
+	{
+		//dead players cant shoot
+		if (player.health <= 0)
+			return;
+
+		if (player.crouching)
+			spawnOffset = crouchSpawnOffset;
+		else
+			spawnOffset = standSpawnOffset;
+
+		GameObject spawned;
+
+		spawned = Instantiate(prmaryObject, localPosition + spawnOffset, Quaternion.Euler(localRotation), transform);
+
+		//applys damage multiplyer for gun
+		Hurtful hurtful = spawned.GetComponent<Hurtful>();
+		if (hurtful != null)
+		{
+			hurtful.ignor = player;
+			//hurtful.damage = (int)((float)hurtful.damage * currentGun.dmgMultiplyer);
+		}
+
+		NetworkServer.Spawn(spawned);
+	}
+
+	[Command]
 	public void CmdShootGun(Vector3 position, Vector3 rotationAim)
 	{
 		//dead players cant shoot
@@ -159,7 +186,8 @@ public class PlayerWeapon : NetworkBehaviour
 		if (isClientOnly) //TEMP SO MESH DOESNT EXPLOIT THIS IN DEVELPMENT FEATURE
 			return;
 
-		CmdCreateRing(PlayerCamera.localInstance.transform.rotation);
+		//CmdCreateRing(PlayerCamera.localInstance.transform.rotation);
+		//CmdSpawnChildObject(Vector3.zero, Vector3.zero);
 
 		if (isClientOnly)
 			timeSinceSecondary = 0;
