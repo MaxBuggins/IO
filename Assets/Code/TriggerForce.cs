@@ -21,11 +21,19 @@ public class TriggerForce : NetworkBehaviour
         {
             Vector3 addForce = force;
 
-            //so if you fall
-            if (player.playerMovement.velocity.y < 0)
-                addForce.y += -player.playerMovement.velocity.y / 2;
-                
-            player.TargetAddVelocity(player.connectionToClient, addForce * Time.fixedDeltaTime);
+            if (player.health <= 0) //They are dead kick them out
+            {
+                playersInTrigger.Remove(player);
+
+            }
+            else
+            {
+                //so if you fall
+                if (player.playerMovement.velocity.y < 0)
+                    addForce.y += -player.playerMovement.velocity.y / 2;
+
+                player.TargetAddVelocity(player.connectionToClient, addForce * Time.fixedDeltaTime);
+            }
         }
     }
 
