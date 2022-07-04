@@ -61,8 +61,8 @@ public class PlayerAnimator : MonoBehaviour
         Ray ray = new Ray(transform.position + (Vector3.up / 2), Vector3.down);
         SurfaceMaterial castResult = Cast(ray);
 
-
-        // You can do a lot of fun stuff with panning or volume here.
+        audioSource.pitch = Random.Range(0.5f, 1.5f);
+        audioSource.volume = Random.Range(0.5f, 1f);
 
         if (castResult != null)
             audioSource.PlayOneShot(castResult.clips[Random.Range(0, castResult.clips.Length)]); // pick one at random
@@ -105,7 +105,6 @@ public class PlayerAnimator : MonoBehaviour
     {
         TerrainData data = terrain.terrainData;
 
-        //int terrainInstanceId = terrain.GetInstanceID();
         float[,,] splatMapData = data.GetAlphamaps(0, 0, data.alphamapWidth, data.alphamapHeight); // In our dev code, I cache this result, not having to fetch it every step.
         int splatTextureCount = splatMapData.Length / (data.alphamapWidth * data.alphamapHeight);
 
