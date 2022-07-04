@@ -30,6 +30,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private bool disableBunnyHopping = false;
 
     public Vector3 velocity;
+    public Vector3 externalVelocity;
 
     [HideInInspector] public Vector2 moveInput;
     private Vector3 moveRelative;
@@ -115,19 +116,22 @@ public class PlayerController : NetworkBehaviour
             onGround = false;
         }
 
-            if (onGround) {
+        if (onGround)
+        {
             // Rotate movement vector to match ground tangent
             moveRelative = Vector3.Cross(Vector3.Cross(groundNormal, moveRelative), groundNormal);
 
             GroundAccelerate();
             ApplyGroundFriction();
         }
-        else {
+        else
+        {
             ApplyGravity();
             AirAccelerate();
         }
 
-        rb.velocity = velocity;
+        rb.velocity = velocity + externalVelocity;
+        externalVelocity = Vector3.zero;
 
         // Reset onGround before next collision checks
         onGround = false;
@@ -267,5 +271,12 @@ public class PlayerController : NetworkBehaviour
     public void ShowScoreboard()
     {
         UI_Main.instance.ShowScoreboard(!UI_Main.instance.scoreBoardUI.active);
+    }
+
+    public void MoveWithPlatform(Vector3 movement)
+    {
+        externalVelocity += movement;
+        rb.velocity += movement;
+
     }
 }

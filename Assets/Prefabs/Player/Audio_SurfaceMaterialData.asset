@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90391616a4d47124a9dedf54f439d452, type: 3}
+  m_Name: Audio_SurfaceMaterialData
+  m_EditorClassIdentifier: 
+  surfaceMaterials:
+  - surfaceType: 0
+    terrainLayer: {fileID: 0}
+    material: {fileID: 2100000, guid: e9f58317fa33d6b4f9b3809a30be14e1, type: 2}
+    clips:
+    - {fileID: 8300000, guid: 9b03ca86dacbb384d8c6f3dbc2290c45, type: 3}
+  - surfaceType: 1
+    terrainLayer: {fileID: 8574412962073106934, guid: 763daf1b5274ac742a0b61640a4370a6, type: 2}
+    material: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}
+  - surfaceType: 2
+    terrainLayer: {fileID: 8574412962073106934, guid: 1de350783ad96b94e89ff87dbff3c9c6, type: 2}
+    material: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: fd6c0080d8c8c5d46aa878165aefedcb, type: 3}

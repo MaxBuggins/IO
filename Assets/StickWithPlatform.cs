@@ -8,13 +8,24 @@ public class StickWithPlatform : MonoBehaviour
     private Vector3 lastPos;
 
     private Player playerInTrigger;
+    private List<Rigidbody> rigidbodiesInTrigger = new List<Rigidbody>();
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         velocity = transform.position - lastPos;
 
+        foreach(Rigidbody rb in rigidbodiesInTrigger)
+        {
+            rb.transform.Translate(velocity);
+        }
+
+        lastPos = transform.position;
+
+        return;
+
         if (playerInTrigger != null)
         {
+            print("InPlatform");
             if (playerInTrigger.health <= 0)
             {
                 playerInTrigger = null;
@@ -24,14 +35,32 @@ public class StickWithPlatform : MonoBehaviour
             //I was so wack i better ill still be wack now in the future
             //Vector3 relativeVelocity = (velocity / Time.fixedDeltaTime * 0.09); //not sure why 0.09
 
-            //playerInTrigger.transform.position += velocity;
-            playerInTrigger.playerMovement.rb.MovePosition(playerInTrigger.transform.position + velocity);
+            playerInTrigger.playerMovement.MoveWithPlatform(velocity);
+            //playerInTrigger.playerMovement.rb.MovePosition(playerInTrigger.transform.position + velocity);
         }
-
-        lastPos = transform.position;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        if(rb != null)
+        {
+            if(rigidbodiesInTrigger.Contains(rb) == false)
+                rigidbodiesInTrigger.Add(rb);
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            if (rigidbodiesInTrigger.Contains(rb))
+                rigidbodiesInTrigger.Remove(rb);
+        }
+    }
+
+    /*
     private void OnTriggerEnter(Collider other)
     {
         Rigidbody rb = other.GetComponent<Rigidbody>();
@@ -42,7 +71,10 @@ public class StickWithPlatform : MonoBehaviour
             {
                 Player player = rb.GetComponent<Player>();
                 if (player == Player.localInstance)
+                {
                     playerInTrigger = player;
+                    //player.transform.parent = transform;
+                }
 
                 return;
             }
@@ -66,7 +98,10 @@ public class StickWithPlatform : MonoBehaviour
             {
                 Player player = rb.GetComponent<Player>();
                 if (player == Player.localInstance)
+                {
                     playerInTrigger = null;
+                    //player.transform.parent = null;
+                }
 
                 return;
             }
@@ -78,6 +113,6 @@ public class StickWithPlatform : MonoBehaviour
 
             rb.transform.parent = null;
         }
-    }
+    }*/
 }
 

@@ -311,7 +311,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71ec07a25c01f846b169ef7e38e4a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stepDistance: 0.2
   movementMultiplyer: 10
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _surfaceData: {fileID: 0}
 --- !u!95 &5656244061296683880
 Animator:
   serializedVersion: 3
@@ -514,6 +519,7 @@ MonoBehaviour:
   clampGroundSpeed: 0
   disableBunnyHopping: 0
   velocity: {x: 0, y: 0, z: 0}
+  externalVelocity: {x: 0, y: 0, z: 0}
   moveInput: {x: 0, y: 0}
   rb: {fileID: 0}
 --- !u!114 &6358458070532936708
@@ -931,4 +937,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71ec07a25c01f846b169ef7e38e4a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stepDistance: 2
   movementMultiplyer: 10
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 65
+  _surfaceData: {fileID: 11400000, guid: 4450c06287d2c3c48b9aa25e87e11a28, type: 2}
