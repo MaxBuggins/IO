@@ -12,6 +12,9 @@ public class UI_Main : MonoBehaviour
 
     public UI_Base[] bases;
 
+    public Sprite[] crosshairSprites;
+    [SerializeField] private Image crossHair;
+
     [SerializeField] private Image screenImage;
 
     [SerializeField] private GameObject playerUI;
@@ -32,6 +35,13 @@ public class UI_Main : MonoBehaviour
             Destroy(this);
 
         canvas = GetComponent<Canvas>();
+
+        
+    }
+
+    private void Start()
+    {
+        SetCrosshairImage(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.crosshairIndex, LocalPlayerSettingsStorage.localInstance.localPlayerSettings.crosshairColour);
     }
 
     public void UIUpdate()
@@ -128,5 +138,18 @@ public class UI_Main : MonoBehaviour
         if (duration > 0)
             Tween.Color(screenImage, Color.clear, duration, 0);
 
+    }
+
+    public void SetCrosshairImage(int index, Color colour)
+    {
+        index--;
+
+        if (index < 0)
+            crossHair.color = Color.clear;
+        else
+            crossHair.color = colour;
+
+        crossHair.sprite = crosshairSprites[index];
+        
     }
 }

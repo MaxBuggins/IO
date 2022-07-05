@@ -23,6 +23,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 0
   killMessage: // I am ERROR \\
-  mouseSensativity: 19.043518
-  showCrosshair: 1
+  mouseSensativity: 14.636183
+  crosshairIndex: -1
+  crosshairColour: {r: 1, g: 1, b: 1, a: 1}
   showOwnHat: 0

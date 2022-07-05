@@ -37,11 +37,13 @@ public class UI_Settings : MonoBehaviour
             Player.localInstance.SetLocalHatVisability();
     }
 
-    public void SetShowCrosshair()
+    public void SetCrosshairIndex(int index)
     {
-        //LocalPlayerSettingsStorage.localInstance.localPlayerSettings.showCrosshair;
+        LocalPlayerSettingsStorage.localInstance.localPlayerSettings.crosshairIndex = index;
 
-        //if (Player.localInstance != null)
-            //Player.localInstance.playerCamera.
+        if (UI_Main.instance != null)
+        {
+            UI_Main.instance.SetCrosshairImage(index, LocalPlayerSettingsStorage.localInstance.localPlayerSettings.crosshairColour);
+        }
     }
 }

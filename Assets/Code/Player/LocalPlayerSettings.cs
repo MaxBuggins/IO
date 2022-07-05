@@ -13,6 +13,9 @@ public class LocalPlayerSettings : ScriptableObject
     public string killMessage;
 
     public float mouseSensativity = 15f;
-    public bool showCrosshair = true;
+
+    public int crosshairIndex = 2;
+    public Color crosshairColour = Color.white;
+
     public bool showOwnHat = false;
 }
