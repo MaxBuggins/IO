@@ -937,7 +937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71ec07a25c01f846b169ef7e38e4a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepDistance: 2.5
+  stepDistance: 2.7
   movementMultiplyer: 10
   groundLayer:
     serializedVersion: 2
