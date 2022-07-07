@@ -6,16 +6,17 @@ using Mirror;
 
 public class TextEffecter : MonoBehaviour
 {
-    public string text;
-
     public float scrollSpeed = -1;
-    private float timeSinceScroll = 0;
+    protected float timeSinceScroll = 0;
 
-    private float lastHackTime = 0;
+
+    protected float lastHackTime = 0;
     public float hackTime = 5;
+    public float hackDuration = 6;
+
     private string orginalText;
 
-    private TextMeshPro textMesh;
+    protected TextMeshPro textMesh;
     
     void Awake()
     {
@@ -27,20 +28,19 @@ public class TextEffecter : MonoBehaviour
     {
         if (NetworkTime.time > lastHackTime + hackTime)
         {
-
             textMesh.text = "Only: " + LevelManager.instance.raceTimeRemaining.ToString("00:00") + " Remaining " + LevelManager.instance.players[0].userName + " = " + LevelManager.instance.players[0].bestTime;
 
             //else
             //textMesh.text = "No Race Recorderd or Running";
 
-            timeSinceScroll = -3;
-            Invoke(nameof(ResetText), 3.5f);
+            timeSinceScroll = hackDuration - 1;
+            Invoke(nameof(ResetText), hackDuration);
+            return;
         }
 
         if (scrollSpeed < 0)
             return;
 
-        print(timeSinceScroll);
         timeSinceScroll += Time.deltaTime;
 
         if (timeSinceScroll > scrollSpeed)
@@ -49,12 +49,9 @@ public class TextEffecter : MonoBehaviour
 
             timeSinceScroll = 0;
         }
-
-
-
     }
 
-    void ResetText()
+    protected void ResetText()
     {
         lastHackTime = (float)NetworkTime.time;
         timeSinceScroll = 1;

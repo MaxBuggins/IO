@@ -299,6 +299,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ad59383a596965a4585d5314714ed784, type: 2}
+  - {fileID: 2100000, guid: 63f80d8196c9a114fa808216531f7ee8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -506,7 +507,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.1, y: 0.05, z: 0.1, w: 0.05}
+  m_margin: {x: 0.1, y: 0.08, z: 0.1, w: 0.05}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -527,6 +528,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5aaec6a31ebe948a2239302139ca97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: 5:32 c \n 5:34 a
   scrollSpeed: 0.5
-  hackTime: 7
+  hackTime: 13
+  hackDuration: 6
