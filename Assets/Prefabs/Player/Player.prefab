@@ -472,7 +472,10 @@ MonoBehaviour:
   standHeight: 2
   crouchHeight: 0.8
   playerCamera: {fileID: 1955725354896944600, guid: 30c829e905a8b504eaba2fe3d6825ed9, type: 3}
-  corpse: {fileID: 2493553902459231394, guid: 4cfc498da6f543440a9adbb6c195a9f7, type: 3}
+  corpses:
+  - {fileID: 2399861778104511431, guid: 6cbc61ca0b515f84d83c30944a94f6ed, type: 3}
+  - {fileID: 3517191600711580884, guid: 16d9d1d47e568a842b0f8d8c74c3b3f7, type: 3}
+  - {fileID: 3517191600711580884, guid: 16d9d1d47e568a842b0f8d8c74c3b3f7, type: 3}
   playerMovement: {fileID: 0}
   playerAbove: {fileID: 1697422174725420596}
   headTransform: {fileID: 7315356856291048817}

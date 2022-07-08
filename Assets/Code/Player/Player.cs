@@ -63,7 +63,7 @@ public class Player : Hurtable
 
     [Header("Unity Stuff")]
     public PlayerCamera playerCamera;
-    public GameObject corpse;
+    public GameObject[] corpses;
 
     private LevelManager levelManager;
     private NetworkManager networkManager;
@@ -245,7 +245,7 @@ public class Player : Hurtable
         //directionalSprite.render.enabled = false;
         character.enabled = false;
 
-        Instantiate(corpse, transform.position, transform.rotation, null);
+        Instantiate(corpses[Random.Range(0, corpses.Length)], transform.position + (Vector3.one * 0.5f ), transform.rotation, null);
 
         if (isLocalPlayer)
         {
