@@ -109,7 +109,7 @@ public class LevelManager : NetworkBehaviour
                     if (p == 0)
                         players[p].hatIndex = 1;
 
-                    lastRoundResults.Add(players[p].userName + " | " + (players[p].bestTime * 100).ToString("00:00") + "*" + colorToHex(players[p].primaryColour));
+                    lastRoundResults.Add(players[p].userName + " | " + (players[p].bestTime * 100).ToString("00:00") + "*" + UnityExtensions.colourToHex(players[p].primaryColour));
                 }
 
                 players[p].ClearRace();
@@ -157,7 +157,7 @@ public class LevelManager : NetworkBehaviour
                     }
 
                     if(!isServerOnly)
-                        UI_Main.instance.CreateAlert(texts[0], fontSize, hexToColor(texts[1]), 7, delay, alertObjIndex: 2);
+                        UI_Main.instance.CreateAlert(texts[0], fontSize, UnityExtensions.hexToColour(texts[1]), 7, delay, alertObjIndex: 2);
 
                     break;
                 }
@@ -184,26 +184,4 @@ public class LevelManager : NetworkBehaviour
     }
 
 
-
-    public static string colorToHex(Color32 color)
-    {
-        string hex = color.r.ToString("X2") + color.g.ToString("X2") + color.b.ToString("X2");
-        return hex;
-    }
-
-    public static Color hexToColor(string hex)
-    {
-        hex = hex.Replace("0x", "");//in case the string is formatted 0xFFFFFF
-        hex = hex.Replace("#", "");//in case the string is formatted #FFFFFF
-        byte a = 255;//assume fully visible unless specified in hex
-        byte r = byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
-        byte g = byte.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
-        byte b = byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
-        //Only use alpha if the string has enough characters
-        if (hex.Length == 8)
-        {
-            a = byte.Parse(hex.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
-        }
-        return new Color32(r, g, b, a);
-    }
 }
