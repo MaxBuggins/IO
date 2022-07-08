@@ -18,14 +18,24 @@ public class TextEffecter : MonoBehaviour
 
     protected TextMeshPro textMesh;
     
-    void Awake()
+    void Start()
     {
+        if (LevelManager.instance.isServerOnly)
+        {
+            Destroy(gameObject);
+        }
+
         textMesh = GetComponent<TextMeshPro>();
         orginalText = textMesh.text;
     }
 
     void Update()
     {
+        if (LevelManager.instance.isServerOnly)
+        {
+            Destroy(gameObject);
+        }
+
         if (NetworkTime.time > lastHackTime + hackTime)
         {
             textMesh.text = "Only: " + LevelManager.instance.raceTimeRemaining.ToString("00:00") + " Remaining " + LevelManager.instance.players[0].userName + " = " + LevelManager.instance.players[0].bestTime;

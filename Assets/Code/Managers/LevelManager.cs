@@ -156,7 +156,8 @@ public class LevelManager : NetworkBehaviour
                             }
                     }
 
-                    UI_Main.instance.CreateAlert(texts[0], fontSize, hexToColor(texts[1]), 7, delay, alertObjIndex: 2);
+                    if(!isServerOnly)
+                        UI_Main.instance.CreateAlert(texts[0], fontSize, hexToColor(texts[1]), 7, delay, alertObjIndex: 2);
 
                     break;
                 }

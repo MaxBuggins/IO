@@ -86,7 +86,14 @@ public class MasterCheckPoint : NetworkBehaviour
         if (isServer)
         {
             if (finish)
-                player.bestTime = (float)(player.checkPointTimes[player.checkPointTimes.Count - 1] - player.checkPointTimes[0]);
+            {
+                double newTime = player.checkPointTimes[player.checkPointTimes.Count - 1] - player.checkPointTimes[0];
+
+                if (newTime > player.bestTime)
+                {
+                    player.bestTime = (float)newTime;
+                }
+            }
         }
 
         player.currentRace = null;

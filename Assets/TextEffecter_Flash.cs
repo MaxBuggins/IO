@@ -9,14 +9,14 @@ public class TextEffecter_Flash : TextEffecter
     public string[] texts;
     private int currentIndex;
 
-    void Start()
-    {
-        
-    }
-
 
     void Update()
     {
+        if (LevelManager.instance.isServerOnly)
+        {
+            Destroy(gameObject);
+        }
+
         if (NetworkTime.time > lastHackTime + hackTime)
         {
             textMesh.text = "Only: " + LevelManager.instance.raceTimeRemaining.ToString("00:00") + " Remaining " + LevelManager.instance.players[0].userName + " = " + LevelManager.instance.players[0].bestTime;
