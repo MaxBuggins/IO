@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3000c69b1acb43f429e2061d6652de0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tryDisableDelay: 4
+  maxDisableVelocity: 1
   deathSprites:
   - {fileID: 8922678115393135293, guid: b62e5c2c223c03d489665908d47b320f, type: 3}
   - {fileID: 4410761582986246478, guid: b62e5c2c223c03d489665908d47b320f, type: 3}
