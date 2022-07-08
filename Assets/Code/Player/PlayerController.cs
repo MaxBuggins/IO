@@ -14,6 +14,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float airLimit = 1f;
 
     [Header("Physcisc")]
+    [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private float gravitY = 16f;
     //[SerializeField] private float airFriction = 2f;
     [SerializeField] private float groundBaseFriction = 12f;
@@ -55,8 +56,6 @@ public class PlayerController : NetworkBehaviour
 
     public override void OnStartLocalPlayer() //just for the local client
     {
-        
-
         controls = new Controls();
 
         controls.Menu.Pause.performed += funny => Pause();
@@ -215,13 +214,17 @@ public class PlayerController : NetworkBehaviour
     }
 
     [ClientCallback]
-    private void OnCollisionStay(Collision other) {
+    private void OnCollisionStay(Collision other) //On Collision Stay is applicable? (True)
+    {
+        if (UnityExtensions.Contains(groundLayerMask, other.gameObject.layer) == false)
+            return;
 
         groundMaterial = other.collider.material;
 
         // Check if any of the contacts has acceptable floor angle
-        foreach (ContactPoint contact in other.contacts) {
-            if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI/2f)) 
+        foreach (ContactPoint contact in other.contacts)
+        {
+            if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI / 2f))
             {
                 groundNormal = contact.normal;
                 onGround = true;
@@ -229,6 +232,7 @@ public class PlayerController : NetworkBehaviour
                 return;
             }
         }
+
     }
 
     // This is for avoiding jumping all the time, thanks to the guy i stole this off

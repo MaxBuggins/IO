@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2493553902459231395}
   - component: {fileID: 1045035786981371226}
   - component: {fileID: 4850770187280093170}
-  - component: {fileID: 6725385382231120376}
   m_Layer: 6
   m_Name: ChargerCorpse
   m_TagString: Untagged
@@ -63,21 +62,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.5, z: 0.7}
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!114 &6725385382231120376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2493553902459231394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5329dc867e44e4d4e85b6e581a38fc39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 10
-  destory: 1
-  detatchChildren: 1
 --- !u!1 &2493553903115866485
 GameObject:
   m_ObjectHideFlags: 0
