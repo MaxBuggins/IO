@@ -16,6 +16,9 @@ public class TextEffecter : MonoBehaviour
     
     void Awake()
     {
+        if (NetworkManager.singleton.mode == NetworkManagerMode.ServerOnly)
+            Destroy(this);
+
         textMesh = GetComponent<TextMeshPro>();
         orginalText = textMesh.text;
     }
