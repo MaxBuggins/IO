@@ -10,7 +10,7 @@ public class TextEffecter : MonoBehaviour
     public float hackTime = 13;
     public float hackDuration = 6;
 
-    private string orginalText;
+    protected string orginalText;
 
     protected TextMeshPro textMesh;
     
