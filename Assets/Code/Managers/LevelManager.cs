@@ -24,12 +24,18 @@ public class LevelManager : NetworkBehaviour
     [SyncVar(hook = nameof(OnRaceChange))]
     public int currentLevelRace = -1;
 
+
+    [Header("Stats")]
     [HideInInspector] public List<Player> players = new List<Player>();
     public SyncList<string> lastRoundResults = new SyncList<string>();
 
+
+    [Header("Level Refrences")]
     private List<Transform> spawnPoints = new List<Transform>();
+    public GameObject rbsParentObject;
 
 
+    [Header("Unity Stuff")]
     private AudioSource audioSource;
     private AudioDistortionFilter audioDistortion;
 
@@ -44,6 +50,8 @@ public class LevelManager : NetworkBehaviour
 
         audioSource = GetComponent<AudioSource>();
         audioDistortion = GetComponent<AudioDistortionFilter>();
+
+        rbsParentObject.SetActive(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.enableRbs);
 
         //set up SyncList
         lastRoundResults.Callback += OnLastResultsUpdated;
@@ -182,6 +190,5 @@ public class LevelManager : NetworkBehaviour
             }
         }
     }
-
 
 }

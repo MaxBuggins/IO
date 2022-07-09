@@ -17,6 +17,7 @@ public class TriggerForce : NetworkBehaviour
 
     void FixedUpdate()
     {
+        //Errors can occur here for some reason?
         foreach (Player player in playersInTrigger)
         {
             Vector3 addForce = force;

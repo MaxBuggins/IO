@@ -26,4 +26,9 @@ public class LocalPlayerSettingsStorage : MonoBehaviour
     {
         localPlayerSettings.userName = userName;
     }
+
+    public void SetBounceType(int index)
+    {
+        localPlayerSettings.bounceCombine = (PhysicMaterialCombine)index;
+    }
 }

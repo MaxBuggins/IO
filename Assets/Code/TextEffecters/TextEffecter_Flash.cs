@@ -5,44 +5,39 @@ using Mirror;
 
 public class TextEffecter_Flash : TextEffecter
 {
+    //public Vector2 flashDelayRange = new Vector2(0.1f, 1f);
+    public AnimationCurve flashDelayRange;
+    private float timeTillFlash;
 
-    public string[] texts;
-    private int currentIndex;
+    private Color orginalColour;
+    private Color orginalColourClear;
 
-
-    void Update()
+    private void Start()
     {
-        if (LevelManager.instance.isServerOnly)
+        orginalColour = textMesh.color;
+        orginalColourClear = textMesh.color;
+        orginalColourClear.a = 0.1f;
+
+        timeTillFlash = flashDelayRange.Evaluate(Random.value);
+    }
+
+    protected void Update()
+    {
+        CheckHack();
+
+        timeTillFlash -= Time.deltaTime;
+
+        if(timeTillFlash < 0)
         {
-            Destroy(gameObject);
-        }
+            timeTillFlash = flashDelayRange.Evaluate(Random.value);
 
-        if (NetworkTime.time > lastHackTime + hackTime)
-        {
-            textMesh.text = "Only: " + LevelManager.instance.raceTimeRemaining.ToString("00:00") + " Remaining " + LevelManager.instance.players[0].userName + " = " + LevelManager.instance.players[0].bestTime;
-
-            //else
-            //textMesh.text = "No Race Recorderd or Running";
-
-            timeSinceScroll = hackDuration - 1;
-            Invoke(nameof(ResetText), hackDuration);
-            return;
-        }
-
-        if (scrollSpeed < 0)
-            return;
-
-        timeSinceScroll += Time.deltaTime;
-
-        if (timeSinceScroll > scrollSpeed)
-        {
-            currentIndex++;
-            textMesh.text = texts[currentIndex];
-
-            if (currentIndex >= texts.Length - 1)
-                currentIndex = -1;
-
-            timeSinceScroll = 0;
+            if (textMesh.color == orginalColourClear)
+                textMesh.color = orginalColour;
+            else
+            {
+                textMesh.color = orginalColourClear;
+                timeTillFlash *= 0.5f;
+            }
         }
     }
 }

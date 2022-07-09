@@ -6,67 +6,40 @@ using Mirror;
 
 public class TextEffecter : MonoBehaviour
 {
-    public float scrollSpeed = -1;
-    protected float timeSinceScroll = 0;
-
-
     protected float lastHackTime = 0;
-    public float hackTime = 5;
+    public float hackTime = 13;
     public float hackDuration = 6;
 
     private string orginalText;
 
     protected TextMeshPro textMesh;
     
-    void Start()
+    void Awake()
     {
-        if (LevelManager.instance.isServerOnly)
-        {
-            Destroy(gameObject);
-        }
-
         textMesh = GetComponent<TextMeshPro>();
         orginalText = textMesh.text;
     }
 
-    void Update()
+    protected bool CheckHack()
     {
-        if (LevelManager.instance.isServerOnly)
-        {
-            Destroy(gameObject);
-        }
+        bool isHacked = NetworkTime.time > lastHackTime + hackTime;
 
-        if (NetworkTime.time > lastHackTime + hackTime)
+        if (isHacked)
         {
             textMesh.text = "Only: " + LevelManager.instance.raceTimeRemaining.ToString("00:00") + " Remaining " + LevelManager.instance.players[0].userName + " = " + LevelManager.instance.players[0].bestTime;
 
-            //else
-            //textMesh.text = "No Race Recorderd or Running";
-
-            timeSinceScroll = hackDuration - 1;
             Invoke(nameof(ResetText), hackDuration);
-            return;
         }
 
-        if (scrollSpeed < 0)
-            return;
-
-        timeSinceScroll += Time.deltaTime;
-
-        if (timeSinceScroll > scrollSpeed)
-        {
-            textMesh.text = textMesh.text.Substring(1, textMesh.text.Length - 1) + textMesh.text.Substring(0, 1);
-
-            timeSinceScroll = 0;
-        }
+        return (isHacked);
     }
 
     protected void ResetText()
     {
         lastHackTime = (float)NetworkTime.time;
-        timeSinceScroll = 1;
         textMesh.text = orginalText;
     }
+
 }
 
 /*            currentScrollLength++;

@@ -7,11 +7,13 @@ public class UI_Settings : MonoBehaviour
 {
     public Slider sensativitySlider;
     public Toggle showOwnHatToggle;
+    public Toggle enableRbsToggle;
 
     private void Start()
     {
         sensativitySlider.value = LocalPlayerSettingsStorage.localInstance.localPlayerSettings.mouseSensativity;
         showOwnHatToggle.isOn = LocalPlayerSettingsStorage.localInstance.localPlayerSettings.showOwnHat;
+        enableRbsToggle.isOn = LocalPlayerSettingsStorage.localInstance.localPlayerSettings.enableRbs;
     }
 
     public void ToggleOnandOff()
@@ -45,5 +47,17 @@ public class UI_Settings : MonoBehaviour
         {
             UI_Main.instance.SetCrosshairImage(index, LocalPlayerSettingsStorage.localInstance.localPlayerSettings.crosshairColour);
         }
+    }
+
+    public void SetEnableRbs(bool enable)
+    {
+        LocalPlayerSettingsStorage.localInstance.localPlayerSettings.enableRbs = enable;
+
+        if (LevelManager.instance != null)
+        {
+            LevelManager.instance.rbsParentObject.SetActive(enable);
+        }
+
+
     }
 }
