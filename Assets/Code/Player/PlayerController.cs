@@ -39,11 +39,12 @@ public class PlayerController : NetworkBehaviour
     private Vector3 groundNormal;
     private PhysicMaterial groundMaterial;
 
-    private bool onGround = false;
+    [HideInInspector] public bool onGround = false;
     private bool jumpPending = false;
     private bool ableToJump = true;
 
     public Rigidbody rb;
+    private Player player;
     private PlayerWeapon playerWeapon;
     private Controls controls;
 
@@ -228,7 +229,7 @@ public class PlayerController : NetworkBehaviour
             {
                 groundNormal = contact.normal;
                 onGround = true;
-                Player.localInstance.timeSinceGrounded = 0;
+                pla .timeSinceGrounded = 0;
                 return;
             }
         }

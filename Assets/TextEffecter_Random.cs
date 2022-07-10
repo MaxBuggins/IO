@@ -10,10 +10,6 @@ public class TextEffecter_Random : TextEffecter
 
     public int maxLines = 9;
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

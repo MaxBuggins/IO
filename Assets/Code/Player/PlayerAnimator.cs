@@ -36,6 +36,8 @@ public class PlayerAnimator : MonoBehaviour
 
     void FixedUpdate()
     {
+        animator.SetBool("Grounded", player.playerMovement.onGround);
+
         float moveMagnatuide = Vector3.Distance(player.transform.position, lastPos);
         distanceSinceStep += moveMagnatuide;
 
