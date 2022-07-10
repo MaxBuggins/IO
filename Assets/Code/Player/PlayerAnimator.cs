@@ -57,6 +57,11 @@ public class PlayerAnimator : MonoBehaviour
         lastPos = player.transform.position;
     }
 
+    public void OnCrouch(bool crouch)
+    {
+        animator.SetBool("Crouching", crouch);
+    }
+
 
     protected void OnFootstepTaken()
     {

@@ -52,6 +52,7 @@ public class PlayerController : NetworkBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        player = GetComponent<Player>();
         playerWeapon = GetComponent<PlayerWeapon>();
     }
 
@@ -91,7 +92,7 @@ public class PlayerController : NetworkBehaviour
     private void FixedUpdate() 
     {
         if (!onGround)
-            Player.localInstance.timeSinceGrounded += Time.fixedDeltaTime;
+            player.timeSinceGrounded += Time.fixedDeltaTime;
 
         if (transform.position.y < LevelManager.instance.minSightHeight)
             UI_Main.instance.ChangeScreenColour(new Color(0.8f, 0.8f, 0.9f, 1));
@@ -229,7 +230,7 @@ public class PlayerController : NetworkBehaviour
             {
                 groundNormal = contact.normal;
                 onGround = true;
-                pla .timeSinceGrounded = 0;
+                player.timeSinceGrounded = 0;
                 return;
             }
         }
@@ -282,6 +283,5 @@ public class PlayerController : NetworkBehaviour
     {
         externalVelocity += movement;
         rb.velocity += movement;
-
     }
 }

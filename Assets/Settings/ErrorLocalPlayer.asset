@@ -27,3 +27,5 @@ MonoBehaviour:
   crosshairIndex: 2
   crosshairColour: {r: 1, g: 1, b: 1, a: 1}
   showOwnHat: 0
+  enableRbs: 1
+  bounceCombine: 1

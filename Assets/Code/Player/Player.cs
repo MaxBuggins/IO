@@ -74,6 +74,7 @@ public class Player : Hurtable
     [HideInInspector] public PlayerController playerMovement;
     
     private SkinnedMeshRenderer playerMeshRenderer;
+    private PlayerAnimator playerAnimator;
     [SerializeField] public PlayerAboveInfo playerAbove;
 
     [SerializeField] private Transform headTransform;
@@ -88,6 +89,7 @@ public class Player : Hurtable
         audioSource = GetComponent<AudioSource>();
         //directionalSprite = GetComponentInChildren<DirectionalSprite>();
         playerMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        playerAnimator = GetComponentInChildren<PlayerAnimator>();
 
         levelManager = FindObjectOfType<LevelManager>();
         networkManager = FindObjectOfType<NetworkManager>();
@@ -160,7 +162,9 @@ public class Player : Hurtable
 
     public void OnCrouch(bool _Old, bool _New)
     {
-        if(_New == true)
+        playerAnimator.OnCrouch(_New);
+
+        if (_New == true)
         {
             character.height = crouchHeight;
         }
