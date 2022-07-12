@@ -5,6 +5,7 @@ using TMPro;
 using Pixelplacement;
 using UnityEngine.UI;
 using Mirror;
+using UnityEngine.InputSystem.UI;
 
 public class UI_Main : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class UI_Main : MonoBehaviour
     [SerializeField] private GameObject[] alertObjects;
 
     public Canvas canvas;
+    [HideInInspector] public InputSystemUIInputModule inputSystemUIInput;
 
     void Awake()
     {
@@ -35,8 +37,9 @@ public class UI_Main : MonoBehaviour
             Destroy(this);
 
         canvas = GetComponent<Canvas>();
+        inputSystemUIInput = GetComponentInChildren<InputSystemUIInputModule>();
 
-        
+
     }
 
     private void Start()

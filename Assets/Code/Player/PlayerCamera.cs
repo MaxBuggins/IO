@@ -18,7 +18,7 @@ public class PlayerCamera : MonoBehaviour
     public float rotToFloor = 8;
 
     [Header("Offsets")]
-    [HideInInspector] public Vector2 cameraOffset;
+    [HideInInspector] public Vector3 cameraOffset;
     public Vector2 standCameraOffset;
     public Vector2 crouchCameraOffset;
 
@@ -66,8 +66,14 @@ public class PlayerCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         mouseLookSensitivty = LocalPlayerSettingsStorage.localInstance.localPlayerSettings.mouseSensativity;
+        SetThirdPerson(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.thirdPerson);
 
         cameraOffset = standCameraOffset;
+    }
+
+    public void OnMouseLook()
+    {
+
     }
 
     void Update()
@@ -138,7 +144,7 @@ public class PlayerCamera : MonoBehaviour
         {
             //Idle
             bobTime = 0;
-            transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, cameraOffset.y, Time.deltaTime * bobSpeed), transform.localPosition.z);
+            transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, cameraOffset.y, Time.deltaTime * bobSpeed), cameraOffset.z);
         }
 
         if (Vector3.Distance(Vector3.zero, currentOffset) > 0.15f)
@@ -148,9 +154,15 @@ public class PlayerCamera : MonoBehaviour
     public void Crouch(bool crouch)
     {
         if (crouch)
-            cameraOffset = crouchCameraOffset;
+        {
+            cameraOffset.x = crouchCameraOffset.x;
+            cameraOffset.y = crouchCameraOffset.y;
+        }
         else
-            cameraOffset = standCameraOffset;
+        {
+            cameraOffset.x = standCameraOffset.x;
+            cameraOffset.y = standCameraOffset.y;
+        }
 
     }
 
@@ -178,4 +190,11 @@ public class PlayerCamera : MonoBehaviour
         deadCollider.enabled = isDead;
     }
 
+    public void SetThirdPerson(bool thirdPerson)
+    {
+        if (thirdPerson)
+            cameraOffset.z = -5;
+        else
+            cameraOffset.z = 0;
+    }
 }

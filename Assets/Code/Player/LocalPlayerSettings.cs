@@ -18,7 +18,9 @@ public class LocalPlayerSettings : ScriptableObject
     public Color crosshairColour = Color.white;
 
     public bool showOwnHat = false;
-    public bool enableRbs;
+    public bool enableRbs = true;
+
+    public bool thirdPerson = false;
 
     public PhysicMaterialCombine bounceCombine = PhysicMaterialCombine.Multiply;
 }

@@ -8,12 +8,13 @@ public class UI_Settings : MonoBehaviour
     public Slider sensativitySlider;
     public Toggle showOwnHatToggle;
     public Toggle enableRbsToggle;
+    public Toggle thirdPersonToggle;
 
     private void Start()
     {
         sensativitySlider.value = LocalPlayerSettingsStorage.localInstance.localPlayerSettings.mouseSensativity;
         showOwnHatToggle.isOn = LocalPlayerSettingsStorage.localInstance.localPlayerSettings.showOwnHat;
-        enableRbsToggle.isOn = LocalPlayerSettingsStorage.localInstance.localPlayerSettings.enableRbs;
+        thirdPersonToggle.isOn = LocalPlayerSettingsStorage.localInstance.localPlayerSettings.thirdPerson;
     }
 
     public void ToggleOnandOff()
@@ -57,7 +58,20 @@ public class UI_Settings : MonoBehaviour
         {
             LevelManager.instance.rbsParentObject.SetActive(enable);
         }
+    }
 
+    public void SetThirdPerson(bool thirdPerson)
+    {
+        LocalPlayerSettingsStorage.localInstance.localPlayerSettings.thirdPerson = thirdPerson;
 
+        if(Player.localInstance != null)
+        {
+            Player.localInstance.playerCamera.SetThirdPerson(thirdPerson);
+
+            if(thirdPerson)
+                Player.localInstance.playerMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+            else
+                Player.localInstance.playerMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+        }
     }
 }
