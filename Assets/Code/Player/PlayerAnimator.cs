@@ -19,7 +19,23 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private SurfaceMaterialData _surfaceData = null;
 
 
+    private float animationLockedTill;
+    private float animationCrossFade = 0;
+
+    #region Cached Properties
+
+    private int _currentState;
+
+    private static readonly int idle = Animator.StringToHash("Idle");
+    private static readonly int run = Animator.StringToHash("Run");
+    private static readonly int fall = Animator.StringToHash("Fall");
+    private static readonly int crouch = Animator.StringToHash("Crouch");
+    private static readonly int crouchWalk = Animator.StringToHash("Crouch Walk");
+
+    #endregion
+
     private Vector3 lastPos;
+    private Vector3 moveVector;
 
     private Animator animator;
     private Player player;
@@ -34,19 +50,26 @@ public class PlayerAnimator : MonoBehaviour
     }
 
 
-    void FixedUpdate()
+    private void Start()
     {
-        animator.SetBool("Grounded", player.playerMovement.onGround);
+        //player.OnCrouch +=
+    }
 
-        float moveMagnatuide = Vector3.Distance(player.transform.position, lastPos);
-        distanceSinceStep += moveMagnatuide;
+    private void FixedUpdate()
+    {
+        moveVector = player.transform.position - lastPos;
 
-        moveMagnatuide *= movementMultiplyer;
-        moveMagnatuide = Mathf.Round(moveMagnatuide * 10f) / 10f;
+        moveVector *= movementMultiplyer;
 
-        animator.SetFloat("move", moveMagnatuide);
+        lastPos = player.transform.position;
+    }
 
-        print(moveMagnatuide);
+
+    void Update()
+    {
+        float moveMag = Mathf.Clamp(moveVector.magnitude, 0.2f, 20);
+        animator.SetFloat("move", moveMag);
+        distanceSinceStep += moveVector.magnitude;
 
         if (distanceSinceStep > stepDistance)
         {
@@ -54,14 +77,101 @@ public class PlayerAnimator : MonoBehaviour
             distanceSinceStep = 0;
         }
 
-        lastPos = player.transform.position;
+        var state = GetState();
+        //var armState = GetArmState();
+
+
+        if (state == _currentState) 
+            return;
+
+        print(moveVector.magnitude);
+        
+
+        animator.CrossFade(state, animationCrossFade, 0);
+        animator.CrossFade(state, animationCrossFade, 1);
+        //transform.localPosition = Vector3.zero; //reset root
+        _currentState = state;
     }
 
-    public void OnCrouch(bool crouch)
+    private int GetState()
     {
-        animator.SetBool("Crouching", crouch);
+        animationCrossFade = 0;
+
+        if (Time.time < animationLockedTill) return _currentState;
+
+        // Crouch
+        if (player.crouching)
+        {
+            if (player.timeSinceGrounded > 0.4)
+            {
+                return fall;
+            }
+
+            if (moveVector.magnitude > 0.2f)
+            {
+                if (Mathf.Abs(moveVector.y) > 1f || moveVector.magnitude > 4)
+                    return fall;
+
+                return crouchWalk;
+            }
+
+            return LockState(crouch, 0.1f, 0.1f);
+        }
+
+
+        if(player.timeSinceGrounded > 0.4)
+        {
+            return fall;
+        }
+
+        if(moveVector.magnitude > 0.2f)
+        {
+            if (Mathf.Abs(moveVector.y) > 1f || moveVector.magnitude > 6)
+                return fall;
+
+            return run;           
+        }
+
+
+        return LockState(idle, 0.15f, 0.15f);
+
+        int LockState(int state, float time, float fade)
+        {
+            animationLockedTill = Time.time + time;
+            animationCrossFade = fade;
+            return state;
+        }
     }
 
+    private int GetArmState()
+    {
+        //topAnimationCrossFade = 0;
+
+        if (Time.time < animationLockedTill) return _currentState;
+
+
+        if (player.timeSinceGrounded > 0)
+        {
+            //return Fall;
+        }
+
+        if (moveVector.magnitude > 0.2f)
+        {
+            if (Mathf.Abs(moveVector.y) > 0.5f)
+                return fall;
+            else
+                return run;
+        }
+
+        return LockState(idle, 0.15f, 0.15f);
+
+        int LockState(int state, float time, float fade)
+        {
+            animationLockedTill = Time.time + time;
+            animationCrossFade = fade;
+            return state;
+        }
+    }
 
     protected void OnFootstepTaken()
     {
@@ -140,4 +250,6 @@ public class PlayerAnimator : MonoBehaviour
         return surfaceMaterial;
     }
 }
+
+
 
