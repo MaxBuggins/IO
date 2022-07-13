@@ -319,6 +319,7 @@ MonoBehaviour:
   - {fileID: 3517191600711580884, guid: 16d9d1d47e568a842b0f8d8c74c3b3f7, type: 3}
   playerMovement: {fileID: 0}
   playerMeshRenderer: {fileID: 0}
+  playerAnimator: {fileID: 0}
   playerAbove: {fileID: 1697422174725420596}
   headTransform: {fileID: 0}
 --- !u!54 &1482048876518670402
@@ -803,3 +804,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   _surfaceData: {fileID: 11400000, guid: 4450c06287d2c3c48b9aa25e87e11a28, type: 2}
+  LandObject: {fileID: 2382965606849645197, guid: 7ba5f877335c67641a688386d48bc6f0, type: 3}

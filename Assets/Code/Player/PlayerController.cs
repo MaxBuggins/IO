@@ -240,13 +240,17 @@ public class PlayerController : NetworkBehaviour
         {
             if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI / 2f))
             {
+                if (other.relativeVelocity.magnitude > 2 && player.timeSinceGrounded > 1f)
+                {
+                    player.playerAnimator.OnHardLanding();
+                }
+
                 groundNormal = contact.normal;
                 onGround = true;
                 player.timeSinceGrounded = 0;
                 return;
             }
         }
-
     }
 
     // This is for avoiding jumping all the time, thanks to the guy i stole this off

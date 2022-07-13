@@ -65,7 +65,7 @@ public class Player : Hurtable
     [HideInInspector] public PlayerController playerMovement;
     
     [HideInInspector] public SkinnedMeshRenderer playerMeshRenderer;
-    //private PlayerAnimator playerAnimator;
+    [HideInInspector] public PlayerAnimator playerAnimator;
     [SerializeField] public PlayerAboveInfo playerAbove;
 
     [SerializeField] private Transform headTransform;
@@ -80,7 +80,7 @@ public class Player : Hurtable
         audioSource = GetComponent<AudioSource>();
         //directionalSprite = GetComponentInChildren<DirectionalSprite>();
         playerMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        //playerAnimator = GetComponentInChildren<PlayerAnimator>();
+        playerAnimator = GetComponentInChildren<PlayerAnimator>();
 
         levelManager = FindObjectOfType<LevelManager>();
         networkManager = FindObjectOfType<NetworkManager>();

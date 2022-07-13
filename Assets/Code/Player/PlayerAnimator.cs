@@ -28,18 +28,21 @@ public class PlayerAnimator : MonoBehaviour
 
     private static readonly int idle = Animator.StringToHash("Idle");
     private static readonly int run = Animator.StringToHash("Run");
-    private static readonly int fall = Animator.StringToHash("Fall");
+    private static readonly int fall = Animator.StringToHash("Fall");   
     private static readonly int crouch = Animator.StringToHash("Crouch");
     private static readonly int crouchWalk = Animator.StringToHash("Crouch Walk");
 
     #endregion
 
     private Vector3 lastPos;
+    private Vector3 lastMoveVector;
     private Vector3 moveVector;
 
     private Animator animator;
     private Player player;
     private AudioSource audioSource;
+
+    public GameObject LandObject;
 
 
     void Awake()
@@ -62,6 +65,7 @@ public class PlayerAnimator : MonoBehaviour
         moveVector *= movementMultiplyer;
 
         lastPos = player.transform.position;
+        lastMoveVector = moveVector;
     }
 
 
@@ -248,6 +252,12 @@ public class PlayerAnimator : MonoBehaviour
         TerrainLayer layer = data.terrainLayers[index];
         SurfaceMaterial surfaceMaterial = _surfaceData.FindSurfaceMaterial(layer);
         return surfaceMaterial;
+    }
+
+
+    public void OnHardLanding()
+    {
+        Instantiate(LandObject, transform.position, transform.rotation, null);
     }
 }
 
