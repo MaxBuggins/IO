@@ -12,6 +12,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float airAcceleration = 100f;
     [SerializeField] private float groundLimit = 12f;
     [SerializeField] private float airLimit = 1f;
+    [SerializeField] private float crouchSpeedMultiplyer = 0.5f;
 
     [Header("Physcisc")]
     [SerializeField] private LayerMask groundLayerMask;
@@ -93,6 +94,9 @@ public class PlayerController : NetworkBehaviour
     {
         if (!onGround)
             player.timeSinceGrounded += Time.fixedDeltaTime;
+        else
+            player.timeSinceGrounded -= Time.deltaTime;
+
 
         if (transform.position.y < LevelManager.instance.minSightHeight)
             UI_Main.instance.ChangeScreenColour(new Color(0.8f, 0.8f, 0.9f, 1));
@@ -155,14 +159,22 @@ public class PlayerController : NetworkBehaviour
 
         float accelSpeed = groundAcceleration * Time.deltaTime;
 
+        if (player.crouching)
+            accelSpeed *= 0.5f;
+
         if (accelSpeed > addSpeed)
             accelSpeed = addSpeed;
 
         velocity += accelSpeed * moveRelative;
 
-        if (clampGroundSpeed) {
-            if (velocity.magnitude > groundLimit)
-                velocity = velocity.normalized * groundLimit;
+        if (clampGroundSpeed) 
+        {
+            float _groundLimit = groundLimit;
+            if (player.crouching)
+                _groundLimit *= 0.5f;
+
+            if (velocity.magnitude > _groundLimit)
+                velocity = velocity.normalized * _groundLimit;
         }
     }
 

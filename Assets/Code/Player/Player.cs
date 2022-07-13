@@ -47,15 +47,6 @@ public class Player : Hurtable
     [Header("Local Stats")]
     public CharacteristicsObject characteristicsObject;
 
-    public float speed = 8;
-    public float crouchSpeed = 4;
-    public float maxSpeed = 10;
-    public float maxCrouchSpeed = 6;
-
-    public float jumpHeight = 4;
-
-    public float airFriction = 0.01f;
-
     public float standHeight = 2f;
     public float crouchHeight = 0.8f;
 
