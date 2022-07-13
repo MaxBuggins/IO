@@ -160,7 +160,7 @@ public class PlayerController : NetworkBehaviour
         float accelSpeed = groundAcceleration * Time.deltaTime;
 
         if (player.crouching)
-            accelSpeed *= 0.5f;
+            accelSpeed *= crouchSpeedMultiplyer;
 
         if (accelSpeed > addSpeed)
             accelSpeed = addSpeed;
@@ -171,7 +171,7 @@ public class PlayerController : NetworkBehaviour
         {
             float _groundLimit = groundLimit;
             if (player.crouching)
-                _groundLimit *= 0.5f;
+                _groundLimit *= crouchSpeedMultiplyer;
 
             if (velocity.magnitude > _groundLimit)
                 velocity = velocity.normalized * _groundLimit;
