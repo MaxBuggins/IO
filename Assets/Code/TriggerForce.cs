@@ -7,16 +7,33 @@ public class TriggerForce : NetworkBehaviour
 {
     public Vector3 force;
 
-    public List<Player> playersInTrigger = new List<Player>();
+    public bool localPlayerInTrigger;
 
-    void Start()
-    {
-        if (isClientOnly)
-            Destroy(this);
-    }
+    //public List<Player> playersInTrigger = new List<Player>();
+
 
     void FixedUpdate()
     {
+        if (localPlayerInTrigger)
+        {
+            if (Player.localInstance.health <= 0) //They are dead kick them out
+            {
+                localPlayerInTrigger = false;
+                return;
+            }
+            else
+            {
+                Vector3 addForce = force;
+
+                //so if you fall
+                if (Player.localInstance.playerMovement.velocity.y < 0)
+                    addForce.y += -Player.localInstance.playerMovement.velocity.y / 2;
+
+                Player.localInstance.playerMovement.rb.velocity += addForce * Time.fixedDeltaTime;
+            }
+        }
+
+        /*
         //Errors can occur here for some reason?
         foreach (Player player in playersInTrigger)
         {
@@ -36,6 +53,7 @@ public class TriggerForce : NetworkBehaviour
                 player.TargetAddVelocity(player.connectionToClient, addForce * Time.fixedDeltaTime);
             }
         }
+        */
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,7 +62,12 @@ public class TriggerForce : NetworkBehaviour
         {
             Player player = other.GetComponent<Player>();
 
-            playersInTrigger.Add(player);
+
+            if(player == Player.localInstance)
+            {
+                localPlayerInTrigger = true;
+            }
+            //playersInTrigger.Add(player);
         }
     }
 
@@ -54,7 +77,13 @@ public class TriggerForce : NetworkBehaviour
         {
             Player player = other.GetComponent<Player>();
 
-            playersInTrigger.Remove(player);
+
+            if (player == Player.localInstance)
+            {
+                localPlayerInTrigger = false;
+            }
+
+            //playersInTrigger.Remove(player);
         }
     }
 }
