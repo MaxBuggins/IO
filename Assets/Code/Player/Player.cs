@@ -73,8 +73,8 @@ public class Player : Hurtable
     private AudioSource audioSource;
     [HideInInspector] public PlayerController playerMovement;
     
-    private SkinnedMeshRenderer playerMeshRenderer;
-    private PlayerAnimator playerAnimator;
+    [HideInInspector] public SkinnedMeshRenderer playerMeshRenderer;
+    //private PlayerAnimator playerAnimator;
     [SerializeField] public PlayerAboveInfo playerAbove;
 
     [SerializeField] private Transform headTransform;
@@ -89,7 +89,7 @@ public class Player : Hurtable
         audioSource = GetComponent<AudioSource>();
         //directionalSprite = GetComponentInChildren<DirectionalSprite>();
         playerMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        playerAnimator = GetComponentInChildren<PlayerAnimator>();
+        //playerAnimator = GetComponentInChildren<PlayerAnimator>();
 
         levelManager = FindObjectOfType<LevelManager>();
         networkManager = FindObjectOfType<NetworkManager>();
@@ -118,12 +118,14 @@ public class Player : Hurtable
     public override void OnStartLocalPlayer()
     {
         localInstance = this;
-        playerMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+
+        if(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.thirdPerson == false)
+            playerMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         //directionalSprite.render.enabled = false;
 
         //playerMovement.enabled = true;
         playerCamera = Instantiate(playerCamera.gameObject, transform).GetComponent<PlayerCamera>();
-
+        Destroy(playerAbove);
         //UI_Main.instance.UIUpdate();
 
 
@@ -162,7 +164,7 @@ public class Player : Hurtable
 
     public void OnCrouch(bool _Old, bool _New)
     {
-        playerAnimator.OnCrouch(_New);
+        //playerAnimator.OnCrouch(_New);
 
         if (_New == true)
         {
