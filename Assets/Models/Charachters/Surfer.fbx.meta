@@ -33,6 +33,9 @@ ModelImporter:
   - first:
       74: -5462811749745270156
     second: Surfer|Throw
+  - first:
+      74: -7497848331705974981
+    second: Surfer|Land
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -211,8 +214,37 @@ ModelImporter:
       name: Surfer|Throw
       takeName: Surfer|Animations
       internalID: 0
-      firstFrame: 170
-      lastFrame: 210
+      firstFrame: 185
+      lastFrame: 200
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Surfer|Land
+      takeName: Surfer|Animations
+      internalID: 0
+      firstFrame: 226
+      lastFrame: 243
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -222,7 +254,7 @@ ModelImporter:
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1

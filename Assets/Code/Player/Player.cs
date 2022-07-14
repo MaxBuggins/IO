@@ -61,7 +61,6 @@ public class Player : Hurtable
 
     private NetworkTransform netTrans;
     private CapsuleCollider character;
-    private AudioSource audioSource;
     [HideInInspector] public PlayerController playerMovement;
     
     [HideInInspector] public SkinnedMeshRenderer playerMeshRenderer;
@@ -77,7 +76,6 @@ public class Player : Hurtable
         netTrans = GetComponent<NetworkTransform>();
         character = GetComponentInChildren<CapsuleCollider>();
         playerMovement = GetComponent<PlayerController>();
-        audioSource = GetComponent<AudioSource>();
         //directionalSprite = GetComponentInChildren<DirectionalSprite>();
         playerMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         playerAnimator = GetComponentInChildren<PlayerAnimator>();
@@ -204,7 +202,7 @@ public class Player : Hurtable
 
         hatObject = Instantiate(MyNetworkManager.singleton.playerHats[newHat], headTransform);
 
-        audioSource.PlayOneShot(characteristicsObject.lauphSounds[Random.Range(0, characteristicsObject.lauphSounds.Length)]);
+        playerAnimator.mouthAudioSource.PlayOneShot(characteristicsObject.lauphSounds[Random.Range(0, characteristicsObject.lauphSounds.Length)]);
 
         if (isLocalPlayer == true)
             SetLocalHatVisability();
@@ -221,7 +219,7 @@ public class Player : Hurtable
     [ClientCallback]
     public override void OnHurt(int damage)
     {
-        audioSource.PlayOneShot(characteristicsObject.hurtSounds[Random.Range(0, characteristicsObject.hurtSounds.Length)]);
+        playerAnimator.mouthAudioSource.PlayOneShot(characteristicsObject.hurtSounds[Random.Range(0, characteristicsObject.hurtSounds.Length)]);
 
         if (isLocalPlayer)
         {
@@ -236,7 +234,7 @@ public class Player : Hurtable
 
     public override void OnDeath()
     {
-        audioSource.PlayOneShot(characteristicsObject.deathSounds[Random.Range(0, characteristicsObject.deathSounds.Length)]);
+        playerAnimator.mouthAudioSource.PlayOneShot(characteristicsObject.deathSounds[Random.Range(0, characteristicsObject.deathSounds.Length)]);
 
         playerMeshRenderer.gameObject.SetActive(false);
         //directionalSprite.render.enabled = false;
@@ -387,5 +385,20 @@ public class Player : Hurtable
         currentRace = null;
         checkPointTimes.Clear();
         bestTime = -1;
+    }
+
+
+    [Command]
+    public void CmdPlayAudioClip(int set)
+    {
+        //every one gets the same random clip the server decided on
+        int index = Random.Range(0, characteristicsObject.playerCallouts[set].clips.Length);
+        RpcPlayAudioClip(set, index);
+    }
+
+    [ClientRpc]
+    public void RpcPlayAudioClip(int set, int index)
+    {
+        playerAnimator.PlayCallout(set, index);
     }
 }

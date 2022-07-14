@@ -73,8 +73,9 @@ public class PlayerController : NetworkBehaviour
 
         controls.Play.Die.performed += FunnyDeath => Suicide();
 
-        controls.Play.ShowScoreBoard.performed += Funnyiest => ShowScoreboard();
+        controls.Play.Callout.performed += moreFUNNY => player.CmdPlayAudioClip((int)moreFUNNY.ReadValue<float>());
 
+        controls.Play.ShowScoreBoard.performed += Funnyiest => ShowScoreboard();
 
         controls.Enable();
 
@@ -144,8 +145,8 @@ public class PlayerController : NetworkBehaviour
     }
 
     void GetMovementInput() {
-        float x = moveInput.x;
-        float z = moveInput.y;
+        float x = Mathf.Round(moveInput.x * 2) / 2;
+        float z = Mathf.Round(moveInput.y * 2) / 2;
 
         //normalize the movement
         moveRelative = transform.rotation * new Vector3(x, 0f, z).normalized;
@@ -240,7 +241,7 @@ public class PlayerController : NetworkBehaviour
         {
             if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI / 2f))
             {
-                if (other.relativeVelocity.magnitude > 2 && player.timeSinceGrounded > 1f)
+                if (other.relativeVelocity.magnitude > 1 && player.timeSinceGrounded > 1f)
                 {
                     player.playerAnimator.OnHardLanding();
                 }

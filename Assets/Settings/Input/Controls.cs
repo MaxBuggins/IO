@@ -107,6 +107,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Callout"",
+                    ""type"": ""Value"",
+                    ""id"": ""577d1b53-a24e-4123-a90b-27f3dba2bb9a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -125,6 +134,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""f9c10efe-7f5c-4e8b-972b-e18ecb2fa6ef"",
                     ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22fca4e1-409a-4888-a8ed-97003e4f267c"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -189,10 +209,43 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""fe58395c-aa57-4dcb-aa4d-704b881119b7"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""a4c3b38d-a40f-4766-b208-7c182c8c4b7b"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f6e77a0-f7e3-4093-b56b-3b62e944b433"",
+                    ""path"": ""<Touchscreen>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55451f81-67ad-4525-8b41-a313b3d540ef"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=2,y=2)"",
                     ""groups"": """",
                     ""action"": ""MouseLook"",
                     ""isComposite"": false,
@@ -277,8 +330,30 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""3b4cc0fa-4ae9-495d-a640-02970b12ff3e"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Primary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""da06daf4-0a83-4b16-89fb-531346cb2ccb"",
                     ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cba3ac0-fdf8-48c3-a0dc-f31fcc35d1be"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -299,12 +374,122 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""cedb0cfb-7408-49bf-9a68-a147ec4914d0"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Die"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""79fe7403-b564-4f05-8469-0aea1ab573f2"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ShowScoreBoard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e117e038-d3d5-40d1-ab79-26bc11a9af70"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowScoreBoard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""95533d13-d10a-4588-8aca-06e275113694"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=0)"",
+                    ""groups"": """",
+                    ""action"": ""Callout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e86637b-65c4-45cd-8e94-f2dc82be8ab9"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": """",
+                    ""action"": ""Callout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bee56f52-8d8f-41b2-870e-4d61d2a987bd"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""Callout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04efca56-4a4b-4cf2-b9c2-9566801e52da"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""Callout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe2df898-c05c-495c-a1f5-0b9801fb497e"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=0)"",
+                    ""groups"": """",
+                    ""action"": ""Callout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a3f351a-c2ac-4cdd-a678-f7a458af1f46"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": """",
+                    ""action"": ""Callout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abcae46c-9a69-4af6-be81-335d194516e3"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""Callout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b15dfd2c-31d0-4873-b386-0eac03ac61ca"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""Callout"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -363,6 +548,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Play_Jump = m_Play.FindAction("Jump", throwIfNotFound: true);
         m_Play_Die = m_Play.FindAction("Die", throwIfNotFound: true);
         m_Play_ShowScoreBoard = m_Play.FindAction("ShowScoreBoard", throwIfNotFound: true);
+        m_Play_Callout = m_Play.FindAction("Callout", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -434,6 +620,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Play_Jump;
     private readonly InputAction m_Play_Die;
     private readonly InputAction m_Play_ShowScoreBoard;
+    private readonly InputAction m_Play_Callout;
     public struct PlayActions
     {
         private @Controls m_Wrapper;
@@ -447,6 +634,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Play_Jump;
         public InputAction @Die => m_Wrapper.m_Play_Die;
         public InputAction @ShowScoreBoard => m_Wrapper.m_Play_ShowScoreBoard;
+        public InputAction @Callout => m_Wrapper.m_Play_Callout;
         public InputActionMap Get() { return m_Wrapper.m_Play; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -483,6 +671,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @ShowScoreBoard.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
                 @ShowScoreBoard.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
                 @ShowScoreBoard.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
+                @Callout.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnCallout;
+                @Callout.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnCallout;
+                @Callout.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnCallout;
             }
             m_Wrapper.m_PlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -514,6 +705,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @ShowScoreBoard.started += instance.OnShowScoreBoard;
                 @ShowScoreBoard.performed += instance.OnShowScoreBoard;
                 @ShowScoreBoard.canceled += instance.OnShowScoreBoard;
+                @Callout.started += instance.OnCallout;
+                @Callout.performed += instance.OnCallout;
+                @Callout.canceled += instance.OnCallout;
             }
         }
     }
@@ -562,6 +756,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnDie(InputAction.CallbackContext context);
         void OnShowScoreBoard(InputAction.CallbackContext context);
+        void OnCallout(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

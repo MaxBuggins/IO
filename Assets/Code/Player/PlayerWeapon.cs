@@ -90,8 +90,7 @@ public class PlayerWeapon : NetworkBehaviour
 		if (player.health <= 0)
 			return;
 
-		 //if(Vector3.Distance(position, transform.position) > 1.5f)//1.5 is the max distance delay that will be allowed
-			//position = transform
+		RpcUsePrimary();
 
 			//randomise bullet spread
 			Vector3 offset = new Vector3(0, Random.Range(-accuracy, accuracy), 0);
@@ -175,7 +174,17 @@ public class PlayerWeapon : NetworkBehaviour
 
 	void UsePrimary()
     {
+		player.playerAnimator.TriggerPrimaryAttack();
 		CmdShootGun(transform.position, PlayerCamera.localInstance.transform.eulerAngles);
+    }
+
+	[ClientRpc]
+	void RpcUsePrimary()
+    {
+		if (isLocalPlayer)
+			return;
+
+		player.playerAnimator.TriggerPrimaryAttack();
     }
 
 	void UseSecondary()

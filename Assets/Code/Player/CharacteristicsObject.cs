@@ -10,4 +10,17 @@ public class CharacteristicsObject : ScriptableObject
     public AudioClip[] lauphSounds;
     public AudioClip[] hurtSounds;
     public AudioClip[] deathSounds;
+
+    public PlayerCallout[] playerCallouts;
+}
+
+
+public enum CalloutType { lauph, medic, yes, no } // Music Generas
+
+[System.Serializable]
+public class PlayerCallout
+{
+    public CalloutType calloutCatagory;
+
+    public AudioClip[] clips;
 }

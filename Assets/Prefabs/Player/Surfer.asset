@@ -23,3 +23,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7178fc6607820f9498e3d00ecade653b, type: 3}
   deathSounds:
   - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}
+  playerCallouts:
+  - calloutCatagory: 0
+    clips:
+    - {fileID: 8300000, guid: 9b03ca86dacbb384d8c6f3dbc2290c45, type: 3}
+  - calloutCatagory: 1
+    clips:
+    - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}

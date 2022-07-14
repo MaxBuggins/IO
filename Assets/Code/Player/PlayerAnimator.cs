@@ -28,9 +28,31 @@ public class PlayerAnimator : MonoBehaviour
 
     private static readonly int idle = Animator.StringToHash("Idle");
     private static readonly int run = Animator.StringToHash("Run");
-    private static readonly int fall = Animator.StringToHash("Fall");   
+    private static readonly int fall = Animator.StringToHash("Fall");
+    private static readonly int land = Animator.StringToHash("Land");
     private static readonly int crouch = Animator.StringToHash("Crouch");
     private static readonly int crouchWalk = Animator.StringToHash("Crouch Walk");
+    private static readonly int primaryAttack = Animator.StringToHash("Primary Attack");
+    #endregion
+
+    #region FaceMaterials
+    [Header("Face Materials")]
+    [SerializeField] private Material smile;
+    [SerializeField] private Material smileTeeth;
+    [SerializeField] private Material mouth;
+    [SerializeField] private Material mouthOpen;
+    #endregion
+
+    #region AudioSorces
+    [Header("Audio Sources")]
+    public AudioSource feetAudioSource;
+    public AudioSource mouthAudioSource;
+
+    private float clipSampleRate;
+    private int sampleDataLength = 1024;
+
+    private float timeSinceLateUpdate = 0;
+    private float lateUpdateRate = 0.3f;
 
     #endregion
 
@@ -40,7 +62,8 @@ public class PlayerAnimator : MonoBehaviour
 
     private Animator animator;
     private Player player;
-    private AudioSource audioSource;
+
+    [HideInInspector] public SkinnedMeshRenderer playerMeshRenderer;
 
     public GameObject LandObject;
 
@@ -49,14 +72,9 @@ public class PlayerAnimator : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         player = GetComponentInParent<Player>();
-        audioSource = GetComponentInParent<AudioSource>();
+        playerMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
-
-    private void Start()
-    {
-        //player.OnCrouch +=
-    }
 
     private void FixedUpdate()
     {
@@ -68,6 +86,27 @@ public class PlayerAnimator : MonoBehaviour
         lastMoveVector = moveVector;
     }
 
+    public void ChangeFace(float loudness)
+    {
+        Material[] materials = playerMeshRenderer.materials;
+        if (loudness > 0.02f)
+        {
+            if (loudness > 0.05f)
+                materials[1] = mouthOpen;
+
+            else if (loudness > 0.035f)
+                materials[1] = mouth;
+
+            else
+                materials[1] = smileTeeth;
+        }
+
+        else
+        {
+            materials[1] = smile;
+        }
+        playerMeshRenderer.materials = materials;
+    }
 
     void Update()
     {
@@ -87,14 +126,33 @@ public class PlayerAnimator : MonoBehaviour
 
         if (state == _currentState) 
             return;
-
-        print(moveVector.magnitude);
         
 
         animator.CrossFade(state, animationCrossFade, 0);
         animator.CrossFade(state, animationCrossFade, 1);
         //transform.localPosition = Vector3.zero; //reset root
         _currentState = state;
+    }
+
+    private void LateUpdate()
+    {
+        timeSinceLateUpdate += Time.deltaTime;
+        if (timeSinceLateUpdate >= lateUpdateRate)
+        {
+            timeSinceLateUpdate = 0f;
+
+            float[] clipSampleData = new float[sampleDataLength];
+            mouthAudioSource.GetOutputData(clipSampleData, mouthAudioSource.timeSamples); //I read 1024 samples, which is about 80 ms on a 44khz stereo clip, beginning at the current sample position of the clip.
+            float clipLoudness = 0f;
+            foreach (var sample in clipSampleData)
+            {
+                clipLoudness += Mathf.Abs(sample);
+            }
+            clipLoudness /= sampleDataLength; //clipLoudness is what you are looking for
+
+            print(clipLoudness);
+            ChangeFace(clipLoudness);
+        }
     }
 
     private int GetState()
@@ -147,46 +205,22 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    private int GetArmState()
-    {
-        //topAnimationCrossFade = 0;
-
-        if (Time.time < animationLockedTill) return _currentState;
-
-
-        if (player.timeSinceGrounded > 0)
-        {
-            //return Fall;
-        }
-
-        if (moveVector.magnitude > 0.2f)
-        {
-            if (Mathf.Abs(moveVector.y) > 0.5f)
-                return fall;
-            else
-                return run;
-        }
-
-        return LockState(idle, 0.15f, 0.15f);
-
-        int LockState(int state, float time, float fade)
-        {
-            animationLockedTill = Time.time + time;
-            animationCrossFade = fade;
-            return state;
-        }
-    }
 
     protected void OnFootstepTaken()
     {
         Ray ray = new Ray(transform.position + (Vector3.up / 2), Vector3.down);
         SurfaceMaterial castResult = Cast(ray);
 
-        audioSource.pitch = Random.Range(0.5f, 1.5f);
-        audioSource.volume = Random.Range(0.5f, 1f);
+        feetAudioSource.pitch = Random.Range(0.5f, 1.5f);
+        feetAudioSource.volume = Random.Range(0.5f, 1f);
 
         if (castResult != null)
-            audioSource.PlayOneShot(castResult.clips[Random.Range(0, castResult.clips.Length)]); // pick one at random
+            feetAudioSource.PlayOneShot(castResult.clips[Random.Range(0, castResult.clips.Length)]); // pick one at random
+    }
+
+    public void TriggerPrimaryAttack()
+    {
+        animator.CrossFade(primaryAttack, 0, 1);
     }
 
 
@@ -257,7 +291,16 @@ public class PlayerAnimator : MonoBehaviour
 
     public void OnHardLanding()
     {
+        animator.CrossFade(land, 0, 0);
+        animationLockedTill = Time.time + 0.5f;
         Instantiate(LandObject, transform.position, transform.rotation, null);
+    }
+
+
+    public void PlayCallout(int set, int index)
+    {
+        AudioClip[] playerCallout = player.characteristicsObject.playerCallouts[set].clips;
+        mouthAudioSource.PlayOneShot(playerCallout[index]);
     }
 }
 
