@@ -32,6 +32,7 @@ public class PlayerAnimator : MonoBehaviour
     private static readonly int land = Animator.StringToHash("Land");
     private static readonly int crouch = Animator.StringToHash("Crouch");
     private static readonly int crouchWalk = Animator.StringToHash("Crouch Walk");
+    private static readonly int shout = Animator.StringToHash("Shout");
     private static readonly int primaryAttack = Animator.StringToHash("Primary Attack");
     #endregion
 
@@ -299,6 +300,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void PlayCallout(int set, int index)
     {
+        animator.CrossFade(shout, 0.1f, 1);
         AudioClip[] playerCallout = player.characteristicsObject.playerCallouts[set].clips;
         mouthAudioSource.PlayOneShot(playerCallout[index]);
     }

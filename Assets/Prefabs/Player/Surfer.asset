@@ -30,3 +30,9 @@ MonoBehaviour:
   - calloutCatagory: 1
     clips:
     - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}
+  - calloutCatagory: 2
+    clips:
+    - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}
+  - calloutCatagory: 3
+    clips:
+    - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}
