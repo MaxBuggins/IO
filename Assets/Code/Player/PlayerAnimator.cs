@@ -30,6 +30,7 @@ public class PlayerAnimator : MonoBehaviour
     private static readonly int run = Animator.StringToHash("Run");
     private static readonly int fall = Animator.StringToHash("Fall");
     private static readonly int land = Animator.StringToHash("Land");
+    private static readonly int roll = Animator.StringToHash("Roll");
     private static readonly int crouch = Animator.StringToHash("Crouch");
     private static readonly int crouchWalk = Animator.StringToHash("Crouch Walk");
     private static readonly int shout = Animator.StringToHash("Shout");
@@ -80,6 +81,7 @@ public class PlayerAnimator : MonoBehaviour
     private void FixedUpdate()
     {
         moveVector = player.transform.position - lastPos;
+        moveVector.y = 0;
 
         moveVector *= movementMultiplyer;
 
@@ -213,7 +215,7 @@ public class PlayerAnimator : MonoBehaviour
         SurfaceMaterial castResult = Cast(ray);
 
         feetAudioSource.pitch = Random.Range(0.5f, 1.5f);
-        feetAudioSource.volume = Random.Range(0.5f, 1f);
+        feetAudioSource.volume = Random.Range(0.3f, 0.6f);
 
         if (castResult != null)
             feetAudioSource.PlayOneShot(castResult.clips[Random.Range(0, castResult.clips.Length)]); // pick one at random
@@ -292,8 +294,23 @@ public class PlayerAnimator : MonoBehaviour
 
     public void OnHardLanding()
     {
-        animator.CrossFade(land, 0, 0);
-        animationLockedTill = Time.time + 0.5f;
+        if (_currentState == land || _currentState == roll)
+        {
+            return;
+        }
+
+        int state = land;
+
+        if(moveVector.magnitude > 0.5f)
+        {
+            state = roll;
+        }
+
+        animator.CrossFade(state, 0.1f, 0);
+        animationLockedTill = Time.time + 1f;
+        _currentState = state;
+
+
         Instantiate(LandObject, transform.position, transform.rotation, null);
     }
 

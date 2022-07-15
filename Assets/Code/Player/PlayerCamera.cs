@@ -71,6 +71,7 @@ public class PlayerCamera : MonoBehaviour
         cameraOffset = standCameraOffset;
     }
 
+
     public void OnMouseLook()
     {
 
@@ -102,10 +103,10 @@ public class PlayerCamera : MonoBehaviour
                     }
                 }
                 else
-                    ClearAbovePlayerSelection(); //is
+                    ClearAbovePlayerSelection(); //is/this
             }
             else
-                ClearAbovePlayerSelection(); //this
+                ClearAbovePlayerSelection(); //this/is
         }
         else
             ClearAbovePlayerSelection(); //retarded

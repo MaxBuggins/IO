@@ -363,7 +363,7 @@ MonoBehaviour:
   groundBaseFriction: 12
   rampSlideLimit: 4
   slopeLimit: 40
-  jumpHeight: 6
+  jumpHeight: 7
   additiveJump: 1
   autoJump: 1
   clampGroundSpeed: 0

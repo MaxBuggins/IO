@@ -26,7 +26,7 @@ AudioMixerController:
   m_Snapshots:
   - {fileID: 24500006}
   m_StartSnapshot: {fileID: 24500006}
-  m_SuspendThreshold: -50
+  m_SuspendThreshold: 0
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
@@ -88,7 +88,7 @@ AudioMixerSnapshotController:
   m_SnapshotID: 197bd2064a3ff3c47a67dbf671634580
   m_FloatValues:
     acf7b170d8f73b74f9b6b2584b21efe8: -20
-    62293d4783afc1a41bbba84c3fbaae34: -10
+    62293d4783afc1a41bbba84c3fbaae34: 0
   m_TransitionOverrides: {}
 --- !u!243 &6145677635138970305
 AudioMixerGroupController:

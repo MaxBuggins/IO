@@ -21,6 +21,7 @@ public class UI_Main : MonoBehaviour
     [SerializeField] private GameObject playerUI;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject pauseUI;
+    [SerializeField] private GameObject touchUI;
     //who even cares if this one is public
     [SerializeField] public GameObject scoreBoardUI;
 
@@ -36,10 +37,12 @@ public class UI_Main : MonoBehaviour
         else
             Destroy(this);
 
+#if UNITY_IOS
+        touchUI.SetActive(true);
+#endif
+
         canvas = GetComponent<Canvas>();
         inputSystemUIInput = GetComponentInChildren<InputSystemUIInputModule>();
-
-
     }
 
     private void Start()

@@ -12,6 +12,8 @@ public class StickWithPlatform : MonoBehaviour
 
     void LateUpdate()
     {
+        return;
+
         velocity = transform.position - lastPos;
 
         foreach(Rigidbody rb in rigidbodiesInTrigger)
