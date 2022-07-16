@@ -15,7 +15,7 @@ public class CharacteristicsObject : ScriptableObject
 }
 
 
-public enum CalloutType { lauph, medic, yes, no } // Music Generas
+public enum CalloutType { lauph, medic, yes, no, debug } // Music Generas
 
 [System.Serializable]
 public class PlayerCallout

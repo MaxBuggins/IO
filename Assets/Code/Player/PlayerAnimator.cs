@@ -92,21 +92,22 @@ public class PlayerAnimator : MonoBehaviour
     public void ChangeFace(float loudness)
     {
         Material[] materials = playerMeshRenderer.materials;
-        if (loudness > 0.02f)
+        if (loudness > 0.01f)
         {
-            if (loudness > 0.05f)
+            if (loudness > 0.06f)
                 materials[1] = mouthOpen;
 
             else if (loudness > 0.035f)
                 materials[1] = mouth;
 
             else
-                materials[1] = smileTeeth;
+                materials[1] = smileTeeth;       
         }
 
         else
         {
             materials[1] = smile;
+            animator.SetBool("Shouting", false);
         }
         playerMeshRenderer.materials = materials;
     }
@@ -117,7 +118,7 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetFloat("move", moveMag);
         distanceSinceStep += moveVector.magnitude;
 
-        if (distanceSinceStep > stepDistance)
+        if (distanceSinceStep > stepDistance && player.timeSinceGrounded <= 0)
         {
             OnFootstepTaken();
             distanceSinceStep = 0;
@@ -317,7 +318,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void PlayCallout(int set, int index)
     {
-        animator.CrossFade(shout, 0.1f, 1);
+        animator.SetBool("Shouting", true);
         AudioClip[] playerCallout = player.characteristicsObject.playerCallouts[set].clips;
         mouthAudioSource.PlayOneShot(playerCallout[index]);
     }
