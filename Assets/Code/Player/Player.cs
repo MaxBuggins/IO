@@ -211,6 +211,9 @@ public class Player : Hurtable
 
     public void SetLocalHatVisability()
     {
+        if (hatObject == null)
+            return;
+
         if (LocalPlayerSettingsStorage.localInstance.localPlayerSettings.showOwnHat == false)
             hatObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         else
