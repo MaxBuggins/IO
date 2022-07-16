@@ -27,12 +27,12 @@ MonoBehaviour:
   - calloutCatagory: 0
     clips:
     - {fileID: 8300000, guid: 9b03ca86dacbb384d8c6f3dbc2290c45, type: 3}
-  - calloutCatagory: 1
-    clips:
-    - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}
   - calloutCatagory: 2
     clips:
-    - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}
+    - {fileID: 8300000, guid: 47762ed35bbd54e459a8a0f3a31c9018, type: 3}
+  - calloutCatagory: 4
+    clips:
+    - {fileID: 8300000, guid: 21ece37f8cf631f4eba4960943c16113, type: 3}
   - calloutCatagory: 3
     clips:
-    - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}
+    - {fileID: 8300000, guid: ccc2e81dd560d1d49adbc8f1839e3837, type: 3}

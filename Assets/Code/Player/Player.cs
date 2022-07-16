@@ -129,6 +129,7 @@ public class Player : Hurtable
     void UpdateBestTime(float oldBestTime, float newBestTime)
     {
         UI_Main.instance.UIUpdate();
+        playerAbove.ChangeText(userName, newBestTime);
     }
 
     [Command]
@@ -186,7 +187,7 @@ public class Player : Hurtable
     public void OnNameChanged(string oldName, string newName)
     {
         UI_Main.instance.UIUpdate();
-        playerAbove.ChangeText(newName);
+        playerAbove.ChangeText(newName, bestTime);
     }
 
     public void OnColourChanged(Color32 oldColor, Color32 newColor)

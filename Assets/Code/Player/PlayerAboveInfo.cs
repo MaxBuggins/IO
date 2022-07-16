@@ -8,9 +8,14 @@ public class PlayerAboveInfo : MonoBehaviour
 
     public TextMeshPro textBox;
 
-    public void ChangeText(string text)
+    public void ChangeText(string name, float time)
     {
-        textBox.text = text;
+        if(time >= 0)
+            textBox.text = name + "\n" + (time * 100).ToString("00:00");
+        else
+        {
+            textBox.text = name + "\n Attemptless";
+        }
     }
 
     public void ChangeColour(Color32 colour)
