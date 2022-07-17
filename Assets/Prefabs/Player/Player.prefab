@@ -322,7 +322,7 @@ MonoBehaviour:
   playerMeshRenderer: {fileID: 0}
   playerAnimator: {fileID: 0}
   playerAbove: {fileID: 1697422174725420596}
-  headTransform: {fileID: 0}
+  headTransform: {fileID: 2745733285289908181}
 --- !u!54 &1482048876518670402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -688,5 +688,10 @@ PrefabInstance:
 --- !u!4 &2454022791578245231 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8261687190223038107, guid: 963ecc16b7a5ba247b07c3f187543a25, type: 3}
+  m_PrefabInstance: {fileID: 5812203183184314100}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2745733285289908181 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8553415276122843425, guid: 963ecc16b7a5ba247b07c3f187543a25, type: 3}
   m_PrefabInstance: {fileID: 5812203183184314100}
   m_PrefabAsset: {fileID: 0}
