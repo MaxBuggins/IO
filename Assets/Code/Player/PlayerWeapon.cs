@@ -57,11 +57,13 @@ public class PlayerWeapon : NetworkBehaviour
 	}
 
 	[Command]
-	public void CmdSpawnChildObject(Vector3 localPosition, Vector3 localRotation)
+	public void CmdSpawnChildObject()
 	{
 		//dead players cant shoot
 		if (player.health <= 0)
 			return;
+
+		RpcUseSecondary();
 
 		if (player.crouching)
 			spawnOffset = crouchSpawnOffset;
@@ -70,7 +72,7 @@ public class PlayerWeapon : NetworkBehaviour
 
 		GameObject spawned;
 
-		spawned = Instantiate(prmaryObject, localPosition + spawnOffset, Quaternion.Euler(localRotation), transform);
+		spawned = Instantiate(secondaryObject, transform.position + spawnOffset, Quaternion.identity, transform);
 
 		//applys damage multiplyer for gun
 		Hurtful hurtful = spawned.GetComponent<Hurtful>();
@@ -192,13 +194,19 @@ public class PlayerWeapon : NetworkBehaviour
 		if (timeSinceSecondary < secondaryCoolDown) //not enough time progressed
 			return;
 
-		if (isClientOnly) //TEMP SO MESH DOESNT EXPLOIT THIS IN DEVELPMENT FEATURE
+		CmdSpawnChildObject();
+	 
+		player.playerAnimator.TriggerSecondaryAttack();
+
+		timeSinceSecondary = 0;
+	}
+
+	[ClientRpc]
+	void RpcUseSecondary()
+	{
+		if (isLocalPlayer)
 			return;
 
-		//CmdCreateRing(PlayerCamera.localInstance.transform.rotation);
-		//CmdSpawnChildObject(Vector3.zero, Vector3.zero);
-
-		if (isClientOnly)
-			timeSinceSecondary = 0;
+		player.playerAnimator.TriggerSecondaryAttack();
 	}
 }

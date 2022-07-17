@@ -35,6 +35,7 @@ public class PlayerAnimator : MonoBehaviour
     private static readonly int crouchWalk = Animator.StringToHash("Crouch Walk");
     private static readonly int shout = Animator.StringToHash("Shout");
     private static readonly int primaryAttack = Animator.StringToHash("Primary Attack");
+    private static readonly int secondaryAttack = Animator.StringToHash("Secondary Attack");
     #endregion
 
     #region FaceMaterials
@@ -225,6 +226,11 @@ public class PlayerAnimator : MonoBehaviour
     public void TriggerPrimaryAttack()
     {
         animator.CrossFade(primaryAttack, 0, 1);
+    }
+
+    public void TriggerSecondaryAttack()
+    {
+        animator.CrossFade(secondaryAttack, 0, 1);
     }
 
 

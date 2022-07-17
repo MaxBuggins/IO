@@ -62,6 +62,8 @@ public class PlayerCamera : MonoBehaviour
         controls.Play.KeyLook.performed += ctx => look = ctx.ReadValue<Vector2>() * keyLookSensitivty;
         controls.Play.KeyLook.canceled += ctx => look = Vector2.zero;
 
+        controls.Play.Interact.performed += FunnyInteract => AttemptInteract();
+
         controls.Enable();
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -71,16 +73,15 @@ public class PlayerCamera : MonoBehaviour
         cameraOffset = standCameraOffset;
     }
 
-
     public void OnMouseLook()
     {
 
     }
 
+
     void Update()
     {
         var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        Debug.DrawRay(ray.origin, ray.direction * 1000, Color.yellow);
 
         RaycastHit hit;
 
@@ -103,7 +104,11 @@ public class PlayerCamera : MonoBehaviour
                     }
                 }
                 else
+                {
                     ClearAbovePlayerSelection(); //is/this
+
+ 
+                }
             }
             else
                 ClearAbovePlayerSelection(); //this/is
@@ -152,6 +157,21 @@ public class PlayerCamera : MonoBehaviour
             currentOffset += (Vector3.zero - currentOffset).normalized * rotResetSpeed * Time.deltaTime;
     }
 
+    public void AttemptInteract()
+    {
+        var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, hitInfo: out hit, 3))
+        {
+            if (hit.collider.tag == "Interactable")
+            {
+                hit.collider.gameObject.SendMessage("Interact", hit.distance);
+            }
+        }
+    }
+
     public void Crouch(bool crouch)
     {
         if (crouch)
@@ -174,7 +194,6 @@ public class PlayerCamera : MonoBehaviour
 
         currentPlayerAboveInfo = null;
     }
-
 
     public void Shake(float amount = 1)
     {

@@ -298,7 +298,9 @@ public class Player : Hurtable
 
         Transform sPoint = networkManager.GetStartPosition();
         transform.position = sPoint.position;
-        netTrans.RpcTeleport(sPoint.position);
+        transform.rotation = sPoint.rotation;
+        netTrans.RpcTeleport(sPoint.position, sPoint.rotation);
+        
 
 
         health = maxHealth;

@@ -393,8 +393,8 @@ MonoBehaviour:
   standSpawnOffset: {x: 0, y: 1.5, z: 0.1}
   crouchSpawnOffset: {x: 0, y: 0.5, z: 0.1}
   prmaryObject: {fileID: 1197490961052816661, guid: 6d0fea7a00c6a654ebe24b49765893d9, type: 3}
-  secondaryObject: {fileID: 4822890314477641165, guid: 6b0b2a60721fad04292ef140badd457d, type: 3}
-  secondaryCoolDown: 1.5
+  secondaryObject: {fileID: 6065844769810503946, guid: 86e03f078f0033646bba05d8638d39b0, type: 3}
+  secondaryCoolDown: 0
   masterCheckPointPrefab: {fileID: 4299215793386447566, guid: 923154c0d5beb58449d70112f7cbc09a, type: 3}
 --- !u!136 &3833172793736275218
 CapsuleCollider:
