@@ -17,10 +17,13 @@ public class MyNetworkManager : NetworkManager
     [Header("My Stuff")]
     public GameObject[] playerHats;
 
+    private NetworkManagerHUD hud;
+
     #region Unity Callbacks
 
     public override void OnValidate()
     {
+        hud = GetComponent<NetworkManagerHUD>();
         base.OnValidate();
     }
 
@@ -189,8 +192,8 @@ public class MyNetworkManager : NetworkManager
     /// </summary>
     public override void OnClientConnect(NetworkConnection conn)
     {
-        //if (hud != null) //TEMPARAY
-        //hud.showGUI = false;
+        if (hud != null) //TEMPARAY
+            hud.enabled = false;
 
         //Destroy(mainMenuObject);
 
@@ -203,6 +206,9 @@ public class MyNetworkManager : NetworkManager
     /// </summary>
     public override void OnClientDisconnect()
     {
+        if (hud != null) //TEMPARAY
+            hud.enabled = true;
+
         Cursor.lockState = CursorLockMode.None;
 
         base.OnClientDisconnect();

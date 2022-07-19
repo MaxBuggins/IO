@@ -10,7 +10,7 @@ public class UI_Score : UI_Base
     // Update is called when base says so
     public override void Update()
     {
-        score.text = "Score: " + Player.localInstance.GetScore(); //thank you me
+        score.text = Player.localInstance.GetScore().ToString(); //thank you me
 
         base.Update();
     }

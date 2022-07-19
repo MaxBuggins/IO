@@ -78,7 +78,7 @@ namespace Mirror
                 if (Application.platform == RuntimePlatform.WebGLPlayer)
                 {
                     // cant be a server in webgl build
-                    GUILayout.Box("(  WebGL cannot be server  )");
+                    GUILayout.Box("(  Browser cannot be server  )");
                 }
                 else
                 {

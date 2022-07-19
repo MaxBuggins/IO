@@ -158,4 +158,29 @@ public class UI_Main : MonoBehaviour
         crossHair.sprite = crosshairSprites[index];
         
     }
+
+    public void Disconect()
+    {
+        // stop host if host mode
+        if (NetworkServer.active && NetworkClient.isConnected)
+        {
+
+            NetworkManager.singleton.StopHost();
+
+        }
+        // stop client if client-only
+        else if (NetworkClient.isConnected)
+        {
+
+            NetworkManager.singleton.StopClient();
+
+        }
+        // stop server if server-only
+        else if (NetworkServer.active)
+        {
+
+            NetworkManager.singleton.StopServer();
+
+        }
+    }
 }

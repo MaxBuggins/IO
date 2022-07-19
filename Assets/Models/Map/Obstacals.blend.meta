@@ -8,12 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: AirConUV
-    second: {fileID: 2100000, guid: b13bf983481d5384e8fd76324e244fb8, type: 2}
+    second: {fileID: 2100000, guid: 315d02d7679c794478cee5fb0cce43ad, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: AirConUV.003
-    second: {fileID: 2100000, guid: f3ae7955b6c12394899755eaac5d17da, type: 2}
+    second: {fileID: 2100000, guid: f1df3ef04d8751c449af5c174746f91b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ColaCanUV
+    second: {fileID: 2100000, guid: 26231b945ed433642995a151563de1a5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -23,7 +28,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: FanUV.001
-    second: {fileID: 2100000, guid: 2c2078986a2f8b2418ec018568e47352, type: 2}
+    second: {fileID: 2100000, guid: 3a099bcb17092f648a63050f624ab499, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

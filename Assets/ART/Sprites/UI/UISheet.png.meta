@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 8777824922998612401
     second: UISheet_0
+  - first:
+      213: 3765853880425637702
+    second: UISheet_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -146,11 +149,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 241
-        width: 14
-        height: 14
+        y: 97
+        width: 59
+        height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,6 +161,27 @@ TextureImporter:
       bones: []
       spriteID: 1b127e3b24911d970800000000000000
       internalID: 8777824922998612401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UISheet_1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 74
+        width: 66
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 5, y: 7, z: 5, w: 5}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 647ebc2e620034430800000000000000
+      internalID: 3765853880425637702
       vertices: []
       indices: 
       edges: []
