@@ -8,6 +8,11 @@ public class PlayerAboveInfo : MonoBehaviour
 
     public TextMeshPro textBox;
 
+    public void ChangeText(string name)
+    {
+        textBox.text = name;
+    }
+
     public void ChangeText(string name, float time)
     {
         if(time >= 0)
@@ -18,6 +23,11 @@ public class PlayerAboveInfo : MonoBehaviour
         }
     }
 
+    public void ChangeColour(Color colour)
+    {
+        textBox.color = colour; //God i hate american cOLoR, do they even eat fish?
+    }
+
     public void ChangeColour(Color32 colour)
     {
         textBox.color = colour; //God i hate american cOLoR, do they even eat fish?
@@ -26,7 +36,7 @@ public class PlayerAboveInfo : MonoBehaviour
 
     void Update()
     {
-        var lookPos = transform.position - Player.localInstance.transform.position;
+        var lookPos = transform.position - Camera.main.transform.position;
         transform.rotation = Quaternion.LookRotation(lookPos);
     }
 }
