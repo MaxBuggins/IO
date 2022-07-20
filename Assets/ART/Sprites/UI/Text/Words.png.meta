@@ -7,13 +7,19 @@ TextureImporter:
     second: Words_0
   - first:
       213: -1963702539796757817
-    second: Words_1
+    second: Words_3
   - first:
       213: -2096214663393848964
-    second: Words_2
+    second: Words_3
   - first:
       213: -5427448313768164191
+    second: Words_1
+  - first:
+      213: -8206153021064857541
     second: Words_3
+  - first:
+      213: 3244999107534209782
+    second: Words_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -154,9 +160,9 @@ TextureImporter:
       name: Words_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 19
-        width: 47
+        width: 50
         height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -172,13 +178,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Words_1
+      name: Words_2
       rect:
         serializedVersion: 2
-        x: 1
-        y: 3
+        x: 50
+        y: 19
         width: 47
-        height: 12
+        height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,13 +199,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Words_2
+      name: Words_4
       rect:
         serializedVersion: 2
-        x: 49
+        x: 98
         y: 19
-        width: 43
-        height: 13
+        width: 67
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,15 +220,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Words_3
+      name: Words_1
       rect:
         serializedVersion: 2
-        x: 49
+        x: 0
         y: 3
-        width: 43
-        height: 13
+        width: 50
+        height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,6 +236,48 @@ TextureImporter:
       bones: []
       spriteID: 1a44e05b384dda4b0800000000000000
       internalID: -5427448313768164191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Words_3
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 3
+        width: 47
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b383eee2e43ed1e80800000000000000
+      internalID: -8206153021064857541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Words_5
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 3
+        width: 67
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f2490dde7d880d20800000000000000
+      internalID: 3244999107534209782
       vertices: []
       indices: 
       edges: []
