@@ -6,7 +6,7 @@ using Mirror;
 
 public class TextEffecter : MonoBehaviour
 {
-    protected float lastHackTime = 0;
+    protected float lastHackTime = 3;
     public float hackTime = 13;
     public float hackDuration = 6;
 

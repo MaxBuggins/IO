@@ -224,7 +224,10 @@ public class MyNetworkManager : NetworkManager
     /// Called on client when transport raises an exception.</summary>
     /// </summary>
     /// <param name="exception">Exception thrown from the Transport.</param>
-    public override void OnClientError(Exception exception) { }
+    public override void OnClientError(Exception exception) 
+    { 
+
+    }
 
     #endregion
 
