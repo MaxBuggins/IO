@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Mirror;
 
 public class PlayerAboveInfo : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerAboveInfo : MonoBehaviour
 
 
     private void Start()
-    {
+    { 
         ChangeText(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.userName);
     }
 
@@ -33,6 +34,7 @@ public class PlayerAboveInfo : MonoBehaviour
     {
         textBox.color = colour; //God i hate american cOLoR, do they even eat fish?
     }
+
 
     public void ChangeColour(Color32 colour)
     {

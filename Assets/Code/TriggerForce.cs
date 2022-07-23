@@ -7,10 +7,14 @@ public class TriggerForce : NetworkBehaviour
 {
     public Vector3 force;
 
-    public bool localPlayerInTrigger;
+    public bool localPlayerInTrigger = false;
 
     //public List<Player> playersInTrigger = new List<Player>();
 
+    private void Start()
+    {
+        
+    }
 
     void FixedUpdate()
     {
@@ -32,28 +36,6 @@ public class TriggerForce : NetworkBehaviour
                 Player.localInstance.playerMovement.rb.velocity += addForce * Time.fixedDeltaTime;
             }
         }
-
-        /*
-        //Errors can occur here for some reason?
-        foreach (Player player in playersInTrigger)
-        {
-            Vector3 addForce = force;
-
-            if (player.health <= 0) //They are dead kick them out
-            {
-                playersInTrigger.Remove(player);
-
-            }
-            else
-            {
-                //so if you fall
-                if (player.playerMovement.velocity.y < 0)
-                    addForce.y += -player.playerMovement.velocity.y / 2;
-
-                player.TargetAddVelocity(player.connectionToClient, addForce * Time.fixedDeltaTime);
-            }
-        }
-        */
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,7 +43,6 @@ public class TriggerForce : NetworkBehaviour
         if(other.tag == "Player")
         {
             Player player = other.GetComponent<Player>();
-
 
             if(player == Player.localInstance)
             {
