@@ -89,7 +89,7 @@ public class MasterCheckPoint : NetworkBehaviour
             {
                 double newTime = player.checkPointTimes[player.checkPointTimes.Count - 1] - player.checkPointTimes[0];
 
-                if (newTime > player.bestTime)
+                if (newTime < player.bestTime)
                 {
                     player.bestTime = (float)newTime;
                 }
