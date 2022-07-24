@@ -47,7 +47,7 @@ public class NetworkFollowSpline : MonoBehaviour
         //having an rate offset variable to stay in range is a little silly, but it works fine
         rate = ((float)(NetworkTime.time + startOffset) / DurationInSecond) + rateOffset;
 
-        if (rate > spline.nodes.Count - 1)
+        while (rate > spline.nodes.Count - 1)
         {
             rateOffset -= spline.nodes.Count - 1;
             rate -= spline.nodes.Count - 1; //to fix this update only
