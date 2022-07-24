@@ -256,6 +256,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AboveName
       objectReference: {fileID: 0}
+    - target: {fileID: 2588224535745814499, guid: 0a6882014dffa2a4d806b52569424a91, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4147109384897804661, guid: 0a6882014dffa2a4d806b52569424a91, type: 3}
       propertyPath: m_text
       value: Error Eddy
