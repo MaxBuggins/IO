@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum SurfaceType { concreate, grass, dirt, metal, water, glass, gravel } // Music Generas
+public enum SurfaceType { concreate, grass, dirt, metal, glass, gravel } // Music Generas
 
 [System.Serializable]
 public class SurfaceMaterial // Thanks Internet man for idear (may you surf forever)

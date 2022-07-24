@@ -14,7 +14,7 @@ public class PlayerAnimator : MonoBehaviour
 
 
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private static readonly float maxCastDistance = 0.8f;
+    [SerializeField] private static readonly float maxCastDistance = 2f;
 
     [SerializeField] private SurfaceMaterialData _surfaceData = null;
 
@@ -213,7 +213,7 @@ public class PlayerAnimator : MonoBehaviour
 
     protected void OnFootstepTaken()
     {
-        Ray ray = new Ray(transform.position + (Vector3.up / 2), Vector3.down);
+        Ray ray = new Ray(transform.position + (Vector3.up * 1.5f), Vector3.down);
         SurfaceMaterial castResult = Cast(ray);
 
         feetAudioSource.pitch = Random.Range(0.5f, 1.5f);
