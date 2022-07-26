@@ -144,6 +144,7 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -161,7 +162,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.IO
+    Standalone: com.BUG.SurfIO
     iPhone: com.BUG.SurfIO
   buildNumber:
     Standalone: 0
@@ -370,7 +371,7 @@ PlayerSettings:
   cameraUsageDescription: I dont need it
   locationUsageDescription: I dont need it
   microphoneUsageDescription: I dont need it
-  bluetoothUsageDescription: 
+  bluetoothUsageDescription: I dont need it
   switchNMETAOverride: 
   switchNetLibKey: 
   switchSocketMemoryPoolSize: 6144
@@ -636,7 +637,7 @@ PlayerSettings:
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
-    Standalone: 0
+    Standalone: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
