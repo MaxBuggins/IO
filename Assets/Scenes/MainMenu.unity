@@ -2094,7 +2094,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dece419ffe1df7347a5ed014bbf3cbb3, type: 3}
---- !u!114 &4696278066835856539
+--- !u!1 &5060374560227907762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5443727475526106384}
+  - component: {fileID: 5060374560227907766}
+  - component: {fileID: 5060374560227907765}
+  - component: {fileID: 5060374560227907767}
+  - component: {fileID: 5060374560227907763}
+  m_Layer: 0
+  m_Name: NetworkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &5060374560227907763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2121,26 +2141,6 @@ MonoBehaviour:
   sslCertJson: ./cert.json
   sslProtocols: 3072
   _logLevels: 2
---- !u!1 &5060374560227907762
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5443727475526106384}
-  - component: {fileID: 5060374560227907766}
-  - component: {fileID: 4696278066835856539}
-  - component: {fileID: 5060374560227907765}
-  - component: {fileID: 5060374560227907767}
-  m_Layer: 0
-  m_Name: NetworkManager
-  m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!114 &5060374560227907765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2148,7 +2148,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5060374560227907762}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
   m_Name: 
@@ -2173,8 +2173,8 @@ MonoBehaviour:
   serverTickRate: 50
   offlineScene: Assets/Scenes/MainMenu.unity
   onlineScene: Assets/Scenes/SurfCity.unity
-  transport: {fileID: 4696278066835856539}
-  networkAddress: game.playsurf.com
+  transport: {fileID: 5060374560227907763}
+  networkAddress: playsurf.com
   maxConnections: 100
   authenticator: {fileID: 5060374560227907767}
   playerPrefab: {fileID: 449960936539232377, guid: edb246863ceef394ebb323de498e7e9c, type: 3}
