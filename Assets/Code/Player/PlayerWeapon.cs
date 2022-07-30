@@ -72,7 +72,7 @@ public class PlayerWeapon : NetworkBehaviour
 
 		GameObject spawned;
 
-		spawned = Instantiate(secondaryObject, transform.position + spawnOffset, Quaternion.identity, transform);
+		spawned = Instantiate(secondaryObject, secondaryObject.transform.position + transform.position + spawnOffset, Quaternion.identity, transform);
 
 		//applys damage multiplyer for gun
 		Hurtful hurtful = spawned.GetComponent<Hurtful>();

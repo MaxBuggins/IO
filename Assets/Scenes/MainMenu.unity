@@ -788,7 +788,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5060374560227907763}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Mirror.SimpleWeb.SimpleWebTransport, SimpleWebTransport
         m_MethodName: SetSSL
         m_Mode: 0
@@ -2629,11 +2629,11 @@ MonoBehaviour:
   clientMaxMessagesPerTick: 1000
   batchSend: 1
   waitBeforeSend: 0
-  clientUseWss: 1
-  sslEnabled: 1
+  clientUseWss: 0
+  sslEnabled: 0
   sslCertJson: ./cert.json
   sslProtocols: 3072
-  _logLevels: 2
+  _logLevels: 0
 --- !u!114 &5060374560227907765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2667,7 +2667,7 @@ MonoBehaviour:
   offlineScene: Assets/Scenes/MainMenu.unity
   onlineScene: Assets/Scenes/SurfCity.unity
   transport: {fileID: 5060374560227907763}
-  networkAddress: playsurf.com
+  networkAddress: playsurf.io
   maxConnections: 100
   authenticator: {fileID: 5060374560227907767}
   playerPrefab: {fileID: 449960936539232377, guid: edb246863ceef394ebb323de498e7e9c, type: 3}
