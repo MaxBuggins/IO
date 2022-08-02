@@ -88,8 +88,8 @@ namespace Mirror.SimpleWeb
 
         public void SetSSL(bool ssl)
         {
-            sslEnabled = ssl;
-            clientUseWss = ssl;
+            sslEnabled = !ssl;
+            clientUseWss = !ssl;
         }
 
         public override bool Available()

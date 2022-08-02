@@ -35,10 +35,8 @@ public class Projectile : Hurtful
     [Header("Projectile Refrences")]
     private NetworkTransform netTrans;
 
-    [Tooltip("Must be listed as spawnable in the NetManager")]
+    [Tooltip("Server Object for everyone - Must be listed as spawnable in the NetManager")]
     public GameObject hitNetworkObject;
-    [Tooltip("Decoration only for clients")]
-    public GameObject hitObject;
     [Tooltip("Decoration only for clients")]
     public GameObject hitDecal;
 
@@ -148,7 +146,7 @@ public class Projectile : Hurtful
                 //hurt.owner = hurtful.owner;
         }
 
-        DestroySelf();
+        DestroySelf(); //does not give client opertunity to instergate hit object
     }
 
     [Client]
@@ -157,8 +155,8 @@ public class Projectile : Hurtful
         if (hitDecal != null)
             Instantiate(hitDecal, hitPos, Quaternion.LookRotation(hitNormal));
 
-        if (hitObject != null)
-            Instantiate(hitObject, hitPos, transform.rotation);
+/*        if (hitObject != null)
+            Instantiate(hitObject, hitPos, transform.rotation);*/
 
         DestroySelf();
     }

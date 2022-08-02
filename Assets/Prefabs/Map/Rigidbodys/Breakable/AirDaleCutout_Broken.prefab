@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9897f3b24a72130408c1e62a84f702a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destoryDelay: 2.5
+  destoryDelay: 2.1
 --- !u!114 &7732917989092394099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endScale: {x: 1, y: 0, z: 0}
   delay: 0
-  duration: 2
+  duration: 1.8
   scaleCurve:
     serializedVersion: 2
     m_Curve:
@@ -244,15 +244,6 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 0.05
-      value: -0.1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
       value: -0.1
       inSlope: 0
       outSlope: 0

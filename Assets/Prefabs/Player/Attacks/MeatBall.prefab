@@ -87,7 +87,7 @@ MonoBehaviour:
   airRistance: 0.1
   hitNetworkObject: {fileID: 0}
   hitObject: {fileID: 3943665591929302773, guid: aa9578f99ede5714db10a396d279de49, type: 3}
-  hitDecal: {fileID: 0}
+  hitDecal: {fileID: 3943665591929302773, guid: aa9578f99ede5714db10a396d279de49, type: 3}
 --- !u!1 &1197490961304612807
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e782f20f9996c24eb5f613291948b30, type: 3}
   m_Name: ErrorLocalPlayer
   m_EditorClassIdentifier: 
-  userName: _7_eater
+  userName: NoNameNed
   primaryColour:
     serializedVersion: 2
-    rgba: 4283860422
+    rgba: 4280950964
   secondaryColour:
     serializedVersion: 2
     rgba: 16711935
@@ -23,9 +23,10 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 0
   killMessage: // I am ERROR \\
-  mouseSensativity: 14.636183
+  mouseSensativity: 15
   crosshairIndex: 2
   crosshairColour: {r: 1, g: 1, b: 1, a: 1}
-  showOwnHat: 0
+  showOwnHat: 1
   enableRbs: 1
+  thirdPerson: 0
   bounceCombine: 1
