@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SurfCity.unity
     guid: 6fceb73b9417e3f44be23df354efc909
+  - enabled: 1
+    path: Assets/Scenes/FourBlow.unity
+    guid: ae83c802bde3b1346ad715a6c402032e
   m_configObjects: {}

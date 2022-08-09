@@ -153,6 +153,7 @@ public class PlayerController : NetworkBehaviour
     }
 
     private void GroundAccelerate() {
+
         float addSpeed = groundLimit - Vector3.Dot(velocity, moveRelative);
 
         if (addSpeed <= 0)
@@ -224,8 +225,9 @@ public class PlayerController : NetworkBehaviour
         StartCoroutine(JumpTimer());
     }
 
-    private void ApplyGravity() {
-        velocity.y -= gravitY * Time.deltaTime;
+    private void ApplyGravity() 
+    {  
+        velocity -= (transform.up * gravitY) * Time.deltaTime;
     }
 
     [ClientCallback]
