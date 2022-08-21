@@ -4,7 +4,6 @@ using UnityEngine;
 using Mirror;
 
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : NetworkBehaviour
 {
     [Header("Movement Variables")]

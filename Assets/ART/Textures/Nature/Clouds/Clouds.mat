@@ -2,14 +2,15 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Clouds
   m_Shader: {fileID: -6465566751694194690, guid: 9e86a1273d3f48d4698c5c0a6df9972e, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -71,6 +72,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_09ea0db2cef5457d9745999d1ba1fe15_Out_0:
+        m_Texture: {fileID: 2800000, guid: 0745a5870fc6b4c4496bb2f7a1df40f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -83,6 +88,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Vector1_05c927c56b2a4a1cbdeaa014d32e9597: 1
     - Vector1_0bb4961fc2af42519ddd5fb8a91a05fb: 10
@@ -104,6 +110,7 @@ Material:
     - _AlphaClip: 1
     - _Blend: 0
     - _BumpScale: 1
+    - _Bumpyness: 0.1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -116,8 +123,10 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _NoiseScale: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -136,7 +145,7 @@ Material:
     - Vector2_33e7b7c563e447b7a09eb89de3073548: {r: 0, g: 1, b: 0, a: 0}
     - Vector2_a11550edd0084f8295aca6840226359e: {r: 0.2, g: 0.05, b: 0, a: 0}
     - Vector2_c44903edaf2743b3b8715e5ed4d1baa0: {r: -1, g: 1, b: 0, a: 0}
-    - Vector2_facbbb9dbb034aa18a32af546254cdce: {r: 6, g: 3, b: 0, a: 0}
+    - Vector2_facbbb9dbb034aa18a32af546254cdce: {r: 18, g: 18, b: 0, a: 0}
     - Vector2_fe1a3cd480b94b9ca4442b2ec249a0c8: {r: 0, g: 1, b: 0, a: 0}
     - Vector4_4b3d46d0f46b4abd9a461febbccb8ef8: {r: 1, g: 0, b: 0, a: 90}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
@@ -156,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 4
+  version: 5

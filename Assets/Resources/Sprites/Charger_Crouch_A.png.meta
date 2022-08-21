@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -340,6 +341,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Charger_Crouch_A_6: 5388367634127055956
+      Charger_Crouch_A_5: -690587364288272654
+      Charger_Crouch_A_7: 5552139326421573063
+      Charger_Crouch_A_4: 230325555888066155
+      Charger_Crouch_A_3: 7156287223608502504
+      Charger_Crouch_A_0: -8012617931183116947
+      Charger_Crouch_A_1: -8625937014968579642
+      Charger_Crouch_A_2: 5863494171821318453
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

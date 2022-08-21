@@ -42,6 +42,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -292,6 +293,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      SpinningPlanet_0: 8088565147814988675
+      SpinningPlanet_1: 6290848011222811203
+      SpinningPlanet_3: 7966149001965614351
+      SpinningPlanet_5: -6203216701215729104
+      SpinningPlanet_4: -2717634788178034813
+      SpinningPlanet_2: -6411340324639342101
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -24,6 +24,7 @@ public class ItemPickUp : NetworkBehaviour
     [Range(0,1)] public float healthPercentage; //relative to player max health
     public int score;
     public int hatIndex = -1; //-1 means no hat
+    public WeaponObject weaponObject; //null is none
 
 
     [Header("Internals")]
@@ -82,7 +83,8 @@ public class ItemPickUp : NetworkBehaviour
             if (player.health <= 0)
                 return;
 
-            player.Hurt((int)(-player.maxHealth * healthPercentage)); //makes player gain health (WACKY)
+            if(healthPercentage != 0)
+                player.Hurt((int)(-player.maxHealth * healthPercentage)); //makes player gain health (WACKY)
 
             player.bonusScore += score;
 
@@ -91,12 +93,19 @@ public class ItemPickUp : NetworkBehaviour
                 player.hatIndex = hatIndex;
             }
 
+            if(weaponObject != null)
+            {
+                ServerWeapon serverWeapon = player.GetComponent<ServerWeapon>();
+                serverWeapon.enabled = false;
+                serverWeapon.weaponObject = weaponObject;
+                serverWeapon.enabled = true;
+            }
+
             if (respawn)
             {
                 respawnTime = 0;
                 RpcSetItem(false);
             }
-
             else
             {
                 NetworkServer.Destroy(gameObject);

@@ -18,9 +18,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: -295
-    y: -190
+    y: -293
     width: 2474
-    height: 3116
+    height: 3219
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,7 +87,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.0,"y":7.0,"z":0.0}'
+      m_SerializableObject: '{"x":0.0,"y":0.0,"z":0.0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -101,7 +101,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":4.5,"y":14.0,"z":4.5}'
+      m_SerializableObject: '{"x":12.0,"y":2.0,"z":16.0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -115,7 +115,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: -1.5
+      m_SerializableObject: 0
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -143,7 +143,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":-0.20000000298023225,"y":12.0,"z":-0.20000000298023225}'
+      m_SerializableObject: '{"x":-10.0,"y":0.0,"z":-10.0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -157,7 +157,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.20000000298023225,"y":14.0,"z":0.20000000298023225}'
+      m_SerializableObject: '{"x":10.0,"y":0.0,"z":10.0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -288,7 +288,7 @@ MonoBehaviour:
     enumValues: []
     descendantCount: 0
   m_ImportDependencies: []
-  m_GraphVersion: 6
+  m_GraphVersion: 9
   m_ResourceVersion: 1
   m_SubgraphDependencies:
   - {fileID: 5371698748595113096, guid: f5171c8326dc02847ac9b7522fab7cdd, type: 3}
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661614556}
   - {fileID: 8926484042661615603}
-  m_UIPosition: {x: 941, y: -190}
+  m_UIPosition: {x: 941, y: -293}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -363,7 +363,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 8926484042661614555}
   m_Children: []
-  m_UIPosition: {x: 233.38269, y: 57.572144}
+  m_UIPosition: {x: 0, y: 2}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -423,7 +423,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615183}
   - {fileID: 8926484042661614676}
   - {fileID: 8926484042661615199}
-  m_UIPosition: {x: 941, y: 211}
+  m_UIPosition: {x: 941, y: 269}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -769,10 +769,12 @@ MonoBehaviour:
   - {fileID: 8926484042661614558}
   - {fileID: 8926484042661614583}
   dataType: 0
-  capacity: 32
+  capacity: 40
   stripCapacity: 16
   particlePerStripCount: 16
-  m_Space: 0
+  needsComputeBounds: 0
+  boundsMode: 1
+  m_Space: 1
 --- !u!114 &8926484042661614569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,7 +1163,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614853}
   - {fileID: 8926484042661614983}
   - {fileID: 8926484042661615103}
-  m_UIPosition: {x: 943, y: 1050}
+  m_UIPosition: {x: 943, y: 1065}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -1273,7 +1275,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":-0.20000000298023225,"y":12.0,"z":-0.20000000298023225}'
+      m_SerializableObject: '{"x":-10.0,"y":0.0,"z":-10.0}'
     m_Space: 2147483647
   m_Property:
     name: o
@@ -1455,7 +1457,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.20000000298023225,"y":14.0,"z":0.20000000298023225}'
+      m_SerializableObject: '{"x":10.0,"y":0.0,"z":10.0}'
     m_Space: 2147483647
   m_Property:
     name: o
@@ -1951,6 +1953,17 @@ MonoBehaviour:
     - {fileID: 8926484042661614687}
     - {fileID: 8926484042661614688}
     expanded: 1
+  - m_Id: 1
+    linkedSlots:
+    - outputSlot: {fileID: 8926484042661614689}
+      inputSlot: {fileID: 8926484042661615077}
+    - outputSlot: {fileID: 8926484042661614691}
+      inputSlot: {fileID: 8926484042661615079}
+    position: {x: -234.4, y: 1476.7999}
+    expandedSlots:
+    - {fileID: 8926484042661614687}
+    - {fileID: 8926484042661614688}
+    expanded: 1
 --- !u!114 &8926484042661614687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1978,7 +1991,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.AABox, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"center":{"x":0.0,"y":7.0,"z":0.0},"size":{"x":4.5,"y":14.0,"z":4.5}}'
+      m_SerializableObject: '{"center":{"x":0.0,"y":0.0,"z":0.0},"size":{"x":12.0,"y":2.0,"z":16.0}}'
     m_Space: 0
   m_Property:
     name: o
@@ -2058,6 +2071,7 @@ MonoBehaviour:
   m_Direction: 1
   m_LinkedSlots:
   - {fileID: 8926484042661614679}
+  - {fileID: 8926484042661615077}
 --- !u!114 &8926484042661614690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2125,6 +2139,7 @@ MonoBehaviour:
   m_Direction: 1
   m_LinkedSlots:
   - {fileID: 8926484042661614681}
+  - {fileID: 8926484042661615079}
 --- !u!114 &8926484042661614692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2276,7 +2291,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -2863,7 +2878,9 @@ MonoBehaviour:
   capacity: 600
   stripCapacity: 15
   particlePerStripCount: 40
-  m_Space: 0
+  needsComputeBounds: 0
+  boundsMode: 1
+  m_Space: 1
 --- !u!114 &8926484042661614819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2963,6 +2980,7 @@ MonoBehaviour:
   useAlphaClipping: 0
   generateMotionVector: 0
   excludeFromTAA: 0
+  sortingPriority: 0
   m_SubOutputs: []
   cullMode: 0
   zWriteMode: 0
@@ -2970,14 +2988,18 @@ MonoBehaviour:
   colorMapping: 0
   uvMode: 0
   useSoftParticle: 0
-  sortPriority: 0
+  vfxSystemSortPriority: 0
   sort: 0
   indirectDraw: 0
   computeCulling: 0
   frustumCulling: 0
   castShadows: 0
   useExposureWeight: 0
+  flipbookLayout: 0
   shaderGraph: {fileID: 0}
+  materialSettings:
+    m_PropertyNames: []
+    m_PropertyValues: []
   tilingMode: 0
   swapUV: 0
   UseCustomZAxis: 0
@@ -3266,7 +3288,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: -1.5
+      m_SerializableObject: 0
     m_Space: 2147483647
   m_Property:
     name: o
@@ -3301,7 +3323,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614995}
   - {fileID: 8926484042661615581}
   m_OutputSlots: []
-  m_Disabled: 0
+  m_Disabled: 1
   mode: 0
   radiusMode: 0
   roughSurface: 1
@@ -4552,7 +4574,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615078}
   - {fileID: 8926484042661615079}
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661615076}
   m_MasterData:
@@ -4602,7 +4624,8 @@ MonoBehaviour:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661614689}
 --- !u!114 &8926484042661615078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4668,7 +4691,8 @@ MonoBehaviour:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661614691}
 --- !u!114 &8926484042661615080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5332,7 +5356,7 @@ MonoBehaviour:
   m_InputSlots:
   - {fileID: 8926484042661615104}
   m_OutputSlots: []
-  m_Disabled: 0
+  m_Disabled: 1
   attribute: velocity
   Composition: 0
   Source: 0
@@ -6214,7 +6238,7 @@ MonoBehaviour:
         m_SerializableType: UnityEditor.VFX.Plane, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       m_SerializableObject: '{"position":{"x":0.0,"y":0.0,"z":0.0},"normal":{"x":0.0,"y":1.0,"z":0.0}}'
-    m_Space: 0
+    m_Space: 1
   m_Property:
     name: Vortex Plane
     m_serializedType:
@@ -6551,7 +6575,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: False
+      m_SerializableObject: True
     m_Space: 2147483647
   m_Property:
     name: System is World Space
@@ -6798,7 +6822,7 @@ MonoBehaviour:
   m_InputSlots:
   - {fileID: 8926484042661615583}
   m_OutputSlots: []
-  m_Disabled: 0
+  m_Disabled: 1
   attribute: position
   Composition: 0
   Source: 0
@@ -7154,7 +7178,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -7233,7 +7257,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 8926484042661614555}
   m_Children: []
-  m_UIPosition: {x: 0, y: 0}
+  m_UIPosition: {x: 0, y: 77}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -7462,7 +7486,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -7488,7 +7512,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615611}
       inputSlot: {fileID: 8926484042661615604}
-    position: {x: 760.8, y: 5.6000004}
+    position: {x: 760.8, y: -97.600006}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661615611
@@ -7610,7 +7634,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:

@@ -86,12 +86,6 @@ namespace Mirror.SimpleWeb
 
         TcpConfig TcpConfig => new TcpConfig(noDelay, sendTimeout, receiveTimeout);
 
-        public void SetSSL(bool ssl)
-        {
-            sslEnabled = !ssl;
-            clientUseWss = !ssl;
-        }
-
         public override bool Available()
         {
             return true;

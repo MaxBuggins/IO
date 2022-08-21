@@ -72,7 +72,8 @@ public class LevelManager : NetworkBehaviour
     {
         base.OnStartServer();
 
-        ServerChangeRace();
+        if(levelRaces.Length > 0)
+            ServerChangeRace();
     }
 
     private void Update()

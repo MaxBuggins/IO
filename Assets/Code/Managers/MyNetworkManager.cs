@@ -14,10 +14,25 @@ public class MyNetworkManager : NetworkManager
     // have to cast to this type everywhere.
     public static new MyNetworkManager singleton { get; private set; }
 
+    private int[] randomNums = new int[16] { 0, 4, 8, 12, 96, 30, 42, 8, 100, 23, 7, 7, 8, 98, 12, 77 };
+
     [Header("My Stuff")]
     public GameObject[] playerHats;
 
     private NetworkManagerHUD hud;
+
+
+    public float GetNetworkRandomValue()
+    {
+        int index = (int)NetworkTime.time * 4;
+
+        int indexOffset = index / randomNums.Length;
+
+        index -= (indexOffset * randomNums.Length);
+
+        float value = (randomNums[index] / 100);
+        return (value);
+    }
 
     #region Unity Callbacks
 

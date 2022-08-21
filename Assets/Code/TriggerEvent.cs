@@ -5,8 +5,10 @@ using UnityEngine.Events;
 
 public class TriggerEvent : MonoBehaviour
 {
+    public enum triggerObjectType { anything, player, localPlayer }
+
     [Header("Requirements")]
-    public bool localPlayerOnly;
+    public triggerObjectType triggerObject;
 
     [SerializeField]
     private UnityEvent onTriggerEnterEvent;
@@ -17,17 +19,37 @@ public class TriggerEvent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (localPlayerOnly && other.gameObject != Player.localInstance.gameObject)
-            return;
-
-        onTriggerEnterEvent.Invoke();
+        if (PassRequirements(other) == true)
+            onTriggerEnterEvent.Invoke();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (localPlayerOnly && other.gameObject != Player.localInstance.gameObject)
-            return;
+        if(PassRequirements(other) == true)
+            onTriggerExitEvent.Invoke();
+    }
 
-        onTriggerExitEvent.Invoke();
+    bool PassRequirements(Collider other)
+    {
+        switch (triggerObject)
+        {
+            case (triggerObjectType.player):
+                {
+                    if (other.GetComponent<Player>() == null)
+                        return (false);
+
+                    break;
+                }
+
+            case (triggerObjectType.localPlayer):
+                {
+                    if (other.gameObject != Player.localInstance.gameObject)
+                        return (false);
+
+                    break;
+                }
+        }
+
+        return (true);
     }
 }

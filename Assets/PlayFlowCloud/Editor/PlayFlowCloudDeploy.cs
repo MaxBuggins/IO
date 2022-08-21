@@ -252,19 +252,12 @@ public class PlayFlowCloud : EditorWindow
 
         }
         
-        if (GUILayout.Button("Reset PlayFlow Instance"))
-        {
-            reset_instance();
-        }
-        
         if (GUILayout.Button("Documentation"))
         {
             System.Diagnostics.Process.Start("https://docs.playflowcloud.com");
 
 
         }
-        
-        
         
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
@@ -325,32 +318,6 @@ public class PlayFlowCloud : EditorWindow
         }
         finally
         {
-            EditorUtility.ClearProgressBar();
-        }
-    }
-
-    private async void reset_instance()
-    {
-        EditorUtility.ClearProgressBar();
-        try
-        {
-            if (token == null || token == "")
-            {
-                playflow_logs = "Please provide a PlayFlow App Token to get started from https://app.playflowcloud.com";
-                return;
-            }
-            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Resetting PlayFlow Instance", 0.5f);
-            string response =  await PlayFlowAPI.ResetInstance(token);
-            playflow_logs = response;
-        }
-        catch (Exception e)
-        {
-            playflow_logs = "PlayFlow Start Server Failed! StackTrace: " + e.StackTrace;
-            EditorUtility.ClearProgressBar();
-        }
-        finally
-        {
-            await get_server_list();
             EditorUtility.ClearProgressBar();
         }
     }

@@ -21,12 +21,18 @@ public class Hurtful : NetworkBehaviour
     public float maxVelocity = -1;
 
     protected Vector3 lastPos;
+    protected Vector3 lastPos2; //this is beyond
 
     public Hurtable ignor;
 
+    private void Start()
+    {
+        lastPos = transform.position;
+    }
 
     protected void Update()
     {
+        lastPos2 = lastPos; //beyond templeOS level programming
         lastPos = transform.position;
     }
 
@@ -45,7 +51,7 @@ public class Hurtful : NetworkBehaviour
         {
             Vector3 vel;
             if (moveForce) //its a fix i guess
-                vel = (transform.position - lastPos) / Time.deltaTime;
+                vel = (transform.position - lastPos2) / Time.deltaTime;
             else
                 vel = (hurtable.transform.position - transform.position).normalized;
 

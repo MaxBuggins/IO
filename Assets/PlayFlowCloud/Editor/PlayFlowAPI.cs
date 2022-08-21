@@ -176,34 +176,6 @@ public class PlayFlowAPI
             return System.Text.Encoding.UTF8.GetString(await response.Content.ReadAsByteArrayAsync());
         }
     }
-    
-    public static async Task<string> ResetInstance(string token)
-    {
-        String output = "";
-        try
-        {
-            string actionUrl = API_URL + "reset_playflow_instance";
-            using (var client = new HttpClient())
-            using (var formData = new MultipartFormDataContent())
-            {
-                formData.Headers.Add("token", token);
-                formData.Headers.Add("version", version);
-                var response = await client.PostAsync(actionUrl, formData);
-                if (!response.IsSuccessStatusCode)
-                {
-                    Debug.Log(System.Text.Encoding.UTF8.GetString(await response.Content.ReadAsByteArrayAsync()));
-                }
-
-                output = System.Text.Encoding.UTF8.GetString(await response.Content.ReadAsByteArrayAsync());
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-        }
-
-        return output;
-    }
 
     public static string ssl_cleanup(string input)
     {

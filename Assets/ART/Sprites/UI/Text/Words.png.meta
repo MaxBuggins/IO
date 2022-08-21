@@ -69,6 +69,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -220,7 +221,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7c2c1e6b1f68fb4e0800000000000000
-      internalID: -1963702539796757817
+      internalID: -2096214663393848964
       vertices: []
       indices: 
       edges: []
@@ -241,7 +242,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: c71d17faedfb8e2e0800000000000000
-      internalID: -2096214663393848964
+      internalID: -8206153021064857541
       vertices: []
       indices: 
       edges: []
@@ -283,7 +284,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b383eee2e43ed1e80800000000000000
-      internalID: -8206153021064857541
+      internalID: -1963702539796757817
       vertices: []
       indices: 
       edges: []
@@ -508,6 +509,22 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Words_13: 2391445088453177094
+      Words_9: 3155227854623535023
+      Words_10: 6470850648655168448
+      Words_5: 3244999107534209782
+      Words_2: -2096214663393848964
+      Words_1: -5427448313768164191
+      Words_12: 5104999900922364974
+      Words_3: -1963702539796757817
+      Words_6: 9111187522439686525
+      Words_7: 3634632419617956432
+      Words_0: -5216769606859500917
+      Words_14: -6311074298438235943
+      Words_8: -3842656829050981326
+      Words_4: -8206153021064857541
+      Words_11: -8191989874048921072
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

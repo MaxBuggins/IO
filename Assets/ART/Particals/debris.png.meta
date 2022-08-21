@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -340,6 +341,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      debris_0: -5088017817694441252
+      debris_3: 4060900191535170952
+      debris_6: -1436228342886831569
+      debris_4: 898482385378584541
+      debris_1: 8119195620578088711
+      debris_7: -7759988620672419126
+      debris_2: 3087430288746227893
+      debris_5: -5169844490988317235
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

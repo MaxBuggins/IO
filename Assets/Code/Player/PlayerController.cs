@@ -46,7 +46,6 @@ public class PlayerController : NetworkBehaviour
 
     public Rigidbody rb;
     private Player player;
-    private PlayerWeapon playerWeapon;
     private Controls controls;
 
 
@@ -54,7 +53,6 @@ public class PlayerController : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
         player = GetComponent<Player>();
-        playerWeapon = GetComponent<PlayerWeapon>();
     }
 
     public override void OnStartLocalPlayer() //just for the local client
@@ -81,7 +79,6 @@ public class PlayerController : NetworkBehaviour
 
         enabled = true;
     }
-
 
 
     private void Update() 
@@ -274,12 +271,10 @@ public class PlayerController : NetworkBehaviour
         if (pause) 
         {
             controls.Play.Disable();
-            playerWeapon.controls.Disable();
         }
         else
         {
             controls.Play.Enable();
-            playerWeapon.controls.Enable();
         }
     }
 

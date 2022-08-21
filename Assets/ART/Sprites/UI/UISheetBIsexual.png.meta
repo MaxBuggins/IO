@@ -39,6 +39,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -268,6 +269,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      UISheetBIsexual_0: -5343608457300271313
+      UISheetBIsexual_4: 8901455792056824119
+      UISheetBIsexual_3: -5709555824425522411
+      UISheetBIsexual_2: -1438964858274499702
+      UISheetBIsexual_1: 8449155008241445580
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

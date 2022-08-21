@@ -25,7 +25,6 @@ public class PlayerAnimator : MonoBehaviour
     #region Cached Properties
 
     private int _currentState;
-
     private static readonly int idle = Animator.StringToHash("Idle");
     private static readonly int run = Animator.StringToHash("Run");
     private static readonly int fall = Animator.StringToHash("Fall");
@@ -62,6 +61,9 @@ public class PlayerAnimator : MonoBehaviour
     private Vector3 lastPos;
     private Vector3 lastMoveVector;
     private Vector3 moveVector;
+
+
+    public Transform rightHand;
 
     private Animator animator;
     private Player player;

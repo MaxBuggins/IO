@@ -14,11 +14,14 @@ namespace SplineMesh {
     [ExecuteInEditMode]
     [RequireComponent(typeof(Spline))]
     public class ExampleFollowSpline : MonoBehaviour {
-        private GameObject generated;
-        private Spline spline;
-        private float rate = 0;
+
+        public GameObject generated;
+        public Spline spline;
+        public float rate = 0;
 
         public GameObject Follower;
+        public bool spawnObject;
+
         public float DurationInSecond;
 
         private void OnEnable() {

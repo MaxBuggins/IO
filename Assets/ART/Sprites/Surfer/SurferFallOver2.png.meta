@@ -39,6 +39,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -268,6 +269,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      SurferFallOver2_3: -5040337165015546785
+      SurferFallOver2_0: 5673080252681979085
+      SurferFallOver2_2: -1868930871247406789
+      SurferFallOver2_4: -3517629334109494784
+      SurferFallOver2_1: -8263387737436177649
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

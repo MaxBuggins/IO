@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030b95f9b30c1b54f8e0d0ec258e5c67, type: 3}
+  m_Name: Wrench
+  m_EditorClassIdentifier: 
+  rareity: 1
+  primaryDelay: 0.32
+  primaryCooldown: 0.8
+  spawnPrimaryObject: {fileID: 6065844769810503946, guid: 86e03f078f0033646bba05d8638d39b0, type: 3}
+  standSpawnOffset: {x: 0, y: 1.4, z: 0.4}
+  crouchSpawnOffset: {x: 0, y: 0.5, z: 0.4}
+  firstPersonObject: {fileID: 8765737728374144285, guid: 1bc5faabd4409f14da04645bfabed09b, type: 3}
+  thirdPersonObject: {fileID: 509713723418902208, guid: 653f150ef0bb8884686e787a1571f4eb, type: 3}
