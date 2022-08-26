@@ -11,12 +11,15 @@ public class WeaponObject : ScriptableObject
 	public int rareity = 1; // 1 - 5
 	public WeaponType weaponType;
 
+	[Header("Primary")]
 	public float primaryDelay = 0.1f;
 	public float primaryCooldown = 0.2f;
 	public GameObject spawnPrimaryObject;
 
+	[Header("Secondary")]
 	public float secondaryDelay = 0;
 	public float secondaryCoolDown = 0;
+	public GameObject spawnSecondaryObject;
 
 	//Tooltips are for profesionals
 	[Tooltip("Spawn Position relative to the players position when standing")]
@@ -29,7 +32,6 @@ public class WeaponObject : ScriptableObject
 	[Tooltip("Closer to 0 the more accurate")]
 	[Range(0, 90)] public float accuracy = 0;
 	public int maxAmmo;
-
 
 
 	[Header("Refrences")]

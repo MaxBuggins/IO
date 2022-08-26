@@ -134,7 +134,6 @@ public class ServerWeapon : NetworkBehaviour
 		if (player.health <= 0)
 			return;
 
-
 		Vector3 spawnOffset;
 
 		if (player.crouching)
@@ -180,13 +179,16 @@ public class ServerWeapon : NetworkBehaviour
 
 		fpWeapon.onSecondary();
 
-		CmdSecondary(NetworkTime.time);
+		CmdSecondary(NetworkTime.time, PlayerCamera.localInstance.transform.position, PlayerCamera.localInstance.transform.eulerAngles);
 
 	}
 
 	[Command]
-	void CmdSecondary(double sentTime)
+	void CmdSecondary(double sentTime, Vector3 position, Vector3 rotation)
 	{
+		currentRotation = rotation;
+		currentPosition = position;
+
 		if (sentTime < timeSinceLastSecondary + weaponObject.secondaryCoolDown)
 			return;
 
@@ -208,7 +210,30 @@ public class ServerWeapon : NetworkBehaviour
 
 	void SecondaryAction()
     {
-		if (weaponObject.weaponType == WeaponType.shoot)
+		//dead players cant act
+		if (player.health <= 0)
+			return;
+
+		Vector3 spawnOffset;
+
+		if (player.crouching)
+			spawnOffset = weaponObject.crouchSpawnOffset;
+		else
+			spawnOffset = weaponObject.standSpawnOffset;
+
+		Vector3 worldOffset = transform.rotation * spawnOffset;
+		Vector2 cameraOffset = player.playerCamera.standCameraOffset;
+
+		worldOffset += new Vector3(cameraOffset.x, cameraOffset.y);
+
+		Vector3 fakeRotation = currentRotation;
+		fakeRotation.y = transform.rotation.eulerAngles.y;
+
+
+		if (weaponObject.weaponType == WeaponType.melee)
+			SpawnChildObject(weaponObject.spawnSecondaryObject, transform.position + worldOffset, fakeRotation);
+
+		else if (weaponObject.weaponType == WeaponType.shoot)
 			Reload();
 	}
 

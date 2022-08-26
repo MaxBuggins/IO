@@ -17,8 +17,12 @@ MonoBehaviour:
   primaryDelay: 0.42
   primaryCooldown: 1.2
   spawnPrimaryObject: {fileID: 8888910864741429007, guid: 940b6f37c782ffe4985fb73e4d728ab4, type: 3}
+  secondaryDelay: 0.5
+  secondaryCoolDown: 1.5
+  spawnSecondaryObject: {fileID: 1715496487338802109, guid: 06e8f710955b1cc4db193c1b45704e97, type: 3}
   standSpawnOffset: {x: 0, y: 1.4, z: 0.4}
   crouchSpawnOffset: {x: 0, y: 0.5, z: 0.4}
   accuracy: 0
+  maxAmmo: 0
   firstPersonObject: {fileID: 7511452126140294447, guid: 264bb75858397f64994f234e5fa1d24f, type: 3}
   thirdPersonObject: {fileID: 8651533899059719499, guid: b30f82decca07284086810032f69b73d, type: 3}
