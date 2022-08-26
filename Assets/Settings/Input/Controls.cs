@@ -91,7 +91,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Die"",
+                    ""name"": ""Suicide"",
                     ""type"": ""Button"",
                     ""id"": ""a2acd6d3-ef93-4d31-ae14-1649e95ded96"",
                     ""expectedControlType"": ""Button"",
@@ -366,7 +366,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Die"",
+                    ""action"": ""Suicide"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -377,7 +377,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Die"",
+                    ""action"": ""Suicide"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -599,7 +599,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Play_Primary = m_Play.FindAction("Primary", throwIfNotFound: true);
         m_Play_Secondary = m_Play.FindAction("Secondary", throwIfNotFound: true);
         m_Play_Jump = m_Play.FindAction("Jump", throwIfNotFound: true);
-        m_Play_Die = m_Play.FindAction("Die", throwIfNotFound: true);
+        m_Play_Suicide = m_Play.FindAction("Suicide", throwIfNotFound: true);
         m_Play_ShowScoreBoard = m_Play.FindAction("ShowScoreBoard", throwIfNotFound: true);
         m_Play_Callout = m_Play.FindAction("Callout", throwIfNotFound: true);
         m_Play_Interact = m_Play.FindAction("Interact", throwIfNotFound: true);
@@ -672,7 +672,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Play_Primary;
     private readonly InputAction m_Play_Secondary;
     private readonly InputAction m_Play_Jump;
-    private readonly InputAction m_Play_Die;
+    private readonly InputAction m_Play_Suicide;
     private readonly InputAction m_Play_ShowScoreBoard;
     private readonly InputAction m_Play_Callout;
     private readonly InputAction m_Play_Interact;
@@ -687,7 +687,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Primary => m_Wrapper.m_Play_Primary;
         public InputAction @Secondary => m_Wrapper.m_Play_Secondary;
         public InputAction @Jump => m_Wrapper.m_Play_Jump;
-        public InputAction @Die => m_Wrapper.m_Play_Die;
+        public InputAction @Suicide => m_Wrapper.m_Play_Suicide;
         public InputAction @ShowScoreBoard => m_Wrapper.m_Play_ShowScoreBoard;
         public InputAction @Callout => m_Wrapper.m_Play_Callout;
         public InputAction @Interact => m_Wrapper.m_Play_Interact;
@@ -721,9 +721,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnJump;
-                @Die.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
-                @Die.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
-                @Die.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnDie;
+                @Suicide.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnSuicide;
+                @Suicide.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnSuicide;
+                @Suicide.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnSuicide;
                 @ShowScoreBoard.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
                 @ShowScoreBoard.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
                 @ShowScoreBoard.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnShowScoreBoard;
@@ -758,9 +758,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Die.started += instance.OnDie;
-                @Die.performed += instance.OnDie;
-                @Die.canceled += instance.OnDie;
+                @Suicide.started += instance.OnSuicide;
+                @Suicide.performed += instance.OnSuicide;
+                @Suicide.canceled += instance.OnSuicide;
                 @ShowScoreBoard.started += instance.OnShowScoreBoard;
                 @ShowScoreBoard.performed += instance.OnShowScoreBoard;
                 @ShowScoreBoard.canceled += instance.OnShowScoreBoard;
@@ -816,7 +816,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnPrimary(InputAction.CallbackContext context);
         void OnSecondary(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnDie(InputAction.CallbackContext context);
+        void OnSuicide(InputAction.CallbackContext context);
         void OnShowScoreBoard(InputAction.CallbackContext context);
         void OnCallout(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);

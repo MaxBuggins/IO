@@ -7,17 +7,10 @@ public class HurtTrigger : Hurtful
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        var hurtable = other.GetComponent<Hurtable>();
+        if (hurtable != null)
         {
-            var player = other.GetComponent<Player>();
-            if (player != null)
-            {
-                //if (ignorOwner == false || player != owner)
-                //{
-                    HurtObject(player, damage, hurtType);
-                //}
-            }
-            return;
+            HurtObject(hurtable, damage, hurtType);
         }
     }
 }

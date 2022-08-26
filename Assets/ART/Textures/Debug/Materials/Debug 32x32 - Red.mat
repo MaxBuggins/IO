@@ -130,8 +130,8 @@ Material:
     - Color_8b41af6e33cc4319a6a5c4e1220e099a: {r: 1, g: 1, b: 1, a: 0.6117647}
     - Color_af7d49c74ee94c3da55c0b443056f361: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_4e31db3b2aa0454793f672ac09c62288: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.8}
-    - _Color: {r: 1, g: 1, b: 1, a: 0.8}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    - _Color: {r: 1, g: 1, b: 1, a: 0.5019608}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

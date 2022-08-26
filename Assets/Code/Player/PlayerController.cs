@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerController : NetworkBehaviour
 {
     private bool pause = false;
@@ -44,6 +46,7 @@ public class PlayerController : NetworkBehaviour
     private bool jumpPending = false;
     private bool ableToJump = true;
 
+    [HideInInspector] public PlayerInput playerInput;
     public Rigidbody rb;
     private Player player;
     private Controls controls;
@@ -51,6 +54,7 @@ public class PlayerController : NetworkBehaviour
 
     void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
         player = GetComponent<Player>();
     }
@@ -59,25 +63,20 @@ public class PlayerController : NetworkBehaviour
     {
         controls = new Controls();
 
-        controls.Menu.Pause.performed += funny => Pause();
-
         controls.Play.Move.performed += wasfunny => moveInput = wasfunny.ReadValue<Vector2>();
         controls.Play.Move.canceled += wasfunny => moveInput = Vector2.zero;
 
         controls.Play.Jump.performed += funnyer => jumpPending = true;
         controls.Play.Jump.canceled += funnyer => jumpPending = false;
 
-        controls.Play.Crouch.performed += funnyerer => Crouch();
-
-        controls.Play.Die.performed += FunnyDeath => Suicide();
-
         controls.Play.Callout.performed += moreFUNNY => player.CmdPlayAudioClip((int)moreFUNNY.ReadValue<float>());
 
-        controls.Play.ShowScoreBoard.performed += Funnyiest => ShowScoreboard();
+        controls.Menu.Pause.performed += funner => OnPause();
 
         controls.Enable();
 
         enabled = true;
+        playerInput.enabled = true;
     }
 
 
@@ -260,7 +259,7 @@ public class PlayerController : NetworkBehaviour
         ableToJump = true;
     }
 
-    public void Pause()
+    public void OnPause()
     {
         pause = !pause;
 
@@ -278,17 +277,17 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    public void Crouch()
+    public void OnCrouch()
     {
         Player.localInstance.CmdCrouch();
     }
 
-    public void Suicide() //13 11 14
+    public void OnSuicide() //13 11 14
     {
         Player.localInstance.CmdSelfHarm(Player.localInstance.health);
     }
 
-    public void ShowScoreboard()
+    public void OnShowScoreBoard()
     {
         UI_Main.instance.ShowScoreboard(!UI_Main.instance.scoreBoardUI.active);
     }

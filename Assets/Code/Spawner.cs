@@ -14,14 +14,12 @@ public class Spawner : MonoBehaviour
     public float spawnRadius = 0;
 
 
-    void Start()
+    void OnEnable()
     {
-        if (delay == 0)
+        if (delay < 0)
         {
             enabled = false;
         }
-
-
     }
 
     void Update()
@@ -32,14 +30,14 @@ public class Spawner : MonoBehaviour
         {
             timeSinceSpawn = 0;
             spawn();
-
-            if (once)
-                enabled = false;
         }
     }
 
     public void spawn()
     {
+        if (once)
+            enabled = false;
+
         for (int a = 0; a < spawnAmount; a++)
         {
             Vector3 spawnPos = transform.position + Random.insideUnitSphere * spawnRadius;

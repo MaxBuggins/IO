@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Die",
+                    "name": "Suicide",
                     "type": "Button",
                     "id": "a2acd6d3-ef93-4d31-ae14-1649e95ded96",
                     "expectedControlType": "Button",
@@ -344,7 +344,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Die",
+                    "action": "Suicide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -355,7 +355,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Die",
+                    "action": "Suicide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

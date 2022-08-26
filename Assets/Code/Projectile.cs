@@ -24,6 +24,7 @@ public class Projectile : Hurtful
     public float airRistance = 0.1f;
 
     [Header("Internals")]
+    public float timeSinceStart = 0;
     protected Vector3 orginPos;
     protected float distanceTraveld;
 
@@ -57,13 +58,15 @@ public class Projectile : Hurtful
 
     protected void Update()
     {
-        velocity.y += gravitY * Time.deltaTime;
-        Vector3 travel = ((Vector3.up * velocity.y) + (transform.forward * forwardSpeed)) * Time.deltaTime;
+        timeSinceStart += Time.deltaTime;
 
-        transform.position = transform.position + travel;
+        velocity.y = gravitY * timeSinceStart;
+        Vector3 travel = ((Vector3.up * velocity.y) + (transform.forward * forwardSpeed)) * timeSinceStart;
 
-        distanceTraveld += travel.magnitude;
-        forwardSpeed -= airRistance * Time.deltaTime;
+        transform.position = orginPos + travel;
+
+        distanceTraveld = travel.magnitude;
+        forwardSpeed -= airRistance * timeSinceStart;
 
         if (isServer) //Adian Smells of car fuel
             ServerCheckHit();
@@ -104,6 +107,8 @@ public class Projectile : Hurtful
                 HurtObject(hurtable, dmg, hurtType);
             }
 
+
+            print(hit.transform.name);
             ServerHit(hit.point, hit.normal);
         }
 

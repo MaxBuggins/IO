@@ -9,20 +9,26 @@ public enum WeaponType { none, melee, shoot }
 public class WeaponObject : ScriptableObject
 {
 	public int rareity = 1; // 1 - 5
+	public WeaponType weaponType;
 
 	public float primaryDelay = 0.1f;
 	public float primaryCooldown = 0.2f;
 	public GameObject spawnPrimaryObject;
 
+	public float secondaryDelay = 0;
+	public float secondaryCoolDown = 0;
+
+	//Tooltips are for profesionals
 	[Tooltip("Spawn Position relative to the players position when standing")]
 	public Vector3 standSpawnOffset;
 	[Tooltip("Spawn Position relative to the players position when crouching")]
 	public Vector3 crouchSpawnOffset;
 
 
-	//Tooltips are for profesionals
-	//[Tooltip("Closer to 0 the more accurate")]
-	//[Range(0, 90)] public float accuracy = 0;
+	[Header("Gun Stuff")]
+	[Tooltip("Closer to 0 the more accurate")]
+	[Range(0, 90)] public float accuracy = 0;
+	public int maxAmmo;
 
 
 

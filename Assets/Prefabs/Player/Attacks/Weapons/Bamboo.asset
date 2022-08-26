@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 030b95f9b30c1b54f8e0d0ec258e5c67, type: 3}
-  m_Name: Wrench
+  m_Name: Bamboo
   m_EditorClassIdentifier: 
-  rareity: 1
-  primaryDelay: 0.32
-  primaryCooldown: 0.8
-  spawnPrimaryObject: {fileID: 6065844769810503946, guid: 86e03f078f0033646bba05d8638d39b0, type: 3}
+  rareity: 2
+  weaponType: 1
+  primaryDelay: 0.42
+  primaryCooldown: 1.2
+  spawnPrimaryObject: {fileID: 8888910864741429007, guid: 940b6f37c782ffe4985fb73e4d728ab4, type: 3}
   standSpawnOffset: {x: 0, y: 1.4, z: 0.4}
   crouchSpawnOffset: {x: 0, y: 0.5, z: 0.4}
-  firstPersonObject: {fileID: 8765737728374144285, guid: 1bc5faabd4409f14da04645bfabed09b, type: 3}
-  thirdPersonObject: {fileID: 509713723418902208, guid: 653f150ef0bb8884686e787a1571f4eb, type: 3}
+  accuracy: 0
+  firstPersonObject: {fileID: 7511452126140294447, guid: 264bb75858397f64994f234e5fa1d24f, type: 3}
+  thirdPersonObject: {fileID: 8651533899059719499, guid: b30f82decca07284086810032f69b73d, type: 3}

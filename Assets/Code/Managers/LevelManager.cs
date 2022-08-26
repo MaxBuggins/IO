@@ -9,7 +9,7 @@ public class LevelManager : NetworkBehaviour
 
     [Header("Level Propertys")]
     public float respawnDelay = 1;
-    //public int[] spawnWeaponIDs; //all possible weapons that can be spawned with
+    public WeaponObject[] weapons; //all possible weapons that can be spawned with
 
     public AudioClip backgroundMusic;
 

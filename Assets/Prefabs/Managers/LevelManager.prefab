@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,6 +49,10 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   respawnDelay: 1
+  weapons:
+  - {fileID: 11400000, guid: b77d0ae4d98cbd24fa384154d81ba5cf, type: 2}
+  - {fileID: 11400000, guid: fe56561af0a409f43b90dbb8ead413cb, type: 2}
+  - {fileID: 11400000, guid: 5168e77b0f19b624685e7091976fa4b6, type: 2}
   backgroundMusic: {fileID: 8300000, guid: 8f56aa5f1bd6ba6449793f1d9c0776d7, type: 3}
   minSightHeight: -398
   levelRaces: []
@@ -55,6 +60,7 @@ MonoBehaviour:
   raceTimeRemaining: 0
   currentLevelRace: -1
   players: []
+  rbsParentObject: {fileID: 0}
 --- !u!82 &6912716922578377004
 AudioSource:
   m_ObjectHideFlags: 0

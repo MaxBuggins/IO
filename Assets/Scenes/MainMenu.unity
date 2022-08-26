@@ -1936,7 +1936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
   runInBackground: 1
-  autoStartServerBuild: 1
+  autoStartServerBuild: 0
   serverTickRate: 50
   offlineScene: Assets/Scenes/MainMenu.unity
   onlineScene: Assets/Scenes/FourBlow.unity
@@ -1951,12 +1951,11 @@ MonoBehaviour:
   - {fileID: 1197490961052816661, guid: 6d0fea7a00c6a654ebe24b49765893d9, type: 3}
   - {fileID: 6065844769810503946, guid: 86e03f078f0033646bba05d8638d39b0, type: 3}
   - {fileID: 4299215793386447566, guid: 923154c0d5beb58449d70112f7cbc09a, type: 3}
+  - {fileID: 6307708500910428109, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
   playerHats:
   - {fileID: 7891328731170891781, guid: 4a4fa75c6c23cf047af0b13949bf25d2, type: 3}
   - {fileID: 5137231935399928584, guid: b25715fbbb354ed43bbf4dbaadfe60f8, type: 3}
   - {fileID: 2616979179506411788, guid: 0415f3fd8679b2148a9c83e9eeba9aaa, type: 3}
-  - {fileID: 6307708500910428109, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
-  - {fileID: 5572497486745728900, guid: bf4d0b08b37cbcc45b7da16c06831a98, type: 3}
 --- !u!114 &5060374560227907767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2016,7 +2015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0110f245bfcfc7d459681f7bd9ebc590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: 48563
+  port: 7778
   maxMessageSize: 16384
   handshakeMaxSize: 3000
   noDelay: 1
@@ -2026,8 +2025,8 @@ MonoBehaviour:
   clientMaxMessagesPerTick: 1000
   batchSend: 1
   waitBeforeSend: 0
-  clientUseWss: 1
-  sslEnabled: 1
+  clientUseWss: 0
+  sslEnabled: 0
   sslCertJson: ./cert.json
   sslProtocols: 3072
   _logLevels: 2

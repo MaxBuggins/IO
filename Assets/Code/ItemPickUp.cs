@@ -24,10 +24,11 @@ public class ItemPickUp : NetworkBehaviour
     [Range(0,1)] public float healthPercentage; //relative to player max health
     public int score;
     public int hatIndex = -1; //-1 means no hat
-    public WeaponObject weaponObject; //null is none
+    public int weaponIndex = -1; //-1 is none
 
 
     [Header("Internals")]
+    public GameObject renderObject;
     private Renderer render;
     private Collider trigger;
 
@@ -93,12 +94,10 @@ public class ItemPickUp : NetworkBehaviour
                 player.hatIndex = hatIndex;
             }
 
-            if(weaponObject != null)
+            if(weaponIndex > -1)
             {
                 ServerWeapon serverWeapon = player.GetComponent<ServerWeapon>();
-                serverWeapon.enabled = false;
-                serverWeapon.weaponObject = weaponObject;
-                serverWeapon.enabled = true;
+                serverWeapon.weaponIndex = weaponIndex;
             }
 
             if (respawn)
@@ -116,7 +115,12 @@ public class ItemPickUp : NetworkBehaviour
     [ClientRpc]
     void RpcSetItem(bool active)
     {
-        render.enabled = active;
+        if (render == null)
+            renderObject.SetActive(active);
+        else
+            render.enabled = active;
+
+
         trigger.enabled = active;
 
         isActive = active;

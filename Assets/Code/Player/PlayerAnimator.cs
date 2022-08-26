@@ -157,7 +157,6 @@ public class PlayerAnimator : MonoBehaviour
             }
             clipLoudness /= sampleDataLength; //clipLoudness is what you are looking for
 
-            print(clipLoudness);
             ChangeFace(clipLoudness);
         }
     }
