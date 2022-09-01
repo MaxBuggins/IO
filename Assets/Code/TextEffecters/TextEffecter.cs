@@ -25,6 +25,9 @@ public class TextEffecter : MonoBehaviour
 
     protected bool CheckHack()
     {
+        if (hackDuration <= 0)
+            return (false);
+
         if (LevelManager.instance.players.Count == 0) //unfortantally there is a few frames before player is added
             return (false);
 

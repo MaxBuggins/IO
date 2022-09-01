@@ -25,8 +25,6 @@ public class VendingMachine : Hurtable
 
     public override void OnHurt(int damage)
     {
-        health = maxHealth;
-
         Tween.LocalScale(transform, endScale, duration, 0, hitAnimationCurve, completeCallback: ResetScale);
 
         int count = (int)Random.Range(canSpawnCountRange.x, canSpawnCountRange.y);
@@ -47,6 +45,13 @@ public class VendingMachine : Hurtable
     void ResetScale()
     {
         Tween.LocalScale(transform, startScale, duration / 2, 0, hitAnimationCurve);
+    }
+
+    public override void OnDeath()
+    {
+        //not Killable
+        health = maxHealth;
+        OnHurt(10);
     }
 
 }

@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rareity: 2
   weaponType: 2
-  primaryDelay: 0.1
+  primaryDelay: 0.12
   primaryCooldown: 0
   spawnPrimaryObject: {fileID: 6307708500910428109, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
+  primarySpawnCount: 1
   secondaryDelay: 0.6
   secondaryCoolDown: 0.6
+  spawnSecondaryObject: {fileID: 0}
   standSpawnOffset: {x: 0, y: -0.1, z: 0.4}
-  crouchSpawnOffset: {x: 0, y: -0.1, z: 0.4}
-  accuracy: 10
+  crouchSpawnOffset: {x: 0, y: -1.1, z: 0.4}
+  accuracy: 7
   maxAmmo: 5
   firstPersonObject: {fileID: 5053062323977844996, guid: caa3c105304c78b4f893625fd2e7b797, type: 3}
   thirdPersonObject: {fileID: 3181670801411333727, guid: dc943f4095f9f9e4091f7a94ae8ae8ac, type: 3}

@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b77d0ae4d98cbd24fa384154d81ba5cf, type: 2}
   - {fileID: 11400000, guid: fe56561af0a409f43b90dbb8ead413cb, type: 2}
   - {fileID: 11400000, guid: 5168e77b0f19b624685e7091976fa4b6, type: 2}
+  - {fileID: 11400000, guid: c2b06b5af9efd9340a77b32377f8371f, type: 2}
   backgroundMusic: {fileID: 8300000, guid: 8f56aa5f1bd6ba6449793f1d9c0776d7, type: 3}
   minSightHeight: -398
   levelRaces: []

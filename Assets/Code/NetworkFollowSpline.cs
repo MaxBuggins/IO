@@ -13,6 +13,8 @@ public class NetworkFollowSpline : MonoBehaviour
     public bool allowGenertation = true;
 
     public GameObject Follower;
+
+    public bool reverse = false;
     public float DurationInSecond;
     public float startOffset = 0;
 
@@ -50,14 +52,36 @@ public class NetworkFollowSpline : MonoBehaviour
 
     void Update()
     {
-        //having an rate offset variable to stay in range is a little silly, but it works fine
-        rate = ((float)(NetworkTime.time + startOffset) / DurationInSecond) + rateOffset;
+        //it will crash if 0
+        if (DurationInSecond == 0)
+            return;
 
-        while (rate > spline.nodes.Count - 1)
+        if (DurationInSecond < 0)
         {
-            rateOffset -= spline.nodes.Count - 1;
-            rate -= spline.nodes.Count - 1; //to fix this update only
+            //having an rate offset variable to stay in range is a little silly, but it works fine
+            rate = ((float)(-NetworkTime.time + startOffset) / Mathf.Abs(DurationInSecond)) + rateOffset;
+
+            int temp = 0;
+            while (rate < 0 && temp < 100)
+            {
+                rateOffset += spline.nodes.Count - 1;
+                rate += spline.nodes.Count - 1; //to fix this update only
+                temp += 1;             
+            }
         }
+
+        else
+        {
+            //having an rate offset variable to stay in range is a little silly, but it works fine
+            rate = ((float)(NetworkTime.time + startOffset) / DurationInSecond) + rateOffset;
+
+            while (rate > spline.nodes.Count - 1)
+            {
+                rateOffset -= spline.nodes.Count - 1;
+                rate -= spline.nodes.Count - 1; //to fix this update only
+            }
+        }
+
         PlaceFollower();
     }
 

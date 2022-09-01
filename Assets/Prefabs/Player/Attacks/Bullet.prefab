@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  damage: 20
+  damage: 25
   hurtType: 0
   destoryOnHurt: 1
   moveForce: 1
@@ -214,10 +214,10 @@ MonoBehaviour:
   upwardsForce: 0
   maxVelocity: -1
   ignor: {fileID: 0}
-  startDmgFallOff: 20
-  minDmgMultiplyer: 0.25
+  startDmgFallOff: 15
+  minDmgMultiplyer: 0.3
   destroyDelay: 5
-  projectileWidth: 0.1
+  projectileWidth: 0.2
   serverMask:
     serializedVersion: 2
     m_Bits: 9
@@ -225,8 +225,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 73
   forwardSpeed: 60
-  gravitY: 0
-  airRistance: 0
+  gravitY: -2
+  airRistance: 0.1
   timeSinceStart: 0
   hitNetworkObject: {fileID: 0}
   hitDecal: {fileID: 3943665591929302773, guid: aa9578f99ede5714db10a396d279de49, type: 3}

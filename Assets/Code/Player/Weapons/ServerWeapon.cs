@@ -65,6 +65,14 @@ public class ServerWeapon : NetworkBehaviour
 
 				if(childMeshRenderer != null)
 					childMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+
+				foreach (Transform child2 in child)
+				{
+					MeshRenderer childMeshRenderer2 = child2.GetComponent<MeshRenderer>();
+
+					if (childMeshRenderer2 != null)
+						childMeshRenderer2.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+				}
 			}
 
 			fpWeaponObject = Instantiate(weaponObject.firstPersonObject, player.playerCamera.transform.GetChild(0));
@@ -153,7 +161,10 @@ public class ServerWeapon : NetworkBehaviour
 			SpawnChildObject(weaponObject.spawnPrimaryObject, transform.position + worldOffset, fakeRotation);
 
 		if (weaponObject.weaponType == WeaponType.shoot)
-			ShootProjectile(weaponObject.spawnPrimaryObject, transform.position + worldOffset, fakeRotation, weaponObject.accuracy);
+		{
+			for(int i = 0; i < weaponObject.primarySpawnCount; i++)
+				ShootProjectile(weaponObject.spawnPrimaryObject, transform.position + worldOffset, fakeRotation, weaponObject.accuracy);
+		}
 	}
 
 

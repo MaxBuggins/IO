@@ -108,7 +108,6 @@ public class Projectile : Hurtful
             }
 
 
-            print(hit.transform.name);
             ServerHit(hit.point, hit.normal);
         }
 
