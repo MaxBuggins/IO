@@ -7,7 +7,6 @@ using System;
 using System.Linq;
 
 
-
 public class PlayFlowCloud : EditorWindow
 {
     private static PlayFlowConfig data;
@@ -18,6 +17,10 @@ public class PlayFlowCloud : EditorWindow
     private string serverArguments = "";
     private string token = "";
     private string ssl = "";
+
+    private string instanceType = "small";
+    private int instanceIndex = 0;
+
     private int selected_server = 0;
     private bool devmode = false;
 
@@ -26,17 +29,48 @@ public class PlayFlowCloud : EditorWindow
     private string playflow_logs = "PlayFlow Logs: ";
 
     public List<string> active_servers = new List<string>();
-    
+
     public string[] regionOptions = new string[]
         {"North America", "Europe", "Southeast Asia | Oceanic", "East Asia"};
 
     private string[] regions = new string[] {"us-east", "eu-west", "sea", "ea"};
+
+
+    public string[] defaultregionOptions = new string[]
+        {"North America", "Europe", "Southeast Asia | Oceanic", "East Asia"};
+
+    private string[] defaultregions = new string[] {"us-east", "eu-west", "sea", "ea"};
+
+    public string[] productionRegionOptions = new string[]
+    {
+        "North America East (North Virginia)", "North America West (California)", "North America West (Oregon)", "Europe (Stockholm)",
+        "Europe (France)", "South Asia (Mumbai)", "South East Asia (Singapore)", "East Asia (Korea)",
+        "East Asia (Japan)", "Australia (Sydney)"
+    };
+    
+
+    private string[] productionRegions = new string[]
+        {"us-east", "us-west", "us-west-2", "eu-north", "eu-west", "ap-south", "sea", "ea", "ap-north", "ap-southeast"};
+
+    
     public int index = 0;
     private string region = "us-east";
+    
+    
 
     private string path = "";
 
     private static Texture banner = null;
+
+    private bool isProductionToken = false;
+    
+    
+    Dictionary<string, string> instance_types = new Dictionary<string, string>
+    {
+        { "small", "Small - 2 VCPU 1GB RAM" },
+        { "medium", "Medium - 2 VCPU 2GB RAM" },
+        { "large", "Large - 2 VCPU 4GB RAM"},
+    };
 
 
     Vector2 scroll;
@@ -74,7 +108,6 @@ public class PlayFlowCloud : EditorWindow
     {
         //Show existing window instance. If one doesn't exist, make one.
         EditorWindow.GetWindow(typeof(PlayFlowCloud));
-        
     }
 
     private static GUISkin _uiStyle;
@@ -89,8 +122,7 @@ public class PlayFlowCloud : EditorWindow
             return _uiStyle;
         }
     }
-    
-    
+
 
     private static GUISkin GetUiStyle()
     {
@@ -102,6 +134,7 @@ public class PlayFlowCloud : EditorWindow
             var loadPath = eachPath.Substring(eachPath.LastIndexOf("Assets"));
             return (GUISkin) AssetDatabase.LoadAssetAtPath(loadPath, typeof(GUISkin));
         }
+
         return null;
     }
 
@@ -113,17 +146,43 @@ public class PlayFlowCloud : EditorWindow
         port = serializedObject.FindProperty("playflowUrl").stringValue;
         ssl = serializedObject.FindProperty("enableSSL").boolValue.ToString();
         index = serializedObject.FindProperty("serverLocation").intValue;
-        region = regions[index];
-    }
- 
-    void OnGUI()
-    {
 
-        if (banner == null)
+        try
         {
-            banner = (Texture)AssetDatabase.LoadAssetAtPath("Assets/PlayFlowCloud/Resources/playflow.png", typeof(Texture));
+            instanceIndex = serializedObject.FindProperty("instanceIndex").intValue;
+        }
+        catch
+        {
+            instanceIndex = 0;
         }
 
+        try
+        {
+            region = regions[index];
+        }
+        catch
+        {
+            index = 0;
+            region = regions[index];
+        }
+    }
+
+    void OnGUI()
+    {
+        if (banner == null)
+        {
+            banner = (Texture) AssetDatabase.LoadAssetAtPath("Assets/PlayFlowCloud/Resources/playflow.png",
+                typeof(Texture));
+        }
+
+        if (token.Length > 60)
+        {
+            isProductionToken = true;
+        }
+        else
+        {
+            isProductionToken = false;
+        }
 
         var serializedObject = new SerializedObject(data);
         // fetches the values of the real instance into the serialized one
@@ -133,6 +192,8 @@ public class PlayFlowCloud : EditorWindow
         var configport = serializedObject.FindProperty("playflowUrl");
         var configenableSSL = serializedObject.FindProperty("enableSSL");
         var configapiUrl = serializedObject.FindProperty("serverLocation");
+        var configinstanceType = serializedObject.FindProperty("instanceIndex");
+
 
 
         scroll = EditorGUILayout.BeginScrollView(scroll);
@@ -145,70 +206,92 @@ public class PlayFlowCloud : EditorWindow
         //     "Use the PlayFlow Server Port number as your game's port for both the clients and server",
         //     uiStyle.GetStyle("labelsmall"));
 
-                
 
-        
         configtoken.stringValue =
             EditorGUILayout.TextField("PlayFlow App Token", configtoken.stringValue, uiStyle.textField);
-        
 
-        
+
         configserverArguments.stringValue = EditorGUILayout.TextField("Arguments (optional)",
             configserverArguments.stringValue, uiStyle.textField);
 
-        
+        EditorGUILayout.BeginHorizontal();
+
         configenableSSL.boolValue = EditorGUILayout.Toggle("Enable SSL", configenableSSL.boolValue);
+
+
+        if (ssl.Equals(true.ToString()) && isProductionToken)
+        {
+            configport.stringValue =
+                EditorGUILayout.TextField("Server Port", configport.stringValue, uiStyle.textField);
+        }
+
+        if (isProductionToken)
+        {
+            regionOptions = productionRegionOptions;
+            regions = productionRegions;
+        }
+        else
+        {
+            regionOptions = defaultregionOptions;
+            regions = defaultregions;
+        }
+
+        EditorGUILayout.EndHorizontal();
+
         devmode = EditorGUILayout.Toggle("Development Build", devmode);
 
 
-        
         getGlobalValues();
-        
+
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Server Location (Free Plan)", uiStyle.GetStyle("labelsmall"));
         index = EditorGUILayout.Popup(configapiUrl.intValue, regionOptions);
         configapiUrl.intValue = index;
         EditorGUILayout.EndHorizontal();
-        
 
 
+        if (isProductionToken)
+        {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Instance Type", uiStyle.GetStyle("labelsmall"));
+            instanceIndex = EditorGUILayout.Popup(configinstanceType.intValue, instance_types.Values.ToArray());
+            configinstanceType.intValue = instanceIndex;
+            instanceType = instance_types.Keys.ToList()[instanceIndex]; 
+            EditorGUILayout.EndHorizontal();
+        }
 
         EditorGUILayout.BeginHorizontal();
-        
+
         if (GUILayout.Button("Get Active Servers"))
         {
             getservers();
-
         }
 
-        
-        
         if (GUILayout.Button("Upload Server"))
         {
             BuildAndZip();
             GUIUtility.ExitGUI();
-
         }
+
+        if (GUILayout.Button("Upload Status"))
+        {
+            get_upload_status();
+        }
+
 
         // if (GUILayout.Button("Upload Server Zip"))
         // {
-        //     upload_files_directly();
+        //     // upload_files_directly();
+        //     Debug.Log(EditorUserBuildSettings.activeBuildTarget);
         // }
-        
+
         if (GUILayout.Button("Start Server"))
         {
             start_server();
-
         }
-        
- 
 
- 
         EditorGUILayout.EndHorizontal();
-
-
         EditorGUILayout.BeginHorizontal();
-        
 
 
         EditorGUILayout.BeginVertical();
@@ -216,58 +299,85 @@ public class PlayFlowCloud : EditorWindow
         selected_server = EditorGUILayout.Popup(selected_server, active_servers.ToArray());
         EditorGUILayout.EndVertical();
 
-   
-   
+
+        if (GUILayout.Button("Get Server Status"))
+        {
+            get_status();
+        }
 
 
         if (GUILayout.Button("Restart Server"))
         {
             restart_server();
-
         }
 
 
         if (GUILayout.Button("Stop Server"))
         {
             stop_server();
-
         }
 
 
         if (GUILayout.Button("Get Logs"))
         {
             get_logs();
-
         }
-        
-   
 
         EditorGUILayout.EndHorizontal();
-        
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Get PlayFlow Token"))
         {
             System.Diagnostics.Process.Start("https://app.playflowcloud.com");
-
-
         }
-        
+
+        if (GUILayout.Button("Reset PlayFlow Instance"))
+        {
+            reset_instance();
+        }
+
         if (GUILayout.Button("Documentation"))
         {
             System.Diagnostics.Process.Start("https://docs.playflowcloud.com");
-
-
         }
-        
+
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.TextArea(playflow_logs, uiStyle.textArea);
         EditorGUILayout.EndHorizontal();
-        
-
-
         EditorGUILayout.EndScrollView();
         serializedObject.ApplyModifiedProperties();
+    }
+
+    private async void get_status()
+    {
+        EditorUtility.ClearProgressBar();
+        try
+        {
+            if (token == null || token == "")
+            {
+                playflow_logs = "Please provide a PlayFlow App Token to get started from https://app.playflowcloud.com";
+                return;
+            }
+
+            if (!active_servers.Any())
+            {
+                playflow_logs = "No server selected";
+                return;
+            }
+
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Getting Server Info", 0.75f);
+            string response = await PlayFlowAPI.GetServerStatus(token, active_servers[selected_server]);
+            setPlayFlowLogs(response);
+        }
+        catch (Exception e)
+        {
+            playflow_logs = "PlayFlow Restart Failed! StackTrace: " + e.StackTrace;
+            EditorUtility.ClearProgressBar();
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+        }
     }
 
     public void OnInspectorUpdate()
@@ -277,6 +387,11 @@ public class PlayFlowCloud : EditorWindow
 
     private void BuildAndZip()
     {
+        BuildTarget standaloneTarget = EditorUserBuildSettings.selectedStandaloneTarget;
+        BuildTargetGroup currentBuildTargetGroup = BuildPipeline.GetBuildTargetGroup(standaloneTarget);
+#if UNITY_2021_2_OR_NEWER
+        StandaloneBuildSubtarget currentSubTarget = EditorUserBuildSettings.standaloneBuildSubtarget;
+#endif
         try
         {
             if (token == null || token == "")
@@ -285,20 +400,27 @@ public class PlayFlowCloud : EditorWindow
                 return;
             }
 
+
             PlayFlowBuilder.BuildServer(devmode);
             EditorUtility.DisplayProgressBar("PlayFlowCloud", "Zipping Files", 0.4f);
             string zipFile = PlayFlowBuilder.ZipServerBuild();
-            
+
             string directoryToZip = Path.GetDirectoryName(defaultPath);
-            string targetfile = Path.Combine(directoryToZip, @".." + Path.DirectorySeparatorChar +  "Server.zip");
+            string targetfile = Path.Combine(directoryToZip, @".." + Path.DirectorySeparatorChar + "Server.zip");
             EditorUtility.DisplayProgressBar("PlayFlowCloud", "Uploading Files", 0.75f);
             playflow_logs = PlayFlowAPI.Upload(targetfile, token, region);
-            
+
+
             //PlayFlowBuilder.cleanUp(zipFile);
         }
         finally
         {
             EditorUtility.ClearProgressBar();
+            EditorUserBuildSettings.SwitchActiveBuildTarget(currentBuildTargetGroup, standaloneTarget);
+#if UNITY_2021_2_OR_NEWER
+
+            EditorUserBuildSettings.standaloneBuildSubtarget = currentSubTarget;
+#endif
         }
     }
 
@@ -309,7 +431,6 @@ public class PlayFlowCloud : EditorWindow
             path = EditorUtility.OpenFilePanel("Select Server", "", "zip");
             EditorUtility.DisplayProgressBar("PlayFlowCloud", "Uploading Files", 0.75f);
             playflow_logs = PlayFlowAPI.Upload(path, token, region);
-                 
         }
         catch (Exception e)
         {
@@ -321,7 +442,61 @@ public class PlayFlowCloud : EditorWindow
             EditorUtility.ClearProgressBar();
         }
     }
-    
+
+    private async void get_upload_status()
+    {
+        EditorUtility.ClearProgressBar();
+        try
+        {
+            if (token == null || token == "")
+            {
+                playflow_logs = "Please provide a PlayFlow App Token to get started from https://app.playflowcloud.com";
+                return;
+            }
+
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Resetting PlayFlow Instance", 0.5f);
+            string response = await PlayFlowAPI.Get_Upload_Version(token);
+            Debug.Log(response);
+            setPlayFlowLogs(response);
+            Debug.Log(playflow_logs);
+        }
+        catch (Exception e)
+        {
+            playflow_logs = "PlayFlow Cloud Failed! StackTrace: " + e.StackTrace;
+            EditorUtility.ClearProgressBar();
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+        }
+    }
+
+    private async void reset_instance()
+    {
+        EditorUtility.ClearProgressBar();
+        try
+        {
+            if (token == null || token == "")
+            {
+                playflow_logs = "Please provide a PlayFlow App Token to get started from https://app.playflowcloud.com";
+                return;
+            }
+
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Resetting PlayFlow Instance", 0.5f);
+            string response = await PlayFlowAPI.ResetInstance(token);
+            setPlayFlowLogs(response);
+        }
+        catch (Exception e)
+        {
+            playflow_logs = "PlayFlow Reset Server Failed! StackTrace: " + e.StackTrace;
+            EditorUtility.ClearProgressBar();
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+        }
+    }
+
     private async void start_server()
     {
         EditorUtility.ClearProgressBar();
@@ -334,12 +509,12 @@ public class PlayFlowCloud : EditorWindow
                 playflow_logs = "Please provide a PlayFlow App Token to get started from https://app.playflowcloud.com";
                 return;
             }
+
             EditorUtility.DisplayProgressBar("PlayFlowCloud", "Starting Server", 0.75f);
-            string response =  await PlayFlowAPI.StartServer(token, region, serverArguments, ssl);
-            playflow_logs = response;
+            string response = await PlayFlowAPI.StartServer(token, region, serverArguments, ssl, port, instanceType);
+            setPlayFlowLogs(response);
 
             matchInfo = JsonUtility.FromJson<MatchInfo>(response);
-
         }
         catch (Exception e)
         {
@@ -356,16 +531,20 @@ public class PlayFlowCloud : EditorWindow
 
                 if (matchInfo.ssl_port != null)
                 {
-                   match = matchInfo.match_id + " -> (SSL) " + matchInfo.ssl_port;
+                    match = matchInfo.match_id + " -> (SSL) " + matchInfo.ssl_port;
                 }
-                
+
                 selected_server = active_servers.IndexOf(match);
             }
-            
+
             EditorUtility.ClearProgressBar();
         }
     }
 
+    private void setPlayFlowLogs(string json)
+    {
+        playflow_logs = json;
+    }
 
 
     private async void restart_server()
@@ -386,7 +565,9 @@ public class PlayFlowCloud : EditorWindow
             }
 
             EditorUtility.DisplayProgressBar("PlayFlowCloud", "Restarting Server", 0.75f);
-            playflow_logs = await PlayFlowAPI.RestartServer(token, region, serverArguments, ssl, active_servers[selected_server]);
+            string response =
+                await PlayFlowAPI.RestartServer(token, region, serverArguments, ssl, active_servers[selected_server]);
+            setPlayFlowLogs(response);
         }
         catch (Exception e)
         {
@@ -395,11 +576,11 @@ public class PlayFlowCloud : EditorWindow
         }
         finally
         {
-           
             EditorUtility.ClearProgressBar();
         }
     }
-    
+
+
     private async void stop_server()
     {
         EditorUtility.ClearProgressBar();
@@ -410,11 +591,13 @@ public class PlayFlowCloud : EditorWindow
                 playflow_logs = "Please provide a PlayFlow App Token to get started from https://app.playflowcloud.com";
                 return;
             }
+
             if (!active_servers.Any())
             {
                 playflow_logs = "No server selected";
                 return;
             }
+
             EditorUtility.DisplayProgressBar("PlayFlowCloud", "Stopping Server", 0.75f);
             playflow_logs = await PlayFlowAPI.StopServer(token, region, active_servers[selected_server]);
         }
@@ -429,7 +612,7 @@ public class PlayFlowCloud : EditorWindow
             EditorUtility.ClearProgressBar();
         }
     }
-    
+
     private async void get_logs()
     {
         EditorUtility.ClearProgressBar();
@@ -440,15 +623,16 @@ public class PlayFlowCloud : EditorWindow
                 playflow_logs = "Please provide a PlayFlow App Token to get started from https://app.playflowcloud.com";
                 return;
             }
+
             if (!active_servers.Any())
             {
                 playflow_logs = "No server selected";
                 return;
             }
-            
+
             EditorUtility.DisplayProgressBar("PlayFlowCloud", "Getting Server Logs", 0.75f);
             playflow_logs = await PlayFlowAPI.GetServerLogs(token, region, active_servers[selected_server]);
-            string[] split = playflow_logs.Split(new[] { "\\n" }, StringSplitOptions.None);
+            string[] split = playflow_logs.Split(new[] {"\\n"}, StringSplitOptions.None);
             playflow_logs = "";
             foreach (string s in split)
                 playflow_logs += s + "\n";
@@ -460,7 +644,6 @@ public class PlayFlowCloud : EditorWindow
         }
         finally
         {
-            
             EditorUtility.ClearProgressBar();
         }
     }
@@ -476,24 +659,21 @@ public class PlayFlowCloud : EditorWindow
                 playflow_logs = "Please provide a PlayFlow App Token to get started from https://app.playflowcloud.com";
                 return;
             }
-            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Getting Active Servers", 0.75f);
 
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Getting Active Servers", 0.75f);
             await get_server_list();
-            playflow_logs = "Updated Active Servers";
         }
         catch (Exception e)
         {
             playflow_logs = "PlayFlow Build & Publish Failed! StackTrace: " + e.StackTrace;
             EditorUtility.ClearProgressBar();
-
         }
         finally
         {
             EditorUtility.ClearProgressBar();
         }
-        
     }
-    
+
     private async Task get_server_list()
     {
         try
@@ -503,8 +683,9 @@ public class PlayFlowCloud : EditorWindow
                 playflow_logs = "Please provide a PlayFlow App Token to get started from https://app.playflowcloud.com";
                 return;
             }
+
             EditorUtility.DisplayProgressBar("PlayFlowCloud", "Updating Servers Info", 0.75f);
-            string response = await PlayFlowAPI.GetActiveServers(token, region);
+            string response = await PlayFlowAPI.GetActiveServers(token, region, true);
             Server[] servers = JsonHelper.FromJson<Server>(response);
             active_servers = new List<string>();
             foreach (Server server in servers)
@@ -518,8 +699,10 @@ public class PlayFlowCloud : EditorWindow
 
                 active_servers.Add(serverInfo);
             }
+
             active_servers.Sort();
-            selected_server =  active_servers.Count - 1;
+            selected_server = active_servers.Count - 1;
+            setPlayFlowLogs(response);
         }
         catch (Exception e)
         {

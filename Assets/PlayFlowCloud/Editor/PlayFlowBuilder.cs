@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using ICSharpCode.SharpZipLib.Zip;
@@ -16,45 +17,64 @@ public class PlayFlowBuilder
                                        Path.DirectorySeparatorChar + "Server.x86_64";
     public static void BuildServer(bool devmode)
     {
-        List<string> scenes = new List<string>();
-        foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
-        {
-            if (scene.enabled)
-            {
-                scenes.Add(scene.path);
-            }
-        }
 
-        BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-        buildPlayerOptions.scenes = scenes.ToArray();
-        buildPlayerOptions.locationPathName = defaultPath;
-        buildPlayerOptions.target = BuildTarget.StandaloneLinux64;
-
-    #if UNITY_2021_2_OR_NEWER
-        if (Application.unityVersion.CompareTo(("2021.2")) >= 0)
+        try
         {
-            buildPlayerOptions.subtarget = (int) StandaloneBuildSubtarget.Server;
-            if (devmode)
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Build Linux Server", 0.25f);
+            List<string> scenes = new List<string>();
+            foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
             {
-                buildPlayerOptions.options = BuildOptions.CompressWithLz4HC | BuildOptions.Development;
+                if (scene.enabled)
+                {
+                    scenes.Add(scene.path);
+                }
             }
-            else
+
+            BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
+            buildPlayerOptions.scenes = scenes.ToArray();
+            buildPlayerOptions.locationPathName = defaultPath;
+            buildPlayerOptions.target = BuildTarget.StandaloneLinux64;
+
+#if UNITY_2021_2_OR_NEWER
+            if (Application.unityVersion.CompareTo(("2021.2")) >= 0)
             {
-                buildPlayerOptions.options = BuildOptions.CompressWithLz4HC;
+                EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone,
+                    BuildTarget.StandaloneLinux64);
+                EditorUserBuildSettings.standaloneBuildSubtarget = StandaloneBuildSubtarget.Server;
+                buildPlayerOptions.subtarget = (int) StandaloneBuildSubtarget.Server;
+                if (devmode)
+                {
+                    buildPlayerOptions.options = BuildOptions.CompressWithLz4HC | BuildOptions.Development;
+                }
+                else
+                {
+                    buildPlayerOptions.options = BuildOptions.CompressWithLz4HC;
+                }
             }
-        }
-    #else
+#else
         buildPlayerOptions.options = BuildOptions.CompressWithLz4HC | BuildOptions.EnableHeadlessMode;
         
         if (devmode)
         {
-            buildPlayerOptions.options = BuildOptions.CompressWithLz4HC | BuildOptions.Development | BuildOptions.EnableHeadlessMode;
+            buildPlayerOptions.options =
+ BuildOptions.CompressWithLz4HC | BuildOptions.Development | BuildOptions.EnableHeadlessMode;
         }
-        
-    #endif
-        
-        
-        BuildPipeline.BuildPlayer(buildPlayerOptions);
+
+#endif
+
+
+            BuildPipeline.BuildPlayer(buildPlayerOptions);
+        }
+
+        catch (Exception e)
+        {
+            Debug.Log(e.StackTrace);
+        }
+
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+        }
     }
 
     public static string ZipServerBuild()

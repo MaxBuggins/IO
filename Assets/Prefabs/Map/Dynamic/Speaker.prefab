@@ -196,8 +196,9 @@ MonoBehaviour:
   audioClips:
   - {fileID: 8300000, guid: 23fcc657e60c099418a9d140e99bd106, type: 3}
   - {fileID: 8300000, guid: 6cc09fdc648cfeb40b78d965c971adfe, type: 3}
+  - {fileID: 8300000, guid: 77e709151aef7a54cafd4596ebb34ad4, type: 3}
   delayOffset: 5
-  frequency: 25
+  frequency: 50
   maxScale: {x: 1.3, y: 1.3, z: 1.1}
   duration: 0.25
   animationCurve:
