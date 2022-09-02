@@ -76,7 +76,7 @@ MonoBehaviour:
   healthPercentage: 0
   score: 0
   hatIndex: -1
-  weaponIndex: -1
+  weaponIndex: 0
   renderObject: {fileID: 5995725472056600033}
 --- !u!136 &3218234944956998122
 CapsuleCollider:
