@@ -124,12 +124,19 @@ public class Projectile : Hurtful
             clientMask, QueryTriggerInteraction.Ignore))
         {
             Rigidbody hitRb = hit.collider.gameObject.GetComponentInParent<Rigidbody>();
+            Hurtable hurtable = hit.collider.gameObject.GetComponentInParent<Hurtable>();
 
-            if (hitRb != null)
+            if (hurtable != null)
+            {
+                if (hurtable == ignor)
+                    return;
+            }
+            else if (hitRb != null)
             {
                 Vector3 vel = (transform.position - lastPos) / Time.deltaTime;
                 hitRb.AddForceAtPosition(vel * collisionForce, hit.point, ForceMode.Impulse);
             }
+
 
             ClientHit(hit.point, hit.normal);
         }
