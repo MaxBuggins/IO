@@ -36,8 +36,16 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6307708500910428082, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
+      propertyPath: maxVelocity
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307708500910428082, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
       propertyPath: destroyDelay
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307708500910428082, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
+      propertyPath: collisionForce
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6307708500910428082, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
       propertyPath: projectileWidth
