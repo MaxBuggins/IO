@@ -44,7 +44,7 @@ public class PlayerCamera : MonoBehaviour
 
 
     [Header("Unity Things")]
-    public PlayerController movement;
+    private PlayerController movement;
     private Controls controls;
 
 
@@ -93,21 +93,19 @@ public class PlayerCamera : MonoBehaviour
 
                 if (player != null)
                 {
-                    //lets not repeat whats been done
-                    if (currentPlayerAboveInfo != player.playerAbove)
+                    if (player != Player.localInstance)
                     {
-                        if (currentPlayerAboveInfo != null)
-                            currentPlayerAboveInfo.gameObject.SetActive(false);
-
                         currentPlayerAboveInfo = player.playerAbove;
                         currentPlayerAboveInfo.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        ClearAbovePlayerSelection(); //This is beyond stpid
                     }
                 }
                 else
                 {
                     ClearAbovePlayerSelection(); //is/this
-
- 
                 }
             }
             else

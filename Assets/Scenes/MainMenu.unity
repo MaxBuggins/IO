@@ -1946,7 +1946,7 @@ MonoBehaviour:
   authenticator: {fileID: 5060374560227907767}
   playerPrefab: {fileID: 449960936539232377, guid: edb246863ceef394ebb323de498e7e9c, type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 1
+  playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 1197490961052816661, guid: 6d0fea7a00c6a654ebe24b49765893d9, type: 3}
   - {fileID: 6065844769810503946, guid: 86e03f078f0033646bba05d8638d39b0, type: 3}

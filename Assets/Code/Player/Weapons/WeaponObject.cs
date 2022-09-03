@@ -16,6 +16,7 @@ public class WeaponObject : ScriptableObject
 	public float primaryCooldown = 0.2f;
 	public GameObject spawnPrimaryObject;
 	public int primarySpawnCount = 1;
+	public Vector3 primaryForce;
 
 	[Header("Secondary")]
 	public float secondaryDelay = 0;

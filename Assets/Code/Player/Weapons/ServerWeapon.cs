@@ -149,13 +149,22 @@ public class ServerWeapon : NetworkBehaviour
 		else
 			spawnOffset = weaponObject.standSpawnOffset;
 
-		Vector3 worldOffset = transform.rotation * spawnOffset;
+		Vector3 fakeRotation = currentRotation;
+		fakeRotation.y = transform.rotation.eulerAngles.y;
+
+		Vector3 worldOffset = Quaternion.Euler(fakeRotation) * spawnOffset;
 		Vector2 cameraOffset = player.playerCamera.standCameraOffset;
 
 		worldOffset += new Vector3(cameraOffset.x, cameraOffset.y);
 
-		Vector3 fakeRotation = currentRotation;
-		fakeRotation.y = transform.rotation.eulerAngles.y;
+		if (weaponObject.primaryForce.magnitude != 0)
+		{
+			Vector3 relativeForce = Quaternion.Euler(fakeRotation) * weaponObject.primaryForce;
+
+			player.TargetAddVelocity(player.connectionToClient, relativeForce);
+		}
+
+
 
 		if (weaponObject.weaponType == WeaponType.melee)
 			SpawnChildObject(weaponObject.spawnPrimaryObject, transform.position + worldOffset, fakeRotation);

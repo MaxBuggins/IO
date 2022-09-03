@@ -17,7 +17,7 @@ MonoBehaviour:
     technique: 2
     maxDrawDistance: 300
     dBufferSettings:
-      surfaceData: 2
+      surfaceData: 0
     screenSpaceSettings:
       normalBlend: 0
       useGBuffer: 0

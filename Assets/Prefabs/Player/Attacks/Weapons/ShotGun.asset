@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rareity: 3
   weaponType: 2
-  primaryDelay: 0.14
+  primaryDelay: 0.15
   primaryCooldown: 0.1
   spawnPrimaryObject: {fileID: 5991925690411241500, guid: aaa568d813a4be046bf57b686310b631, type: 3}
   primarySpawnCount: 5
+  primaryForce: {x: 0, y: 0, z: -10}
   secondaryDelay: 1.1
   secondaryCoolDown: 0.8
   spawnSecondaryObject: {fileID: 0}
