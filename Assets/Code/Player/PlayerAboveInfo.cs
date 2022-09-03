@@ -9,12 +9,6 @@ public class PlayerAboveInfo : MonoBehaviour
 
     public TextMeshPro textBox;
 
-
-    private void Start()
-    { 
-        ChangeText(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.userName);
-    }
-
     public void ChangeText(string name)
     {
         textBox.text = name;

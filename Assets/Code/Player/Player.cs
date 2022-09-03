@@ -100,6 +100,7 @@ public class Player : Hurtable
 
     public override void OnStartClient()
     {
+        playerAbove.ChangeText(userName, bestTime);
         OnCrouch(crouching, crouching);
         base.OnStartClient();
     }
@@ -187,7 +188,7 @@ public class Player : Hurtable
     public void OnNameChanged(string oldName, string newName)
     {
         UI_Main.instance.UIUpdate();
-        playerAbove.ChangeText(newName, bestTime);
+        playerAbove.ChangeText(userName, bestTime);
     }
 
     public void OnColourChanged(Color32 oldColor, Color32 newColor)
