@@ -40,6 +40,7 @@ public class Projectile : Hurtful
     public GameObject hitNetworkObject;
     [Tooltip("Decoration only for clients")]
     public GameObject hitDecal;
+    public GameObject hitHurtableDecal;
 
 
     // Server and Clients must run
@@ -140,7 +141,7 @@ public class Projectile : Hurtful
             }
 
 
-            ClientHit(hit.point, hit.normal);
+            ClientHit(hit.point, hit.normal, hurtable);
         }
     }
 
@@ -163,13 +164,14 @@ public class Projectile : Hurtful
     }
 
     [Client]
-    void ClientHit(Vector3 hitPos, Vector3 hitNormal)
+    void ClientHit(Vector3 hitPos, Vector3 hitNormal, Hurtable hurtable)
     {
-        if (hitDecal != null)
+        if (hurtable != null && hitHurtableDecal != null)
+            Instantiate(hitHurtableDecal, hitPos, Quaternion.LookRotation(hitNormal));
+    
+        else if (hitDecal != null)
             Instantiate(hitDecal, hitPos, Quaternion.LookRotation(hitNormal));
 
-/*        if (hitObject != null)
-            Instantiate(hitObject, hitPos, transform.rotation);*/
 
         DestroySelf();
     }

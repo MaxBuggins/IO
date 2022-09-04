@@ -230,6 +230,7 @@ MonoBehaviour:
   timeSinceStart: 0
   hitNetworkObject: {fileID: 0}
   hitDecal: {fileID: 3943665591929302773, guid: aa9578f99ede5714db10a396d279de49, type: 3}
+  hitHurtableDecal: {fileID: 7984094168329706430, guid: 1037919d93738ff4daf75e8bff62da30, type: 3}
 --- !u!1 &6307708501162226975
 GameObject:
   m_ObjectHideFlags: 0

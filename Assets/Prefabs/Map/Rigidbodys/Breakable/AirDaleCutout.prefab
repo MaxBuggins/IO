@@ -132,8 +132,8 @@ MonoBehaviour:
   syncInterval: 0.1
   maxHealth: 50
   health: 50
-  endScaleMax: {x: 1.1, y: 1.6, z: 1.7}
-  endScaleMin: {x: 0.9, y: 2.4, z: 1.3}
+  endScaleMax: {x: 1.1, y: 1.6, z: 1.6}
+  endScaleMin: {x: 0.9, y: 2.4, z: 1.4}
   duration: 0.15
   hitAnimationCurve:
     serializedVersion: 2

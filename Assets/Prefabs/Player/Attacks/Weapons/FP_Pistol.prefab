@@ -463,8 +463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249c200c89124914aaf9be52ac919213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  once: 1
-  delay: 0
+  once: 0
+  delay: -1
   toSpawn: {fileID: 282067849631746471, guid: 7d0d3cedab22eb547a3968d63838c4d0, type: 3}
   spawnAmount: 1
   spawnRadius: 0
@@ -585,3 +585,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplyer: 1
   fxObject: {fileID: 0}
+  ammoSpawner: {fileID: 568432562368126227}

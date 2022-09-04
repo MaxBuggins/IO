@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     public bool once;
 
     private float timeSinceSpawn = 0;
-    public float delay;
+    public float delay; //if -1 dont
 
     public GameObject toSpawn;
     public int spawnAmount = 1;
@@ -18,6 +18,7 @@ public class Spawner : MonoBehaviour
     {
         if (delay < 0)
         {
+            spawn();
             enabled = false;
         }
     }
@@ -36,7 +37,7 @@ public class Spawner : MonoBehaviour
     public void spawn()
     {
         if (once)
-            enabled = false;
+            once = false;
 
         for (int a = 0; a < spawnAmount; a++)
         {

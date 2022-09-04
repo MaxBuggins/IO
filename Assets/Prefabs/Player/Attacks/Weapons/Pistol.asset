@@ -25,7 +25,7 @@ MonoBehaviour:
   spawnSecondaryObject: {fileID: 0}
   standSpawnOffset: {x: 0, y: -0.1, z: 0.4}
   crouchSpawnOffset: {x: 0, y: -1.1, z: 0.4}
-  accuracy: 0
+  accuracy: 4
   maxAmmo: 5
   firstPersonObject: {fileID: 5053062323977844996, guid: caa3c105304c78b4f893625fd2e7b797, type: 3}
   thirdPersonObject: {fileID: 3181670801411333727, guid: dc943f4095f9f9e4091f7a94ae8ae8ac, type: 3}

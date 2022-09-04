@@ -9,6 +9,7 @@ public class FP_Weapon : MonoBehaviour
 
     private Animator animator;
     public GameObject fxObject;
+    public Spawner ammoSpawner;
 
     void Start()
     {
@@ -25,5 +26,11 @@ public class FP_Weapon : MonoBehaviour
     public void onSecondary()
     {
         animator.SetTrigger("Secondary");
+    }
+
+    public void onReleaseAmmo()
+    {
+        ammoSpawner.enabled = true;
+        ammoSpawner.once = true;
     }
 }
