@@ -92,7 +92,7 @@ public class PlayerController : NetworkBehaviour
         if (!onGround)
             player.timeSinceGrounded += Time.fixedDeltaTime;
         else
-            player.timeSinceGrounded -= Time.deltaTime;
+            player.timeSinceGrounded -= Time.fixedDeltaTime;
 
 
         if (transform.position.y < LevelManager.instance.minSightHeight)
@@ -234,12 +234,14 @@ public class PlayerController : NetworkBehaviour
 
         groundMaterial = other.collider.material;
 
+        onGround = false;
+
         // Check if any of the contacts has acceptable floor angle
         foreach (ContactPoint contact in other.contacts)
         {
             if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI / 2f))
             {
-                if (other.relativeVelocity.magnitude > 1 && player.timeSinceGrounded > 1f)
+                if (player.timeSinceGrounded > 1f)
                 {
                     player.playerAnimator.OnHardLanding();
                 }

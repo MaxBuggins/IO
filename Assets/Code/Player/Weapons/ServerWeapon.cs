@@ -27,6 +27,8 @@ public class ServerWeapon : NetworkBehaviour
 
 	[SyncVar][SerializeField] private int ammoRemaining;
 
+	private bool primaryHeld = false;
+
 	private GameObject fpWeaponObject;
 	private GameObject thirdPersonObject;
 	private FP_Weapon fpWeapon;
@@ -38,7 +40,15 @@ public class ServerWeapon : NetworkBehaviour
 		player = GetComponent<Player>();
 	}
 
-	public void OnWeaponChanged(int oldWeapon, int newWeapon)
+
+	[ClientCallback]
+    private void Update()
+    {
+		if (primaryHeld && weaponObject.canHoldPrimary)
+			DoPrimary();
+    }
+
+    public void OnWeaponChanged(int oldWeapon, int newWeapon)
 	{
 		weaponObject = LevelManager.instance.weapons[newWeapon];
 
@@ -54,6 +64,8 @@ public class ServerWeapon : NetworkBehaviour
 
 		if (isLocalPlayer)
 		{
+			enabled = true;
+
 			//THIS IS ASS CODE DO NOT ACCEPT ASS CODE I AM LAZY
 			MeshRenderer meshRenderer = thirdPersonObject.GetComponent<MeshRenderer>();
 			if (meshRenderer != null)
@@ -81,8 +93,16 @@ public class ServerWeapon : NetworkBehaviour
 
 	}
 
-    #region primary
-    public void OnPrimary()
+	#region primary
+	public void OnPrimary()
+	{
+		primaryHeld = !primaryHeld;
+
+		if (primaryHeld)
+			DoPrimary();
+	}
+
+	void DoPrimary()
 	{
 		if (weaponIndex < 0)
 			return;

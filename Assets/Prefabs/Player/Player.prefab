@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 4374120624178119424}
   - component: {fileID: 3833172793736275218}
   - component: {fileID: 7207056391034352282}
-  - component: {fileID: 1069070423729124205}
   - component: {fileID: 3953753756436405815}
   m_Layer: 3
   m_Name: Player
@@ -224,24 +223,6 @@ MonoBehaviour:
   weaponIndex: -1
   weaponObject: {fileID: 0}
   ammoRemaining: 0
---- !u!143 &1069070423729124205
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449960936539232377}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3953753756436405815
 MonoBehaviour:
   m_ObjectHideFlags: 0

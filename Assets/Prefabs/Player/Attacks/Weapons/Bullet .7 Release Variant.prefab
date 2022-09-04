@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet .7 Release Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 200382658574743953, guid: b2d1f0dbda191454f9c596837e901e9a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1804427401443442258, guid: b2d1f0dbda191454f9c596837e901e9a, type: 3}
       propertyPath: m_RootOrder
       value: 0

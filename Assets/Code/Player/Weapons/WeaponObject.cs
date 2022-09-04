@@ -12,6 +12,7 @@ public class WeaponObject : ScriptableObject
 	public WeaponType weaponType;
 
 	[Header("Primary")]
+	public bool canHoldPrimary = true;
 	public float primaryDelay = 0.1f;
 	public float primaryCooldown = 0.2f;
 	public GameObject spawnPrimaryObject;

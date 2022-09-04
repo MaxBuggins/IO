@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rareity: 3
   weaponType: 2
+  canHoldPrimary: 1
   primaryDelay: 0.15
-  primaryCooldown: 0.1
+  primaryCooldown: 0.2
   spawnPrimaryObject: {fileID: 5991925690411241500, guid: aaa568d813a4be046bf57b686310b631, type: 3}
   primarySpawnCount: 5
   primaryForce: {x: 0, y: 0, z: -10}
@@ -24,7 +25,7 @@ MonoBehaviour:
   spawnSecondaryObject: {fileID: 0}
   standSpawnOffset: {x: 0, y: -0.1, z: 0.4}
   crouchSpawnOffset: {x: 0, y: -1.1, z: 0.4}
-  accuracy: 25
+  accuracy: 0
   maxAmmo: 2
   firstPersonObject: {fileID: 8854295928716714716, guid: 5cc1798776f01484a9b9ad08261b0cf3, type: 3}
   thirdPersonObject: {fileID: 7162661912730180099, guid: 44b02f0e97b8c464f8b0d972fd030136, type: 3}

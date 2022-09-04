@@ -109,6 +109,8 @@ public class Projectile : Hurtful
 
 
             ServerHit(hit.point, hit.normal);
+
+            print(hit.transform.name);
         }
 
         if (isServerOnly == false)
