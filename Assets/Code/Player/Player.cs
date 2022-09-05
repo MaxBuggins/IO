@@ -38,7 +38,7 @@ public class Player : Hurtable
     [HideInInspector] public MasterCheckPoint currentRace;
     public readonly SyncList<double> checkPointTimes = new SyncList<double>();
 
-    [SyncVar(hook = nameof(OnCrouch))]
+    [SyncVar(hook = nameof(DoCrouch))]
     public bool crouching = false;
 
     #region localStats
@@ -101,7 +101,7 @@ public class Player : Hurtable
     public override void OnStartClient()
     {
         playerAbove.ChangeText(userName, bestTime);
-        OnCrouch(crouching, crouching);
+        DoCrouch(crouching, crouching);
         base.OnStartClient();
     }
 
@@ -153,7 +153,7 @@ public class Player : Hurtable
         crouching = !crouching;
     }
 
-    public void OnCrouch(bool _Old, bool _New)
+    public void DoCrouch(bool _Old, bool _New)
     {
         //playerAnimator.OnCrouch(_New);
 

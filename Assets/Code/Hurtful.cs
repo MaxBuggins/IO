@@ -14,6 +14,8 @@ public class Hurtful : NetworkBehaviour
 
     public bool destoryOnHurt = false;
 
+    public AudioClip hitSound;
+
     [Header("Force")]
     public bool moveForce = true; //if false then force is caculated via distance from collider center
     public float collisionForce = 0;
@@ -60,6 +62,14 @@ public class Hurtful : NetworkBehaviour
 
             if(hurtable.connectionToClient != null)
                 hurtable.TargetAddVelocity(hurtable.connectionToClient, (vel * collisionForce) + (vel.magnitude * Vector3.up * upwardsForce));
+        }
+
+        if (hitSound != null)
+        {
+            if (ignor == Player.localInstance)
+                UnityExtensions.PlayAudioAt(hitSound, hurtable.transform.position, 1, 0);
+            else
+                UnityExtensions.PlayAudioAt(hitSound, hurtable.transform.position, 0.5f, 1);
         }
 
 

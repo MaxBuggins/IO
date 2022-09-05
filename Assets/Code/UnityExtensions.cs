@@ -41,5 +41,23 @@ public static class UnityExtensions
         }
         return new Color32(r, g, b, a);
     }
+
+    public static AudioSource PlayAudioAt(AudioClip clip, Vector3 pos, float volume = 1, float spaitalBlend = 0)
+    {
+        GameObject tempObj = new GameObject("TempAudio");
+        tempObj.transform.position = pos; // set its position
+
+        var aSource = tempObj.AddComponent<AudioSource>(); // add an audio source
+
+        aSource.clip = clip;
+        aSource.volume = volume;
+        aSource.spatialBlend = spaitalBlend;
+                             
+        aSource.Play(); // start the sound
+
+        Object.Destroy(tempObj, clip.length); // destroy object after clip duration
+
+        return aSource; // return the AudioSource reference
+    }
 }
 

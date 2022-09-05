@@ -1365,7 +1365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71ec07a25c01f846b169ef7e38e4a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepDistance: 20
+  stepDistance: 50
   movementMultiplyer: 8
   groundLayer:
     serializedVersion: 2
@@ -1377,6 +1377,7 @@ MonoBehaviour:
   mouthOpen: {fileID: 2100000, guid: 876e0e1d05a23944e8e68ccc253907a2, type: 2}
   feetAudioSource: {fileID: 6732181089449866345}
   mouthAudioSource: {fileID: 1152682213110309885}
+  rightHand: {fileID: 0}
   playerMeshRenderer: {fileID: 0}
   LandObject: {fileID: 2382965606849645197, guid: 7ba5f877335c67641a688386d48bc6f0, type: 3}
 --- !u!82 &6732181089449866345

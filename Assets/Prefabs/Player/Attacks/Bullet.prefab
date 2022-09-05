@@ -209,6 +209,7 @@ MonoBehaviour:
   damage: 25
   hurtType: 0
   destoryOnHurt: 1
+  hitSound: {fileID: 8300000, guid: 23db48910c55c4444bb2ca637275e429, type: 3}
   moveForce: 1
   collisionForce: 0.06
   upwardsForce: 0

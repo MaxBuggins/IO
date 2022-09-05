@@ -167,8 +167,10 @@ public class Projectile : Hurtful
     void ClientHit(Vector3 hitPos, Vector3 hitNormal, Hurtable hurtable)
     {
         if (hurtable != null && hitHurtableDecal != null)
+        {
             Instantiate(hitHurtableDecal, hitPos, Quaternion.LookRotation(hitNormal));
-    
+        }
+
         else if (hitDecal != null)
             Instantiate(hitDecal, hitPos, Quaternion.LookRotation(hitNormal));
 

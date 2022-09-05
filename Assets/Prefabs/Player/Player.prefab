@@ -663,6 +663,10 @@ PrefabInstance:
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6732181089449866345, guid: 963ecc16b7a5ba247b07c3f187543a25, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8261687190223038107, guid: 963ecc16b7a5ba247b07c3f187543a25, type: 3}
       propertyPath: m_RootOrder
       value: 4
