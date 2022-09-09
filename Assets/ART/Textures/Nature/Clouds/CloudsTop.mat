@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_2922c7012c5a4d4597743f3366936619:
-        m_Texture: {fileID: 2800000, guid: 3440de1d960c2c345b8f411fe3176e12, type: 3}
+        m_Texture: {fileID: 2800000, guid: 23c2b80af22b938479c62c36d7038aa5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_ca72b47a09854399a40edb945e9b837d:
@@ -106,6 +106,7 @@ Material:
     - _AlphaClip: 1
     - _Blend: 0
     - _BumpScale: 1
+    - _Bumpyness: 0.07
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -118,6 +119,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _NoiseScale: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 1
@@ -137,9 +139,9 @@ Material:
     - Color_f973b1553a914a2ca12ee4509fbccf04: {r: 0.53411764, g: 0.6355324, b: 0.8901961, a: 1}
     - Vector2_1: {r: -1, g: 1, b: 0, a: 0}
     - Vector2_33e7b7c563e447b7a09eb89de3073548: {r: 0, g: 1, b: 0, a: 0}
-    - Vector2_a11550edd0084f8295aca6840226359e: {r: 0.25, g: 0.1, b: 0, a: 0}
+    - Vector2_a11550edd0084f8295aca6840226359e: {r: 0.25, g: 0.5, b: 0, a: 0}
     - Vector2_c44903edaf2743b3b8715e5ed4d1baa0: {r: -1, g: 1, b: 0, a: 0}
-    - Vector2_facbbb9dbb034aa18a32af546254cdce: {r: 5, g: 5, b: 0, a: 0}
+    - Vector2_facbbb9dbb034aa18a32af546254cdce: {r: 15, g: 15, b: 0, a: 0}
     - Vector2_fe1a3cd480b94b9ca4442b2ec249a0c8: {r: 0, g: 1, b: 0, a: 0}
     - Vector4_4b3d46d0f46b4abd9a461febbccb8ef8: {r: 1, g: 0, b: 0, a: 90}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

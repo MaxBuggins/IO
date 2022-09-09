@@ -68,6 +68,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ParallaxMapping_5f9c30f928bf45fd8ed1dffdd98a5b6f_Heightmap_1:
+        m_Texture: {fileID: 2800000, guid: 4efae64dab0a3494586a0a0160b0b2a0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}

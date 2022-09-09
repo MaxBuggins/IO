@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponType: 2
   canHoldPrimary: 1
   primaryDelay: 0.15
-  primaryCooldown: 0.2
+  primaryCooldown: 0.4
   spawnPrimaryObject: {fileID: 5991925690411241500, guid: aaa568d813a4be046bf57b686310b631, type: 3}
   primarySpawnCount: 5
   primaryForce: {x: 0, y: 0, z: -10}
