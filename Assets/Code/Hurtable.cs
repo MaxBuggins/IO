@@ -11,7 +11,7 @@ public class Hurtable : NetworkBehaviour
 
 
     [Server]
-    public void Hurt(int damage, HurtType hurtType = HurtType.Death) //can be used to heal just do -damage
+    public void Hurt(int damage, HurtType hurtType = HurtType.Death, Hurtable attacker = null) //can be used to heal just do -damage
     {
         if (health <= 0)
             return;
@@ -22,8 +22,19 @@ public class Hurtable : NetworkBehaviour
         else
             health -= damage;
 
-        if(health <= 0 )
+        if (health <= 0)
+        {
+            if (attacker != null)
+            {
+                Player killer = attacker.GetComponent<Player>();
+                if (killer != null)
+                {
+                    killer.kills += 1;
+                }
+            }
+
             ServerDeath();
+        }
     }
 
 

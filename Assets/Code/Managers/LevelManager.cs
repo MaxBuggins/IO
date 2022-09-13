@@ -5,9 +5,12 @@ using Mirror;
 
 public class LevelManager : NetworkBehaviour
 {
+    public enum GameMode { lobby, surf, deathmatch}
+
     [HideInInspector] public static LevelManager instance;
 
     [Header("Level Propertys")]
+    public GameMode gameMode = GameMode.surf;
     public float respawnDelay = 1;
     public WeaponObject[] weapons; //all possible weapons that can be spawned with
 

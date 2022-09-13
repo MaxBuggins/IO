@@ -42,15 +42,32 @@ public class UI_ScoreBoard : UI_Base
 
             row.userName.text = LevelManager.instance.players[count].userName;
 
-            if (LevelManager.instance.players[count].bestTime > 0)
+            switch (LevelManager.instance.gameMode)
             {
-                //string minutes = Mathf.Floor(LevelManager.instance.players[count].bestTime / 60).ToString("00");
-                //string seconds = Mathf.Floor(LevelManager.instance.players[count].bestTime * 100).ToString("00:00");
-                //UI_Main.instance.players[count].bestTime.ToString("mm':'ss.ff'");
-                row.bestTime.text = (LevelManager.instance.players[count].bestTime * 100).ToString("00:00");
+                case (LevelManager.GameMode.surf):
+                    {
+                        if (LevelManager.instance.players[count].bestTime > 0)
+                        {
+                            row.bestTime.text = (LevelManager.instance.players[count].bestTime * 100).ToString("00:00");
+                        }
+                        else
+                            row.bestTime.text = "No Attempt";
+
+                        break;
+                    }
+
+                case (LevelManager.GameMode.deathmatch):
+                    {
+                        if (LevelManager.instance.players[count].kills > 0)
+                        {
+                            row.kills.text = ("" + LevelManager.instance.players[count].kills);
+                        }
+                        else
+                            row.bestTime.text = "Virgin";
+
+                        break;
+                    }
             }
-            else 
-                row.bestTime.text = "No Attempt";
 
 
             RectTransform rowRectTrans = row.GetComponent<RectTransform>();
@@ -62,7 +79,7 @@ public class UI_ScoreBoard : UI_Base
             row.transform.eulerAngles = Vector3.up * 2.5f * even;
             count += 1;
 
-            rowRectTrans.sizeDelta = new Vector2(600, 50);
+            rowRectTrans.sizeDelta = new Vector2(500, 50);
             rowRectTrans.anchoredPosition = new Vector2(rowRectTrans.anchoredPosition.x, -100 - (count-1) * 50);
         }
 
