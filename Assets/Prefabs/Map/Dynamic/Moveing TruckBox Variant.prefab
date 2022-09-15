@@ -362,9 +362,10 @@ MonoBehaviour:
   damage: 40
   hurtType: 0
   destoryOnHurt: 0
+  hitSound: {fileID: 0}
   moveForce: 1
-  collisionForce: 1
-  upwardsForce: 0.5
+  collisionForce: 3
+  upwardsForce: 1.5
   maxVelocity: -1
   ignor: {fileID: 0}
 --- !u!114 &7853244035038173295
