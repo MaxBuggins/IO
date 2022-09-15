@@ -1958,6 +1958,7 @@ MonoBehaviour:
   - {fileID: 7891328731170891781, guid: 4a4fa75c6c23cf047af0b13949bf25d2, type: 3}
   - {fileID: 5137231935399928584, guid: b25715fbbb354ed43bbf4dbaadfe60f8, type: 3}
   - {fileID: 2616979179506411788, guid: 0415f3fd8679b2148a9c83e9eeba9aaa, type: 3}
+  - {fileID: 1413463073311024749, guid: 3a9f4256962953d4886bfc36bf52f9ca, type: 3}
 --- !u!114 &5060374560227907767
 MonoBehaviour:
   m_ObjectHideFlags: 0
