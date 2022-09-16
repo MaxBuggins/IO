@@ -16,6 +16,7 @@ public class UI_Main : MonoBehaviour
     public Sprite[] crosshairSprites;
 
     [SerializeField] private Image screenImage;
+    [SerializeField] private Image hurtOverlay;
 
     [SerializeField] private GameObject playerUI;
     [SerializeField] private GameObject gameOverUI;
@@ -83,6 +84,16 @@ public class UI_Main : MonoBehaviour
         {
             uI_Base.RefreshColour(Player.localInstance.primaryColour);
         }
+    }
+
+    public void OnHurt(float damageRatio)
+    {
+        Color currentColour = hurtOverlay.color;
+        currentColour.a += damageRatio;
+        hurtOverlay.color = currentColour;
+
+        currentColour.a = 0;
+        Tween.Color(hurtOverlay, currentColour, 0.8f, 0.4f);
     }
 
     public void OnPause(bool pause)

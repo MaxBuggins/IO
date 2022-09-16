@@ -229,10 +229,11 @@ public class Player : Hurtable
         if (isLocalPlayer)
         {
             UI_Main.instance.UIUpdate();
+            UI_Main.instance.OnHurt((float)damage / (float)maxHealth);
             playerCamera.Shake(damage);
 
             if (health > 0)
-                UI_Main.instance.TemparyChangeScreenColour(new Color(0.706f, 0.125f, 0.165f, 0.3f), 0.5f);
+                UI_Main.instance.TemparyChangeScreenColour(new Color(0.706f, 0.125f, 0.165f, 0.1f), 0.5f);
         }
     }
 
@@ -257,6 +258,8 @@ public class Player : Hurtable
 
     public override void OnAlive()
     {
+        transform.localScale = Vector3.zero;
+        Tween.LocalScale(transform, Vector3.one, 0.8f, 0, AnimationCurve.EaseInOut(0,0,1,1));
         character.enabled = true;
 
         if(currentRace != null)

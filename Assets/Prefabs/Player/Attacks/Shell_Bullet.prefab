@@ -49,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6307708500910428082, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
       propertyPath: projectileWidth
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6307708500910428082, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
       propertyPath: startDmgFallOff
