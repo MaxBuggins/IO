@@ -15,8 +15,12 @@ public class UI_ScoreRow : MonoBehaviour
     //public TextMeshProUGUI deaths;
     //public TextMeshProUGUI score;
 
+    public Sprite[] backSprites;
+
     private void Start()
     {
+        banner.sprite = backSprites[Random.Range(0, backSprites.Length)];
+
         switch (LevelManager.instance.gameMode)
         {
             case (LevelManager.GameMode.surf):

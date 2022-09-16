@@ -25,7 +25,8 @@ public class ServerWeapon : NetworkBehaviour
 	[Tooltip("Time the server secondary action is behing the client")]
 	private double secondaryTimeOffset;
 
-	[SyncVar][SerializeField] private int ammoRemaining;
+	[SyncVar(hook = nameof(OnAmmoChange))] 
+	[SerializeField] private int ammoRemaining;
 
 	private bool primaryHeld = false;
 
@@ -57,6 +58,8 @@ public class ServerWeapon : NetworkBehaviour
 
 		if (thirdPersonObject != null)
 			Destroy(thirdPersonObject);
+
+		UI_Main.instance.UI_Crosshaire.ammoCount.enabled = (weaponObject.weaponType == WeaponType.shoot);
 
 		thirdPersonObject = Instantiate(weaponObject.thirdPersonObject, player.playerAnimator.rightHand);
 
@@ -93,6 +96,11 @@ public class ServerWeapon : NetworkBehaviour
 
 	}
 
+    public void OnAmmoChange(int oldAmmoCount, int newAmmoCount)
+    {
+		UI_Main.instance.UI_Crosshaire.SetAmmo(newAmmoCount);
+	}
+
 	#region primary
 	public void OnPrimary()
 	{
@@ -115,6 +123,8 @@ public class ServerWeapon : NetworkBehaviour
 
 		player.playerAnimator.TriggerPrimaryAttack();
 		fpWeapon.onPrimary();
+
+		player.playerCamera.Shake(weaponObject.shakeAmount, weaponObject.shakeDuration);
 
 		CmdPrimary(NetworkTime.time, PlayerCamera.localInstance.transform.position, PlayerCamera.localInstance.transform.eulerAngles);
 
@@ -218,6 +228,9 @@ public class ServerWeapon : NetworkBehaviour
 			return;
 
 		fpWeapon.onSecondary();
+
+		if(weaponObject.weaponType == WeaponType.shoot)
+			UI_Main.instance.UI_Crosshaire.Reload(weaponObject.secondaryDelay);
 
 		CmdSecondary(NetworkTime.time, PlayerCamera.localInstance.transform.position, PlayerCamera.localInstance.transform.eulerAngles);
 

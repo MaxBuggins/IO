@@ -173,7 +173,7 @@ MonoBehaviour:
   standCameraOffset: {x: 0, y: 1.6}
   crouchCameraOffset: {x: 0, y: 0.6}
   bobSpeed: 13
-  bobAmount: 0.025
+  bobAmount: 0.1
   shakeDuration: 0.5
   magnatude: 0.3
   rotResetSpeed: 1
@@ -181,7 +181,6 @@ MonoBehaviour:
   currentOffset: {x: 0, y: 0, z: 0}
   focus: {fileID: 0}
   deadCollider: {fileID: 1762061980112930572}
-  movement: {fileID: 0}
 --- !u!135 &1762061980112930572
 SphereCollider:
   m_ObjectHideFlags: 0

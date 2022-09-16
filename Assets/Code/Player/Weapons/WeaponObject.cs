@@ -19,6 +19,9 @@ public class WeaponObject : ScriptableObject
 	public int primarySpawnCount = 1;
 	public Vector3 primaryForce;
 
+	public float shakeAmount = 0;
+	public float shakeDuration = 0;
+
 	[Header("Secondary")]
 	public float secondaryDelay = 0;
 	public float secondaryCoolDown = 0;

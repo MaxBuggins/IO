@@ -14,7 +14,6 @@ public class UI_Main : MonoBehaviour
     public UI_Base[] bases;
 
     public Sprite[] crosshairSprites;
-    [SerializeField] private Image crossHair;
 
     [SerializeField] private Image screenImage;
 
@@ -22,8 +21,10 @@ public class UI_Main : MonoBehaviour
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private GameObject touchUI;
+    
     //who even cares if this one is public
     [SerializeField] public GameObject scoreBoardUI;
+    public UI_Crosshaire UI_Crosshaire;
 
     [SerializeField] private GameObject[] alertObjects;
 
@@ -151,11 +152,11 @@ public class UI_Main : MonoBehaviour
         index--;
 
         if (index < 0)
-            crossHair.color = Color.clear;
+            UI_Crosshaire.crossHair.color = Color.clear;
         else
-            crossHair.color = colour;
+            UI_Crosshaire.crossHair.color = colour;
 
-        crossHair.sprite = crosshairSprites[index];
+        UI_Crosshaire.crossHair.sprite = crosshairSprites[index];
         
     }
 

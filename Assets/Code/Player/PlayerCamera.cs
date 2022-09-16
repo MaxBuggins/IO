@@ -193,7 +193,7 @@ public class PlayerCamera : MonoBehaviour
         currentPlayerAboveInfo = null;
     }
 
-    public void Shake(float amount = 1)
+    public void Shake(float amount = 1, float duration = 0.6f)
     {
         //better than 2 if statements (but thats probs what the Clamp fuction does so000.
         amount = Mathf.Clamp(amount, 0.15f, 1.8f); //stop BIG SHAKEs (only at hungry hacks)
@@ -202,6 +202,7 @@ public class PlayerCamera : MonoBehaviour
 
         Tween.Shake(transform, orignalPosition, Vector3.one * magnatude * amount, shakeDuration, 0);
     }
+
 
     public void Dead(bool isDead)
     {

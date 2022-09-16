@@ -98,6 +98,14 @@ MonoBehaviour:
   userName: {fileID: 5494153924595820138}
   bestTime: {fileID: 2890377462984698504}
   kills: {fileID: 1681681947716928167}
+  backSprites:
+  - {fileID: 1973083210, guid: 70ad3053f0d05684f85c9b1f7bb5c9e5, type: 3}
+  - {fileID: 1038304936, guid: 70ad3053f0d05684f85c9b1f7bb5c9e5, type: 3}
+  - {fileID: 1746379518, guid: 70ad3053f0d05684f85c9b1f7bb5c9e5, type: 3}
+  - {fileID: 2030021019, guid: 70ad3053f0d05684f85c9b1f7bb5c9e5, type: 3}
+  - {fileID: 1613385361, guid: 70ad3053f0d05684f85c9b1f7bb5c9e5, type: 3}
+  - {fileID: -1575343597, guid: 70ad3053f0d05684f85c9b1f7bb5c9e5, type: 3}
+  - {fileID: 2030021019, guid: 70ad3053f0d05684f85c9b1f7bb5c9e5, type: 3}
 --- !u!1 &1044728410781590661
 GameObject:
   m_ObjectHideFlags: 0
