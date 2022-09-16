@@ -20,8 +20,8 @@ MonoBehaviour:
   spawnPrimaryObject: {fileID: 6307708500910428109, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
   primarySpawnCount: 1
   primaryForce: {x: 0, y: 0, z: 0}
-  shakeAmount: 0.6
-  shakeDuration: 0.6
+  shakeAmount: 0
+  shakeDuration: 1
   secondaryDelay: 0.6
   secondaryCoolDown: 0.6
   spawnSecondaryObject: {fileID: 0}

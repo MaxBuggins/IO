@@ -26,7 +26,8 @@ public class Enemy : Hurtable
 
     public override void OnDeath()
     {
-        Instantiate(corpse, transform.position, transform.rotation, null);
+        if(corpse != null)
+            Instantiate(corpse, transform.position, transform.rotation, null);
 
 
         if(isClientOnly)

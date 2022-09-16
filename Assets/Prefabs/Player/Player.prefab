@@ -88,7 +88,7 @@ MonoBehaviour:
   catchupThreshold: 4
   catchupMultiplier: 0.1
   onlySyncOnChange: 1
-  bufferResetMultiplier: 5
+  bufferResetMultiplier: 4
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
