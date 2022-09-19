@@ -12,6 +12,7 @@ public class Projectile : Hurtful
     [Header("Projectile Propertys")]
     //[Tooltip("Will skip collision with hurtfuls ignored collider")]
     //public bool skipIgnoreCollision;
+    public int destoryOnHits = 0;
     public float destroyDelay = 3;
     public float projectileWidth = 0.3f;
 
@@ -24,7 +25,8 @@ public class Projectile : Hurtful
     public float airRistance = 0.1f;
 
     [Header("Internals")]
-    public float timeSinceStart = 0;
+    [HideInInspector] public float timeSinceStart = 0;
+    private float currentForwardSpeed;
     protected Vector3 orginPos;
     protected float distanceTraveld;
 
@@ -54,6 +56,8 @@ public class Projectile : Hurtful
         lastPos = transform.position;
         orginPos = transform.position;
 
+        currentForwardSpeed = forwardSpeed;
+
         Invoke(nameof(DestroySelf), destroyDelay);
     }
 
@@ -62,12 +66,14 @@ public class Projectile : Hurtful
         timeSinceStart += Time.deltaTime;
 
         velocity.y = gravitY * timeSinceStart;
-        Vector3 travel = ((Vector3.up * velocity.y) + (transform.forward * forwardSpeed)) * timeSinceStart;
+        Vector3 travel = ((Vector3.up * velocity.y) + (transform.forward * currentForwardSpeed)) * timeSinceStart;
 
         transform.position = orginPos + travel;
 
         distanceTraveld = travel.magnitude;
-        forwardSpeed -= airRistance * timeSinceStart;
+        currentForwardSpeed -= airRistance * timeSinceStart;
+        print(travel);
+
 
         if (isServer) //Adian Smells of car fuel
             ServerCheckHit();
@@ -108,10 +114,8 @@ public class Projectile : Hurtful
                 HurtObject(hurtable, dmg, hurtType);
             }
 
-
             ServerHit(hit.point, hit.normal);
 
-            print(hit.transform.name);
         }
 
         if (isServerOnly == false)
@@ -140,6 +144,15 @@ public class Projectile : Hurtful
                 hitRb.AddForceAtPosition(vel * collisionForce, hit.point, ForceMode.Impulse);
             }
 
+            if (isServer)
+                return;
+
+            destoryOnHits -= 1;
+
+            if (destoryOnHits < 0)
+            {
+                DestroySelf(); //does not give client opertunity to instergate hit object
+            }
 
             ClientHit(hit.point, hit.normal, hurtable);
         }
@@ -149,18 +162,30 @@ public class Projectile : Hurtful
     [Server]
     void ServerHit(Vector3 hitPos, Vector3 hitNormal)
     {
-        if (hitNetworkObject != null)
+        if (destoryOnHits > -1)
         {
-            GameObject obj = Instantiate(hitNetworkObject, hitPos, transform.rotation);
+            destoryOnHits -= 1;
 
-            NetworkServer.Spawn(hitNetworkObject);
+            if (destoryOnHits < 0)
+            {
+                DestroySelf(); //does not give client opertunity to instergate hit object
+            }
 
-            //Hurtful hurt = obj.GetComponentInChildren<Hurtful>();
-            //if (hurt != null)
-                //hurt.owner = hurtful.owner;
+            else
+            {
+                Vector3 forw = (transform.position - lastPos).normalized;
+                Vector3 mirrored = Vector3.Reflect(forw, hitNormal);
+                transform.rotation = Quaternion.LookRotation(mirrored, transform.up);
+                transform.position = hitPos;
+
+                velocity = Vector3.zero; //reset for gravity projectiles
+                //currentForwardSpeed = forwardSpeed;
+                timeSinceStart = 0;
+                orginPos = hitPos;
+
+                RpcSyncProjectile(transform.position, transform.eulerAngles, true);
+            }
         }
-
-        DestroySelf(); //does not give client opertunity to instergate hit object
     }
 
     [Client]
@@ -174,12 +199,19 @@ public class Projectile : Hurtful
         else if (hitDecal != null)
             Instantiate(hitDecal, hitPos, Quaternion.LookRotation(hitNormal));
 
-
-        DestroySelf();
+        if(isClientOnly)
+            Destroy(gameObject);
     }
 
     void DestroySelf()
     {
+        if (hitNetworkObject != null && isServer)
+        {
+            GameObject obj = Instantiate(hitNetworkObject, transform.position, transform.rotation);
+
+            NetworkServer.Spawn(obj);
+        }
+
         Destroy(gameObject);
     }
 

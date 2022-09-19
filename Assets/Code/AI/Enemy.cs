@@ -26,8 +26,11 @@ public class Enemy : Hurtable
 
     public override void OnDeath()
     {
-        if(corpse != null)
-            Instantiate(corpse, transform.position, transform.rotation, null);
+        if (corpse != null)
+        {
+            GameObject corpseObject = Instantiate(corpse, transform.position, transform.rotation, null);
+            corpseObject.transform.localScale = transform.localScale;
+        }
 
 
         if(isClientOnly)

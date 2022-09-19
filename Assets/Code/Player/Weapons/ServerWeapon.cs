@@ -124,7 +124,8 @@ public class ServerWeapon : NetworkBehaviour
 		player.playerAnimator.TriggerPrimaryAttack();
 		fpWeapon.onPrimary();
 
-		player.playerCamera.Shake(weaponObject.shakeAmount, weaponObject.shakeDuration);
+		if(weaponObject.weaponType == WeaponType.shoot)
+			player.playerCamera.Shake(weaponObject.shakeAmount, weaponObject.shakeDuration);
 
 		CmdPrimary(NetworkTime.time, PlayerCamera.localInstance.transform.position, PlayerCamera.localInstance.transform.eulerAngles);
 

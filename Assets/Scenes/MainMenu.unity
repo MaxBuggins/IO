@@ -1937,11 +1937,11 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   runInBackground: 1
   autoStartServerBuild: 0
-  serverTickRate: 50
+  serverTickRate: 60
   offlineScene: Assets/Scenes/MainMenu.unity
   onlineScene: Assets/Scenes/FourBlow.unity
   transport: {fileID: 5443727475526106386}
-  networkAddress: sea.ssl.cloud.playflow.app
+  networkAddress: localhost
   maxConnections: 100
   authenticator: {fileID: 5060374560227907767}
   playerPrefab: {fileID: 449960936539232377, guid: edb246863ceef394ebb323de498e7e9c, type: 3}
@@ -1954,6 +1954,8 @@ MonoBehaviour:
   - {fileID: 6307708500910428109, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
   - {fileID: 1715496487338802109, guid: 06e8f710955b1cc4db193c1b45704e97, type: 3}
   - {fileID: 5991925690411241500, guid: aaa568d813a4be046bf57b686310b631, type: 3}
+  - {fileID: 4244508315201502716, guid: 4670759904860c14b863f58d7e63819e, type: 3}
+  - {fileID: 6673444213950539985, guid: a4e9a665b17a3e44899c74c9b5cff7e0, type: 3}
   playerHats:
   - {fileID: 7891328731170891781, guid: 4a4fa75c6c23cf047af0b13949bf25d2, type: 3}
   - {fileID: 5137231935399928584, guid: b25715fbbb354ed43bbf4dbaadfe60f8, type: 3}
