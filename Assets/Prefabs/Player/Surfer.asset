@@ -36,3 +36,4 @@ MonoBehaviour:
   - calloutCatagory: 3
     clips:
     - {fileID: 8300000, guid: ccc2e81dd560d1d49adbc8f1839e3837, type: 3}
+  onSpawnPrefab: {fileID: 3191287857240720067, guid: 1ab5d37d33bb6de4597531228f9b06ee, type: 3}

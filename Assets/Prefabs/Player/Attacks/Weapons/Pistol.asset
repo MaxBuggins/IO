@@ -21,7 +21,7 @@ MonoBehaviour:
   primarySpawnCount: 1
   primaryForce: {x: 0, y: 0, z: 0}
   shakeAmount: 0
-  shakeDuration: 1
+  shakeDuration: 0
   secondaryDelay: 0.6
   secondaryCoolDown: 0.6
   spawnSecondaryObject: {fileID: 0}

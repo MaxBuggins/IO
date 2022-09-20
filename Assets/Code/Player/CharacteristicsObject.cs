@@ -12,6 +12,8 @@ public class CharacteristicsObject : ScriptableObject
     public AudioClip[] deathSounds;
 
     public PlayerCallout[] playerCallouts;
+
+    public GameObject onSpawnPrefab;
 }
 
 

@@ -260,6 +260,8 @@ public class Player : Hurtable
     {
         transform.localScale = Vector3.zero;
         Tween.LocalScale(transform, Vector3.one, 0.8f, 0, AnimationCurve.EaseInOut(0,0,1,1));
+        Instantiate(characteristicsObject.onSpawnPrefab, transform.position, transform.rotation);
+
         character.enabled = true;
 
         if(currentRace != null)
