@@ -211,12 +211,13 @@ MonoBehaviour:
   destoryOnHurt: 1
   hitSound: {fileID: 8300000, guid: 23db48910c55c4444bb2ca637275e429, type: 3}
   moveForce: 1
-  collisionForce: 0.06
+  collisionForce: 0.02
   upwardsForce: 0
-  maxVelocity: -1
+  maxVelocity: 50
   ignor: {fileID: 0}
   startDmgFallOff: 15
   minDmgMultiplyer: 0.3
+  destoryOnHits: 0
   destroyDelay: 5
   projectileWidth: 0.2
   serverMask:
@@ -225,7 +226,7 @@ MonoBehaviour:
   clientMask:
     serializedVersion: 2
     m_Bits: 73
-  forwardSpeed: 60
+  forwardSpeed: 120
   gravitY: -2
   airRistance: 0.1
   timeSinceStart: 0

@@ -97,6 +97,7 @@ public class ItemPickUp : NetworkBehaviour
             if(weaponIndex > -1)
             {
                 ServerWeapon serverWeapon = player.GetComponent<ServerWeapon>();
+                serverWeapon.OnWeaponChanged(serverWeapon.weaponIndex, weaponIndex);
                 serverWeapon.weaponIndex = weaponIndex;
             }
 

@@ -1783,7 +1783,7 @@ MonoBehaviour:
   autoStartServerBuild: 0
   serverTickRate: 60
   offlineScene: Assets/Scenes/MainMenu.unity
-  onlineScene: Assets/Scenes/FourBlow.unity
+  onlineScene: Assets/Scenes/SurfCity.unity
   transport: {fileID: 5443727475526106386}
   networkAddress: localhost
   maxConnections: 100
