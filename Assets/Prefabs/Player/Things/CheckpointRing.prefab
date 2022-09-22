@@ -160,7 +160,7 @@ MonoBehaviour:
   finish: 0
   masterCheckPoint: {fileID: 0}
   textDisplay: {fileID: 6942595942831126859}
-  ringRender: {fileID: 0}
+  ringRender: {fileID: 8199679985011563655}
   centerRender: {fileID: 737105800642869577}
 --- !u!64 &1331913247364403110
 MeshCollider:
