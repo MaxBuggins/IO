@@ -27,6 +27,7 @@ public class Hurtful : NetworkBehaviour
 
     public Hurtable ignor;
 
+
     private void Start()
     {
         lastPos = transform.position;

@@ -151,10 +151,9 @@ public class Projectile : Hurtful
 
             if (destoryOnHits < 0)
             {
-                DestroySelf(); //does not give client opertunity to instergate hit object
+                ClientHit(hit.point, hit.normal, hurtable);
             }
 
-            ClientHit(hit.point, hit.normal, hurtable);
         }
     }
 
@@ -181,7 +180,7 @@ public class Projectile : Hurtful
                 velocity = Vector3.zero; //reset for gravity projectiles
                 //currentForwardSpeed = forwardSpeed;
                 timeSinceStart = 0;
-                orginPos = hitPos;
+                orginPos = transform.position;
 
                 RpcSyncProjectile(transform.position, transform.eulerAngles, true);
             }
@@ -220,6 +219,11 @@ public class Projectile : Hurtful
     {
         transform.position = pos;
         transform.eulerAngles = rot;
+
+        velocity = Vector3.zero; //reset for gravity projectiles
+                                 //currentForwardSpeed = forwardSpeed;
+        timeSinceStart = 0;
+        orginPos = transform.position;
 
         if (hit && hitDecal != null)
             Instantiate(hitDecal, lastPos, transform.rotation);

@@ -217,7 +217,7 @@ MonoBehaviour:
   ignor: {fileID: 0}
   startDmgFallOff: 15
   minDmgMultiplyer: 0.3
-  destoryOnHits: 1
+  destoryOnHits: 0
   destroyDelay: 2
   projectileWidth: 0.2
   serverMask:

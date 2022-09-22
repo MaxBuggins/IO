@@ -17,7 +17,7 @@ MonoBehaviour:
   canHoldPrimary: 1
   primaryDelay: 0.12
   primaryCooldown: 0.15
-  spawnPrimaryObject: {fileID: 6673444213950539985, guid: a4e9a665b17a3e44899c74c9b5cff7e0, type: 3}
+  spawnPrimaryObject: {fileID: 6307708500910428109, guid: b346a4552c4547c419e45c82858dff8a, type: 3}
   primarySpawnCount: 1
   primaryForce: {x: 0, y: 0, z: 0}
   shakeAmount: 0

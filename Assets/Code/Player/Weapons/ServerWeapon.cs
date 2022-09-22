@@ -98,7 +98,8 @@ public class ServerWeapon : NetworkBehaviour
 
     public void OnAmmoChange(int oldAmmoCount, int newAmmoCount)
     {
-		UI_Main.instance.UI_Crosshaire.SetAmmo(newAmmoCount);
+		if(isLocalPlayer)
+			UI_Main.instance.UI_Crosshaire.SetAmmo(newAmmoCount);
 
 		//if (isLocalPlayer)
 			//OnSecondary();
