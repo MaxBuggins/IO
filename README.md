@@ -1,4 +1,4 @@
 # IO
- Making an online IO like browser game, based of Sorce Engine Surfing.
+ Making an online IO like browser game, based on Source Engine Surfing.
  
- Early in Develpment
+ Base Functionality Achived
