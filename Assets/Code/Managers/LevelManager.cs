@@ -231,4 +231,12 @@ public class LevelManager : NetworkBehaviour
     {
         UI_Main.instance.CreateAlert(remainingTime + " minute left", 24, levelRaces[currentLevelRace].colour);
     }
+
+    public void WipeRBs()
+    {
+        foreach (Transform child in rbsParentObject.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }

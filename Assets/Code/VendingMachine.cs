@@ -37,7 +37,7 @@ public class VendingMachine : Hurtable
             spawnLocation += Vector3.forward * Random.Range(-spawnSize.x, spawnSize.x);
 
 
-            GameObject spawned = Instantiate(cans[Random.Range(0, cans.Length)], spawnLocation, Quaternion.identity);
+            GameObject spawned = Instantiate(cans[Random.Range(0, cans.Length)], spawnLocation, Quaternion.identity, LevelManager.instance.rbsParentObject.transform);
         }
         //spawned.GetComponent<Rigidbody>().AddForce(transform.forward);
     }
