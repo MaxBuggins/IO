@@ -5,7 +5,7 @@ using Mirror;
 
 public class LevelManager : NetworkBehaviour
 {
-    public enum GameMode { lobby, surf, deathmatch}
+    public enum GameMode { lobby, surf, deathmatch }
 
     [HideInInspector] public static LevelManager instance;
 
@@ -37,6 +37,8 @@ public class LevelManager : NetworkBehaviour
     private List<Transform> spawnPoints = new List<Transform>();
     public GameObject rbsParentObject;
 
+    [Header("Internal Variables")]
+    private bool has1MinAlertedPlayers = false;
 
     [Header("Unity Stuff")]
     private AudioSource audioSource;
@@ -75,7 +77,7 @@ public class LevelManager : NetworkBehaviour
     {
         base.OnStartServer();
 
-        if(levelRaces.Length > 0)
+        if (levelRaces.Length > 0)
             ServerChangeRace();
     }
 
@@ -90,6 +92,13 @@ public class LevelManager : NetworkBehaviour
         if (isServer == false)
             return;
 
+        if (raceTimeRemaining < 60 && has1MinAlertedPlayers == false)
+        {
+            RpcTimeRemainingAlert(1);
+            has1MinAlertedPlayers = true;
+        }
+    
+
         if (raceTimeRemaining < 0)
             ServerChangeRace();
     }
@@ -100,6 +109,7 @@ public class LevelManager : NetworkBehaviour
         if (levelRaces.Length < 2)
             return; //not enough races
 
+        has1MinAlertedPlayers = false;
 
         int newRaceIndex = Random.Range(0, levelRaces.Length);
         while (newRaceIndex == currentLevelRace)
@@ -135,6 +145,26 @@ public class LevelManager : NetworkBehaviour
         raceStartTime = NetworkTime.time;
     }
 
+    public void ServerSetRaceDuration(float duration)
+    {
+        raceDuration = duration;
+    }
+
+    public void ServerSetCurrentRaceTimeRemaining(float remaining)
+    {
+        raceStartTime = NetworkTime.time - Mathf.Abs(raceDuration - remaining);
+    }
+
+    public void ServerSpawnObjectAtAllPlayers(GameObject gameObject)
+    {
+        foreach(Player player in players)
+        {
+            GameObject obj = Instantiate(gameObject, player.transform.position, player.transform.rotation);
+
+            NetworkServer.Spawn(obj);
+        }
+    }
+
     public void OnRaceChange(int oldRaceIndex, int newRaceIndex)
     {
         if (oldRaceIndex == -1)
@@ -168,7 +198,7 @@ public class LevelManager : NetworkBehaviour
                             }
                     }
 
-                    if(!isServerOnly)
+                    if (!isServerOnly)
                         UI_Main.instance.CreateAlert(texts[0], fontSize, UnityExtensions.hexToColour(texts[1]), 7, delay, alertObjIndex: 2);
 
                     break;
@@ -195,4 +225,10 @@ public class LevelManager : NetworkBehaviour
         }
     }
 
+
+    [ClientRpc]
+    void RpcTimeRemainingAlert(float remainingTime)
+    {
+        UI_Main.instance.CreateAlert(remainingTime + " minute left", 24, levelRaces[currentLevelRace].colour);
+    }
 }
