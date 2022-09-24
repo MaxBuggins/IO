@@ -6,12 +6,15 @@ using Pixelplacement;
 
 public class HurtableEvent : Hurtable
 {
-    [Header("Event")]
-    [SerializeField] private UnityEvent onHurtEvent;
-    [SerializeField] private bool serverOnlyHurtEvent;
+    enum EventEnviroment { global, serverOnly, clientOnly, localOnly }
 
+    [Header("Hurt Event")]
+    [SerializeField] private UnityEvent onHurtEvent;
+    [SerializeField] private EventEnviroment hurtEventEnviroment;
+
+    [Header("Death Event")]
     [SerializeField] private UnityEvent onDeathEvent;
-    [SerializeField] private bool serverOnlyDeathEvent;
+    [SerializeField] private EventEnviroment deathEventEnviroment;
 
     [Header("Scale")]
     public Vector3 endScale;
@@ -28,23 +31,45 @@ public class HurtableEvent : Hurtable
     {
         Tween.LocalScale(transform, endScale, duration, 0, hurtAnimationCurve, completeCallback: ResetScale);
 
-        if (serverOnlyHurtEvent && isServer == false)
-            return;
-
-        onHurtEvent.Invoke();
+        if (CheckEventEnviroment(hurtEventEnviroment))
+            onHurtEvent.Invoke();
     }
 
     public override void OnDeath()
     {
-        //not Killable
-        health = maxHealth;
-
         Tween.LocalScale(transform, endScale, duration, 0, hurtAnimationCurve, completeCallback: ResetScale);
 
-        if (serverOnlyDeathEvent && isServer == false)
-            return;
+        if(CheckEventEnviroment(deathEventEnviroment))
+            onDeathEvent.Invoke();
+    }
 
-        onDeathEvent.Invoke();
+    bool CheckEventEnviroment(EventEnviroment eventEnviroment)
+    {
+        switch (eventEnviroment)
+        {
+            case (EventEnviroment.clientOnly):
+                {
+                    if (!isClient)
+                        return (false);
+                    break;
+                }
+
+            case (EventEnviroment.serverOnly):
+                {
+                    if (!isServer)
+                        return (false);
+                    break;
+                }
+
+            case (EventEnviroment.localOnly):
+                {
+                    if (lastAttackerIdenity != Player.localInstance.netIdentity)
+                        return(false);
+                    break;
+                }
+        }
+
+        return (true);
     }
 
     void ResetScale()

@@ -58,7 +58,7 @@ Material:
     - _GlitchStrength: 0.25
     - _NoiseScale: 20
     - _NoiseStrength: 2
-    - _Offset: 0
+    - _Offset: -0.5
     - _Pixelation: 2
     - _Power: 1
     - _QueueControl: 0
@@ -68,11 +68,11 @@ Material:
     - _ScrollSpeed: 0.25
     - _VibrateSpeed: 0.01
     m_Colors:
-    - _Color: {r: 0, g: 0.3333335, b: 1, a: 1}
+    - _Color: {r: 0.8745098, g: 0.24313726, b: 0.13725491, a: 1}
     - _FrenselTileing: {r: 8, g: 8, b: 0, a: 0}
     - _FresnelColor: {r: 4.538554, g: 0, b: 4.759381, a: 1}
     - _HologramTiling: {r: 1, g: 1, b: 0, a: 0}
     - _MainColor: {r: 0.4453125, g: 0.375, b: 0.5, a: 0.61960787}
     - _MainTileing: {r: 1, g: 2, b: 0, a: 0}
-    - _Other: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
+    - _Other: {r: 6.9960785, g: 1.945098, b: 1.0980393, a: 1}
   m_BuildTextureStacks: []

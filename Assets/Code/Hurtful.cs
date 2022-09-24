@@ -73,7 +73,7 @@ public class Hurtful : NetworkBehaviour
                 UnityExtensions.PlayAudioAt(hitSound, hurtable.transform.position, 0.5f, 1);
         }
 
-        hurtable.Hurt(damage, type, ignor);
+        hurtable.Hurt(damage, type, ignor.netIdentity);
 
         if (destoryOnHurt == true)
             Destroy(gameObject);

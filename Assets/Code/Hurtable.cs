@@ -9,12 +9,16 @@ public class Hurtable : NetworkBehaviour
     public int maxHealth = 100;
     [SyncVar(hook = nameof(OnHealthChanged))] public int health = 100;
 
+    [SyncVar] protected NetworkIdentity lastAttackerIdenity;
+
 
     [Server]
-    public void Hurt(int damage, HurtType hurtType = HurtType.Death, Hurtable attacker = null) //can be used to heal just do -damage
+    public void Hurt(int damage, HurtType hurtType = HurtType.Death, NetworkIdentity attackerIdentity = null) //can be used to heal just do -damage
     {
         if (health <= 0)
             return;
+
+        lastAttackerIdenity = attackerIdentity;
 
         //prevents infiti health stacking
         if (health - damage > maxHealth)
@@ -24,9 +28,9 @@ public class Hurtable : NetworkBehaviour
 
         if (health <= 0)
         {
-            if (attacker != null)
+            if (attackerIdentity != null)
             {
-                Player killer = attacker.GetComponent<Player>();
+                Player killer = attackerIdentity.GetComponent<Player>();
                 if (killer != null)
                 {
                     killer.kills += 1;
