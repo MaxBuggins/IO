@@ -6,10 +6,11 @@ using UnityEngine.Events;
 
 public class Hurtable : NetworkBehaviour
 {
+    [SyncVar] protected NetworkIdentity lastAttackerIdenity; //MUST BE BEFORE HEALTH because of sync order
+
     public int maxHealth = 100;
     [SyncVar(hook = nameof(OnHealthChanged))] public int health = 100;
 
-    [SyncVar] protected NetworkIdentity lastAttackerIdenity;
 
 
     [Server]
