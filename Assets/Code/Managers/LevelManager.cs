@@ -225,6 +225,12 @@ public class LevelManager : NetworkBehaviour
         }
     }
 
+    [Server]
+    public void ServerChangeScene(string scene)
+    {
+        NetworkManager.singleton.ServerChangeScene(scene);
+    }
+
 
     [ClientRpc]
     void RpcTimeRemainingAlert(float remainingTime)
