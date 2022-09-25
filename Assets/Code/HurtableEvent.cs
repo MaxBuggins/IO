@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Pixelplacement;
+using Mirror;
 
 public class HurtableEvent : Hurtable
 {
@@ -41,6 +42,12 @@ public class HurtableEvent : Hurtable
 
         if(CheckEventEnviroment(deathEventEnviroment))
             onDeathEvent.Invoke();
+    }
+
+    [ServerCallback]
+    public override void ServerDeath()
+    {
+        health = maxHealth;
     }
 
     bool CheckEventEnviroment(EventEnviroment eventEnviroment)
