@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+#if (UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_STANDALONE_OSX || STEAMWORKS_WIN || STEAMWORKS_LIN_OSX)
+using Steamworks;
+#endif
+
 public class MasterCheckPoint : NetworkBehaviour
 {
     [SyncVar(hook = nameof(CompleteCheckPoints))]
@@ -92,6 +96,15 @@ public class MasterCheckPoint : NetworkBehaviour
                 if (newTime < player.bestTime || player.bestTime < 0)
                 {
                     player.bestTime = (float)newTime;
+                }
+
+                if (newTime < 18)
+                    SteamUserStats.SetAchievement("ACH_TRAVEL_FAR_ACCUM");
+                
+                if (newTime < 30)
+                {
+                    SteamUserStats.SetAchievement("ACH_TRAVEL_FAR_ACCUM");
+                    SteamUserStats.StoreStats();
                 }
             }
         }

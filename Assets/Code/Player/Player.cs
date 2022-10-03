@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+#if (UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_STANDALONE_OSX || STEAMWORKS_WIN || STEAMWORKS_LIN_OSX)
+using Steamworks;
+#endif
+
+
 public class Player : Hurtable
 {
     [HideInInspector] static public Player localInstance;
@@ -140,6 +145,15 @@ public class Player : Hurtable
         {
             inUserName = inUserName.Remove(inUserName.IndexOf("_7_"), "_7_".Length);   
             hatIndex = 0;
+
+#if (UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_STANDALONE_OSX || STEAMWORKS_WIN || STEAMWORKS_LIN_OSX)
+            if (SteamManager.Initialized == false)
+                return;
+
+
+            SteamUserStats.SetAchievement("ACH_WIN_ONE_GAME");
+            SteamUserStats.StoreStats();
+#endif
         }
 
         userName = inUserName;
