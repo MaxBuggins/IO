@@ -5,24 +5,22 @@ using UnityEngine.UI;
 
 public class UI_Sticker : MonoBehaviour
 {
-    public Vector2 randomStickerPositionRange;
+    public Vector2 stickerOffset;
     public Vector2 randomStickerRotationRange;
 
     public Sprite[] stickers;
 
-    void Start()
+    public RectTransform rectTransform;
+
+    void OnEnable()
     {
         GetComponent<Image>().sprite = stickers[Random.Range(0, stickers.Length)];
 
-        randomStickerPositionRange /= 2;
-        transform.localPosition = new Vector3(Random.Range(-randomStickerPositionRange.x, randomStickerPositionRange.x), Random.Range(-randomStickerPositionRange.y, randomStickerPositionRange.y), transform.localPosition.z);
-        transform.localEulerAngles = new Vector3(0,0,Random.Range(randomStickerRotationRange.x, randomStickerRotationRange.y));
-    }
+        Vector2 rectRange = new Vector2(rectTransform.rect.width, rectTransform.rect.height);
+        rectRange /= 2;
+        rectRange -= stickerOffset;
 
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position, randomStickerPositionRange);
+        transform.localPosition = rectTransform.rect.center + new Vector2(Random.Range(-rectRange.x, rectRange.x), Random.Range(-rectRange.y, rectRange.y));
+        transform.localEulerAngles = new Vector3(0, 0, Random.Range(randomStickerRotationRange.x, randomStickerRotationRange.y));
     }
 }
