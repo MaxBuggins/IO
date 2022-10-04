@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class LocalPlayerSettings : ScriptableObject
 {
+    [Header("User Stuff")]
     public string userName;
 
     public Color32 primaryColour;
-    public Color32 secondaryColour;
-    public Color32 thirdryColour;
+    public int patternIndex;
+    public int stickerIndex;
 
-    public string killMessage;
 
+    [Header("Player Stuff")]
     public float mouseSensativity = 15f;
 
     public int crosshairIndex = 2;

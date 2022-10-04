@@ -15,8 +15,22 @@ public class SteamFriendDisplay : MonoBehaviour
 
 	private CSteamID steamFriend;
 
+	protected Callback<SteamServersConnected_t> m_SteamServersConnected;
+
+
+    private void OnEnable()
+    {
+		//m_SteamServersConnected = Callback<SteamServersConnected_t>.Create(OnSteamServersConnected);
+	}
+
     void Start()
     {
+		if (SteamUser.BLoggedOn() == false)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
 		steamFriend = SteamFriends.GetFriendByIndex(Random.Range(0, SteamFriends.GetFriendCount(EFriendFlags.k_EFriendFlagImmediate)), EFriendFlags.k_EFriendFlagImmediate);
 
 		nameDisplay.text = SteamFriends.GetFriendPersonaName(steamFriend);

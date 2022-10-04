@@ -47,6 +47,7 @@ public class StickWithPlatform : MonoBehaviour
         Rigidbody rb = other.GetComponent<Rigidbody>();
         if(rb != null)
         {
+            //rb.transform.parent = transform;
             if(rigidbodiesInTrigger.Contains(rb) == false)
                 rigidbodiesInTrigger.Add(rb);
         }
@@ -57,6 +58,8 @@ public class StickWithPlatform : MonoBehaviour
         Rigidbody rb = other.GetComponent<Rigidbody>();
         if (rb != null)
         {
+            //rb.transform.parent = transform;
+
             if (rigidbodiesInTrigger.Contains(rb))
                 rigidbodiesInTrigger.Remove(rb);
         }

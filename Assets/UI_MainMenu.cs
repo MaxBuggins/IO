@@ -13,12 +13,7 @@ public class UI_MainMenu : MonoBehaviour
 {
     public TMP_InputField usernameTextBox;
 
-	private Vector2 m_ScrollPos;
-	private HSteamPipe m_Pipe;
-	private HSteamUser m_GlobalUser;
-	private HSteamPipe m_LocalPipe;
-	private HSteamUser m_LocalUser;
-
+	public MyNetworkManager myNetworkManager;
 
 	private void Start()
     {
@@ -26,5 +21,15 @@ public class UI_MainMenu : MonoBehaviour
 		usernameTextBox.text = SteamFriends.GetPersonaName();
 
 #endif
+	}
+
+
+	public void JoinGame()
+	{
+#if (UNITY_WEBGL)
+		myNetworkManager.StartClient();
+#endif
+
+
 	}
 }

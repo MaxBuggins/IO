@@ -23,4 +23,14 @@ public class UI_PickColour : MonoBehaviour
             AboveInfo.ChangeColour(image.color);
         }
     }
+
+    public void PickPattern(int index)
+    {
+        LocalPlayerSettingsStorage.localInstance.localPlayerSettings.patternIndex = index;
+    }
+
+    public void PickSticker(int index)
+    {
+        LocalPlayerSettingsStorage.localInstance.localPlayerSettings.stickerIndex = index;
+    }
 }
