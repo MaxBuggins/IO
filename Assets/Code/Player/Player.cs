@@ -150,6 +150,7 @@ public class Player : Hurtable
             if (SteamManager.Initialized == false)
                 return;
 
+            //SteamUserStats.
 
             SteamUserStats.SetAchievement("ACH_WIN_ONE_GAME");
             SteamUserStats.StoreStats();
@@ -396,6 +397,7 @@ public class Player : Hurtable
 
                     else
                     {
+                        UI_Main.instance.OnPassRing();
                         time = (float)(newTime - checkPointTimes[checkPointTimes.Count - 2]);
                     }
                     roundedTime = Mathf.Round(time * 1000.0f) / 1000.0f;

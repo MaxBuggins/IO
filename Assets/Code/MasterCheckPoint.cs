@@ -96,6 +96,7 @@ public class MasterCheckPoint : NetworkBehaviour
                 if (newTime < player.bestTime || player.bestTime < 0)
                 {
                     player.bestTime = (float)newTime;
+                    SteamLeaderboard.UpdateScore((int)(newTime * 100));
                 }
 
                 if (newTime < 18)
@@ -106,6 +107,8 @@ public class MasterCheckPoint : NetworkBehaviour
                     SteamUserStats.SetAchievement("ACH_TRAVEL_FAR_ACCUM");
                     SteamUserStats.StoreStats();
                 }
+
+
             }
         }
 

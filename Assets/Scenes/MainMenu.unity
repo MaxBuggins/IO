@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 18658606}
   - component: {fileID: 18658605}
+  - component: {fileID: 18658607}
   m_Layer: 0
   m_Name: SteamManager
   m_TagString: Untagged
@@ -167,6 +168,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &18658607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18658604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628bef2c4ee31e645a6a0564cfe25f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &142864600
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAmount: {x: 8.895426, y: 0.16546303, z: -1.6187202}
   duration: 2
+  delay: 0
   animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -1144,6 +1158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAmount: {x: 8.895426, y: 0.16546303, z: -1.6187202}
   duration: 4
+  delay: 0
   animationCurve:
     serializedVersion: 2
     m_Curve:

@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3994436797737270163}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -102,4 +102,17 @@ MonoBehaviour:
   - {fileID: -926957660, guid: 6a57126c18830a044a4fe83e97bf637c, type: 3}
   - {fileID: -2133244045, guid: 6a57126c18830a044a4fe83e97bf637c, type: 3}
   - {fileID: -1798866992, guid: 6a57126c18830a044a4fe83e97bf637c, type: 3}
+  - {fileID: -359395763, guid: 6a57126c18830a044a4fe83e97bf637c, type: 3}
+  - {fileID: -1640018029, guid: 6a57126c18830a044a4fe83e97bf637c, type: 3}
+  - {fileID: 130516626, guid: 6a57126c18830a044a4fe83e97bf637c, type: 3}
+  - {fileID: 224788866, guid: 6a57126c18830a044a4fe83e97bf637c, type: 3}
+  - {fileID: 596632522, guid: 6a57126c18830a044a4fe83e97bf637c, type: 3}
+  - {fileID: 810172971, guid: 6a57126c18830a044a4fe83e97bf637c, type: 3}
+  rotateDuration: 0
+  rotateAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   rectTransform: {fileID: 0}

@@ -660,6 +660,7 @@ MonoBehaviour:
   - {fileID: 5387573083884081287, guid: d50aa9a7ada4a57448508c69271e5821, type: 3}
   - {fileID: 4252963945889860613, guid: 434b2f1808bb3f44e890ba5bc0fdf8c8, type: 3}
   - {fileID: 8257727921012164781, guid: edc7d165a4fa463419f85d28c6ef834d, type: 3}
+  winScreenPrefab: {fileID: 7733692879411263872, guid: bf1fc1fb2083dc943b894194573fff80, type: 3}
   canvas: {fileID: 596965255092342151}
   inputSystemUIInput: {fileID: 0}
 --- !u!1 &1806990851545315810
@@ -1659,10 +1660,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5802834398718830845}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 4055951989892341164}
+        m_TargetAssemblyTypeName: UI_Settings, Assembly-CSharp
+        m_MethodName: ToggleOnandOff
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3903,8 +3904,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5879435287181216006, guid: 545511e5635c6e744b74954e343035d0, type: 3}
   m_PrefabInstance: {fileID: 9127694013083182760}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5802834398718830845 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3326992976764587605, guid: 545511e5635c6e744b74954e343035d0, type: 3}
+--- !u!114 &4055951989892341164 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5108691113977985796, guid: 545511e5635c6e744b74954e343035d0, type: 3}
   m_PrefabInstance: {fileID: 9127694013083182760}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ac041ef8dd20d4c9101f146e221ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

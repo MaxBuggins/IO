@@ -28,6 +28,7 @@ public class UI_Main : MonoBehaviour
     public UI_Crosshaire UI_Crosshaire;
 
     [SerializeField] private GameObject[] alertObjects;
+    [SerializeField] private GameObject winScreenPrefab;
 
     public Canvas canvas;
     [HideInInspector] public InputSystemUIInputModule inputSystemUIInput;
@@ -128,6 +129,11 @@ public class UI_Main : MonoBehaviour
         {
             screenImage.color = Color.clear;
         }
+    }
+
+    public void OnPassRing()
+    {
+        Instantiate(winScreenPrefab, transform);
     }
 
     public void CreateAlert(string text, float fontSize, Color fontColour, float duration = 2, float delay = 0, int alertObjIndex = 0)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6a57126c18830a044a4fe83e97bf637c
+guid: f46c8e2561702f140a5b59572e06994d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -36,8 +36,8 @@ TextureImporter:
     filterMode: 0
     aniso: 2
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
@@ -152,7 +152,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BasicStickers_0
+      name: WinStickers_0
       rect:
         serializedVersion: 2
         x: 0
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1de5d12a38d74f4e914c7d101d54321
-      internalID: -751992541
+      spriteID: dcf07e5a0511e994aa53869b17e2bd34
+      internalID: 648208114
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BasicStickers_1
+      name: WinStickers_1
       rect:
         serializedVersion: 2
         x: 32
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a4494d70bdfcb743a091414fed254f2
-      internalID: -524876479
+      spriteID: 92d0b8016ffd9fc429857bfdf1282d0c
+      internalID: 1005629070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BasicStickers_2
+      name: WinStickers_2
       rect:
         serializedVersion: 2
         x: 64
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d9ec6bcff9c23b4da35f3b0a6295132
-      internalID: 1851325332
+      spriteID: 39533a29f3b07854e9925a141316c56f
+      internalID: -444294385
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BasicStickers_3
+      name: WinStickers_3
       rect:
         serializedVersion: 2
         x: 96
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b66dcc08c91c9846a6b8e0032635004
-      internalID: 1674078852
+      spriteID: 979d283c7ab26d24ba5cf95871795607
+      internalID: 1634126442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BasicStickers_4
+      name: WinStickers_4
       rect:
         serializedVersion: 2
         x: 0
@@ -250,186 +250,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d790d387357b65843b3b5e17e59a55bf
-      internalID: -1786770653
+      spriteID: 3f5b92c197384714db5f1c6796928767
+      internalID: -1144906106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BasicStickers_5
+      name: WinStickers_5
       rect:
         serializedVersion: 2
         x: 32
         y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: acf1bfd10b62cd9429c4259d2815ae40
-      internalID: 370478714
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicStickers_6
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d89c18e6f3e963c468682c27f738e79c
-      internalID: -127922361
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicStickers_7
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc285147fffa1e24dbabd2f7363cbe12
-      internalID: -926957660
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicStickers_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f677997c198228c409620dd61ac32911
-      internalID: -2133244045
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicStickers_9
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a658e4e5a7441c944a35f4cdc398e7a1
-      internalID: -1798866992
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicStickers_10
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7c0331c4c7d2e6849bb876c47d7de6b9
-      internalID: -359395763
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicStickers_11
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b15180277c5f0fd418606b6fc53834b9
-      internalID: -1640018029
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicStickers_12
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 69b764557ea7e904fbe9f1c80cc8f8b9
-      internalID: 130516626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicStickers_13
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -439,50 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f72db5ead94f9e47bec5d5567d99ab1
-      internalID: 224788866
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicStickers_14
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5c7c4a561464d7e40a67d5a5a2e213e4
-      internalID: 596632522
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicStickers_15
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 40730c613d2e0c340967e5af40ad7794
-      internalID: 810172971
+      spriteID: fd95d9a89e07bd14a9c7b3bffc43df5f
+      internalID: -1886786425
       vertices: []
       indices: 
       edges: []
@@ -490,7 +280,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4bced615e3013944f9fa10cc4d9eb476
+    spriteID: 62b0a9cc37547d34593a77ef84e8939b
     internalID: 0
     vertices: []
     indices: 
@@ -498,22 +288,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BasicStickers_10: -359395763
-      BasicStickers_14: 596632522
-      BasicStickers_5: 575645711
-      BasicStickers_3: 1674078852
-      BasicStickers_12: 130516626
-      BasicStickers_11: -1640018029
-      BasicStickers_15: 26885188
-      BasicStickers_8: -2133244045
-      BasicStickers_4: -1786770653
-      BasicStickers_9: -1798866992
-      BasicStickers_1: -524876479
-      BasicStickers_7: -926957660
-      BasicStickers_13: 224788866
-      BasicStickers_2: 1851325332
-      BasicStickers_0: -751992541
-      BasicStickers_6: -127922361
+      WinStickers_2: -444294385
+      WinStickers_1: 1005629070
+      WinStickers_0: 648208114
+      WinStickers_5: -1886786425
+      WinStickers_4: -1144906106
+      WinStickers_3: 1634126442
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
