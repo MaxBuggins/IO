@@ -143,8 +143,11 @@ public class UI_ScoreBoard : UI_Base
         {
             LeaderboardEntry_t leaderboardEntry;
             bool ret = SteamUserStats.GetDownloadedLeaderboardEntry(steamLeaderboardEntrys, count, out leaderboardEntry, null, 0);
-            print("SteamUserStats.GetDownloadedLeaderboardEntry(" + steamLeaderboardEntrys+ ", " + 0 + ", " + "out LeaderboardEntry" + ", " + null + ", " + 0 + ") : " + ret + " -- " + leaderboardEntry);
+            //print("SteamUserStats.GetDownloadedLeaderboardEntry(" + steamLeaderboardEntrys+ ", " + 0 + ", " + "out LeaderboardEntry" + ", " + null + ", " + 0 + ") : " + ret + " -- " + leaderboardEntry);
             //row.banner.color = SteamUserStats.Down;
+
+            print(leaderboardEntry.m_cDetails);
+            
 
             row.userName.text = "" + SteamFriends.GetFriendPersonaName(leaderboardEntry.m_steamIDUser);
 

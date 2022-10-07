@@ -36,10 +36,20 @@ public class CheckPoint : MonoBehaviour
         if (LevelManager.instance == null)
             return;
 
-        string minutes = Mathf.Floor(LevelManager.instance.raceTimeRemaining / 60).ToString("00");
-        string seconds = Mathf.Floor(LevelManager.instance.raceTimeRemaining % 60).ToString("00");
+        if (LevelManager.instance.raceTimeRemaining > 86400) //more than a day
+        {
+            float days = (((LevelManager.instance.raceTimeRemaining / 24) / 60) / 60);
+            days = Mathf.RoundToInt(days);
+            textDisplay.text = "Expire\n" + days + " days";
 
-        textDisplay.text = "Expire\n" + minutes + ":" + seconds;
+        }
+        else
+        {
+            string minutes = Mathf.Floor(LevelManager.instance.raceTimeRemaining / 60).ToString("00");
+            string seconds = Mathf.Floor(LevelManager.instance.raceTimeRemaining % 60).ToString("00");
+
+            textDisplay.text = "Expire\n" + minutes + ":" + seconds;
+        }
 
     }
 

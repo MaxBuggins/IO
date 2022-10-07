@@ -43,6 +43,9 @@ public class TriggerEvent : MonoBehaviour
 
             case (triggerObjectType.localPlayer):
                 {
+                    if (Player.localInstance == null)
+                        return(false);
+
                     if (other.gameObject != Player.localInstance.gameObject)
                         return (false);
 
