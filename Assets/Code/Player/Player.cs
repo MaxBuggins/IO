@@ -55,6 +55,7 @@ public class Player : Hurtable
     public float standHeight = 2f;
     public float crouchHeight = 0.8f;
 
+    public bool finishedRaceAlive = false;
     #endregion
 
     [Header("Unity Stuff")]
@@ -152,7 +153,7 @@ public class Player : Hurtable
 
             //SteamUserStats.
 
-            SteamUserStats.SetAchievement("ACH_WIN_ONE_GAME");
+            SteamUserStats.SetAchievement("ACH_GET_DEVHAT");
             SteamUserStats.StoreStats();
 #endif
         }
@@ -262,6 +263,12 @@ public class Player : Hurtable
         character.enabled = false;
 
         Instantiate(corpses[Random.Range(0, corpses.Length)], transform.position + (Vector3.one * 0.5f ), transform.rotation, null);
+
+#if (UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_STANDALONE_OSX || STEAMWORKS_WIN || STEAMWORKS_LIN_OSX)
+        finishedRaceAlive = false;
+
+        SteamUserStats.StoreStats();
+#endif
 
         if (isLocalPlayer)
         {
@@ -378,6 +385,9 @@ public class Player : Hurtable
 
                     if (index == 0)
                     {
+                        float test;
+                        SteamUserStats.GetStat("fastest_race_time", out test);
+                        print(test);
                         UI_Main.instance.CreateAlert("|Start Race|", 60, textColor, alertObjIndex: 0);
                         return;
                     }
@@ -392,7 +402,11 @@ public class Player : Hurtable
                         duration = 3;
                         time = (float)(newTime - checkPointTimes[0]);
 
+                        SteamUserStats.SetStat("fastest_race_time", time);
+
                         currentRace.EndRace(this, true);
+
+                        finishedRaceAlive = true;
                     }
 
                     else

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3191287857240720078}
   - component: {fileID: 3191287857240720077}
   - component: {fileID: 3191287857240720076}
+  - component: {fileID: 757631208623573826}
   m_Layer: 0
   m_Name: PlayerSpawnEffect
   m_TagString: Untagged
@@ -116,3 +117,16 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &757631208623573826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3191287857240720067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9897f3b24a72130408c1e62a84f702a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destoryDelay: 5

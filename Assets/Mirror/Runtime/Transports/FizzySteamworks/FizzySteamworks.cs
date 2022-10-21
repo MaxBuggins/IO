@@ -73,7 +73,7 @@ namespace Mirror.FizzySteam
 #else
                 SteamNetworkingUtils.InitRelayNetworkAccess();
 #endif
-
+                print(address);
                 InitRelayNetworkAccess();
 
                 if (ServerActive())

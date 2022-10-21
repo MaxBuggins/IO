@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pixelplacement;
+#if (UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_STANDALONE_OSX || STEAMWORKS_WIN || STEAMWORKS_LIN_OSX)
+using Steamworks;
+#endif
 
 public class VendingMachine : Hurtable
 {
@@ -17,10 +20,18 @@ public class VendingMachine : Hurtable
 
     public GameObject[] cans;
 
+    [Header("Stats")]
+    public static int localTotalCansSpawned;
+    public static bool hasCanAchivement = false;
+
+
     private void Start()
     {
         startScale = transform.localScale;
         spawnSize /= 2;
+
+       
+        SteamUserStats.GetStat("total_cans", out localTotalCansSpawned);
     }
 
     public override void OnHurt(int damage)
@@ -39,7 +50,22 @@ public class VendingMachine : Hurtable
 
             GameObject spawned = Instantiate(cans[Random.Range(0, cans.Length)], spawnLocation, Quaternion.identity, LevelManager.instance.rbsParentObject.transform);
         }
-        //spawned.GetComponent<Rigidbody>().AddForce(transform.forward);
+
+
+        if (lastAttackerIdenity.isLocalPlayer)
+        {
+            localTotalCansSpawned += count;
+            SteamUserStats.SetStat("total_cans", localTotalCansSpawned);
+
+            print(localTotalCansSpawned);
+
+            if (localTotalCansSpawned >= 1000 && hasCanAchivement == false)
+            {
+                hasCanAchivement = true;
+                SteamUserStats.StoreStats();
+            }
+        }
+
     }
 
     void ResetScale()

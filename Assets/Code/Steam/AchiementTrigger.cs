@@ -7,13 +7,14 @@ using Steamworks;
 #endif
 public class AchiementTrigger : MonoBehaviour
 {
-    public string achivementString = "ACH_TRAVEL_FAR_SINGLE";
+    public string achivementString = "ACH_FIND_CEREALS";
+
+    public bool requireFinishedRaceAlive = false;
+
     void Start()
     {
         if (SteamManager.Initialized == false)
             Destroy(gameObject);
-
-        SteamUserStats.ResetAllStats(true);
     }
 
 
@@ -23,6 +24,9 @@ public class AchiementTrigger : MonoBehaviour
         if (player != null)
             if (player.isLocalPlayer)
             {
+                if (requireFinishedRaceAlive == true && player.finishedRaceAlive == false)
+                    return;
+
                 SteamUserStats.SetAchievement(achivementString);
                 SteamUserStats.StoreStats();
             }

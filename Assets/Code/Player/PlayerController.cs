@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.InputSystem;
+using Steamworks;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerInput))]
@@ -16,7 +17,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float airLimit = 1f;
     [SerializeField] private float crouchSpeedMultiplyer = 0.5f;
 
-    [Header("Physcisc")]
+    [Header("Physcis")]
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private float gravitY = 16f;
     //[SerializeField] private float airFriction = 2f;
@@ -52,6 +53,10 @@ public class PlayerController : NetworkBehaviour
     private Controls controls;
 
 
+    [Header("Stats")]
+    float distanceSurfed;
+
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -77,6 +82,8 @@ public class PlayerController : NetworkBehaviour
 
         enabled = true;
         playerInput.enabled = true;
+
+        SteamUserStats.GetStat("distance_surfed", out distanceSurfed);
     }
 
 
@@ -135,10 +142,17 @@ public class PlayerController : NetworkBehaviour
         rb.velocity = velocity + externalVelocity;
         externalVelocity = Vector3.zero;
 
+        if (onGround == false)
+        {
+            distanceSurfed += (Mathf.Abs(velocity.x) + Mathf.Abs(velocity.z)) * Time.fixedDeltaTime;
+            SteamUserStats.SetStat("distance_surfed", distanceSurfed);
+        }
+
         // Reset onGround before next collision checks
         onGround = false;
         groundNormal = Vector3.zero;
     }
+
 
     void GetMovementInput() {
         float x = Mathf.Round(moveInput.x * 2) / 2;

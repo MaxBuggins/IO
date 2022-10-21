@@ -124,6 +124,8 @@ public class SteamManager : MonoBehaviour {
 
 		s_EverInitialized = true;
 
+		//print("STEAMID is:" + SteamAPI.stea)
+
 		SteamLeaderboard.Init("dailyRace");
 	}
 

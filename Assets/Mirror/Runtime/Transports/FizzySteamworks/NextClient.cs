@@ -95,8 +95,9 @@ namespace Mirror.FizzySteam
 
                 OnConnected -= SetConnectedComplete;
             }
-            catch (FormatException)
+            catch (FormatException) //NextClient
             {
+                Debug.LogError($"hostSteamID: " + hostSteamID);
                 Debug.LogError($"Connection string was not in the right format. Did you enter a SteamId?");
                 Error = true;
                 OnConnectionFailed();
