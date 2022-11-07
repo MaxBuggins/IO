@@ -217,8 +217,8 @@ public class PlayerAnimator : MonoBehaviour
         Ray ray = new Ray(transform.position + (Vector3.up * 1.5f), Vector3.down);
         SurfaceMaterial castResult = Cast(ray);
 
-        feetAudioSource.pitch = Random.Range(0.5f, 1.5f);
-        feetAudioSource.volume = Random.Range(0.3f, 0.6f);
+        feetAudioSource.pitch = Random.Range(0.7f, 1.3f);
+        feetAudioSource.volume = Random.Range(0.4f, 0.6f);
 
         if (castResult != null)
             feetAudioSource.PlayOneShot(castResult.clips[Random.Range(0, castResult.clips.Length)]); // pick one at random

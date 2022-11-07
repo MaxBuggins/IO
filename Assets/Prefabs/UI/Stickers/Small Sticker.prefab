@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1721154324040229373, guid: 9c9762783d2708b4c80e3428f4fbd64d, type: 3}
       propertyPath: stickers.Array.size
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1721154324040229373, guid: 9c9762783d2708b4c80e3428f4fbd64d, type: 3}
       propertyPath: stickers.Array.data[0]
@@ -43,6 +43,18 @@ PrefabInstance:
       propertyPath: stickers.Array.data[5]
       value: 
       objectReference: {fileID: 13010100, guid: bc067c68dab0400409aec4697d062918, type: 3}
+    - target: {fileID: 1721154324040229373, guid: 9c9762783d2708b4c80e3428f4fbd64d, type: 3}
+      propertyPath: stickers.Array.data[6]
+      value: 
+      objectReference: {fileID: 595938108, guid: bc067c68dab0400409aec4697d062918, type: 3}
+    - target: {fileID: 1721154324040229373, guid: 9c9762783d2708b4c80e3428f4fbd64d, type: 3}
+      propertyPath: stickers.Array.data[7]
+      value: 
+      objectReference: {fileID: 680821614, guid: bc067c68dab0400409aec4697d062918, type: 3}
+    - target: {fileID: 1721154324040229373, guid: 9c9762783d2708b4c80e3428f4fbd64d, type: 3}
+      propertyPath: stickers.Array.data[8]
+      value: 
+      objectReference: {fileID: -1356972665, guid: bc067c68dab0400409aec4697d062918, type: 3}
     - target: {fileID: 3015039454252647017, guid: 9c9762783d2708b4c80e3428f4fbd64d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

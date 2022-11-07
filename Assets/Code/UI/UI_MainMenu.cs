@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,10 @@ public class UI_MainMenu : MonoBehaviour
 		myNetworkManager.StartClient();
 #endif
 
-
 	}
+
+	public void Quit()
+    {
+		Application.Quit();
+    }
 }

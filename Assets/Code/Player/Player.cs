@@ -222,6 +222,13 @@ public class Player : Hurtable
 
         playerAnimator.mouthAudioSource.PlayOneShot(characteristicsObject.lauphSounds[Random.Range(0, characteristicsObject.lauphSounds.Length)]);
 
+
+        if(newHat == 1)
+        {
+            SteamUserStats.SetAchievement("ACH_WINRACE");
+            SteamUserStats.StoreStats();
+        }
+
         if (isLocalPlayer == true)
             SetLocalHatVisability();
     }
@@ -261,6 +268,7 @@ public class Player : Hurtable
         playerMeshRenderer.gameObject.SetActive(false);
         //directionalSprite.render.enabled = false;
         character.enabled = false;
+        GetComponent<ServerWeapon>().weaponIndex = -1;
 
         Instantiate(corpses[Random.Range(0, corpses.Length)], transform.position + (Vector3.one * 0.5f ), transform.rotation, null);
 
@@ -283,7 +291,7 @@ public class Player : Hurtable
         transform.localScale = Vector3.zero;
         Tween.LocalScale(transform, Vector3.one, 0.8f, 0, AnimationCurve.EaseInOut(0,0,1,1));
         Instantiate(characteristicsObject.onSpawnPrefab, transform.position, transform.rotation);
-
+        
         character.enabled = true;
 
         if(currentRace != null)
@@ -294,8 +302,8 @@ public class Player : Hurtable
 
         if (isLocalPlayer)
         {
-            //GetComponent<Rigidbody>().velocity = Vector3.zero;
             playerMovement.velocity = Vector3.zero;
+            playerMovement.rb.velocity = Vector3.zero;
             playerCamera.Dead(false);
             UI_Main.instance.UIUpdate();
         }

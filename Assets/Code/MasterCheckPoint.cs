@@ -30,6 +30,7 @@ public class MasterCheckPoint : NetworkBehaviour
 
         CmdGetRaces(); //TEMP
 
+
         RefreshCheckPoints();
         base.OnStartClient();
     }
@@ -49,6 +50,7 @@ public class MasterCheckPoint : NetworkBehaviour
 
     public void RefreshCheckPoints()
     {
+
         int i;
         for(i = 0; i < checkPoints.Count; i++)
         {

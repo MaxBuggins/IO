@@ -126,7 +126,7 @@ public class SteamManager : MonoBehaviour {
 
 		//print("STEAMID is:" + SteamAPI.stea)
 
-		SteamLeaderboard.Init("dailyRace");
+		//SteamLeaderboard.Init("dailyRace");
 	}
 
 	// This should only ever get called on first load and after an Assembly reload, You should never Disable the Steamworks Manager yourself.

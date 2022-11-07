@@ -286,10 +286,12 @@ public class PlayerController : NetworkBehaviour
         if (pause) 
         {
             controls.Play.Disable();
+            player.playerCamera.controls.Disable();
         }
         else
         {
             controls.Play.Enable();
+            player.playerCamera.controls.Enable();
         }
     }
 

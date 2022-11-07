@@ -10,20 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e782f20f9996c24eb5f613291948b30, type: 3}
-  m_Name: ErrorLocalPlayer
+  m_Name: SavedLocalPlayer
   m_EditorClassIdentifier: 
-  userName: NoNameNed
+  userName: Bug
   primaryColour:
     serializedVersion: 2
     rgba: 4280950964
-  secondaryColour:
-    serializedVersion: 2
-    rgba: 16711935
-  thirdryColour:
-    serializedVersion: 2
-    rgba: 0
-  killMessage: // I am ERROR \\
-  mouseSensativity: 15
+  patternIndex: 0
+  stickerIndex: 0
+  mouseSensativity: 14.45451
   crosshairIndex: 2
   crosshairColour: {r: 1, g: 1, b: 1, a: 1}
   showOwnHat: 1

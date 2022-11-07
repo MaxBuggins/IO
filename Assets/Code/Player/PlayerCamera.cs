@@ -45,7 +45,7 @@ public class PlayerCamera : MonoBehaviour
 
     [Header("Unity Things")]
     private PlayerController movement;
-    private Controls controls;
+    [HideInInspector] public Controls controls;
 
 
     void Start()

@@ -51,6 +51,19 @@ public class ServerWeapon : NetworkBehaviour
 
     public void OnWeaponChanged(int oldWeapon, int newWeapon)
 	{
+		if(newWeapon < 0)
+        {
+			if (fpWeaponObject != null)
+				Destroy(fpWeaponObject);
+
+			if (thirdPersonObject != null)
+				Destroy(thirdPersonObject);
+
+			UI_Main.instance.UI_Crosshaire.ammoCount.enabled = false;
+
+			return;
+        }		
+			
 		weaponObject = LevelManager.instance.weapons[newWeapon];
 
 		if (fpWeaponObject != null)

@@ -71,6 +71,8 @@ public class LevelManager : NetworkBehaviour
 
         audioSource.clip = backgroundMusic;
         audioSource.Play();
+
+        OnRaceChange(currentLevelRace, currentLevelRace);
     }
 
     public override void OnStartServer()
@@ -129,7 +131,10 @@ public class LevelManager : NetworkBehaviour
                 if (players[p].bestTime >= 0)
                 {
                     if (p == 0)
-                        players[p].hatIndex = 1;
+                    {
+                        if(players.Count > 1) //Are you really a winner if your alone
+                            players[p].hatIndex = 1;
+                    }
 
                     lastRoundResults.Add(players[p].userName + " | " + (players[p].bestTime * 100).ToString("00:00") + "*" + UnityExtensions.colourToHex(players[p].primaryColour));
                 }
@@ -143,6 +148,8 @@ public class LevelManager : NetworkBehaviour
         levelRaces[currentLevelRace].ServerActivateCheckPoints(true);
 
         raceStartTime = NetworkTime.time;
+
+        OnRaceChange(currentLevelRace, currentLevelRace);
     }
 
     public void ServerSetRaceDuration(float duration)
@@ -167,9 +174,12 @@ public class LevelManager : NetworkBehaviour
 
     public void OnRaceChange(int oldRaceIndex, int newRaceIndex)
     {
+        SteamLeaderboard.Init(levelRaces[newRaceIndex].raceName);
+
         if (oldRaceIndex == -1)
             return;
 
+        //what was i gonna do here?
     }
 
     void OnLastResultsUpdated(SyncList<string>.Operation operation, int index, string oldResult, string newResult)

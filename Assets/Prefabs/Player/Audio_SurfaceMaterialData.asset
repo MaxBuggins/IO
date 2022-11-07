@@ -31,4 +31,6 @@ MonoBehaviour:
     terrainLayer: {fileID: 8574412962073106934, guid: 1de350783ad96b94e89ff87dbff3c9c6, type: 2}
     material: {fileID: 0}
     clips:
-    - {fileID: 8300000, guid: fcb76203bd23dfa42a0ac0559f449189, type: 3}
+    - {fileID: 8300000, guid: e5e5e49a98fe8d14ea7beb601363bf32, type: 3}
+    - {fileID: 8300000, guid: 8e8c369fdae75304f8833af75bc5c1f2, type: 3}
+    - {fileID: 8300000, guid: 37e0be5bd2c376f4b804caa7087308cd, type: 3}

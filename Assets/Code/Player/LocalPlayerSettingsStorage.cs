@@ -7,6 +7,8 @@ public class LocalPlayerSettingsStorage : MonoBehaviour
     public static LocalPlayerSettingsStorage localInstance;
     public LocalPlayerSettings localPlayerSettings;
 
+    public LocalPlayerSettings defaultlocalPlayerSettings;
+
     private void Awake()
     {
         if (localInstance == null)
@@ -35,5 +37,30 @@ public class LocalPlayerSettingsStorage : MonoBehaviour
     public void SetBounceType(int index)
     {
         localPlayerSettings.bounceCombine = (PhysicMaterialCombine)index;
+    }
+
+    public void SetDisplayTV(bool enable) //broken
+    {
+        localPlayerSettings.displayTVs = enable;
+        foreach (UnityEngine.Video.VideoPlayer videoPlayer in FindObjectsOfType<UnityEngine.Video.VideoPlayer>())
+        {
+            videoPlayer.enabled = enable;
+        }
+    }
+
+    //I dont like this solution
+    public void resetPlayerSettings()
+    {
+        localPlayerSettings.mouseSensativity = defaultlocalPlayerSettings.mouseSensativity;
+
+        localPlayerSettings.crosshairIndex = defaultlocalPlayerSettings.crosshairIndex;
+        localPlayerSettings.crosshairColour = defaultlocalPlayerSettings.crosshairColour;
+
+        localPlayerSettings.showOwnHat = defaultlocalPlayerSettings.showOwnHat;
+        localPlayerSettings.enableRbs = defaultlocalPlayerSettings.enableRbs;
+
+        localPlayerSettings.thirdPerson = defaultlocalPlayerSettings.thirdPerson;
+
+        localPlayerSettings.bounceCombine = defaultlocalPlayerSettings.bounceCombine;
     }
 }

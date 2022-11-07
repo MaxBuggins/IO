@@ -12,7 +12,7 @@ public class LocalPlayerSettings : ScriptableObject
     public int stickerIndex;
 
 
-    [Header("Player Stuff")]
+    [Header("Settings Stuff")]
     public float mouseSensativity = 15f;
 
     public int crosshairIndex = 2;
@@ -20,8 +20,10 @@ public class LocalPlayerSettings : ScriptableObject
 
     public bool showOwnHat = false;
     public bool enableRbs = true;
+    public bool displayTVs = true;
 
     public bool thirdPerson = false;
 
     public PhysicMaterialCombine bounceCombine = PhysicMaterialCombine.Multiply;
+
 }

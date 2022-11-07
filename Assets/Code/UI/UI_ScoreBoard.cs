@@ -116,7 +116,6 @@ public class UI_ScoreBoard : UI_Base
             SteamLeaderboard.DownloadLeaderboard();
             return;
         }
-       
 
         int count = Mathf.Clamp(SteamUserStats.GetLeaderboardEntryCount(steamLeaderboard), 0, 10);
 
@@ -146,7 +145,7 @@ public class UI_ScoreBoard : UI_Base
             //print("SteamUserStats.GetDownloadedLeaderboardEntry(" + steamLeaderboardEntrys+ ", " + 0 + ", " + "out LeaderboardEntry" + ", " + null + ", " + 0 + ") : " + ret + " -- " + leaderboardEntry);
             //row.banner.color = SteamUserStats.Down;
 
-            print(leaderboardEntry.m_cDetails);
+            //print(leaderboardEntry.m_cDetails);
             
 
             row.userName.text = "" + SteamFriends.GetFriendPersonaName(leaderboardEntry.m_steamIDUser);

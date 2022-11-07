@@ -74,4 +74,13 @@ public class UI_Settings : MonoBehaviour
                 Player.localInstance.playerMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         }
     }
+
+    public void SetDisplayTV(bool enable)
+    {
+        LocalPlayerSettingsStorage.localInstance.localPlayerSettings.displayTVs = enable;
+        foreach (UnityEngine.Video.VideoPlayer videoPlayer in FindObjectsOfType<UnityEngine.Video.VideoPlayer>())
+        {
+            videoPlayer.enabled = false;
+        }
+    }
 }
