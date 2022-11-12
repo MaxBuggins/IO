@@ -257,9 +257,10 @@ public class Player : Hurtable
 
             if (health > 0)
                 UI_Main.instance.TemparyChangeScreenColour(new Color(0.706f, 0.125f, 0.165f, 0.1f), 0.5f);
+            
         }
     }
-
+    
 
     public override void OnDeath()
     {
@@ -273,6 +274,9 @@ public class Player : Hurtable
         Instantiate(corpses[Random.Range(0, corpses.Length)], transform.position + (Vector3.one * 0.5f ), transform.rotation, null);
 
 #if (UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_STANDALONE_OSX || STEAMWORKS_WIN || STEAMWORKS_LIN_OSX)
+        if (SteamAPI.IsSteamRunning() == false)
+            return;
+        
         finishedRaceAlive = false;
 
         SteamUserStats.StoreStats();
