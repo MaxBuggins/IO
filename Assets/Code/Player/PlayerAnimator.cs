@@ -23,7 +23,6 @@ public class PlayerAnimator : MonoBehaviour
     private float animationCrossFade = 0;
 
     #region Cached Properties
-
     private int _currentState;
     private static readonly int idle = Animator.StringToHash("Idle");
     private static readonly int run = Animator.StringToHash("Run");
@@ -35,6 +34,7 @@ public class PlayerAnimator : MonoBehaviour
     private static readonly int shout = Animator.StringToHash("Shout");
     private static readonly int primaryAttack = Animator.StringToHash("Primary Attack");
     private static readonly int secondaryAttack = Animator.StringToHash("Secondary Attack");
+    private static readonly int surf = Animator.StringToHash("Surf");
     #endregion
 
     #region FaceMaterials
@@ -63,7 +63,9 @@ public class PlayerAnimator : MonoBehaviour
     private Vector3 moveVector;
 
 
+    [Header("Refrences")]
     public Transform rightHand;
+    public Transform surfboard;
 
     private Animator animator;
     private Player player;
@@ -186,8 +188,12 @@ public class PlayerAnimator : MonoBehaviour
             return LockState(crouch, 0.1f, 0.1f);
         }
 
+        if (player.surfing)
+        {
+            return LockState(surf, 0, 0.1f);
+        }
 
-        if(player.timeSinceGrounded > 0.4)
+        if (player.timeSinceGrounded > 0.4)
         {
             return fall;
         }
@@ -232,6 +238,11 @@ public class PlayerAnimator : MonoBehaviour
     public void TriggerSecondaryAttack()
     {
         animator.CrossFade(secondaryAttack, 0, 1);
+    }
+
+    public void SetSurfing(bool surfing)
+    {
+        surfboard.gameObject.SetActive(surfing);
     }
 
 

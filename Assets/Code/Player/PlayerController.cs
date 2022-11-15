@@ -250,9 +250,12 @@ public class PlayerController : NetworkBehaviour
 
         onGround = false;
 
+        bool surfing = false;
+
         // Check if any of the contacts has acceptable floor angle
         foreach (ContactPoint contact in other.contacts)
         {
+            surfing = true;
             if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI / 2f))
             {
                 if (player.timeSinceGrounded > 1f)
@@ -263,9 +266,13 @@ public class PlayerController : NetworkBehaviour
                 groundNormal = contact.normal;
                 onGround = true;
                 player.timeSinceGrounded = 0;
+                player.CmdSetSurfing(false);
                 return;
             }
         }
+        if (surfing =! player.surfing)
+            player.CmdSetSurfing(surfing);
+
     }
 
     // This is for avoiding jumping all the time, thanks to the guy i stole this off
