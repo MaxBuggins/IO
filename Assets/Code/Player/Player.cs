@@ -46,6 +46,10 @@ public class Player : Hurtable
     [SyncVar(hook = nameof(DoCrouch))]
     public bool crouching = false;
 
+    [SyncVar(hook = nameof(OnSurfChange))]
+    public bool surfing = false;
+
+
     #region localStats
     //so things like status effects can be applyed without editing the
     //default values.
@@ -189,7 +193,18 @@ public class Player : Hurtable
             playerCamera.Crouch(_New);
         }
     }
-    
+
+    [Command]
+    public void CmdSetSurfing(bool isSurfing)
+    {
+        surfing = isSurfing;
+    }
+
+    public void OnSurfChange(bool _Old, bool _New)
+    {
+        playerAnimator.SetSurfing(_New);
+    }
+
     public void OnScoreChange(int oldScore, int newScore)
     {
         if (newScore > oldScore)
