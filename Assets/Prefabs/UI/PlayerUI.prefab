@@ -660,6 +660,7 @@ MonoBehaviour:
   - {fileID: 5387573083884081287, guid: d50aa9a7ada4a57448508c69271e5821, type: 3}
   - {fileID: 4252963945889860613, guid: 434b2f1808bb3f44e890ba5bc0fdf8c8, type: 3}
   - {fileID: 8257727921012164781, guid: edc7d165a4fa463419f85d28c6ef834d, type: 3}
+  - {fileID: 1452143118947390677, guid: 473617c3d8d80d247a727372eb3c7685, type: 3}
   winScreenPrefab: {fileID: 7733692879411263872, guid: bf1fc1fb2083dc943b894194573fff80, type: 3}
   canvas: {fileID: 596965255092342151}
   inputSystemUIInput: {fileID: 0}

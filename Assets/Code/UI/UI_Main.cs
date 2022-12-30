@@ -136,18 +136,25 @@ public class UI_Main : MonoBehaviour
         Instantiate(winScreenPrefab, transform);
     }
 
-    public void CreateAlert(string text, float fontSize, Color fontColour, float duration = 2, float delay = 0, int alertObjIndex = 0)
+    public GameObject CreateAlert(string text, float fontSize, Color fontColour, float duration = 2, float delay = 0, int alertObjIndex = 0, Vector2? moveDirection = null)
     {
+        if(moveDirection == null)
+        {
+            moveDirection = Vector2.down * 600;
+        }
+
         GameObject createdAlertObject = Instantiate(alertObjects[alertObjIndex], transform);
 
         createdAlertObject.GetComponent<SelfDestruct>().destoryDelay = duration;
 
-        TextMeshProUGUI createdAlertObjectTMPro = createdAlertObject.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI createdAlertObjectTMPro = createdAlertObject.GetComponentInChildren<TextMeshProUGUI>();
         createdAlertObjectTMPro.text = text;
         createdAlertObjectTMPro.fontSize = fontSize;
         createdAlertObjectTMPro.color = fontColour;
 
-        Tween.AnchoredPosition(createdAlertObject.GetComponent<RectTransform>(), Vector2.down * 600, duration, delay);
+        Tween.AnchoredPosition(createdAlertObject.GetComponent<RectTransform>(), moveDirection.Value, duration, delay);
+
+        return (createdAlertObject);
     }
 
     public void ChangeScreenColour(Color colour)
