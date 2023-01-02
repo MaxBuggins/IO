@@ -110,10 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73a88e59b014f9f4d92d8408c240c9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxInteractDistanceValue: 2.5
   fileName: Join_Frink_TODAY.txt
   password: 7
-  maxInteractDistance: 3
-  pickUpDuration: 0.4
+  pickUpDuration: 0.6
   pickUpCurve:
     serializedVersion: 2
     m_Curve:
@@ -139,4 +139,3 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   rotOffset: {x: -90, y: 90, z: 0}
-  decryptSpeed: 0

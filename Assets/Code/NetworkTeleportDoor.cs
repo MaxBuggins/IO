@@ -4,12 +4,17 @@ using UnityEngine;
 using Mirror;
 
 [RequireComponent(typeof(Renderer))] //fancy
-public class NetworkTeleportDoor : NetworkBehaviour
+public class NetworkTeleportDoor : NetworkBehaviour, Interact
 {
     [SyncVar(hook = nameof(UpdateDoorState))] public bool open;
 
     [Header("Interaction")]
-    public float maxInteractDistance = 2;
+    public float maxInteractDistanceValue = 2;
+    public float maxInteractDistance
+    {
+        get { return maxInteractDistanceValue; }
+        set { maxInteractDistanceValue = value; }
+    }
 
     [Header("Visual")]
     [SerializeField] private float openDuration = 1f;
@@ -102,5 +107,4 @@ public class NetworkTeleportDoor : NetworkBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, desternationDoor.ownDesternationTrans.position);
     }
-
 }

@@ -30,6 +30,11 @@ public class UI_Main : MonoBehaviour
     [SerializeField] private GameObject[] alertObjects;
     [SerializeField] private GameObject winScreenPrefab;
 
+    [SerializeField] private Transform hintPos;
+    [SerializeField] private Transform hiddenHintPos;
+    [SerializeField] private GameObject[] hintObjects;
+
+
     public Canvas canvas;
     [HideInInspector] public InputSystemUIInputModule inputSystemUIInput;
 
@@ -136,9 +141,33 @@ public class UI_Main : MonoBehaviour
         Instantiate(winScreenPrefab, transform);
     }
 
+    public void DisplayHint(bool display, int index, float duration = 0)
+    {
+        if (display)
+        {
+            if(duration == 0)
+                hintObjects[index].transform.position = Vector3.MoveTowards(hintObjects[index].transform.position, hintPos.position, 1500 * Time.deltaTime);
+
+            else
+            {
+                Tween.Position(hintObjects[index].transform, hintPos.position, duration * 0.25f, 0, AnimationCurve.EaseInOut(0, 0, 1, 1));
+                Invoke(nameof(HideHint), duration * 0.75f);
+            }
+        }
+        else
+        {
+            hintObjects[index].transform.position = Vector3.MoveTowards(hintObjects[index].transform.position, hiddenHintPos.position, 300 * Time.deltaTime);
+        }
+    }
+
+    public void HideHint()
+    {
+        Tween.Position(hintObjects[1].transform, hiddenHintPos.position, 2f, 0, AnimationCurve.EaseInOut(0, 0, 1, 1));
+    }
+
     public GameObject CreateAlert(string text, float fontSize, Color fontColour, float duration = 2, float delay = 0, int alertObjIndex = 0, Vector2? moveDirection = null)
     {
-        if(moveDirection == null)
+        if (moveDirection == null)
         {
             moveDirection = Vector2.down * 600;
         }

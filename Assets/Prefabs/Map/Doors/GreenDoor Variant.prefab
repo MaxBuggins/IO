@@ -57,11 +57,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5312819558573371961, guid: 2acc6477236b3f84eab938f08d82d3c0, type: 3}
       propertyPath: m_Name
-      value: GreenDoor
+      value: GreenDoor Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7170659530921105521, guid: 2acc6477236b3f84eab938f08d82d3c0, type: 3}
       propertyPath: sceneId
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7170659530921105521, guid: 2acc6477236b3f84eab938f08d82d3c0, type: 3}
+      propertyPath: m_AssetId
+      value: 3aa9e299dce15db418830ae2272b6645
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2acc6477236b3f84eab938f08d82d3c0, type: 3}

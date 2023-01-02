@@ -65,11 +65,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5312819558573371961, guid: 2acc6477236b3f84eab938f08d82d3c0, type: 3}
       propertyPath: m_Name
-      value: RedDoor
+      value: RedDoor Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7170659530921105521, guid: 2acc6477236b3f84eab938f08d82d3c0, type: 3}
       propertyPath: sceneId
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7170659530921105521, guid: 2acc6477236b3f84eab938f08d82d3c0, type: 3}
+      propertyPath: m_AssetId
+      value: 49d13e386895d69458e1900605fceba2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2acc6477236b3f84eab938f08d82d3c0, type: 3}

@@ -73,11 +73,6 @@ public class PlayerCamera : MonoBehaviour
         cameraOffset = standCameraOffset;
     }
 
-    public void OnMouseLook()
-    {
-
-    }
-
 
     void Update()
     {
@@ -85,7 +80,7 @@ public class PlayerCamera : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, hitInfo: out hit, 200))
+        if (Physics.Raycast(ray, hitInfo: out hit, 100))
         {
             if (hit.collider.tag == "Player")
             {
@@ -109,10 +104,27 @@ public class PlayerCamera : MonoBehaviour
                 }
             }
             else
+            {
                 ClearAbovePlayerSelection(); //this/is
+
+                if (hit.collider.tag == "Interactable")
+                {
+                    if (hit.distance < hit.collider.GetComponent<Interact>().maxInteractDistance - 0.1f)
+                    {
+                        UI_Main.instance.DisplayHint(true, 0);
+                    }
+                    else
+                        UI_Main.instance.DisplayHint(false, 0);
+                }
+                else
+                    UI_Main.instance.DisplayHint(false, 0);
+            }
         }
         else
+        {
             ClearAbovePlayerSelection(); //retarded
+            UI_Main.instance.DisplayHint(false, 0);
+        }
 
 
         float mouseX = look.x * Time.fixedDeltaTime;
@@ -155,13 +167,14 @@ public class PlayerCamera : MonoBehaviour
             currentOffset += (Vector3.zero - currentOffset).normalized * rotResetSpeed * Time.deltaTime;
     }
 
+
     public void AttemptInteract()
     {
         var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, hitInfo: out hit, 3))
+        if (Physics.Raycast(ray, hitInfo: out hit, 4))
         {
             if (hit.collider.tag == "Interactable")
             {

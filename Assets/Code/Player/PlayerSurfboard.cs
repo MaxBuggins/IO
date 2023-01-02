@@ -33,7 +33,7 @@ public class PlayerSurfboard : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(primaryGroundTrans.position, Vector3.down, out hit, maxRayDistance * 5, groundMask))
+        if (Physics.Raycast(primaryGroundTrans.position, Vector3.down, out hit, maxRayDistance * 5, groundMask, QueryTriggerInteraction.Ignore))
         {
             //print(hit.normal);
 

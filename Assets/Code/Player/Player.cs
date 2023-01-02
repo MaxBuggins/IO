@@ -470,4 +470,5 @@ public class Player : Hurtable
     {
         playerAnimator.PlayCallout(set, index);
     }
+
 }
