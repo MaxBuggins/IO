@@ -1254,7 +1254,7 @@ MonoBehaviour:
   maxRayDistance: 2
   addVector: {x: 0, y: 0, z: 0}
   primaryGroundTrans: {fileID: 4602337173920348244}
-  collisionParticals: {fileID: 0}
+  collisionParticals: {fileID: 2804414924253969719}
   player: {fileID: 0}
 --- !u!1 &6057776705120176589
 GameObject:

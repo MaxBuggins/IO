@@ -523,10 +523,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 4621549798594556911}
-    - target: {fileID: 152424599691252536, guid: 963ecc16b7a5ba247b07c3f187543a25, type: 3}
-      propertyPath: collisionParticals
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2856257091741926188, guid: 963ecc16b7a5ba247b07c3f187543a25, type: 3}
       propertyPath: m_Enabled
       value: 1
