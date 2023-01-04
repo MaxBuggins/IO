@@ -1246,7 +1246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3462f7578d00ce147a267cedeb9fb218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slerpAmount: 0.14
+  slerpAmount: 0.1
   surfboardJumpFlipSpeed: 100
   groundMask:
     serializedVersion: 2

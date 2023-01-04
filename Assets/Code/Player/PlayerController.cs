@@ -248,39 +248,43 @@ public class PlayerController : NetworkBehaviour
 
         groundMaterial = other.collider.material;
 
-        onGround = false;
-
         bool surfing = true;
 
         // Check if any of the contacts has acceptable floor angle
         foreach (ContactPoint contact in other.contacts)
         {
-            print(contact.normal.y);
-
             if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI / 2f))
             {
+                print(contact.normal.y);
+
                 if (player.timeSinceGrounded > 1f)
                 {
                     player.playerAnimator.OnHardLanding();
                 }
-
+                player.CmdSetSurfing(false);
                 groundNormal = contact.normal;
                 onGround = true;
                 player.timeSinceGrounded = 0;
-                player.CmdSetSurfing(false);
                 surfing = false;
                 return;
             }
 
-            if (contact.normal.y < 0.05f)
+            if (player.surfing == false && contact.normal.y < 0.1f)
             {
-                surfing = false;
+                print(contact.normal.y);
                 player.CmdSetSurfing(false);
+                groundNormal = contact.normal;
+                player.timeSinceGrounded = 0;
+                surfing = false;
                 return;
             }
         }
-        if (surfing =! player.surfing)
-            player.CmdSetSurfing(surfing);
+        if (surfing == false)
+        {
+            onGround = true;
+        }
+
+        player.CmdSetSurfing(surfing);
 
     }
 
