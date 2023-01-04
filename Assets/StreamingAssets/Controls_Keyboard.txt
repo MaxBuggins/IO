@@ -1,0 +1,57 @@
+:Decoded:
+How To Play 
+█▀ █ █ █▀█ █▀▀  █ █▀█
+▄█ █▄█ █▀▄ █▀ ▄ █ █▄█
+By Max Buggins
+
+==================================================
+=-Inputs-=
+
+WASD - That is how you got to the floppy disk
+Mouse - Thats how you looked at the floppy disk
+E - Thats how you picked up the floppy disk
+
+Space - To Jump upwards, You must be on flatish ground
+C - Crouch down
+
+Left Mouse Click - Use held item
+R - Die
+
+Tab - Show the scoreboard
+P or Esc - Pause (Time won't actually stop, silly)
+
+Numbers - Say something
+
+=================================================
+=-Surfing-=
+
+To surf, find a ramp and move towards it.
+Example:
+ o  /
+ | /  This man whould press D to move towards the
+ ^/   ramp, (DO NOT PRESS WSA at the same time)
+
+Are you coming towards a roof you just really just want to bounce off, then hold space and you will bounce, keeping your velocity.
+
+=================================================
+=-Not enjoying the game?-=
+
+Simple just:
+
+1. Alt-Tab to steam
+2. Find Surf.IO
+3. "Leave a Review"
+4. Give a posative review, 
+need help, here is a template:
+
+"WoW i am blown away by this [A] game called SURF.IO, it is very [A], I especailly love the [B], I think you [C] people should play it [D]."
+
+[A]: Fun, Great, Amasing, Cool, Crazy Cool, Brilliant
+[B]: Movement, Graphics, Sounds, Frink, Races
+[C]: Cool, Happy, Awsome, 好, Strong
+[D]: Now, Very soon, Tommorow, Yesterday
+
+5. Now you can quit the game, It is important to do the above steps or risk makeing Max Buggins, very sad.
+=================================================
+
+Please try to enjoy this game.

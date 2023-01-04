@@ -1,0 +1,5 @@
+newmtl Debug_32x32_-_Glass
+map_Kd Debug 32x32 - Glass.png
+Kd 1 1 1
+d 0.8
+
