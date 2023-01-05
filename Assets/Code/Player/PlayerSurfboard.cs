@@ -13,30 +13,44 @@ public class PlayerSurfboard : MonoBehaviour
 
     public Vector3 addVector;
 
-
     private Vector3 orginalRotation;
     private float lastPlayerRotY;
 
     [Header("Refrences")]
     public Transform primaryGroundTrans;
     public Transform collisionParticals;
+    [SerializeField] private Renderer surfboardRenderer;
+    [SerializeField] private Material fp_surfboard_material;
     public Player player;
 
     private void Start()
     {
         orginalRotation = transform.localEulerAngles;
         lastPlayerRotY = player.transform.eulerAngles.y;
+
+
+        Texture surfboardTexture;
+        surfboardTexture = surfboardRenderer.material.mainTexture;
+        surfboardRenderer.material = fp_surfboard_material;
+        surfboardRenderer.material.mainTexture = surfboardTexture;
     }
 
 
     private void LateUpdate()
     {
+        Color whiteTrans = Color.white;
+
+        whiteTrans.a = Mathf.InverseLerp(80, 0, Camera.main.transform.eulerAngles.x) + 0.05f;
+
+        //whiteTrans.a
+        //whiteTrans.a = Camera.main.rot
+
+        surfboardRenderer.material.color = whiteTrans;
+
         RaycastHit hit;
 
         if (Physics.Raycast(primaryGroundTrans.position, Vector3.down, out hit, maxRayDistance * 5, groundMask, QueryTriggerInteraction.Ignore))
         {
-            //print(hit.normal);
-
             if (hit.distance > maxRayDistance)
             {
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(orginalRotation), slerpAmount / 2);

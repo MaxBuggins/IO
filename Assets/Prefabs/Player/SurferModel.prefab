@@ -1255,6 +1255,8 @@ MonoBehaviour:
   addVector: {x: 0, y: 0, z: 0}
   primaryGroundTrans: {fileID: 4602337173920348244}
   collisionParticals: {fileID: 2804414924253969719}
+  surfboardRenderer: {fileID: 4058710391955723072}
+  fp_surfboard_material: {fileID: 2100000, guid: bc17d752d9202d4499c6cb3f6bd9801d, type: 2}
   player: {fileID: 0}
 --- !u!1 &6057776705120176589
 GameObject:
@@ -1647,7 +1649,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5777154575677436071
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1664,7 +1666,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &1367501211733356983
 MonoBehaviour:
   m_ObjectHideFlags: 0
