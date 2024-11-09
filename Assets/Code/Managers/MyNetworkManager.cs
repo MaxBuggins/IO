@@ -190,14 +190,6 @@ public class MyNetworkManager : NetworkManager
         base.OnServerDisconnect(conn);
     }
 
-    /// <summary>
-    /// Called on server when transport raises an exception.
-    /// <para>NetworkConnection may be null.</para>
-    /// </summary>
-    /// <param name="conn">Connection of the client...may be null</param>
-    /// <param name="exception">Exception thrown from the Transport.</param>
-    public override void OnServerError(NetworkConnectionToClient conn, Exception exception) { }
-
     #endregion
 
     #region Client System Callbacks
@@ -236,14 +228,6 @@ public class MyNetworkManager : NetworkManager
     /// </summary>
     public override void OnClientNotReady() { }
 
-    /// <summary>
-    /// Called on client when transport raises an exception.</summary>
-    /// </summary>
-    /// <param name="exception">Exception thrown from the Transport.</param>
-    public override void OnClientError(Exception exception) 
-    { 
-
-    }
 
     #endregion
 
