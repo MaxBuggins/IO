@@ -33,7 +33,7 @@ public class TriggerForce : NetworkBehaviour
                 if (Player.localInstance.playerMovement.velocity.y < 0)
                     addForce.y += -Player.localInstance.playerMovement.velocity.y / 2;
 
-                Player.localInstance.playerMovement.rb.velocity += addForce * Time.fixedDeltaTime;
+                Player.localInstance.playerMovement.rb.linearVelocity += addForce * Time.fixedDeltaTime;
             }
         }
     }

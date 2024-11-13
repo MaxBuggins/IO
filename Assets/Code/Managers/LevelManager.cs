@@ -59,7 +59,7 @@ public class LevelManager : NetworkBehaviour
         rbsParentObject.SetActive(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.enableRbs);
 
         //set up SyncList
-        lastRoundResults.Callback += OnLastResultsUpdated;
+        lastRoundResults.OnAdd += OnLastResultsAdded;
 
         RefreshPlayerList();
     }
@@ -182,38 +182,30 @@ public class LevelManager : NetworkBehaviour
         //what was i gonna do here?
     }
 
-    void OnLastResultsUpdated(SyncList<string>.Operation operation, int index, string oldResult, string newResult)
+    void OnLastResultsAdded(int index)
     {
-        switch (operation)
+        string[] texts = lastRoundResults[index].Split('*');
+        float fontSize = 24;
+        float delay = 0;
+
+        switch (index)
         {
-            case SyncList<string>.Operation.OP_ADD:
+            case (0):
                 {
-                    string[] texts = lastRoundResults[index].Split('*');
-                    float fontSize = 24;
-                    float delay = 0;
-
-                    switch (index)
-                    {
-                        case (0):
-                            {
-                                fontSize = 48;
-                                delay = 1f;
-                                break;
-                            }
-                        case (1):
-                            {
-                                fontSize = 32;
-                                delay = 0.5f;
-                                break;
-                            }
-                    }
-
-                    if (!isServerOnly)
-                        UI_Main.instance.CreateAlert(texts[0], fontSize, UnityExtensions.hexToColour(texts[1]), 7, delay, alertObjIndex: 2);
-
+                    fontSize = 48;
+                    delay = 1f;
+                    break;
+                }
+            case (1):
+                {
+                    fontSize = 32;
+                    delay = 0.5f;
                     break;
                 }
         }
+
+        if (!isServerOnly)
+            UI_Main.instance.CreateAlert(texts[0], fontSize, UnityExtensions.hexToColour(texts[1]), 7, delay, alertObjIndex: 2);
     }
 
 

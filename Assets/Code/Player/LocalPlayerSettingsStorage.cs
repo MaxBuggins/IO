@@ -36,7 +36,7 @@ public class LocalPlayerSettingsStorage : MonoBehaviour
 
     public void SetBounceType(int index)
     {
-        localPlayerSettings.bounceCombine = (PhysicMaterialCombine)index;
+        localPlayerSettings.bounceCombine = (PhysicsMaterialCombine)index;
     }
 
     public void SetDisplayTV(bool enable) //broken

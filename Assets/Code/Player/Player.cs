@@ -132,7 +132,7 @@ public class Player : Hurtable
         CmdPlayerSetStats(LocalPlayerSettingsStorage.localInstance.localPlayerSettings.userName, LocalPlayerSettingsStorage.localInstance.localPlayerSettings.primaryColour);
 
         //set up SyncList
-        checkPointTimes.Callback += OnTimesUpdated;
+        checkPointTimes.OnAdd += OnTimesAdded;
 
         base.OnStartLocalPlayer();
     }
@@ -322,7 +322,7 @@ public class Player : Hurtable
         if (isLocalPlayer)
         {
             playerMovement.velocity = Vector3.zero;
-            playerMovement.rb.velocity = Vector3.zero;
+            playerMovement.rb.linearVelocity = Vector3.zero;
             playerCamera.Dead(false);
             UI_Main.instance.UIUpdate();
         }
@@ -370,7 +370,7 @@ public class Player : Hurtable
     [TargetRpc]
     public override void TargetAddVelocity(NetworkConnection target, Vector3 vel) //TEMP apply to local player only
     {
-        playerMovement.rb.velocity += vel;
+        playerMovement.rb.linearVelocity += vel;
         //playerMovement.velocity = Vector3.ClampMagnitude(playerMovement.velocity, maxVelocity); //no more infinit death demension
     }
 
@@ -379,13 +379,13 @@ public class Player : Hurtable
     {
         //Code some bitches
         if (vel.x == 0)
-            vel.x = playerMovement.rb.velocity.x;
+            vel.x = playerMovement.rb.linearVelocity.x;
         if (vel.y == 0)
-            vel.y = playerMovement.rb.velocity.y;
+            vel.y = playerMovement.rb.linearVelocity.y;
         if (vel.z == 0)
-            vel.z = playerMovement.rb.velocity.z;
+            vel.z = playerMovement.rb.linearVelocity.z;
 
-        playerMovement.rb.velocity = vel;
+        playerMovement.rb.linearVelocity = vel;
         //playerMovement.velocity = Vector3.ClampMagnitude(playerMovement.velocity, maxVelocity); //no more infinit death demension
     }
 
@@ -398,55 +398,48 @@ public class Player : Hurtable
         Hurt(damage, HurtType.Suicide);
     }
 
-    void OnTimesUpdated(SyncList<double>.Operation operation, int index, double oldTime, double newTime)
+    void OnTimesAdded(int index)
     {
-        switch (operation)
+
+        //currentCheckPoint++;
+        Color textColor = currentRace.colour;
+        textColor.a = 0.65f;
+
+        string msg = "";
+
+        if (index == 0)
         {
-            case SyncList<double>.Operation.OP_ADD:
-                {
-                    //currentCheckPoint++;
-                    Color textColor = currentRace.colour;
-                    textColor.a = 0.65f;
-
-                    string msg = "";
-
-                    if (index == 0)
-                    {
-                        float test;
-                        SteamUserStats.GetStat("fastest_race_time", out test);
-                        print(test);
-                        UI_Main.instance.CreateAlert("|Start Race|", 60, textColor, alertObjIndex: 0);
-                        return;
-                    }
-
-                    float time;
-                    float roundedTime;
-                    float duration = 2;
-
-                    if (currentRace.checkPoints[checkPointTimes.Count - 1].finish)
-                    {
-                        msg = "Finish | ";
-                        duration = 3;
-                        time = (float)(newTime - checkPointTimes[0]);
-
-                        SteamUserStats.SetStat("fastest_race_time", time);
-
-                        currentRace.EndRace(this, true);
-
-                        finishedRaceAlive = true;
-                    }
-
-                    else
-                    {
-                        UI_Main.instance.OnPassRing();
-                        time = (float)(newTime - checkPointTimes[checkPointTimes.Count - 2]);
-                    }
-                    roundedTime = Mathf.Round(time * 1000.0f) / 1000.0f;
-                    UI_Main.instance.CreateAlert(msg + roundedTime, 60, textColor, duration, alertObjIndex: 1);
-
-                    break;
-                }
+            float test;
+            SteamUserStats.GetStat("fastest_race_time", out test);
+            print(test);
+            UI_Main.instance.CreateAlert("|Start Race|", 60, textColor, alertObjIndex: 0);
+            return;
         }
+
+        float time;
+        float roundedTime;
+        float duration = 2;
+
+        if (currentRace.checkPoints[checkPointTimes.Count - 1].finish)
+        {
+            msg = "Finish | ";
+            duration = 3;
+            time = (float)(checkPointTimes[index] - checkPointTimes[0]);
+
+            SteamUserStats.SetStat("fastest_race_time", time);
+
+            currentRace.EndRace(this, true);
+
+            finishedRaceAlive = true;
+        }
+
+        else
+        {
+            UI_Main.instance.OnPassRing();
+            time = (float)(checkPointTimes[index] - checkPointTimes[checkPointTimes.Count - 2]);
+        }
+        roundedTime = Mathf.Round(time * 1000.0f) / 1000.0f;
+        UI_Main.instance.CreateAlert(msg + roundedTime, 60, textColor, duration, alertObjIndex: 1);
     }
 
     public void ClearRace()

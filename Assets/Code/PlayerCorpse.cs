@@ -42,7 +42,7 @@ public class PlayerCorpse : MonoBehaviour
 
     void TryDisable()
     {
-        if (rb.velocity.magnitude > maxDisableVelocity)
+        if (rb.linearVelocity.magnitude > maxDisableVelocity)
         {
             Invoke(nameof(TryDisable), tryDisableDelay);
             return;

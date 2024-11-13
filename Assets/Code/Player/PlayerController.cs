@@ -41,7 +41,7 @@ public class PlayerController : NetworkBehaviour
     private Vector3 moveRelative;
 
     private Vector3 groundNormal;
-    private PhysicMaterial groundMaterial;
+    private PhysicsMaterial groundMaterial;
 
     [HideInInspector] public bool onGround = false;
     private bool jumpPending = false;
@@ -106,7 +106,7 @@ public class PlayerController : NetworkBehaviour
             UI_Main.instance.ChangeScreenColour(new Color(0.8f, 0.8f, 0.9f, 1));
 
 
-        velocity = rb.velocity; 
+        velocity = rb.linearVelocity; 
 
         // Clamp speed for bunny hop more like funny hop
         if (disableBunnyHopping && onGround) {
@@ -139,7 +139,7 @@ public class PlayerController : NetworkBehaviour
             AirAccelerate();
         }
 
-        rb.velocity = velocity + externalVelocity;
+        rb.linearVelocity = velocity + externalVelocity;
         externalVelocity = Vector3.zero;
 
         if (onGround == false)
@@ -333,6 +333,6 @@ public class PlayerController : NetworkBehaviour
     public void MoveWithPlatform(Vector3 movement)
     {
         externalVelocity += movement;
-        rb.velocity += movement;
+        rb.linearVelocity += movement;
     }
 }

@@ -24,6 +24,6 @@ public class LocalPlayerSettings : ScriptableObject
 
     public bool thirdPerson = false;
 
-    public PhysicMaterialCombine bounceCombine = PhysicMaterialCombine.Multiply;
+    public PhysicsMaterialCombine bounceCombine = PhysicsMaterialCombine.Multiply;
 
 }
