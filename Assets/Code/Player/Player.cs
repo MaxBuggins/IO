@@ -346,19 +346,19 @@ public class Player : Hurtable
     [ServerCallback]
     public void SpawnPlayer()
     {
-        character.enabled = true;
-
         if (currentRace != null)
             currentRace.EndRace(this, false);
 
         Transform sPoint = networkManager.GetStartPosition();
+
+        print("Server is spawning the player at" + sPoint.position);
         transform.position = sPoint.position;
         transform.rotation = sPoint.rotation;
         netTrans.RpcTeleport(sPoint.position, sPoint.rotation);
-        
 
 
         health = maxHealth;
+        character.enabled = true;
     }
 
     public int GetScore() //common conversion for main score

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.InputSystem;
+#if PLATFORM_Windows
 using Steamworks;
+#endif
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerInput))]
@@ -83,7 +85,9 @@ public class PlayerController : NetworkBehaviour
         enabled = true;
         playerInput.enabled = true;
 
+        #if PLATFORM_Windows
         SteamUserStats.GetStat("distance_surfed", out distanceSurfed);
+        #endif
     }
 
 
@@ -145,7 +149,9 @@ public class PlayerController : NetworkBehaviour
         if (onGround == false)
         {
             distanceSurfed += (Mathf.Abs(velocity.x) + Mathf.Abs(velocity.z)) * Time.fixedDeltaTime;
+            #if PLATFORM_Windows
             SteamUserStats.SetStat("distance_surfed", distanceSurfed);
+            #endif
         }
 
         // Reset onGround before next collision checks

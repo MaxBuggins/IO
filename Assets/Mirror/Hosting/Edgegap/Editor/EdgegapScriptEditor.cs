@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+
+using UnityEditor;
 using UnityEngine.UIElements;
 using Edgegap;
 
@@ -23,3 +25,4 @@ public class EdgegapPluginScriptEditor : Editor
         return _serverDataContainer;
     }
 }
+#endif
